@@ -6,75 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First Page</title>
     <link rel="stylesheet" type="text/css" href="../../public/css/first_page.css">
+    <link rel="stylesheet" type="text/css" href="../../public/css/header1.css">
+
 </head>
 
 <body>
-    <p class="titlu_mare">Probleme noi</p>
-    <div class="container">
+    <nav>
+        <ul class="sidebar">
+          <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+          <li><a href="#">Pagina principală</a></li>
+          <li><a href="#">Comunitate</a></li>
+          <li><a href="#">Probleme</a></li>
+          <li><a href="#">Înregistrare</a></li>
+          <li><a href="#">Autentificare</a></li> 
+        </ul>
+        <ul class="menu">
+          <li><a href="#">www.In&lt;form>atiX.ro</form></a></li>
+          <li class="hideOnMobile"><a href="#">Comunitate</a></li>
+          <li class="hideOnMobile"><a href="#">Probleme</a></li>
+          <li class="hideOnMobile"><a href="#">Înregistrare</a></li>
+          <li class="hideOnMobile"><a href="#">Autentificare</a></li>
+          <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+        </ul>
+      </nav>
+    <div class="container_mare">
         <div class="dreptunghi_stanga">
-            <div class="problema">
-                <p1 class="titlu_prb">Titlu problema</p1>
-                <p2 class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
-                    problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
-                    problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
-                    problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere problema
-                </p2>
-                <div class="last_line">
-                    <div class="tags">
-                        <p3 class="tag">Tag1</p3>
-                        <p3 class="tag">Tag2</p3>
-                        <p3 class="tag">Tag3</p3>
+            <p class="probleme_noi">Probleme noi</p>
+            <div class="probleme">
+                <div class="problema">
+                    <p1 class="titlu_prb">Titlu problema</p1>
+                    <p2 class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
+                        problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
+                        problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
+                        problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
+                        problema
+                    </p2>
+                    <div class="last_line">
+                        <div class="tags">
+                            <p3 class="tag">Tag1</p3>
+                            <p3 class="tag">Tag2</p3>
+                            <p3 class="tag">Tag3</p3>
+                        </div>
+                        <p3 class="autor">Autor</p3>
                     </div>
-                    <p3 class="autor">Autor</p3>
-                </div>
 
-            </div>
-            <div class="problema">
-                <p1 class="titlu_prb">Titlu problema</p1>
-                <p2 class="descriere_prb">Descriere problema</p2>
-                <div class="last_line">
-                    <div class="tags">
-                        <p3 class="tag">Tag1</p3>
-                        <p3 class="tag">Tag2</p3>
-                        <p3 class="tag">Tag3</p3>
-                    </div>
-                    <p3 class="autor">Autor</p3>
                 </div>
+                <div class="problema">
+                    <p1 class="titlu_prb">Titlu problema</p1>
+                    <p2 class="descriere_prb">Descriere problema</p2>
+                    <div class="last_line">
+                        <div class="tags">
+                            <p3 class="tag">Tag1</p3>
+                            <p3 class="tag">Tag2</p3>
+                            <p3 class="tag">Tag3</p3>
+                        </div>
+                        <p3 class="autor">Autor</p3>
+                    </div>
 
-            </div>
-            <div class="problema">
-                <p1 class="titlu_prb">Titlu problema</p1>
-                <p2 class="descriere_prb">Descriere problema</p2>
-                <div class="last_line">
-                    <div class="tags">
-                        <p3 class="tag">Tag1</p3>
-                        <p3 class="tag">Tag2</p3>
-                        <p3 class="tag">Tag3</p3>
-                    </div>
-                    <p3 class="autor">Autor</p3>
                 </div>
-            </div>
-            <div class="problema">
-                <p1 class="titlu_prb">Titlu problema</p1>
-                <p2 class="descriere_prb">Descriere problema</p2>
-                <div class="last_line">
-                    <div class="tags">
-                        <p3 class="tag">Tag1</p3>
-                        <p3 class="tag">Tag2</p3>
-                        <p3 class="tag">Tag3</p3>
+                <div class="problema">
+                    <p1 class="titlu_prb">Titlu problema</p1>
+                    <p2 class="descriere_prb">Descriere problema</p2>
+                    <div class="last_line">
+                        <div class="tags">
+                            <p3 class="tag">Tag1</p3>
+                            <p3 class="tag">Tag2</p3>
+                            <p3 class="tag">Tag3</p3>
+                        </div>
+                        <p3 class="autor">Autor</p3>
                     </div>
-                    <p3 class="autor">Autor</p3>
                 </div>
-            </div>
-        </div>
-        <div class="dreptunghi_dreapta">
-            <div class="problema_sapt">
-                <p1 class="titlu_prb">Titlu problema</p1>
-                <p2 class="descriere_prb_sapt">Descriere problema Aceasta este problema saptamanii 
-                    jhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasj
-                </p2>
-                <div class="bottom_section_prb">
-                    <div class="buton_rezolva">Rezolva</div>
+                <div class="problema">
+                    <p1 class="titlu_prb">Titlu problema</p1>
+                    <p2 class="descriere_prb">Descriere problema</p2>
                     <div class="last_line">
                         <div class="tags">
                             <p3 class="tag">Tag1</p3>
@@ -86,8 +90,44 @@
                 </div>
             </div>
         </div>
+        <div class="dreptunghi_dreapta">
+            <form action="action_page.php" method="post">
+                <div class="imgcontainer">
+                  <img src="https://cdn0.iconfinder.com/data/icons/robot-avatar/512/Robot_Avatars_19-1024.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="container">
+                  <label for="uname" class="text_login">Username</label>
+                  <input type="text" placeholder="Enter Username" name="uname" required>
+              
+                  <label for="psw" class="text_login">Password</label>
+                  <input type="password" placeholder="Enter Password" name="psw" required>
+              
+                  <button type="submit">Login</button>
+                  <label class="remember_me">
+                    <input type="checkbox" checked="checked" name="remember" > Remember me
+                  </label>
+                </div>
+              
+                <div class="container_jos">
+                  <button type="button" class="cancelbtn">Cancel</button>
+                  <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+              </form>
+              
+        </div>
     </div>
     <script>
+        function showSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'flex'
+        }
+        function hideSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'none'
+        }
+      </script>
+
+    <!-- <script>
         window.onload = function () {
             var element = document.querySelector('.descriere_prb');
             var style = window.getComputedStyle(element);
@@ -98,7 +138,7 @@
             element.style.display = '-webkit-box';
             element.style.webkitBoxOrient = 'vertical';
         };
-    </script>
+    </script> -->
 </body>
 
 </html>
