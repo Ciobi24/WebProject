@@ -4,7 +4,7 @@
 }
 
 /* This will change the scrollbar's background color */
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 10px;
 }
 
@@ -20,36 +20,55 @@
 
 ::-webkit-scrollbar-thumb:hover {
     background: #663953;
-}
+} 
 .container_mare{
     background: linear-gradient(to bottom, #E4C7B7, #E4DFD9);
     display:grid;
     grid-template-columns: 2fr 1fr;
     height: 100vh;
 }
+
 /*
- .titlu_mare{
-    font-size: 2.1em;
-    margin-left: 10vw;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    color:#522157;
-}
+//////////////////////////////////////////////////////// stanga
 */
 .dreptunghi_stanga{
     grid-column-start: 1;
-    overflow-y: auto; 
-    direction: rtl;
-    margin-left:5%;
+    margin-left:4vw;
+    margin-right:3vw;
+}
+.probleme_noi{
+  color:#663953;
+  font-size:2em;
+  margin-top:5vh;
+  padding-left: 30px;
+}
+.probleme{
+  margin-top: 10px;
+  overflow-y: auto; 
+  direction: rtl;
+  border-radius: 5px;
+  height: 50vh;
+}
+.problema{
+  margin-left: 5px;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  height: 25vh;
 }
 
+
+/*
+//////////////////////////////////////////////////////// dreapta
+*/
 .dreptunghi_dreapta{
     grid-column-start: 2;
-    margin-right:5%;
+    margin-right:3vw;
 }
 form {
     border: 3px solid #f1f1f1;
     border-radius: 10px;
+    margin-top: 7vh;
   }
   
   /* Full-width inputs */
@@ -124,11 +143,23 @@ font-weight:600;
   
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 800px) {
+.container_mare{
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
 .dreptunghi_stanga{
     display: none;
 }
 .dreptunghi_dreapta{
-    width:100vw;
+  width:auto;
+  margin:0;
+  padding: 0;
+}
+form{
+  width:90vw;
+  margin:auto;
+  margin-top:10vh;
 }
   }
 
@@ -145,17 +176,7 @@ font-weight:600;
     border-radius: 15px;
     color:#522157;
 }
-.problema_sapt{
-    align-items: space-between;
-    background-color: #c6987f;
-    height: 50vh;
-    width: 25vh;
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    border-radius: 15px;
-    color:#522157;
-}
+
 
 .titlu_prb{
     margin-left: 2vw;
