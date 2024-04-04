@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Page</title>
+    <link rel="stylesheet" type="text/css" href="../../public/css/first_page.css">
+</head>
+
+<body>
+    <p class="titlu_mare">Probleme noi</p>
+    <div class="container">
+        <div class="dreptunghi_stanga">
+            <div class="problema">
+                <p1 class="titlu_prb">Titlu problema</p1>
+                <p2 class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
+                    problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
+                    problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
+                    problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere problema
+                </p2>
+                <div class="last_line">
+                    <div class="tags">
+                        <p3 class="tag">Tag1</p3>
+                        <p3 class="tag">Tag2</p3>
+                        <p3 class="tag">Tag3</p3>
+                    </div>
+                    <p3 class="autor">Autor</p3>
+                </div>
+
+            </div>
+            <div class="problema">
+                <p1 class="titlu_prb">Titlu problema</p1>
+                <p2 class="descriere_prb">Descriere problema</p2>
+                <div class="last_line">
+                    <div class="tags">
+                        <p3 class="tag">Tag1</p3>
+                        <p3 class="tag">Tag2</p3>
+                        <p3 class="tag">Tag3</p3>
+                    </div>
+                    <p3 class="autor">Autor</p3>
+                </div>
+
+            </div>
+            <div class="problema">
+                <p1 class="titlu_prb">Titlu problema</p1>
+                <p2 class="descriere_prb">Descriere problema</p2>
+                <div class="last_line">
+                    <div class="tags">
+                        <p3 class="tag">Tag1</p3>
+                        <p3 class="tag">Tag2</p3>
+                        <p3 class="tag">Tag3</p3>
+                    </div>
+                    <p3 class="autor">Autor</p3>
+                </div>
+            </div>
+            <div class="problema">
+                <p1 class="titlu_prb">Titlu problema</p1>
+                <p2 class="descriere_prb">Descriere problema</p2>
+                <div class="last_line">
+                    <div class="tags">
+                        <p3 class="tag">Tag1</p3>
+                        <p3 class="tag">Tag2</p3>
+                        <p3 class="tag">Tag3</p3>
+                    </div>
+                    <p3 class="autor">Autor</p3>
+                </div>
+            </div>
+        </div>
+        <div class="dreptunghi_dreapta">
+            <div class="problema_sapt">
+                <p1 class="titlu_prb">Titlu problema</p1>
+                <p2 class="descriere_prb_sapt">Descriere problema Aceasta este problema saptamanii 
+                    jhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasjjhvdhavdshfvajfvhajdvshasj
+                </p2>
+                <div class="bottom_section_prb">
+                    <div class="buton_rezolva">Rezolva</div>
+                    <div class="last_line">
+                        <div class="tags">
+                            <p3 class="tag">Tag1</p3>
+                            <p3 class="tag">Tag2</p3>
+                            <p3 class="tag">Tag3</p3>
+                        </div>
+                        <p3 class="autor">Autor</p3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var element = document.querySelector('.descriere_prb');
+            var style = window.getComputedStyle(element);
+            var lineHeight = parseFloat(style.lineHeight);
+            var height = parseFloat(style.height);
+            var maxLines = Math.floor(height / lineHeight);
+            element.style.webkitLineClamp = maxLines;
+            element.style.display = '-webkit-box';
+            element.style.webkitBoxOrient = 'vertical';
+        };
+    </script>
+</body>
+
+</html>
