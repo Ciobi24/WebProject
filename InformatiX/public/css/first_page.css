@@ -35,7 +35,7 @@
 .container_mare {
   background: linear-gradient(to bottom, #E4C7B7, #E4DFD9);
   display: grid;
-  grid-template-columns: 2fr 1fr; 
+  grid-template-columns: 9fr 5fr; 
   grid-template-rows: 1fr 1fr;
   height: 100%; 
   overflow-y: auto; 
@@ -48,7 +48,7 @@
 .dreptunghi-descriere {
   position: relative;
   grid-column-start: 1;
-  margin-left: 4vw;
+  margin-left: 10vw;
   margin-right: 3vw;
   margin-top: 55px;
   background-color: #d0b6a8;
@@ -58,6 +58,61 @@
   border: 1px solid gray;
   display: grid; 
   grid-template-columns: 1fr 1fr; 
+}
+.dreptunghi-others {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  margin-right: 10vw;
+  margin-top: 55px;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  height: 55vh;
+  border: none;
+  display: grid; 
+  grid-template-rows: 1fr 1fr 1fr;  
+}
+.sectiune1 {
+  grid-row-start: 1;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center; 
+  color: #b81f76;
+  font-weight: bold;
+}
+.sectiune1 p:first-child {
+  margin-bottom: 10px;
+  margin-top: 15px; 
+}
+.sectiune1 p:last-child {
+  color: #2c3e50; 
+  text-align: left; 
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+} 
+.sectiune2 p:first-child {
+  margin-bottom: 10px;
+  margin-top: 15px; 
+}
+.sectiune2 p:last-child {
+  color: #2c3e50; 
+  text-align: left; 
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+} 
+.sectiune2{
+  grid-row-start: 2;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.sectiune3{
+  grid-row-start: 3;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 .paragraf-descriere {
   grid-column: 2;
@@ -73,12 +128,12 @@
   opacity: 0.84;
 }
 
-
 .dreptunghi_stanga{
     grid-column-start: 1;
     grid-row-start: 2;
-    margin-left:4vw;
+    margin-left:9vw;
     margin-right:3vw;
+    margin-top: 0;
 }
 .probleme_noi{
   color:#663953;
@@ -108,10 +163,9 @@
 .dreptunghi_dreapta {
     grid-column: 2; 
     grid-row: 1;
-    margin-right: 3vw; 
+    margin-right: 10vw; 
     height: 90%; 
 }
-
 
 form {
     border: 3px solid #f1f1f1;
