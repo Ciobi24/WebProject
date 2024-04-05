@@ -1,0 +1,12 @@
+.footer-content {
+    background: linear-gradient(to bottom, #E4DFD9, #565452);
+    color: #fff; 
+    padding: 20px; 
+    text-align: center; 
+    height: 50px;
+    /* opacity: 0.4; */
+}
+
+footer {
+    width: 100%; 
+}

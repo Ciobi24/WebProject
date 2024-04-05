@@ -21,20 +21,153 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #663953;
 } 
-.container_mare{
-    background: linear-gradient(to bottom, #E4C7B7, #E4DFD9);
-    display:grid;
-    grid-template-columns: 2fr 1fr;
-    height: 100vh;
+@font-face {
+  font-family: 'RETRO';
+  src: url('../../inspo/RetroscapeRegular-V5dZ.ttf') format('truetype');
 }
+
+
+.dreptunghi-welcome {
+  margin: 0; 
+  height: 100px;
+  background-color: #8B4C70;
+  display: flex;
+  align-items: center;
+}
+.welcome{
+  line-height: 17px;
+  color: white;
+  font-size: 15px; 
+  padding-left: 55px; 
+  font-weight: bold;
+  font-family: RETRO;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 3px;
+  animation: animated-text 4s steps(50,end) 30s infinite,
+  animated-cursor 600ms steps(51,end) 4s infinite;
+  border-right: 1px solid; 
+  animation-delay: 0s, 30s;
+  width: fit-content;
+}
+
+/* text animation */
+
+@keyframes animated-text{
+from{width: 0;}
+to{width: 90%;}
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor{
+from{border-right-color: #f1f1f1;}
+to{border-right-color: transparent; }
+}
+
+
+.container_mare {
+  background: linear-gradient(to bottom, #E4C7B7, #E4DFD9);
+  display: grid;
+  grid-template-columns: 9fr 5fr; 
+  grid-template-rows: 1fr 1fr;
+  height: 100%; 
+  overflow-y: auto; 
+}
+
 
 /*
 //////////////////////////////////////////////////////// stanga
 */
+.dreptunghi-descriere {
+  position: relative;
+  grid-column-start: 1;
+  margin-left: 10vw;
+  margin-right: 3vw;
+  margin-top: 55px;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  height: 55vh;
+  border: 1px solid gray;
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+}
+.dreptunghi-others {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  margin-right: 10vw;
+  margin-top: 55px;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  height: 55vh;
+  border: none;
+  display: grid; 
+  grid-template-rows: 1fr 1fr 1fr;  
+}
+.sectiune1 {
+  grid-row-start: 1;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center; 
+  color: #b81f76;
+  font-weight: bold;
+}
+.sectiune1 p:first-child {
+  margin-bottom: 10px;
+  margin-top: 15px; 
+}
+.sectiune1 p:last-child {
+  color: #2c3e50; 
+  text-align: left; 
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+} 
+.sectiune2 p:first-child {
+  margin-bottom: 10px;
+  margin-top: 15px; 
+}
+.sectiune2 p:last-child {
+  color: #2c3e50; 
+  text-align: left; 
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+} 
+.sectiune2{
+  grid-row-start: 2;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.sectiune3{
+  grid-row-start: 3;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.paragraf-descriere {
+  grid-column: 2;
+  padding: 20px; 
+  color: rgb(0, 0, 0); 
+  font-weight: bold;
+}
+.dreptunghi-descriere img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  grid-column: 1; 
+  opacity: 0.84;
+}
+
 .dreptunghi_stanga{
     grid-column-start: 1;
-    margin-left:4vw;
+    grid-row-start: 2;
+    margin-left:9vw;
     margin-right:3vw;
+    margin-top: 0;
 }
 .probleme_noi{
   color:#663953;
@@ -61,10 +194,13 @@
 /*
 //////////////////////////////////////////////////////// dreapta
 */
-.dreptunghi_dreapta{
-    grid-column-start: 2;
-    margin-right:3vw;
+.dreptunghi_dreapta {
+    grid-column: 2; 
+    grid-row: 1;
+    margin-right: 10vw; 
+    height: 90%; 
 }
+
 form {
     border: 3px solid #f1f1f1;
     border-radius: 10px;
