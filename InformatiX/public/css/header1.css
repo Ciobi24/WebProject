@@ -12,8 +12,6 @@ header{
 
 }
 
-
-
 nav ul {
   width: 100%;
   list-style: none;
@@ -43,7 +41,7 @@ nav a {
   color: #ffffff;
 }
 
-nav a:hover, nav a.active {
+nav a:hover {
   color: gray;
 }
 
@@ -78,7 +76,7 @@ nav li:first-child {
   display: none;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 730px) {
   .hideOnMobile {
     display: none;
   }
@@ -91,5 +89,14 @@ nav li:first-child {
 @media (max-width: 400px) {
   .sidebar {
     width: 100%;
+  }
+  nav a{
+    font-size:10px;
+  }
+}
+
+@media(max-width:300px){
+  *{
+    font-size:10px;
   }
 }
