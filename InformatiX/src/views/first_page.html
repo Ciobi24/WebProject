@@ -2,167 +2,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Page</title>
-    <link rel="stylesheet" type="text/css" href="../../public/css/first_page.css">
-    <link rel="stylesheet" type="text/css" href="../../public/css/header1.css">
-    <link rel="stylesheet" type="text/css" href="../../public/css/footer.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In&lt;form>atiX</title>
+  <link rel="stylesheet" href="../../public/css/header1.css">
+  <link rel="stylesheet" href="../../public/css/footer.css">
+  <link rel="stylesheet" href="../../public/css/first_page.css">
+  <script>
+    function showSidebar() {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'flex'
+    }
+    function hideSidebar() {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'none'
+    }
+  </script>
 </head>
 
 <body>
+  <header>
     <nav>
-        <ul class="sidebar">
-          <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
-          <li><a href="#">Pagina principală</a></li>
-          <li><a href="#">Comunitate</a></li>
-          <li><a href="#">Probleme</a></li>
-          <li><a href="#">Înregistrare</a></li>
-        </ul>
-        <ul class="menu">
-          <li><a href="#">www.In&lt;form>atiX.ro</form></a></li>
-          <li class="hideOnMobile"><a href="#">Comunitate</a></li>
-          <li class="hideOnMobile"><a href="#">Probleme</a></li>
-          <li class="hideOnMobile"><a href="#">Înregistrare</a></li>
-          <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
-        </ul>
-      </nav>
-      <div class="dreptunghi-welcome"><p class="welcome">[ REZOLVA PROBLEME DE INFORMATICA ALATURI DE NOI ]</p></div>
-    <div class="container_mare">
-        <div class="dreptunghi-descriere">
-            <div class="paragraf-descriere">
-                <p>Aici vom descrie ce se poate gasi pe acest site si ce avantaje ofera</p>
-            </div>
+      <ul class="sidebar">
+        <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
+              width="26">
+              <path
+                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+            </svg></a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Comunitate</a></li>
+        <li><a href="#login">Login</a></li>
+      </ul>
+      <ul class="menu">
+        <li><a href="#home">www.In&lt;form>atiX.ro</form></a></li>
+        <li class="hideOnMobile"><a href="#about">Comunitate</a></li>
+        <li class="hideOnMobile"><a href="#login">Login</a></li>
+        <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+              viewBox="0 96 960 960" width="26">
+              <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+            </svg></a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <div class="sections">
+    <section class="sect1" id="home">
+      <div class="container1">
+        <div class="welcome">
+          <p id="w_text"></p>
         </div>
-        <div class = "dreptunghi-others">
-            <div class= "sectiune1">
-                <p>Cum se vor evalua problemele?</p>
-                <p>Problemele vor fi evaluate de către profesori. Ca un utilizator să poată trimite probleme, acesta trebuie să fie membru
-                    al unei clase. Rezultatul evaluării va fi comunicat de către profesorul asignat clasei respective.
-                </p>
-            </div>
-            <div class="sectiune2">
-                <p>Cum pot face parte dintr-o clasă?</p>
-                <p> O clasă destinată rezolvării de probleme poate fi creată de un profesor. Invitațiile pot fi trimise de către profesor pe baza numelui
-                    de utilizator al elevului, sau pe baza unui cod unic asociat clasei respective cu care elevul se poate asocia clasei. 
-                </p>
-            </div>
-            <div class="sectiune3">1</div>
+        <div class="descriere">
+          <p id="d_text"></p>
         </div>
-        <div class="dreptunghi_stanga">
-            <p class="probleme_noi">Probleme noi</p>
-            <div class="probleme">
-                <div class="problema">
-                    <p1 class="titlu_prb">Titlu problema</p1>
-                    <p2 class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
-                        problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
-                        problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
-                        problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
-                        problema
-                    </p2>
-                    <div class="last_line">
-                        <div class="tags">
-                            <p3 class="tag">Tag1</p3>
-                            <p3 class="tag">Tag2</p3>
-                            <p3 class="tag">Tag3</p3>
-                        </div>
-                        <p3 class="autor">Autor</p3>
-                    </div>
+      </div>
+    </section>
+    <section class="sect2" id="about">
+      <div class="container2">
+        <div class="question"></div>
+        <div class="question"></div>
+      </div>
+    </section>
+    <section class="sect3" id="login">
+      <div class="container3">
+        <input type="checkbox" id="flip">
+        <div class="cover">
+          <div class="front">
+            <img src="../../public/images/img1.png" alt="">
+          </div>
+          <div class="back">
+            <img class="backImg" src="../../public/images/img1.png" alt="">
+          </div>
+        </div>
+        <div class="forms">
+            <div class="form-content">
+              <div class="login-form">
+                <div class="title">Login</div>
+              <form action="#">
+                <div class="input-boxes">
+                  <div class="input-box">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" placeholder="Enter your email" required>
+                  </div>
+                  <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Enter your password" required>
+                  </div>
+                  <div class="text"><a href="#">Forgot password?</a></div>
+                  <div class="button input-box">
+                    <input type="submit" value="Submit">
+                  </div>
+                  <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up</label></div>
+                </div>
+            </form>
+          </div>
+            <div class="signup-form">
+              <div class="title">Sign up</div>
+            <form action="#">
+                <div class="input-boxes">
+                  <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Enter your name" required>
+                  </div>
+                  <div class="input-box">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" placeholder="Enter your email" required>
+                  </div>
+                  <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Enter your password" required>
+                  </div>
+                  <div class="button input-box">
+                    <input type="submit" value="Submit">
+                  </div>
+                  <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+                </div>
+          </form>
+        </div>
+        </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-                </div>
-                <div class="problema">
-                    <p1 class="titlu_prb">Titlu problema</p1>
-                    <p2 class="descriere_prb">Descriere problema</p2>
-                    <div class="last_line">
-                        <div class="tags">
-                            <p3 class="tag">Tag1</p3>
-                            <p3 class="tag">Tag2</p3>
-                            <p3 class="tag">Tag3</p3>
-                        </div>
-                        <p3 class="autor">Autor</p3>
-                    </div>
-
-                </div>
-                <div class="problema">
-                    <p1 class="titlu_prb">Titlu problema</p1>
-                    <p2 class="descriere_prb">Descriere problema</p2>
-                    <div class="last_line">
-                        <div class="tags">
-                            <p3 class="tag">Tag1</p3>
-                            <p3 class="tag">Tag2</p3>
-                            <p3 class="tag">Tag3</p3>
-                        </div>
-                        <p3 class="autor">Autor</p3>
-                    </div>
-                </div>
-                <div class="problema">
-                    <p1 class="titlu_prb">Titlu problema</p1>
-                    <p2 class="descriere_prb">Descriere problema</p2>
-                    <div class="last_line">
-                        <div class="tags">
-                            <p3 class="tag">Tag1</p3>
-                            <p3 class="tag">Tag2</p3>
-                            <p3 class="tag">Tag3</p3>
-                        </div>
-                        <p3 class="autor">Autor</p3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="dreptunghi_dreapta">
-            <form action="action_page.php" method="post">
-                <div class="imgcontainer">
-                  <img src="https://cdn0.iconfinder.com/data/icons/robot-avatar/512/Robot_Avatars_19-1024.png" alt="Avatar" class="avatar">
-                </div>
-                <div class="container">
-                  <label for="uname" class="text_login">Username</label>
-                  <input type="text" placeholder="Enter Username" name="uname" required>
-              
-                  <label for="psw" class="text_login">Password</label>
-                  <input type="password" placeholder="Enter Password" name="psw" required>
-              
-                  <button type="submit">Login</button>
-                  <label class="remember_me">
-                    <input type="checkbox" checked="checked" name="remember" > Remember me
-                  </label>
-                </div> 
-                <div class="container_jos">
-                  <button type="button" class="cancelbtn">Cancel</button>
-                  <span class="psw">Forgot <a href="#">password?</a></span>
-                </div>
-              </form>
-              
-        </div>
-    </div>
-    <script>
-        function showSidebar(){
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'flex'
-        }
-        function hideSidebar(){
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'none'
-        }
-      </script>
-
-    <!-- <script>
-        window.onload = function () {
-            var element = document.querySelector('.descriere_prb');
-            var style = window.getComputedStyle(element);
-            var lineHeight = parseFloat(style.lineHeight);
-            var height = parseFloat(style.height);
-            var maxLines = Math.floor(height / lineHeight);
-            element.style.webkitLineClamp = maxLines;
-            element.style.display = '-webkit-box';
-            element.style.webkitBoxOrient = 'vertical';
-        };
-    </script> -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Numele</p>
-        </div>
-    </footer>
 </body>
 
 </html>

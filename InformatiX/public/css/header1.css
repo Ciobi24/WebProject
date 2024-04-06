@@ -2,13 +2,17 @@
   margin: 0;
   padding: 0;
 }
-
-nav {
+header{
+  position: fixed;
   background-color: #522157;
   /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   opacity: 0.60; */
-  height:50px;
+  height:9vh;
+  width: 100%;
+
 }
+
+
 
 nav ul {
   width: 100%;
@@ -16,6 +20,7 @@ nav ul {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  z-index: 100;
 }
 
 nav li {
@@ -31,13 +36,14 @@ nav a {
   display: flex;
   align-items: center;
   color: rgb(0, 0, 0);
+  transition: .3s;
 }
 
 .menu a {
   color: #ffffff;
 }
 
-nav a:hover {
+nav a:hover, nav a.active {
   color: gray;
 }
 
@@ -49,7 +55,6 @@ nav li:first-child {
   position: fixed;
   top: 0;
   right: 0;
-  height: 290px;
   width: 100%;
   background-color: rgba(141, 115, 115, 0.15);
   backdrop-filter: blur(12px);
