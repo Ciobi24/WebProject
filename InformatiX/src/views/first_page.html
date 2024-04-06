@@ -19,6 +19,14 @@
       const sidebar = document.querySelector('.sidebar')
       sidebar.style.display = 'none'
     }
+    function showSignUp() {
+      const flipCheckbox = document.getElementById('flip');
+      flipCheckbox.checked = true;
+    }
+    function showLogin() {
+      const flipCheckbox = document.getElementById('flip');
+      flipCheckbox.checked = false;
+    }
   </script>
 </head>
 
@@ -31,14 +39,16 @@
               <path
                 d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
             </svg></a></li>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">Comunitate</a></li>
-        <li><a href="#login">Login</a></li>
+        <li><a href="#home" onclick=hideSidebar()>Home</a></li>
+        <li><a href="#about" onclick=hideSidebar()>Comunitate</a></li>
+        <li><a href="#login" onclick="showSignUp(); hideSidebar()">Register</a></li>
+        <li><a href="#login" onclick="showLogin(); hideSidebar()">Login</a></li>
       </ul>
       <ul class="menu">
         <li><a href="#home">www.In&lt;form>atiX.ro</a></li>
         <li class="hideOnMobile"><a href="#about">Comunitate</a></li>
-        <li class="hideOnMobile"><a href="#login">Login</a></li>
+        <li class="hideOnMobile"><a href="#login" onclick="showSignUp()">Register</a></li>
+        <li class="hideOnMobile"><a href="#login" onclick="showLogin()">Login</a></li>
         <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
               viewBox="0 96 960 960" width="26">
               <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
@@ -50,12 +60,7 @@
   <div class="sections">
     <div class="sect1" id="home">
       <div class="container1">
-        <div class="welcome">
-          <p id="w_text"></p>
-        </div>
-        <div class="descriere">
-          <p id="d_text"></p>
-        </div>
+        
       </div>
     </div>
     <div class="sect2" id="about">
