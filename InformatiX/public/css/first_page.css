@@ -4,6 +4,7 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .sect1,
@@ -83,7 +84,7 @@
   margin: 2%;
   background-color: rgba(228, 215, 217, 0.5);
   border-radius: 15px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   height:60%;
   width: 40vw;
   display: flex;
@@ -101,6 +102,7 @@
   margin-right: 10%;
   margin-top:10%;
   margin-bottom: 5%;
+  font-size: 1.4rem;
 }
 .raspuns{
   font-weight: bold;
@@ -134,13 +136,13 @@ header{
     font-size: 1rem;
   }
   .intrebare{
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   .raspuns{
     font-size: 1rem;
   }
 }
-@media (max-width:400px) {
+@media (max-width:500px) {
   .container2 {
     flex-direction: column;
   }
@@ -150,10 +152,10 @@ header{
     margin:2%;
   }
   .intrebare{
-    font-size: 70%;
+    font-size: 75%;
   }
   .raspuns{
-    font-size: 70%;
+    font-size: 65%;
   }
 
 }
@@ -167,10 +169,10 @@ header{
     font-size: 1.2rem;
   }
   .intrebare{
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   .raspuns{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 
