@@ -104,7 +104,8 @@
    bottom: 0;
    height: 3px;
    width: 25px;
-   background: #7d2ae8;
+   /* background: #7d2ae8; */
+
  }
  .forms .signup-form  .title:before{
    width: 20px;
