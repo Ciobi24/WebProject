@@ -6,14 +6,14 @@ body {
 
 .container-mare {
     width: 1250px;
-    height: 1500px;
+    height: 2500px;
     margin-top:85px;
     display: grid; 
     background-color: #E4DFD9;
     margin: auto;
     overflow: auto;
     grid-template-columns: 3fr 4fr;
-    grid-template-rows: repeat(3, 1fr); 
+    grid-template-rows: repeat(5, 1fr); 
 }
 .avatar {
     grid-row: 1;
@@ -47,6 +47,10 @@ body {
     grid-row:1;
     padding: 50px 50px 100px 50px;
 }
+.elem2{
+    grid-row:1;
+    padding: 50px 50px 60px 50px;
+}
 .footer-sections{
     grid-row: 2;
     background-color: #955579;
@@ -76,11 +80,10 @@ body {
     grid-template-rows: 2fr 13fr 1fr;
     background-color: #dcd6ce;
     margin-right: 30px;
-    margin-top: 150px;
     margin-bottom: 147px;
     grid-column-start: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 4;
     border: 1px solid rgba(18, 0, 20, 0.33);
 }
 .probleme_noi{
@@ -105,8 +108,10 @@ body {
 }
 
 .sectiune-clasa{
+    grid-row: 2;
+    grid-column: 1;
     display: grid;
-    grid-template-rows: 12fr 1fr;
+    grid-template-rows: 12fr 1fr 1fr;
     background-color: #dcd6ce;
     justify-self: center; 
     align-self: center; 
@@ -116,7 +121,24 @@ body {
     border: 1px solid rgba(18, 0, 20, 0.33);
     padding: 50px 0px 0px 0px;
 }
+.sectiune-clasa p {
+    color:#531439; 
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+.join-a-class {
+    color: #531439; 
+    font-size: 1.1em;
+    padding: 2px 2px 2px 2px;
+    transition: transform 0.3s;
+    margin-left: auto;
+    margin-right: 10px;
+}
 
+.join-a-class:hover {
+    transform: scale(1.05); 
+}
 @media screen and (max-width: 1100px) {
     .container-mare {
         width: 900px;
