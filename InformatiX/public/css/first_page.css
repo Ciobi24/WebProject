@@ -116,9 +116,11 @@
 .sect3 {
   background: linear-gradient(to bottom, #6e3c59, #8B4C70);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 
 .sections {
   scroll-snap-type: y mandatory;
@@ -134,7 +136,12 @@ header {
   z-index: 1;
 }
 
-
+.sect3 .footer{
+  height: 10%;
+  align-self: flex-end;
+  background: linear-gradient(to bottom, #8B4C70, #522157);
+  color: #ffffff;
+}
 @media (max-width:850px) {
   .container1 {
     display: grid;
