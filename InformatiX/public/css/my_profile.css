@@ -1,0 +1,73 @@
+ *{
+    margin:0;
+    padding:0;
+    overflow: hidden;
+ }
+
+ .corp_profil{
+    width:100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 9vh 1fr ;
+ }
+ .header{
+   z-index: 3;
+   position: fixed;
+   grid-column: 1/3;
+   grid-row: 1/2;
+}
+ .corp_stanga{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #8B4C70;
+    grid-column: 1/2;
+    grid-row: 2/3;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+ }
+ .corp_dreapta{
+    grid-row: 2/3;
+    grid-column: 2/3;
+    overflow-y: scroll;
+    display: flex;
+      flex-direction: column;
+    justify-content: flex-end;
+    background-color: #E4DFD9;
+    height: 100%;
+    width: 100%;
+ }
+ button{
+    height: 10%;
+    background-color:#8B4C70 ;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+ }
+ button > p{
+   height: 100%;
+   width: 100%;
+   font-size: 1.4rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ button.active{
+    background-color: #E4DFD9;
+    color:#8B4C70;
+ }
+ button:hover{
+    opacity: 0.6;
+ }
+ .corp_dreapta footer{
+   grid-row: inherit;
+   grid-column: inherit;
+   background: linear-gradient(rgba(128, 128, 128, 0.1), #8B4C70);
+   width: 100%;
+   height: 9vh;
+   z-index: 3;
+   color: #ffffff;
+ }

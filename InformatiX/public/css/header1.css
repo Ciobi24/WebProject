@@ -5,8 +5,8 @@
 header{
   position: fixed;
   background-color: #522157;
-  /* box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  opacity: 0.60; */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+  /*opacity: 0.60; */
   height:9vh;
   width: 100%;
 
@@ -86,12 +86,14 @@ nav li:first-child {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 430px) {
   .sidebar {
     width: 100%;
   }
   nav a{
     font-size:10px;
+    padding-top: 10%;
+    padding-bottom: 10%;
   }
 }
 
