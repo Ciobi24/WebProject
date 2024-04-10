@@ -1,16 +1,122 @@
 body {
-    background-color: #a48270; 
+    background-color: #E4DFD9; 
     margin: 0;
   padding: 0;
 }
 
 .container-mare {
-    width: 1100px;
-    height: 100vh;
-    display: flex;
-    background-color: lightgray; 
+    width: 1250px;
+    height: 1500px;
+    margin-top:85px;
+    display: grid; 
+    background-color: #E4DFD9;
     margin: auto;
+    overflow: auto;
+    grid-template-columns: 3fr 4fr;
+    grid-template-rows: repeat(3, 1fr); 
 }
+.avatar {
+    grid-row: 1;
+    width: 150px;
+    height: 150px;
+    box-sizing: border-box;
+    border: 5px white solid;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    animation: float 6s ease-in-out infinite;
+    margin-left: 45px;
+    grid-column: 1;
+    grid-row: 1;
+}
+.avatar img {
+    width: 100%;
+    height: auto;
+}
+.profile{
+    display: grid;
+    grid-template-rows: 14fr 1fr;
+    background-color: #dcd6ce;
+    justify-self: center; 
+    align-self: center; 
+    margin-top: 150px;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+    padding: 50px 0px 0px 0px;
+}
+.elem1{
+    grid-row:1;
+    padding: 50px 50px 100px 50px;
+}
+.footer-sections{
+    grid-row: 2;
+    background-color: #955579;
+    opacity: 0.87;
+}
+.profile p{
+    font-size: 25px;
+    margin-top: 20px;
+    color: #8B4C70;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile{
+    display: grid;
+    grid-template-rows: 14fr 1fr;
+    background-color: #dcd6ce;
+    justify-self: center; 
+    align-self: center; 
+    margin-top: 150px;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+    padding: 50px 0px 0px 0px;
+}
+
+.dreptunghi_dreapta{
+    display: grid;
+    grid-template-rows: 2fr 13fr 1fr;
+    background-color: #dcd6ce;
+    margin-right: 30px;
+    margin-top: 150px;
+    margin-bottom: 147px;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+}
+.probleme_noi{
+  color:#663953;
+  font-size:2em;
+  margin-top:20px;
+  padding-left: 30px;
+}
+.probleme{
+  margin-top: 10px;
+  overflow-y: auto; 
+  direction: rtl;
+  border-radius: 5px;
+  height: 620px;
+}
+.problema{
+  margin-left: 5px;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  height: 200px;
+}
+
+.sectiune-clasa{
+    display: grid;
+    grid-template-rows: 12fr 1fr;
+    background-color: #dcd6ce;
+    justify-self: center; 
+    align-self: center; 
+    margin-top: 55px;
+    margin-left: 40px;
+    margin-right: 60px;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+    padding: 50px 0px 0px 0px;
+}
+
 @media screen and (max-width: 1100px) {
     .container-mare {
         width: 900px;
