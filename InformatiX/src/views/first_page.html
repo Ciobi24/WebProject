@@ -20,6 +20,16 @@
       sidebar.style.display = 'none'
     }
   </script>
+  <script>
+    function showSignupForm() {
+        document.getElementById('flip').checked = true;
+    }
+    </script>
+      <script>
+        function showLoginForm() {
+            document.getElementById('flip').checked = false;
+        }
+        </script>
 </head>
 
 <body>
@@ -33,15 +43,14 @@
             </svg></a></li>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">Comunitate</a></li>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#login">Register</a></li>
-
+        <li onclick="showLoginForm()"><a href="#login">Login</a></li>
+        <li onclick="showSignupForm()"><a href="#signup">Register</a></li>
       </ul>
       <ul class="menu">
         <li><a href="#home">www.In&lt;form>atiX.ro</a></li>
         <li class="hideOnMobile"><a href="#about">Comunitate</a></li>
-        <li class="hideOnMobile"><a href="#login">Login</a></li>
-        <li class="hideOnMobile"><a href="#login">Register</a></li>
+        <li class="hideOnMobile" onclick="showLoginForm()"><a href="#login">Login</a></li>
+        <li class="hideOnMobile" onclick="showSignupForm()"><a href="#signup">Register</a></li>
         <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
               viewBox="0 96 960 960" width="26">
               <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
@@ -75,7 +84,7 @@
         </div>
       </div>
     </div>
-    <div class="sect3" id="login">
+    <div class="sect3">
       <div class="container3">
         <input type="checkbox" id="flip">
         <div class="cover">
@@ -88,7 +97,7 @@
         </div>
         <div class="forms">
             <div class="form-content">
-              <div class="login-form">
+              <div class="login-form" id="login">
                 <div class="title">Login</div>
               <form action="#">
                 <div class="input-boxes">
@@ -108,7 +117,7 @@
                 </div>
             </form>
           </div>
-            <div class="signup-form">
+            <div class="signup-form" id="signup">
               <div class="title">Sign up</div>
             <form action="#">
                 <div class="input-boxes">
