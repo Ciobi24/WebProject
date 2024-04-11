@@ -37,7 +37,20 @@
       }
 
       // Show the selected div
-      document.getElementById(id).style.display = 'block';
+      var selectedDiv = document.getElementById(id);
+      selectedDiv.style.display = 'block';
+
+      // Recursive function to display all descendants
+      function showAllDescendants(element) {
+        var children = element.children;
+        for (var i = 0; i < children.length; i++) {
+          children[i].style.display = 'block';
+          showAllDescendants(children[i]); // Recursively call the function for each child
+        }
+      }
+
+      // Call the function for the selected div
+      showAllDescendants(selectedDiv);
     }
   </script>
   <script>window.onload = function () {
@@ -101,18 +114,88 @@
         <p>Switch to teacher</p>
       </button>
       <div class="statistics">
-        <div class="container_anim">
-          <div class="circle">
-          </div>
-          <div class="circle"></div>
-          <div class="circle"></div>
+
+        <div class="circle">
+          <p class="nr"> 100 </p>
+          <p class="pb">solutii corecte</p>
         </div>
+        <div class="circle">
+          <p class="nr"> 130 </p>
+          <p class="pb">probleme rezolvate</p>
+        </div>
+
       </div>
     </div>
     <div class="corp_dreapta">
-      <div id="infos_page" style="display:block;">Content of Infos Page</div>
-      <div id="passwrd_page" style="display:none;">Content of Password Page</div>
-      <div id="switch_page" style="display:none;">Content of Switch Page</div>
+      <div id="infos_page" style="display:block;">
+        <div class="container">
+          <h2>Edit Profile Information</h2>
+          <form action="#">
+            <div class="input-group">
+              <label for="name">Nume</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" value="John" required>
+            </div>
+            <div class="input-group">
+              <label for="surname">Prenume</label>
+              <input type="text" id="surname" name="surname" placeholder="Enter your surname" value="Doe" required>
+            </div>
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" value="john@example.com"
+                required>
+            </div>
+            <div class="input-group">
+              <label for="dob">Data Nasterii</label>
+              <input type="date" id="dob" name="dob" value="2000-01-01" required>
+            </div>
+            <div class="input-group">
+              <label for="city">Oras</label>
+              <input type="text" id="city" name="city" placeholder="Enter your city" value="New York" required>
+            </div>
+            <div class="input-group">
+              <label for="school">Scoala</label>
+              <input type="text" id="school" name="school" placeholder="Enter your school" value="ABC School" required>
+            </div>
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
+
+
+      </div>
+      <div class="passwrd_page" id="passwrd_page" style="display:none;">
+        <div class="container">
+          <h2>Password Change</h2>
+          <form action="#">
+            <div class="input-group">
+              <label for="old-password">Old Password</label>
+              <input type="password" id="old-password" name="old-password" placeholder="Enter old password" required>
+            </div>
+            <div class="input-group">
+              <label for="new-password">New Password</label>
+              <input type="password" id="new-password" name="new-password" placeholder="Enter new password" required>
+            </div>
+            <button type="submit">Change Password</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="switch_page" style="display:none;">
+        <div class="container">
+          <h2>Apply for Teacher Account</h2>
+          <form action="#" enctype="multipart/form-data">
+            <div class="input-group">
+              <label for="school">School Name</label>
+              <input type="text" id="school" name="school" placeholder="Enter your school name" required>
+            </div>
+            <div class="input-group">
+              <label for="upload-file">Upload Photo/Document</label>
+              <input type="file" id="upload-file" name="upload-file" accept=".jpg, .jpeg, .png, .pdf" required>
+              <small>Accepted formats: JPG, JPEG, PNG, PDF</small>
+            </div>
+            <button type="submit">Submit Application</button>
+          </form>
+        </div>
+      </div>
       <footer>
         <p>@ Contact</p>
       </footer>
