@@ -136,9 +136,10 @@ header {
   z-index: 1;
 }
 
-.sect3 .footer{
+.sect3 footer{
   height: 10%;
-  align-self: flex-end;
+  width: 100%;
+  align-self: baseline;
   background: linear-gradient(to bottom, #8B4C70, #522157);
   color: #ffffff;
 }
