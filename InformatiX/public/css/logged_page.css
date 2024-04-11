@@ -27,7 +27,7 @@ html body {
     overflow: hidden;
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
     animation: float 6s ease-in-out infinite;
-    margin-left: 45px;
+    margin-left: 95px;
     grid-column: 1;
     grid-row: 1;
 }
@@ -35,17 +35,6 @@ html body {
 .avatar img {
     width: 100%;
     height: auto;
-}
-
-.profile {
-    display: grid;
-    grid-template-rows: 14fr 1fr;
-    background-color: #dcd6ce;
-    justify-self: center;
-    align-self: center;
-    margin-top: 150px;
-    border: 1px solid rgba(18, 0, 20, 0.33);
-    padding: 50px 0px 0px 0px;
 }
 
 .elem1 {
@@ -68,6 +57,7 @@ html body {
 .profile p {
     font-size: 25px;
     margin-top: 20px;
+    margin-left: 48px;
     color: #8B4C70;
     align-items: center;
     justify-content: center;
@@ -77,9 +67,9 @@ html body {
     display: grid;
     grid-template-rows: 14fr 1fr;
     background-color: #dcd6ce;
-    justify-self: center;
-    align-self: center;
     margin-top: 65px;
+    margin-left: 45px;
+    margin-right: 35px;
     border: 1px solid rgba(18, 0, 20, 0.33);
     border-top: solid 3px #8d8888;
     padding: 50px 0px 0px 0px;
@@ -88,9 +78,10 @@ html body {
 
 .dreptunghi_dreapta {
     display: grid;
-    grid-template-rows: 2fr 13fr 1fr;
+    grid-template-rows: 1.14fr 13fr 1fr;
     background-color: #dcd6ce;
     margin-right: 30px;
+    margin-left: 25px;
     margin-bottom: 147px;
     grid-column-start: 2;
     grid-row-start: 2;
@@ -112,7 +103,7 @@ html body {
     overflow-y: auto;
     direction: ltr;
     border-radius: 5px;
-    height: 620px;
+    height: 741px;
 }
 
 .problema {
@@ -120,7 +111,7 @@ html body {
     background-color: #d0b6a8;
     border-radius: 10px;
     margin-bottom: 7px;
-    height: 200px;
+    height: 230px;
 }
 
 .sectiune-clasa {
@@ -134,7 +125,7 @@ html body {
     align-self: center;
     margin-top: 55px;
     margin-left: 40px;
-    margin-right: 60px;
+    margin-right: 35px;
     border: 1px solid rgba(18, 0, 20, 0.33);
     border-top: solid 3px #8d8888;
     padding: 50px 0px 0px 0px;
@@ -170,6 +161,7 @@ html body {
     background-color: #dcd6ce;
     justify-self: center;
     align-self: center;
+    margin-right: 58px;
     border: 1px solid rgba(18, 0, 20, 0.33);
     border-bottom: 25px solid rgb(149, 85, 121);
     border-top: solid 3px #8d8888;
@@ -222,6 +214,7 @@ html body {
     background-color: #dcd6ce;
     justify-self: center;
     align-self: center;
+    margin-left: 5px;
     border: 1px solid rgba(18, 0, 20, 0.33);
     border-bottom: 25px solid rgb(149, 85, 121);
     border-top: solid 3px #8d8888;
@@ -276,6 +269,7 @@ td {
 }
 
 .ce-gasesc-aici {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     grid-row: 1;
     grid-column-start: 1;
     grid-column-end: 4;
@@ -287,7 +281,11 @@ td {
     color: #742d55;
     text-align: center;
 }
-
+.ce-gasesc-aici-text {
+    color: #531439;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 6px 20px 20px 20px;
+}
 .altele {
     grid-row-start: 4;
     grid-column: 2;
@@ -302,6 +300,21 @@ td {
     border-top: solid 3px #8d8888;
     padding: 0px 0px 0px 0px;
     border-radius: 7px;
+}
+
+.altele p {
+    color: #531439;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 8px;
+    padding: 10px;
+    text-align: center;
+}
+.altele img {
+    width: 170px;
+    align-self: center;
+    justify-self: center;
+    border-radius: 5px;
+    opacity: 0.86;
 }
 
 footer{
