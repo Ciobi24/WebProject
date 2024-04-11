@@ -93,5 +93,10 @@ nav li:first-child {
     display: block;
   }
 }
+@media (max-width: 290px){
+  nav a{
+    font-size:12px;
+  }
+}
 
 
