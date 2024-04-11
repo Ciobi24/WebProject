@@ -134,9 +134,11 @@ header {
 
 .container3 {
   z-index: 1;
+  margin-top: 100px;
 }
 
 .sect3 footer{
+  margin-top: 88px;
   height: 10%;
   width: 100%;
   align-self: baseline;

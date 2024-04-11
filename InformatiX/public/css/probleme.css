@@ -5,15 +5,15 @@ body {
 
 .container-mare {
     width: 1250px;
-    height: 1140px;
+    height: 1390px;
     margin-top: 85px;
     display: grid;
-    grid-template-rows: 2fr 10fr 10fr;
+    grid-template-rows: 4fr 10fr 17fr;
     grid-template-columns: 1fr 1fr;
-    background-color: #deccb9;
+    background-color: #E4DFD9;
     margin: auto;
     overflow: auto;
-    border-top: solid 100px #C2649A;
+    border-top: solid 100px rgb(149, 85, 121);
 }
 
 .tip-clasa{
@@ -24,18 +24,31 @@ body {
     font-size: 50px;
     color: #6f1d4c;
 }
-.container-mare div {
-    grid-row: 2;
-    grid-column: 1;
-    width: 465px;
-    height: 340px;
+.container-mare > div {
+    display: grid;
     background-color: #dcd6ce;
-    justify-self: center;
-    align-self: center;
-    margin-left: 5px;
+    align-self: flex-end;
     border: 1px solid rgba(18, 0, 20, 0.33);
     border-bottom: 25px solid rgb(149, 85, 121);
-    border-top: solid 3px #8d8888;
+    border-top: solid 6px #8d8888;
     padding: 0px 0px 0px 0px;
     border-radius: 7px;
+}
+
+.nr_probleme{
+    font-size: 11px;
+}
+@media screen and (max-width: 850px) {
+    .container-mare {
+        width: 815px;
+        height: 1390px;
+        margin-top: 85px;
+        display: grid;
+        grid-template-rows: 4fr 10fr 10fr 10fr 10fr 10fr;
+        grid-template-columns: 1fr;
+        background-color: #E4DFD9;
+        margin: auto;
+        overflow: auto;
+        border-top: solid 100px rgb(149, 85, 121);
+    }
 }

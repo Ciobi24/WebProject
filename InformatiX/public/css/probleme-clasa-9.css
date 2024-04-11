@@ -1,0 +1,305 @@
+
+.probleme-elementare{
+    width: 420px;
+    height: 440px;
+    grid-row: 2;
+    grid-column: 1;
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+    grid-template-columns: 1fr;
+    margin-top: 4px;
+    margin-left: 150px;
+    padding: 20px;
+}
+
+.titlu1{
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid gray;
+    background-color: #cbc5bd;
+}
+.titlu1 p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #522157;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-top: 9px;
+}
+.tabel1 {
+    width: 80%;
+    height: 90%;
+    border-collapse: collapse; 
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+.tabel1 td {
+    padding: 10px;
+    border: 1px solid #000; 
+    text-align: left; 
+    margin-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+}
+.tabel1 a{
+    text-decoration: none; 
+    display: block; 
+    margin-top: 19px;
+    width: 100%; 
+    height: 100%;
+}
+.tabel1 td:hover {
+    text-decoration: underline;
+    opacity: 0.75;
+}
+
+
+.elemente-ale-limbajului{
+    width: 465px;
+    height: 310px;
+    grid-row: 2;
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 1.4fr 10fr;
+    grid-template-columns: 1fr;
+    margin-top: 4px;
+    padding: 20px;
+}
+.titlu2{
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid gray;
+    background-color: #cbc5bd;
+}
+.titlu2 p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #522157;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-top: 9px;
+}
+.tabel2 {
+    width: 80%;
+    height: 90%;
+    border-collapse: collapse; 
+    margin-left: 45px;
+    margin-top: 16px;
+}
+
+.tabel2 td {
+    padding: 10px;
+    border: 1px solid #000; 
+    text-align: left; 
+    margin-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+}
+.tabel2 a{
+    text-decoration: none; 
+    display: block; 
+    margin-top: 19px;
+    width: 100%; 
+    height: 100%;
+}
+.tabel2 td:hover {
+    text-decoration: underline;
+    opacity: 0.75;
+}
+
+
+.vectori{
+    width: 420px;
+    height: 560px;
+    grid-row: 3;
+    grid-column: 1;
+    display: grid;
+    grid-template-rows: 0.8fr 10fr;
+    grid-template-columns: 1fr;
+    margin-top: 7px;
+    margin-left: 150px;
+    margin-bottom: 100px;
+    padding: 20px;
+}
+.titlu3{
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid gray;
+    background-color: #cbc5bd;
+}
+.titlu3 p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #522157;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-top: 8px;
+}
+.tabel3 {
+    width: 80%;
+    height: 94%;
+    border-collapse: collapse; 
+    margin-left: 45px;
+    margin-top: 16px;
+}
+
+.tabel3 td {
+    padding: 10px;
+    border: 1px solid #000; 
+    text-align: left; 
+    margin-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+}
+.tabel3 a{
+    text-decoration: none; 
+    display: block; 
+    margin-top: 18px;
+    width: 100%; 
+    height: 100%;
+}
+.tabel3 td:hover {
+    text-decoration: underline;
+    opacity: 0.75;
+}
+
+
+.matrici{
+    width: 465px;
+    height: 310px;
+    grid-row: 3;
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 1.4fr 10fr;
+    grid-template-columns: 1fr;
+    margin-top: 4px;
+    margin-bottom: 100px;
+    padding: 20px;
+}
+.titlu4{
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid gray;
+    background-color: #cbc5bd;
+}
+.titlu4 p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #522157;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-top: 9px;
+}
+.tabel4 {
+    width: 80%;
+    height: 90%;
+    border-collapse: collapse; 
+    margin-left: 45px;
+    margin-top: 14.5px;
+}
+
+.tabel4 td {
+    padding: 10px;
+    border: 1px solid #000; 
+    text-align: left; 
+    margin-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+}
+.tabel4 a{
+    text-decoration: none; 
+    display: block; 
+    margin-top: 19px;
+    width: 100%; 
+    height: 100%;
+}
+.tabel4 td:hover {
+    text-decoration: underline;
+    opacity: 0.75;
+}
+
+
+.diverse{
+    width: 465px;
+    height: 175px;
+    grid-row: 3;
+    grid-column: 2;
+    display: grid;
+    grid-template-rows: 2.65fr 10fr;
+    grid-template-columns: 1fr;
+    margin-top: 4px;
+    margin-bottom: 485px;
+    padding: 20px;
+}
+.titlu5{
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid gray;
+    background-color: #cbc5bd;
+}
+.titlu5 p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    color: #522157;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-top: 9px;
+}
+.tabel5 {
+    width: 80%;
+    height: 82%;
+    border-collapse: collapse; 
+    margin-left: 45px;
+    margin-top: 13.5px;
+}
+
+.tabel5 td {
+    padding: 10px;
+    border: 1px solid #000; 
+    text-align: left; 
+    margin-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer; 
+}
+.tabel5 a{
+    text-decoration: none; 
+    display: block; 
+    margin-top: 17px;
+    width: 100%; 
+    height: 100%;
+}
+.tabel5 td:hover {
+    text-decoration: underline;
+    opacity: 0.75;
+}
+
+footer{
+    margin-top: 4px;
+    height: 10vh;
+    width: 100%;
+    align-self: baseline;
+    background: linear-gradient(to bottom, #8B4C70, #522157);
+    color: #ffffff;
+  }
+
+  @media screen and (max-width: 850px) {
+    .probleme-elementare, .elemente-ale-limbajului, .vectori, .matrici, .diverse {
+        grid-row: auto;
+        grid-column: auto;
+        margin: 20px auto; 
+    }
+}
+
+  
+  
