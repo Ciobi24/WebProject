@@ -8,6 +8,7 @@ header{
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   /*opacity: 0.60; */
   height:9vh;
+  height:65px;
   width: 100%;
 
 }
@@ -27,8 +28,8 @@ nav li {
 
 nav a {
   font-weight: bold;
-  font-size: 20px;
-  height: 100%;
+  font-size: 22px;
+  height: 130%;
   padding: 0 30px;
   text-decoration: none;
   display: flex;
@@ -37,12 +38,19 @@ nav a {
   transition: .3s;
 }
 
+nav a:hover {
+  background-color: #4b1e50;
+}
+nav a:active {
+  opacity: 0.5;
+}
+
 .menu a {
-  color: #ffffff;
+  color: #cbcaca;
 }
 
 nav a:hover {
-  color: gray;
+  color: rgb(255, 255, 255);
 }
 
 nav li:first-child {
@@ -86,19 +94,4 @@ nav li:first-child {
   }
 }
 
-@media (max-width: 430px) {
-  .sidebar {
-    width: 100%;
-  }
-  nav a{
-    font-size:10px;
-    padding-top: 10%;
-    padding-bottom: 10%;
-  }
-}
 
-@media(max-width:300px){
-  *{
-    font-size:10px;
-  }
-}
