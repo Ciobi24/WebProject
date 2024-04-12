@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../public/css/header1.css">
+    <link rel="stylesheet" href="../../public/css/temele_mele.css">
+    <link rel="stylesheet" href="../../public/css/footer.css">
+    <script>
+        function showSidebar() {
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'flex'
+        }
+        function hideSidebar() {
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'none'
+        }
+        function showSignUp() {
+          const flipCheckbox = document.getElementById('flip');
+          flipCheckbox.checked = true;
+        }
+        function showLogin() {
+          const flipCheckbox = document.getElementById('flip');
+          flipCheckbox.checked = false;
+        }
+      </script>
+      <script>
+        // Function to open the modal for searching problems
+        function openSearchModal() {
+            var modal = document.getElementById('searchModal');
+            modal.style.display = "block";
+        }
+
+        // Function to close the modal for searching problems
+        function closeSearchModal() {
+            var modal = document.getElementById('searchModal');
+            modal.style.display = "none";
+        }
+
+        // Function to open the solutions page for a user
+        function openSolutionsPage() {
+            // Navigate to solutions.html
+            window.location.href = "solutions.html";
+        }
+
+        // Function to open the evaluate modal
+        function openEvaluateModal() {
+            var modal = document.getElementById('evaluateModal');
+            modal.style.display = "block";
+        }
+
+        // Function to close the evaluate modal
+        function closeEvaluateModal() {
+            var modal = document.getElementById('evaluateModal');
+            modal.style.display = "none";
+        }
+
+        // Function to open solutions for a user
+        function openUserSolution() {
+            // Navigate to solution.html
+            window.location.href = "solution.html";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="sidebar">
+                <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
+                                                           width="26">
+                            <path
+                                    d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/>
+                        </svg></a></li>
+                <li><a href="#home" onclick="hideSidebar()">Home</a></li>
+                <li><a href="#probleme" onclick="hideSidebar()">Probleme</a></li>
+                <li><a href="#clasa_mea" onclick="hideSidebar()">Clasa mea</a></li>
+                <li><a href="#profil" onclick="hideSidebar()">Profil</a></li>
+                <li><a href="#logout" onclick="hideSidebar()">Logout</a></li>
+            </ul>
+            <ul class="menu">
+                <li><a href="#home">Home</a></li>
+                <li class="hideOnMobile"><a href="#probleme">Probleme</a></li>
+                <li class="hideOnMobile"><a href="#clasa_mea">Clasa mea</a></li>
+                <li class="hideOnMobile"><a href="#profil">Profil</a></li>
+                <li class="hideOnMobile"><a href="#logout">Logout</a></li>
+                <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                                                                             viewBox="0 96 960 960" width="26">
+                            <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+                        </svg></a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container_princ">
+        <h2>Temele Mele</h2>
+        <div class="teme">
+            <div class="tema">
+                <h3>Tema 1</h3>
+                <p>Deadline: January 31, 2024</p>
+                <ul>
+                    <li>Problem 1</li>
+                    <li>Problem 2</li>
+                    <li>Problem 3</li>
+                </ul>
+                <button onclick="openSearchModal()">Adauga</button>
+                <button onclick="openEvaluateModal()">Evalueaza</button>
+            </div>
+            <div class="tema">
+                <h3>Tema 2</h3>
+                <p>Deadline: February 15, 2024</p>
+                <ul>
+                    <li>Problem 1</li>
+                    <li>Problem 2</li>
+                </ul>
+                <button onclick="openSearchModal()">Adauga</button>
+                <button onclick="openEvaluateModal()">Evalueaza</button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal for searching problems -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSearchModal()">&times;</span>
+            <h2>Cauta Probleme</h2>
+            <input type="text" id="searchInput" placeholder="Cauta problema...">
+            <button onclick="searchProblem()">Cauta</button>
+        </div>
+    </div>
+    <!-- Modal for users -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeUserModal()">&times;</span>
+            <h2>Select User</h2>
+            <ul>
+                <li onclick="openUserSolution()">User 1</li>
+                <li onclick="openUserSolution()">User 2</li>
+                <li onclick="openUserSolution()">User 3</li>
+                <li onclick="openUserSolution()">User 4</li>
+                <li onclick="openUserSolution()">User 5</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Modal for evaluating -->
+    <div id="evaluateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEvaluateModal()">&times;</span>
+            <h2>Evalueaza Elevii</h2>
+            <ul>
+                <li onclick="openUserSolution()">User 1</li>
+                <li onclick="openUserSolution()">User 2</li>
+                <li onclick="openUserSolution()">User 3</li>
+                <li onclick="openUserSolution()">User 4</li>
+                <li onclick="openUserSolution()">User 5</li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        <p>@ Contact</p>
+    </footer>
+</body>
+</html>
