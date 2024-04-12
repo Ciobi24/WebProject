@@ -128,10 +128,17 @@ h2 {
             background-color: #8B4C70;
             color: #ffffff;
         }
-        .modal-content >ul>li{
+        .modal-content ul li{
             color: #522157;
             font-size: 20px;
+            list-style-type: none;
+            border:2px solid #8B4C70 ;
+            background-color: #bf6c9b;
         }
+        .modal-content ul li:hover{
+            background-color: #8B4C70;
+        }
+
   @media (max-width:1100px){
   .teme {
         display: flex;
