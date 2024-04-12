@@ -65,6 +65,48 @@
             //implement
         }
     </script>
+    <script>
+        // Function to open the modal for adding a new topic
+        function openAddTemaModal() {
+            var modal = document.getElementById('addTemaModal');
+            modal.style.display = "block";
+        }
+    
+        // Function to close the modal for adding a new topic
+        function closeAddTemaModal() {
+            var modal = document.getElementById('addTemaModal');
+            modal.style.display = "none";
+        }
+    
+        // Function to submit the new topic
+        function submitNewTema() {
+            // // Get input values
+            // var clasa = document.getElementById('clasaInput').value;
+            // var deadline = document.getElementById('deadlineInput').value;
+            // var problems = document.getElementById('problemsInput').value.split('\n'); // Split problems by newline
+    
+            // // Create new topic element
+            // var container = document.querySelector('.teme');
+            // var newTema = document.createElement('div');
+            // newTema.classList.add('tema');
+            // newTema.innerHTML = `
+            //     <h3>${clasa}</h3>
+            //     <p>Deadline: ${deadline}</p>
+            //     <ul>
+            //         ${problems.map(problem => `<li>${problem}</li>`).join('')}
+            //     </ul>
+            //     <button onclick="openSearchModal()">Adauga</button>
+            //     <button onclick="openEvaluateModal()">Evalueaza</button>
+            // `;
+    
+            // // Append new topic to container
+            // container.appendChild(newTema);
+    
+            // // Close the modal
+            closeAddTemaModal();
+        }
+    </script>
+    
 </head>
 <body>
     <header>
@@ -76,14 +118,14 @@
                       d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
                   </svg></a></li>
               <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
-              <li><a href="#probleme" onclick=hideSidebar()>Probleme</a></li>
+              <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
               <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasa mea</a></li>
               <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
               <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
             </ul>
             <ul class="menu">
               <li><a href="logged_page.html">Home</a></li>
-              <li class="hideOnMobile"><a href="#probleme">Probleme</a></li>
+              <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
               <li class="hideOnMobile"><a href="clasele_mele.html">Clasa mea</a></li>
               <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
               <li class="hideOnMobile"><a href="index.html">Logout</a></li>
@@ -118,6 +160,21 @@
                 <button onclick="openSearchModal()">Adauga</button>
                 <button onclick="openEvaluateModal()">Evalueaza</button>
             </div>
+        </div>
+        <button onclick="openAddTemaModal()">+</button> <!-- New button for adding a new topic -->
+    </div>
+    <!-- Modal for adding new topic -->
+    <div id="addTemaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddTemaModal()">&times;</span>
+            <h2>Adauga Tema Noua</h2>
+            <label for="clasaInput">Clasa:</label>
+            <input type="text" id="clasaInput" placeholder="Clasa a X-a B/XB/10B"><br><br>
+            <label for="deadlineInput">Deadline:</label>
+            <input type="date" id="deadlineInput" placeholder="Deadline"><br><br>
+            <label for="problemsInput">Probleme:</label>
+            <textarea id="problemsInput" placeholder="Problema1, Problema2, ..."></textarea><br><br>
+            <button onclick="submitNewTema()">Submit</button>
         </div>
     </div>
     <!-- Modal for searching problems -->
