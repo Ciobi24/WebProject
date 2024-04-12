@@ -11,7 +11,9 @@
     margin-left: 150px;
     padding: 20px;
 }
-
+table td{
+    color: #522157;
+}
 .titlu1{
     grid-row: 1;
     width: 100%;
@@ -28,17 +30,17 @@
     margin-top: 9px;
 }
 .tabel1 {
-    width: 80%;
-    height: 90%;
+    width: 85%;
+    height: 80%;
     border-collapse: collapse; 
-    margin-left: 35px;
-    margin-top: 20px;
+    justify-self: center;
+    align-self: center;
 }
 
 .tabel1 td {
     padding: 10px;
     border: 1px solid #000; 
-    text-align: left; 
+    text-align: left;
     margin-left: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -46,10 +48,10 @@
 }
 .tabel1 a{
     text-decoration: none; 
-    display: block; 
-    margin-top: 19px;
     width: 100%; 
     height: 100%;
+    justify-self: center;
+    align-items: left;
 }
 .tabel1 td:hover {
     text-decoration: underline;
@@ -84,11 +86,11 @@
     margin-top: 9px;
 }
 .tabel2 {
-    width: 80%;
-    height: 90%;
+    width: 85%;
+    height: 80%;
     border-collapse: collapse; 
-    margin-left: 45px;
-    margin-top: 16px;
+    justify-self: center;
+    align-self: center;
 }
 
 .tabel2 td {
@@ -102,10 +104,10 @@
 }
 .tabel2 a{
     text-decoration: none; 
-    display: block; 
-    margin-top: 19px;
     width: 100%; 
     height: 100%;
+    justify-self: center;
+    align-items: left;
 }
 .tabel2 td:hover {
     text-decoration: underline;
@@ -139,14 +141,14 @@
     color: #522157;
     font-weight: bold;
     margin-left: 13px;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 .tabel3 {
-    width: 80%;
-    height: 94%;
+    width: 85%;
+    height: 80%;
     border-collapse: collapse; 
-    margin-left: 45px;
-    margin-top: 16px;
+    justify-self: center;
+    align-self: center;
 }
 
 .tabel3 td {
@@ -160,10 +162,10 @@
 }
 .tabel3 a{
     text-decoration: none; 
-    display: block; 
-    margin-top: 18px;
     width: 100%; 
     height: 100%;
+    justify-self: center;
+    align-items: left;
 }
 .tabel3 td:hover {
     text-decoration: underline;
@@ -199,11 +201,11 @@
     margin-top: 9px;
 }
 .tabel4 {
-    width: 80%;
-    height: 90%;
+    width: 85%;
+    height: 80%;
     border-collapse: collapse; 
-    margin-left: 45px;
-    margin-top: 14.5px;
+    justify-self: center;
+    align-self: center;
 }
 
 .tabel4 td {
@@ -217,10 +219,10 @@
 }
 .tabel4 a{
     text-decoration: none; 
-    display: block; 
-    margin-top: 19px;
     width: 100%; 
     height: 100%;
+    justify-self: center;
+    align-items: left;
 }
 .tabel4 td:hover {
     text-decoration: underline;
@@ -247,6 +249,7 @@
     border-bottom: 1px solid gray;
     background-color: #cbc5bd;
 }
+
 .titlu5 p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
@@ -255,12 +258,14 @@
     margin-left: 13px;
     margin-top: 9px;
 }
+
+
 .tabel5 {
-    width: 80%;
-    height: 82%;
+    width: 85%;
+    height: 80%;
     border-collapse: collapse; 
-    margin-left: 45px;
-    margin-top: 13.5px;
+    justify-self: center;
+    align-self: center;
 }
 
 .tabel5 td {
@@ -274,10 +279,10 @@
 }
 .tabel5 a{
     text-decoration: none; 
-    display: block; 
-    margin-top: 17px;
     width: 100%; 
     height: 100%;
+    justify-self: center;
+    align-items: left;
 }
 .tabel5 td:hover {
     text-decoration: underline;
@@ -285,11 +290,12 @@
 }
 
 footer{
-    margin-top: 4px;
-    height: 10vh;
+    grid-row: inherit;
+    grid-column: inherit;   
+    background: linear-gradient(rgba(128, 128, 128, 0.1), #8B4C70);
     width: 100%;
-    align-self: baseline;
-    background: linear-gradient(to bottom, #8B4C70, #522157);
+    height: 9vh;
+    z-index: 3;
     color: #ffffff;
   }
 
@@ -297,7 +303,20 @@ footer{
     .probleme-elementare, .elemente-ale-limbajului, .vectori, .matrici, .diverse {
         grid-row: auto;
         grid-column: auto;
+        padding: 0px;
         margin: 20px auto; 
+    }
+    .matrici {
+        grid-template-rows: 2.65fr 12fr;
+    } 
+    .vectori {
+        grid-template-rows: 2fr 16fr;
+    }
+    .elemente-ale-limbajului {
+        grid-template-rows: 2fr 8.5fr;
+    }
+    .probleme-elementare {
+        grid-template-rows: 2fr 10.6fr;
     }
 }
 
