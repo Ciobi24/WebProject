@@ -87,9 +87,10 @@ nav li:first-child {
 
 .menu-button {
   display: none;
+  color: #cbcaca;
 }
 
-@media (max-width: 730px) {
+@media (max-width: 855px) {
   .hideOnMobile {
     display: none;
   }

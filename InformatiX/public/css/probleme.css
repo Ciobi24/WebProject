@@ -1,26 +1,48 @@
+*{
+    margin:0;
+    padding:0;
+ }
+
 body {
     background-color: #E4DFD9;
+    overflow-y:scroll;  
 }
 
+body::-webkit-scrollbar {
+    width: 10px; 
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #c9afa1; }
+  
+    body::-webkit-scrollbar-thumb {
+    background: #834a89; 
+    border-radius: 5px;
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background: #522157; 
+  }
 
 .container-mare {
-    width: 1250px;
-    height: 1390px;
+    width: 83vw;
+    height: 1400px;
     margin-top: 85px;
     display: grid;
     grid-template-rows: 4fr 10fr 17fr;
     grid-template-columns: 1fr 1fr;
     background-color: #E4DFD9;
     margin: auto;
-    overflow: auto;
+    
     border-top: solid 100px rgb(149, 85, 121);
 }
 
 .tip-clasa{
     grid-row: 1;
     grid-column: 1;
-    margin-left: 20px;
     margin-top: 45px;
+    margin-right: 70px;
+    justify-self: center;
     font-size: 50px;
     color: #6f1d4c;
 }
@@ -37,18 +59,4 @@ body {
 
 .nr_probleme{
     font-size: 11px;
-}
-@media screen and (max-width: 850px) {
-    .container-mare {
-        width: 815px;
-        height: 1390px;
-        margin-top: 85px;
-        display: grid;
-        grid-template-rows: 4fr 10fr 10fr 10fr 10fr 10fr;
-        grid-template-columns: 1fr;
-        background-color: #E4DFD9;
-        margin: auto;
-        overflow: auto;
-        border-top: solid 100px rgb(149, 85, 121);
-    }
 }
