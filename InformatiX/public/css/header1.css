@@ -11,8 +11,14 @@ header{
   width: 100%;
   z-index: 100;
 }
-
+.menu{
+  height: 100%;
+}
+nav{
+  height: 100%;
+}
 nav ul {
+  height:100%;
   width: 100%;
   list-style: none;
   display: flex;
