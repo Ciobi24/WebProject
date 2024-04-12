@@ -6,16 +6,14 @@
 
  .corp_profil{
     width:100%;
-    height: 100vh;
+    height: 93vh;
+    margin-top:7vh;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: 9vh 1fr ;
  }
  .header{
    z-index: 3;
    position: fixed;
-   grid-column: 1/3;
-   grid-row: 1/2;
 }
  .corp_stanga{
     display: flex;
@@ -23,19 +21,17 @@
     overflow: hidden;
     background-color: #8B4C70;
     grid-column: 1/2;
-    grid-row: 2/3;
     height: 100%;
     width: 100%;
-    z-index: 1;
  }
  .corp_dreapta{
-    grid-row: 2/3;
     grid-column: 2/3;
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     background-color: #deccb9;
+    height: 100%;
     width: 100%;
  }
  button{
@@ -99,9 +95,14 @@ font-size: 60px;
  .pb{
   font-size:20px;
   color:#E4C7B7;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
  }
 .container {
   width: 80%;
+  height: fit-content;
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
@@ -140,6 +141,7 @@ input{
 }
 #infos_page{
   overflow-y:scroll;
+  height: 100%;
 }
 #infos_page::-webkit-scrollbar {
   width: 10px; 
@@ -156,6 +158,14 @@ input{
 #infos_page::-webkit-scrollbar-thumb:hover {
   background: #522157; 
 }
+#passwrd_page{
+  height:100%;
+}
+
+#switch_page{
+  height:100%;
+}
+
 
 form > button {
   padding: 10px 20px;
@@ -169,4 +179,93 @@ form > button {
 
 button:hover {
   background-color: #b2337b;
+}
+@media (min-height:710px){
+.corp_profil{
+  margin-top: 65px;
+  height: 92vh;
+}
+}
+@media (min-height:820px){
+  #infos_page{
+    overflow-y: hidden;
+  }
+}
+@media (max-height:650px) and (min-width:1000px){
+.corp_profil{
+  height: 90vh;
+  margin-top:65px;
+}
+}
+@media (max-width:400px){
+  button >p {
+    font-size: 10px;
+  }
+  .corp_profil{
+  margin-top: 65px;
+  height: 91vh;
+  }
+  .container{
+    width: 70%;
+    h2{
+      font-size: 20px;
+    }
+    label{
+      font-size: 12px;
+    }
+    input{
+      width:80%;
+    }
+  }
+  .nr{
+    font-size: 30px;
+  }
+  .nr:hover{
+    font-size: 40px;
+  }
+  .pb{
+    font-size: 17px;
+  }
+}
+@media (max-width:420px) and (min-height:740px){
+  button >p {
+    font-size: 16px;
+  }
+  .corp_profil{
+  margin-top: 65px;
+  height: 93vh;
+  }
+  .container{
+    width: 70%;
+    h2{
+      font-size: 20px;
+    }
+    label{
+      font-size: 12px;
+    }
+    input{
+      width:80%;
+    }
+  }
+  .nr{
+    font-size: 30px;
+  }
+  .nr:hover{
+    font-size: 40px;
+  }
+  .pb{
+    font-size: 18px;
+  }
+}
+@media (max-width: 1024px) and (min-height:914px) and (max-height: 1190px){
+  .corp_profil{
+    margin-top: 65px;
+    height: 95vh;
+  }
+}
+@media (max-width: 1024px) and (min-height:1191px) {
+  .corp_profil{
+    margin-top: 65px;
+    height: 96vh;
+  }
 }
