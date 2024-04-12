@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/clasele_mele.css">
+    <link rel="stylesheet" href="../../public/css/footer.css">
+    <link rel="stylesheet" href="../../public/css/header1.css">
+
+    <title>Document</title>
+
+    <script>
+        // Function to display the modal
+        function showModal(className) {
+            var modal = document.getElementById('myModal');
+            var classNameElement = document.getElementById('className');
+            var userListElement = document.getElementById('userList');
+            classNameElement.innerText = className;
+            modal.style.display = "block";
+            
+            // Fetch and display user list for the clicked class (You need to implement this)
+            var usersMap = {
+                "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
+                "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
+                "Clasa a X-a C": ["Daniel Thomas", "Sophia White", "Matthew Clark", "Isabella Hall", "William Lee"],
+                "Clasa a X-a D": ["Ethan Walker", "Ava Lewis", "Alexander King", "Chloe Scott", "Jacob Green"]
+            };
+            
+            var users = usersMap[className];
+            userListElement.innerHTML = ""; // Clear previous list
+            
+            users.forEach(function(user) {
+                var listItem = document.createElement('div');
+                listItem.textContent = user;
+                userListElement.appendChild(listItem);
+            });
+        }
+    
+        // Function to close the modal
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+    
+        // Function to open the add user modal
+        function openAddUserModal() {
+            var modal = document.getElementById('addUserModal');
+            modal.style.display = "block";
+        }
+    
+        // Function to close the add user modal
+        function closeAddUserModal() {
+            var modal = document.getElementById('addUserModal');
+            modal.style.display = "none";
+        }
+    
+        // Function to add user (You need to implement this)
+        function addUser() {
+            // Add your logic to add a user to the class
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul class="sidebar">
+            <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
+                                                       width="26">
+                        <path
+                                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/>
+                    </svg></a></li>
+            <li><a href="#home" onclick="hideSidebar()">Home</a></li>
+            <li><a href="#probleme" onclick="hideSidebar()">Probleme</a></li>
+            <li><a href="#clasa_mea" onclick="hideSidebar()">Clasa mea</a></li>
+            <li><a href="#profil" onclick="hideSidebar()">Profil</a></li>
+            <li><a href="#logout" onclick="hideSidebar()">Logout</a></li>
+        </ul>
+        <ul class="menu">
+            <li><a href="#home">Home</a></li>
+            <li class="hideOnMobile"><a href="#probleme">Probleme</a></li>
+            <li class="hideOnMobile"><a href="#clasa_mea">Clasa mea</a></li>
+            <li class="hideOnMobile"><a href="#profil">Profil</a></li>
+            <li class="hideOnMobile"><a href="#logout">Logout</a></li>
+            <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                                                                         viewBox="0 96 960 960" width="26">
+                        <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/>
+                    </svg></a></li>
+        </ul>
+    </nav>
+</header>
+<div class="container_princ">
+    <h2>Clasele mele</h2>
+    <div class="clase" id="clase">
+        <div class="clasa" onclick="showModal('Clasa a X-a B')"><h3>Clasa a X-a B</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a A')"><h3>Clasa a X-a A</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a C')"><h3>Clasa a X-a C</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a D')"><h3>Clasa a X-a D</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a B')"><h3>Clasa a X-a B</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a A')"><h3>Clasa a X-a A</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a C')"><h3>Clasa a X-a C</h3></div>
+        <div class="clasa" onclick="showModal('Clasa a X-a D')"><h3>Clasa a X-a D</h3></div>
+    </div>
+</div>
+<footer>
+    <p>@ Contact</p>
+</footer>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="className"></h2>
+        <div id="userList">
+        </div>
+        <!-- Modify this button -->
+        <button onclick="openAddUserModal()">Add User</button>
+    </div>
+</div>
+
+<!-- Add this modal for adding users -->
+<div id="addUserModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" onclick="closeAddUserModal()">&times;</span>
+        <h2>Add User</h2>
+        <input type="text" class="search-input" placeholder="Search user...">
+        <button onclick="addUser()">Add User</button>
+    </div>
+</div>
+
+</body>
+</html>
