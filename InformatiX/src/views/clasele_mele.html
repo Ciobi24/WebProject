@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="../../public/css/header1.css">
 
     <title>Document</title>
+    <script>
+        function showSidebar() {
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'flex'
+        }
+        function hideSidebar() {
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'none'
+        }
+        function showSignUp() {
+          const flipCheckbox = document.getElementById('flip');
+          flipCheckbox.checked = true;
+        }
+        function showLogin() {
+          const flipCheckbox = document.getElementById('flip');
+          flipCheckbox.checked = false;
+        }
+      </script>
 
     <script>
         // Function to display the modal
