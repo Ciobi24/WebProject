@@ -11,8 +11,14 @@ header{
   width: 100%;
   z-index: 100;
 }
-
+.menu{
+  height: 100%;
+}
+nav{
+  height: 100%;
+}
 nav ul {
+  height:100%;
   width: 100%;
   list-style: none;
   display: flex;
@@ -28,12 +34,12 @@ nav li {
 nav a {
   font-weight: bold;
   font-size: 22px;
-  height: 130%;
+  height: 100%;
   padding: 0 30px;
   text-decoration: none;
   display: flex;
   align-items: center;
-  color: #cbcaca;
+  color:#522157;
   transition: .3s;
 }
 
@@ -100,3 +106,6 @@ nav li:first-child {
 }
 
 
+path{
+  fill:#cbcaca;
+}
