@@ -127,3 +127,8 @@ footer{
   ::-webkit-scrollbar-thumb:hover {
     background: #522157; 
   }
+  @media (min-width:760px){
+    .clasa h3{
+        font-size: 30px;
+    }
+  }
