@@ -13,14 +13,17 @@
       const sidebar = document.querySelector('.sidebar')
       sidebar.style.display = 'flex'
     }
+
     function hideSidebar() {
       const sidebar = document.querySelector('.sidebar')
       sidebar.style.display = 'none'
     }
+
     function showSignUp() {
       const flipCheckbox = document.getElementById('flip');
       flipCheckbox.checked = true;
     }
+
     function showLogin() {
       const flipCheckbox = document.getElementById('flip');
       flipCheckbox.checked = false;
@@ -53,7 +56,8 @@
       showAllDescendants(selectedDiv);
     }
   </script>
-  <script>window.onload = function () {
+  <script>
+    window.onload = function () {
       // Get all buttons
       var buttons = document.querySelectorAll('button');
 
@@ -104,23 +108,17 @@
   </header>
   <div class="corp_profil">
     <div class="corp_stanga">
-      <button onclick="showDiv('infos_page')">
-        <p>My info</p>
-      </button>
-      <button onclick="showDiv('passwrd_page')">
-        <p>Change Password</p>
-      </button>
-      <button onclick="showDiv('switch_page')">
-        <p>Switch to teacher</p>
-      </button>
+      <button onclick="showDiv('infos_page')">My info</button>
+      <button onclick="showDiv('passwrd_page')">Change Password</button>
+      <button onclick="showDiv('switch_page')">Switch to teacher</button>
       <div class="statistics">
-
         <div class="circle">
           <p class="nr"> 100 </p>
           <div class="pb">
             <p>solutii</p>
             <p>corecte</p>
-          </div>        </div>
+          </div>
+        </div>
         <div class="circle">
           <p class="nr"> 130 </p>
           <div class="pb">
@@ -128,7 +126,6 @@
             <p>rezolvate</p>
           </div>
         </div>
-
       </div>
     </div>
     <div class="corp_dreapta">
@@ -137,11 +134,11 @@
           <h2>Edit Profile Information</h2>
           <form action="#">
             <div class="input-group">
-              <label for="name">Nume</label>
+              <label for="name">Last Name</label>
               <input type="text" id="name" name="name" placeholder="Enter your name" value="John" required>
             </div>
             <div class="input-group">
-              <label for="surname">Prenume</label>
+              <label for="surname">First Name</label>
               <input type="text" id="surname" name="surname" placeholder="Enter your surname" value="Doe" required>
             </div>
             <div class="input-group">
@@ -150,22 +147,20 @@
                 required>
             </div>
             <div class="input-group">
-              <label for="dob">Data Nasterii</label>
+              <label for="dob">Birthday</label>
               <input type="date" id="dob" name="dob" value="2000-01-01" required>
             </div>
             <div class="input-group">
-              <label for="city">Oras</label>
+              <label for="city">City</label>
               <input type="text" id="city" name="city" placeholder="Enter your city" value="New York" required>
             </div>
             <div class="input-group">
-              <label for="school">Scoala</label>
+              <label for="school">School</label>
               <input type="text" id="school" name="school" placeholder="Enter your school" value="ABC School" required>
             </div>
             <button type="submit">Save Changes</button>
           </form>
         </div>
-
-
       </div>
       <div class="passwrd_page" id="passwrd_page" style="display:none;">
         <div class="container">
@@ -183,14 +178,13 @@
           </form>
         </div>
       </div>
-
       <div id="switch_page" style="display:none;">
         <div class="container">
           <h2>Apply for Teacher Account</h2>
           <form action="#" enctype="multipart/form-data">
             <div class="input-group">
-              <label for="school">School Name</label>
-              <input type="text" id="school" name="school" placeholder="Enter your school name" required>
+              <label for="school">School</label>
+              <input type="text" id="school1" name="school" placeholder="Enter your school name" required>
             </div>
             <div class="input-group">
               <label for="upload-file">Upload Photo/Document</label>
