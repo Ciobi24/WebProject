@@ -1,5 +1,4 @@
-
-.probleme-elementare{
+.probleme-elementare {
     width: 420px;
     height: 440px;
     grid-row: 2;
@@ -11,16 +10,19 @@
     margin-left: 150px;
     padding: 20px;
 }
-table td{
+
+table td {
     color: #522157;
 }
-.titlu1{
+
+.titlu1 {
     grid-row: 1;
     width: 100%;
     height: 100%;
     border-bottom: 1px solid gray;
     background-color: #cbc5bd;
 }
+
 .titlu1 p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
@@ -29,37 +31,40 @@ table td{
     margin-left: 13px;
     margin-top: 9px;
 }
+
 .tabel1 {
     width: 85%;
     height: 80%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     justify-self: center;
     align-self: center;
 }
 
 .tabel1 td {
     padding: 10px;
-    border: 1px solid #000; 
+    border: 1px solid #000;
     text-align: left;
     margin-left: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.tabel1 a{
-    text-decoration: none; 
-    width: 100%; 
+
+.tabel1 a {
+    text-decoration: none;
+    width: 100%;
     height: 100%;
     justify-self: center;
     align-items: left;
 }
+
 .tabel1 td:hover {
     text-decoration: underline;
     opacity: 0.75;
 }
 
 
-.elemente-ale-limbajului{
+.elemente-ale-limbajului {
     width: 465px;
     height: 310px;
     grid-row: 2;
@@ -70,13 +75,15 @@ table td{
     margin-top: 4px;
     padding: 20px;
 }
-.titlu2{
+
+.titlu2 {
     grid-row: 1;
     width: 100%;
     height: 100%;
     border-bottom: 1px solid gray;
     background-color: #cbc5bd;
 }
+
 .titlu2 p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
@@ -85,37 +92,40 @@ table td{
     margin-left: 13px;
     margin-top: 9px;
 }
+
 .tabel2 {
     width: 85%;
     height: 80%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     justify-self: center;
     align-self: center;
 }
 
 .tabel2 td {
     padding: 10px;
-    border: 1px solid #000; 
-    text-align: left; 
+    border: 1px solid #000;
+    text-align: left;
     margin-left: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.tabel2 a{
-    text-decoration: none; 
-    width: 100%; 
+
+.tabel2 a {
+    text-decoration: none;
+    width: 100%;
     height: 100%;
     justify-self: center;
     align-items: left;
 }
+
 .tabel2 td:hover {
     text-decoration: underline;
     opacity: 0.75;
 }
 
 
-.vectori{
+.vectori {
     width: 420px;
     height: 560px;
     grid-row: 3;
@@ -128,13 +138,15 @@ table td{
     margin-bottom: 100px;
     padding: 20px;
 }
-.titlu3{
+
+.titlu3 {
     grid-row: 1;
     width: 100%;
     height: 100%;
     border-bottom: 1px solid gray;
     background-color: #cbc5bd;
 }
+
 .titlu3 p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
@@ -143,37 +155,40 @@ table td{
     margin-left: 13px;
     margin-top: 10px;
 }
+
 .tabel3 {
     width: 85%;
     height: 80%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     justify-self: center;
     align-self: center;
 }
 
 .tabel3 td {
     padding: 10px;
-    border: 1px solid #000; 
-    text-align: left; 
+    border: 1px solid #000;
+    text-align: left;
     margin-left: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.tabel3 a{
-    text-decoration: none; 
-    width: 100%; 
+
+.tabel3 a {
+    text-decoration: none;
+    width: 100%;
     height: 100%;
     justify-self: center;
     align-items: left;
 }
+
 .tabel3 td:hover {
     text-decoration: underline;
     opacity: 0.75;
 }
 
 
-.matrici{
+.matrici {
     width: 465px;
     height: 310px;
     grid-row: 3;
@@ -185,13 +200,15 @@ table td{
     margin-bottom: 100px;
     padding: 20px;
 }
-.titlu4{
+
+.titlu4 {
     grid-row: 1;
     width: 100%;
     height: 100%;
     border-bottom: 1px solid gray;
     background-color: #cbc5bd;
 }
+
 .titlu4 p {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
@@ -200,37 +217,40 @@ table td{
     margin-left: 13px;
     margin-top: 9px;
 }
+
 .tabel4 {
     width: 85%;
     height: 80%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     justify-self: center;
     align-self: center;
 }
 
 .tabel4 td {
     padding: 10px;
-    border: 1px solid #000; 
-    text-align: left; 
+    border: 1px solid #000;
+    text-align: left;
     margin-left: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.tabel4 a{
-    text-decoration: none; 
-    width: 100%; 
+
+.tabel4 a {
+    text-decoration: none;
+    width: 100%;
     height: 100%;
     justify-self: center;
     align-items: left;
 }
+
 .tabel4 td:hover {
     text-decoration: underline;
     opacity: 0.75;
 }
 
 
-.diverse{
+.diverse {
     width: 465px;
     height: 175px;
     grid-row: 3;
@@ -242,7 +262,8 @@ table td{
     margin-bottom: 485px;
     padding: 20px;
 }
-.titlu5{
+
+.titlu5 {
     grid-row: 1;
     width: 100%;
     height: 100%;
@@ -263,62 +284,148 @@ table td{
 .tabel5 {
     width: 85%;
     height: 80%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     justify-self: center;
     align-self: center;
 }
 
 .tabel5 td {
     padding: 10px;
-    border: 1px solid #000; 
-    text-align: left; 
+    border: 1px solid #000;
+    text-align: left;
     margin-left: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
 }
-.tabel5 a{
-    text-decoration: none; 
-    width: 100%; 
+
+.tabel5 a {
+    text-decoration: none;
+    width: 100%;
     height: 100%;
     justify-self: center;
     align-items: left;
 }
+
 .tabel5 td:hover {
     text-decoration: underline;
     opacity: 0.75;
 }
 
-footer{
+footer {
     grid-row: inherit;
-    grid-column: inherit;   
+    grid-column: inherit;
     background: linear-gradient(rgba(128, 128, 128, 0.1), #8B4C70);
     width: 100%;
     height: 9vh;
     z-index: 3;
     color: #ffffff;
-  }
+}
 
-  @media screen and (max-width: 850px) {
-    .probleme-elementare, .elemente-ale-limbajului, .vectori, .matrici, .diverse {
+@media screen and (max-width: 850px) {
+    .container-mare {
+        width: 83%;
+        height: 100%;
+        margin-top: 85px;
+        margin-right: 70px;
+        display: grid;
+        grid-template-rows: 1.4fr 5.16fr 3.85fr 6.6fr 3.8fr 3.2fr;
+        grid-template-columns: 1fr;
+        background-color: #E4DFD9;
+        overflow: hidden;
+        margin: auto;
+        border-top: solid 100px rgb(149, 85, 121);
+    }
+    .container-mare div {
+        align-self: center;
+        justify-self: center;
+       width: 100%;
+       height: 80%;
+    }
+    .probleme-elementare,
+    .elemente-ale-limbajului,
+    .vectori,
+    .matrici,
+    .diverse {
         grid-row: auto;
         grid-column: auto;
         padding: 0px;
-        margin: 20px auto; 
+        margin: 20px auto;
     }
+
     .matrici {
         grid-template-rows: 2.65fr 12fr;
-    } 
+    }
+
     .vectori {
         grid-template-rows: 2fr 16fr;
     }
+
     .elemente-ale-limbajului {
         grid-template-rows: 2fr 8.5fr;
     }
+
     .probleme-elementare {
         grid-template-rows: 2fr 10.6fr;
     }
 }
 
-  
-  
+@media (min-height:710px) {}
+
+@media (min-height:820px) {}
+
+@media (max-height:650px) and (min-width:1000px) {}
+
+@media (max-width:400px) {}
+
+@media (max-width:420px) and (min-height:740px) {}
+
+@media (max-width: 1024px) and (min-height:914px) and (max-height: 1190px) {}
+
+@media (max-width: 1024px) and (min-height:1191px) {
+    .container-mare {
+        width: 83%;
+        height: 100%;
+        margin-top: 85px;
+        margin-right: 70px;
+        display: grid;
+        grid-template-rows: 1.4fr 5.16fr 3.85fr 6.6fr 3.8fr 3.2fr;
+        grid-template-columns: 1fr;
+        background-color: #E4DFD9;
+        overflow: hidden;
+        margin: auto;
+        border-top: solid 100px rgb(149, 85, 121);
+    }
+    .container-mare div {
+        align-self: center;
+        justify-self: center;
+       width: 100%;
+       height: 80%;
+    }
+    .probleme-elementare,
+    .elemente-ale-limbajului,
+    .vectori,
+    .matrici,
+    .diverse {
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+
+    .matrici {
+        grid-template-rows: 2.65fr 12fr;
+    }
+
+    .vectori {
+        grid-template-rows: 2fr 16fr;
+    }
+
+    .elemente-ale-limbajului {
+        grid-template-rows: 2fr 8.5fr;
+    }
+
+    .probleme-elementare {
+        grid-template-rows: 2fr 10.6fr;
+    }
+}
