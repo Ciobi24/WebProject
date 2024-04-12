@@ -90,7 +90,7 @@ nav li:first-child {
   color: #cbcaca;
 }
 
-@media (max-width: 730px) {
+@media (max-width: 855px) {
   .hideOnMobile {
     display: none;
   }

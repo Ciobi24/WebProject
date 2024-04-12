@@ -25,7 +25,7 @@ body::-webkit-scrollbar {
   }
 
 .container-mare {
-    width: 1250px;
+    width: 83vw;
     height: 1400px;
     margin-top: 85px;
     display: grid;
@@ -40,8 +40,9 @@ body::-webkit-scrollbar {
 .tip-clasa{
     grid-row: 1;
     grid-column: 1;
-    margin-left: 20px;
     margin-top: 45px;
+    margin-right: 70px;
+    justify-self: center;
     font-size: 50px;
     color: #6f1d4c;
 }
