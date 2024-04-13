@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../public/css/clasele_mele.css">
     <link rel="stylesheet" href="../../public/css/footer.css">
     <link rel="stylesheet" href="../../public/css/header1.css">
-    <title>Document</title>
+    <title></title>
     <script>
         function showSidebar() {
           const sidebar = document.querySelector('.sidebar')
@@ -35,7 +35,6 @@
             classNameElement.innerText = className;
             modal.style.display = "block";
             
-            // Fetch and display user list for the clicked class (You need to implement this)
             var usersMap = {
                 "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
                 "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
@@ -71,9 +70,12 @@
             modal.style.display = "none";
         }
     
-        // Function to add user (You need to implement this)
+        // Function to add user 
         function addUser() {
-            // Add your logic to add a user to the class
+            // Add 
+        }
+        function openAddClassModal(){
+            //
         }
     </script>
     <script>
@@ -113,6 +115,7 @@
 </header>
 <div class="container_princ">
     <h2>Clasele mele</h2>
+    <button onclick="openAddClassModal()">+</button>
     <div class="clase" id="clase">
         <div class="clasa" onclick="showModal('Clasa a X-a B')"><h3>Clasa a X-a B</h3></div>
         <div class="clasa" onclick="showModal('Clasa a X-a A')"><h3>Clasa a X-a A</h3></div>
@@ -128,23 +131,22 @@
     <p>@ Contact</p>
 </footer>
 
-<!-- The Modal -->
+
 <div id="myModal" class="modal">
-    <!-- Modal content -->
+
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2 id="className">Clasa a X-a B</h2>
         <div id="userList">
         </div>
-        <!-- Modify this button -->
+       
         <button onclick="openAddUserModal()">Add User</button>
         <button onclick="openTemePage()">Teme</button>
     </div>
 </div>
 
-<!-- Add this modal for adding users -->
 <div id="addUserModal" class="modal">
-    <!-- Modal content -->
+
     <div class="modal-content">
         <span class="close" onclick="closeAddUserModal()">&times;</span>
         <h2>Add User</h2>

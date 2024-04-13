@@ -1,7 +1,13 @@
- *{
+@font-face {
+  font-family: Poppins;
+  src: url('../../public/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+*{
     margin:0;
     padding:0;
     overflow: hidden;
+    font-family: Poppins;
  }
 
  .corp_profil{
@@ -96,6 +102,7 @@ font-size: 60px;
   font-size:20px;
   color:#E4C7B7;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
