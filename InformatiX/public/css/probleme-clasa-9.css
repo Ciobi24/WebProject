@@ -1,3 +1,11 @@
+@font-face {
+    font-family: Poppins;
+    src: url('../../public/fonts/Poppins-Regular.ttf') format('truetype');
+  }
+  
+  *{
+    font-family: Poppins;
+  }
 .probleme-elementare {
     width: 420px;
     height: 440px;
