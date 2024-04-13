@@ -1,3 +1,10 @@
+@font-face {
+    font-family: Poppins;
+    src: url('../../public/fonts/Poppins-Regular.ttf') format('truetype');
+  }
+  *{
+    font-family: Poppins;
+  }
 body{
     display:flex;
     flex-direction: column;
@@ -46,6 +53,8 @@ h2 {
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .tema h3 {
@@ -82,6 +91,7 @@ h2 {
   ::-webkit-scrollbar-thumb:hover {
     background: #522157; 
   }
+
           /* Styles for the modal */
           .modal {
             display: none;
@@ -127,6 +137,17 @@ h2 {
         .tema >button{
             background-color: #8B4C70;
             color: #ffffff;
+            border-radius: 15px;
+            margin:10px;
+        }
+        .container_princ>button{
+            background-color: #8B4C70;
+            color: #ffffff;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            font-size: 40px;
+            margin-bottom: 20px;
         }
         .modal-content ul li{
             color: #522157;
@@ -138,7 +159,10 @@ h2 {
         .modal-content ul li:hover{
             background-color: #8B4C70;
         }
-
+        input, textarea {
+            background-color: #c9afa1;
+        }
+        
   @media (max-width:1100px){
   .teme {
         display: flex;
@@ -149,4 +173,7 @@ h2 {
         overflow-y: auto;
         overflow-x: hidden;
     }
+  }
+  button:hover{
+    background-color: #522157;
   }
