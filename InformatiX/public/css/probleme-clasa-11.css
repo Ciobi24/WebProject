@@ -17,27 +17,28 @@ body {
 }
 
 body::-webkit-scrollbar {
-    width: 10px; 
+    width: 10px;
   }
   
   body::-webkit-scrollbar-track {
-    background: #c9afa1; }
+    background: #c9afa1;
+  }
   
-    body::-webkit-scrollbar-thumb {
-    background: #834a89; 
+  body::-webkit-scrollbar-thumb {
+    background: #834a89;
     border-radius: 5px;
   }
   
   body::-webkit-scrollbar-thumb:hover {
-    background: #522157; 
+    background: #522157;
   }
 
 .container-mare {
     width: 83vw;
-    height: 1900px;
+    height: 1600px;
     margin-top: 85px;
     display: grid;
-    grid-template-rows: 5fr 10fr;
+    grid-template-rows: 1fr 4.8fr 3.5fr 2fr;
     grid-template-columns: 1fr 1fr;
     background-color: #E4DFD9;
     margin: auto;
@@ -74,7 +75,7 @@ body::-webkit-scrollbar {
     grid-row: 2;
     grid-column: 1;
     display: grid;
-    grid-template-rows: 1fr 10fr;
+    grid-template-rows: 0.8fr 10fr;
     grid-template-columns: 1fr;
     margin-top: 4px;
     margin-left: 150px;
@@ -125,7 +126,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel1 td:hover {
@@ -136,11 +136,11 @@ table td {
 
 .elemente-ale-limbajului {
     width: 465px;
-    height: 246px;
+    height: 155px;
     grid-row: 2;
     grid-column: 2;
     display: grid;
-    grid-template-rows: 1.4fr 10fr;
+    grid-template-rows: 1.9fr 10fr;
     grid-template-columns: 1fr;
     margin-top: 4px;
     padding: 20px;
@@ -186,7 +186,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel2 td:hover {
@@ -197,15 +196,15 @@ table td {
 
 .vectori {
     width: 420px;
-    height: 260px;
+    height: 92px;
     grid-row: 4;
     grid-column: 1;
     display: grid;
-    grid-template-rows: 0.8fr 10fr;
+    grid-template-rows: 5fr 10fr;
     grid-template-columns: 1fr;
     margin-top: 7px;
     margin-left: 150px;
-    margin-bottom: 70px;
+    margin-bottom: 65px;
     padding: 20px;
 }
 
@@ -223,7 +222,7 @@ table td {
     color: #522157;
     font-weight: bold;
     margin-left: 13px;
-    margin-top: 10px;
+    margin-top: 7px;
 }
 
 .tabel3 {
@@ -249,7 +248,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel3 td:hover {
@@ -264,11 +262,10 @@ table td {
     grid-row: 3;
     grid-column: 2;
     display: grid;
-    grid-template-rows: 1.4fr 10fr;
+    grid-template-rows: 2.4fr 10fr;
     grid-template-columns: 1fr;
-    margin-top: 4px;
-    margin-bottom: 100px;
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 .titlu4 {
@@ -311,7 +308,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel4 td:hover {
@@ -329,7 +325,8 @@ table td {
     grid-template-rows: 2.65fr 10fr;
     grid-template-columns: 1fr;
     margin-top: 4px;
-    margin-bottom: 485px;
+    margin-bottom: 285px;
+    margin-top: 60px;
     padding: 20px;
 }
 
@@ -347,7 +344,7 @@ table td {
     color: #522157;
     font-weight: bold;
     margin-left: 13px;
-    margin-top: 9px;
+    margin-top: 12px;
 }
 
 
@@ -374,7 +371,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel5 td:hover {
@@ -383,16 +379,16 @@ table td {
 }
 
 .divide {
-    width: 420px;
-    height: 440px;
+    width: 465px;
+    height: 92px;
     grid-row: 4;
     grid-column: 2;
     display: grid;
-    grid-template-rows: 1fr 10fr;
+    grid-template-rows: 5fr 10fr;
     grid-template-columns: 1fr;
     margin-top: 4px;
-    margin-left: 150px;
     padding: 20px;
+    margin-bottom: 67px;
 }
 
 .titlu6 {
@@ -409,7 +405,7 @@ table td {
     color: #522157;
     font-weight: bold;
     margin-left: 13px;
-    margin-top: 9px;
+    margin-top: 6px;
 }
 
 .tabel6 {
@@ -435,7 +431,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel6 td:hover {
@@ -445,15 +440,16 @@ table td {
 
 .structuri {
     width: 420px;
-    height: 230px;
+    height: 220px;
     grid-row: 3;
     grid-column: 1;
     display: grid;
-    grid-template-rows: 1fr 10fr;
+    grid-template-rows: 2.2fr 10fr;
     grid-template-columns: 1fr;
     margin-top: 4px;
     margin-left: 150px;
     padding: 20px;
+    margin-bottom: 242px;
 }
 
 .titlu7 {
@@ -496,7 +492,6 @@ table td {
     width: 100%;
     height: 100%;
     justify-self: center;
-    align-items: left;
 }
 
 .tabel7 td:hover {
@@ -517,162 +512,203 @@ footer {
 {
     .container-mare {
         width: 85.5%;
-        height:2000px;
-        margin-top: 60px;
+        height: 1999px;
+        margin-top: 85px;
         margin-right: 70px;
         display: grid;
-        grid-template-rows: 1.4fr 6fr 4.1fr 7.6fr 4.3fr 2.8fr 0.3fr;
+        grid-template-rows: 0.4fr 3.3fr 1.2fr 1.3fr 1.7fr 1.1fr 1.1fr 1.3fr 0.2fr;
         grid-template-columns: 1fr;
         background-color: #E4DFD9;
         overflow: hidden;
         margin: auto;
-        border-top: solid 80px rgb(149, 85, 121);
+        border-top: solid 75px rgb(149, 85, 121);
+    }
+    .structuri {
+        grid-template-rows: 1.18fr 6fr;
+        height: 218px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 30px auto;
     }
     .tip-clasa {
-        font-size: 30px;
-        align-self: center;
-        justify-self: center;
-        margin-right: 17px;
+        font-size: 25px;
+        margin-right: 10px;
     }
+    .divide{
+        grid-template-rows: 1.05fr 6fr;
+        height: 92px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+    
     a {
-        font-size: 12.2px;
+        font-size: 11px;
     }
     .container-mare div {
         align-self: center;
         justify-self: center;
         width: 100%;
-        height: 80%;
     }
 
     .probleme-elementare,
     .elemente-ale-limbajului,
     .vectori,
     .matrici,
-    .diverse,.divide, .structuri {
+    .diverse,.structuri {
         grid-row: auto;
         grid-column: auto;
         padding: 0px;
         margin: 20px auto;
-        height: 70%;
     }
-
     .matrici {
-        grid-template-rows: 2.65fr 12fr;
+        grid-template-rows: 2.25fr 12fr;
+        height: 218px;
     }
 
-    .vectori {
-        grid-template-rows: 2fr 16fr;
+    .vectori{
+        grid-template-rows: 3fr 6fr;
+        height: 90px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
     }
 
     .elemente-ale-limbajului {
-        grid-template-rows: 2fr 8.5fr;
+        grid-template-rows: 2.2fr 9.5fr;
     }
 
     .probleme-elementare {
-        grid-template-rows: 2fr 10.6fr;
+        margin-top: 30px;
+        grid-template-rows: 0.8fr 10.6fr;
+        height: 470px;
     }
-    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6, .titlu7{
+    .titlu1 , .titlu2 , .titlu3 , .titlu4 , .titlu5 , .titlu6, .titlu7{
         font-size: 14px;
-        margin-top: 11px;
-        margin-top:12px;
-        margin-left: 10px;
+        margin-top: 0;
     }
-
+    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6 p, .titlu7 p{
+        font-size: 13.6px;
+        margin-top: 8px;
+    }
     .tabel1,
     .tabel2,
     .tabel3,
     .tabel4,
-    .tabel5 {
-        width: 90%;
-        height: 90%;
+    .tabel5, .tabel6, .tabel7 {
+        width: 88%;
+        height: 80%;
         border-collapse: collapse;
         justify-self: center;
         align-self: center;
     }
-    .diverse {
-        grid-template-rows: 2.65fr 6fr;
-    }
 }
 @media (min-width:500px) and (max-width: 800px) {
     .container-mare {
-        width: 82.5%;
-        height: 2000px;
+        width: 78.5%;
+        height: 2540px;
         margin-top: 85px;
         margin-right: 70px;
         display: grid;
-        grid-template-rows: 1.4fr 6.16fr 4.1fr 7.6fr 4.3fr 3fr 0.3fr;
+        grid-template-rows: 0.4fr 2.7fr 1.2fr 1.3fr 1.7fr 1.1fr 1.1fr 1.3fr 0.2fr;
         grid-template-columns: 1fr;
         background-color: #E4DFD9;
         overflow: hidden;
         margin: auto;
-        border-top: solid 100px rgb(149, 85, 121);
+        border-top: solid 90px rgb(149, 85, 121);
     }
+    .structuri {
+        grid-template-rows: 1.98fr 6fr;
+        height: 295px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 30px auto;
+    }
+    .divide{
+        grid-template-rows: 2.65fr 6fr;
+        height: 120px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+    
     a {
-        font-size: 17px;
+        font-size: 16.7px;
     }
     .container-mare div {
         align-self: center;
         justify-self: center;
         width: 100%;
-        height: 80%;
     }
 
     .probleme-elementare,
     .elemente-ale-limbajului,
     .vectori,
     .matrici,
-    .diverse, .divide, .structuri {
+    .diverse,.structuri {
         grid-row: auto;
         grid-column: auto;
         padding: 0px;
         margin: 20px auto;
     }
-
     .matrici {
-        grid-template-rows: 2.65fr 12fr;
+        grid-template-rows: 2.95fr 12fr;
+        height: 295px;
     }
 
-    .vectori {
-        grid-template-rows: 2fr 16fr;
+    .vectori{
+        grid-template-rows: 1.95fr 6fr;
+        height: 102px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
     }
-
+    .diverse{
+        height: 205px;
+    }
     .elemente-ale-limbajului {
         grid-template-rows: 2fr 8.5fr;
+        height: 213px;
     }
-
     .probleme-elementare {
-        grid-template-rows: 2fr 10.6fr;
+        margin-top: 30px;
+        grid-template-rows: 0.9fr 10.6fr;
+        height: 590px;
     }
-    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6, .titlu7{
+    .titlu1 , .titlu2 , .titlu3 , .titlu4 , .titlu5 , .titlu6, .titlu7{
+        margin-top: 0;
+    }
+    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6 p, .titlu7 p{
         font-size: 19px;
-        margin-top: 11px;
-        margin-top:8px;
+        margin-top: 10px;
     }
-
     .tabel1,
     .tabel2,
     .tabel3,
     .tabel4,
-    .tabel5 {
+    .tabel5, .tabel6, .tabel7 {
         width: 88%;
         height: 90%;
         border-collapse: collapse;
         justify-self: center;
         align-self: center;
     }
-    .diverse {
-        grid-template-rows: 2.65fr 6fr;
-    }
     .tip-clasa{
-        font-size: 43px;
-        margin-right: 18px;
+        font-size: 30px;
+        margin-right: 47px;
     }
 }
 
 @media (min-height:800px) and (max-height: 900px){
     .container-mare {
         width: 78%;
-        height: 1300px;
+        height: 1470px;
         margin-top: 85px;
         margin-right: 70px;
         background-color: #E4DFD9;
@@ -689,6 +725,9 @@ footer {
         padding: 0px;
         width: 91%;
     }
+    .tabel6 a {
+        font-size: 15.7px;
+    }
     .matrici{
         margin-bottom: 260px;
     }
@@ -697,13 +736,13 @@ footer {
 @media (max-height:650px) and (min-width:1000px) {
     .container-mare {
         width: 80%;
-        height: 1300px;
+        height: 1460px;
         margin-top: 85px;
         margin-right: 70px;
         background-color: #E4DFD9;
         overflow: hidden;
         margin: auto;
-        border-top: solid 100px rgb(149, 85, 121);
+        border-top: solid 80px rgb(149, 85, 121);
     }
     .probleme-elementare,
     .elemente-ale-limbajului,
@@ -713,6 +752,9 @@ footer {
         margin: 15px;
         padding: 0px;
         width: 91%;
+    }
+    .tabel1 a, .tabel2 a, .tabel3 a, .tabel4 a, .tabel5 a, .tabel6 a, .tabel7 a {
+        font-size: 12px;
     }
     .matrici{
         margin-bottom: 265px;
@@ -727,231 +769,289 @@ footer {
 @media (max-width:420px) and (min-width: 330px){
     .container-mare {
         width: 85.5%;
-        height: 2000px;
+        height: 2250px;
         margin-top: 85px;
         margin-right: 70px;
         display: grid;
-        grid-template-rows: 1.4fr 6fr 4.1fr 7.6fr 4.3fr 2.8fr 0.3fr;
+        grid-template-rows: 0.2fr 3.4fr 1.7fr 1.3fr 1.7fr 1.1fr 1.1fr 1.3fr 0.2fr;
         grid-template-columns: 1fr;
         background-color: #E4DFD9;
         overflow: hidden;
         margin: auto;
         border-top: solid 80px rgb(149, 85, 121);
     }
-    .tip-clasa {
-        font-size: 40px;
-        align-self: center;
-        justify-self: center;
-        margin-right: 17px;
+    .structuri {
+        grid-template-rows: 1.48fr 6fr;
+        height: 222px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 30px auto;
     }
+    .divide{
+        grid-template-rows: 2.75fr 6fr;
+        height: 112px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+    
     a {
-        font-size: 15px;
+        font-size: 13.5px;
     }
     .container-mare div {
         align-self: center;
         justify-self: center;
         width: 100%;
-        height: 80%;
     }
 
     .probleme-elementare,
     .elemente-ale-limbajului,
     .vectori,
     .matrici,
-    .diverse, .divide, .structuri {
+    .diverse,.structuri {
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+    .matrici {
+        grid-template-rows: 3.25fr 12fr;
+        height: 220px;
+    }
+
+    .vectori{
+        grid-template-rows: 3.15fr 6fr;
+        height: 87px;
         grid-row: auto;
         grid-column: auto;
         padding: 0px;
         margin: 20px auto;
     }
 
-    .matrici {
-        grid-template-rows: 2.65fr 12fr;
-    }
-
-    .vectori {
-        grid-template-rows: 2fr 16fr;
-    }
-
     .elemente-ale-limbajului {
-        grid-template-rows: 2fr 8.5fr;
+        grid-template-rows: 1.5fr 8.5fr;
+        height: 160px;
     }
-
+    .diverse{
+        height: 180px;
+    }
     .probleme-elementare {
-        grid-template-rows: 2fr 10.6fr;
+        margin-top: 30px;
+        grid-template-rows: 1.2fr 10.6fr;
+        height: 430px;
     }
-    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6, .titlu7{
-        font-size: 18px;
-        margin-top: 11px;
-        margin-top:8px;
+    .titlu1 , .titlu2 , .titlu3 , .titlu4 , .titlu5 , .titlu6, .titlu7{
+        margin-top: 0;
     }
-
+    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6 p, .titlu7 p{
+        margin-top: 10px;
+        font-size: 16px;
+    }
     .tabel1,
     .tabel2,
     .tabel3,
     .tabel4,
-    .tabel5 {
+    .tabel5, .tabel6, .tabel7 {
         width: 88%;
         height: 90%;
         border-collapse: collapse;
         justify-self: center;
         align-self: center;
     }
-    .diverse {
-        grid-template-rows: 2.65fr 6fr;
-    }
 }
 
 @media (min-width:400px) and (min-height:740px) and (max-width: 1100px) {
         .container-mare {
             width: 85.5%;
-            height: 2000px;
+            height: 2290px;
             margin-top: 85px;
             margin-right: 70px;
             display: grid;
-            grid-template-rows: 1.4fr 6.16fr 4.1fr 7.6fr 4.3fr 3fr 0.3fr;
+            grid-template-rows: 0.2fr 3.0fr 1.7fr 1.3fr 1.7fr 1.1fr 1.1fr 1.3fr 0.2fr;
             grid-template-columns: 1fr;
             background-color: #E4DFD9;
             overflow: hidden;
             margin: auto;
             border-top: solid 100px rgb(149, 85, 121);
         }
+        .structuri {
+            grid-template-rows: 1.28fr 6fr;
+            height: 280px;
+            grid-row: auto;
+            grid-column: auto;
+            padding: 0px;
+            margin: 30px auto;
+        }
+        .divide{
+            grid-template-rows: 2.95fr 6fr;
+            height: 119px;
+            grid-row: auto;
+            grid-column: auto;
+            padding: 0px;
+            margin: 20px auto;
+        }
+        
         a {
-            font-size: 17px;
+            font-size: 15.5px;
         }
         .container-mare div {
             align-self: center;
             justify-self: center;
             width: 100%;
-            height: 80%;
         }
-    
+        .tip-clasa{
+            font-size: 37px;
+        }
         .probleme-elementare,
         .elemente-ale-limbajului,
         .vectori,
         .matrici,
-        .diverse, .divide, .structuri {
+        .diverse,.structuri {
+            grid-row: auto;
+            grid-column: auto;
+            padding: 0px;
+            margin: 20px auto;
+        }
+        .matrici {
+            grid-template-rows: 2.35fr 12fr;
+            height: 280px;
+        }
+    
+        .vectori{
+            grid-template-rows: 3.35fr 6fr;
+            height: 119px;
             grid-row: auto;
             grid-column: auto;
             padding: 0px;
             margin: 20px auto;
         }
     
-        .matrici {
-            grid-template-rows: 2.65fr 12fr;
-        }
-    
-        .vectori {
-            grid-template-rows: 2fr 16fr;
-        }
-    
         .elemente-ale-limbajului {
-            grid-template-rows: 2fr 8.5fr;
+            grid-template-rows: 2.5fr 8.5fr;
+            height: 200px;
         }
-    
+        .diverse{
+            height: 210px;
+        }
         .probleme-elementare {
-            grid-template-rows: 2fr 10.6fr;
+            margin-top: 30px;
+            grid-template-rows: 1.2fr 10.6fr;
+            height: 477px;
         }
-        .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6, .titlu7{
-            font-size: 19px;
-            margin-top: 11px;
-            margin-top:8px;
+        .titlu1 , .titlu2 , .titlu3 , .titlu4 , .titlu5 , .titlu6, .titlu7{
+            margin-top: 0;
         }
-    
+        .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6 p, .titlu7 p{
+            margin-top: 10px;
+            font-size: 20.5px;
+        }
         .tabel1,
         .tabel2,
         .tabel3,
         .tabel4,
-        .tabel5 {
+        .tabel5, .tabel6, .tabel7 {
             width: 88%;
-            height: 90%;
+            height: 85%;
             border-collapse: collapse;
             justify-self: center;
             align-self: center;
-        }
-        .diverse {
-            grid-template-rows: 2.65fr 6fr;
         }
 }
 
 @media (max-width: 1024px) and (min-height:1191px) {
     .container-mare {
-        width: 83%;
-        height: 2800px;
+        width: 78.5%;
+        height: 2740px;
         margin-top: 85px;
         margin-right: 70px;
         display: grid;
-        grid-template-rows: 2fr 7.16fr 4.85fr 8.7fr 4.9fr 2.8fr 0.5fr;
+        grid-template-rows: 0.4fr 2.7fr 1.2fr 1.3fr 1.7fr 1.1fr 1.1fr 1.3fr 0.2fr;
         grid-template-columns: 1fr;
         background-color: #E4DFD9;
         overflow: hidden;
         margin: auto;
-        border-top: solid 100px rgb(149, 85, 121);
+        border-top: solid 140px rgb(149, 85, 121);
     }
-
+    .structuri {
+        grid-template-rows: 1.98fr 6fr;
+        height: 295px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 30px auto;
+    }
+    .divide{
+        grid-template-rows: 2.65fr 6fr;
+        height: 155px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+    
+    a {
+        font-size: 21px;
+    }
     .container-mare div {
         align-self: center;
         justify-self: center;
         width: 100%;
-        height: 80%;
     }
 
     .probleme-elementare,
     .elemente-ale-limbajului,
     .vectori,
     .matrici,
-    .diverse, .divide, .structuri {
+    .diverse,.structuri {
         grid-row: auto;
         grid-column: auto;
         padding: 0px;
         margin: 20px auto;
     }
+    .matrici {
+        grid-template-rows: 3.85fr 12fr;
+        height: 295px;
+    }
 
+    .vectori{
+        grid-template-rows: 2.65fr 6fr;
+        height: 145px;
+        grid-row: auto;
+        grid-column: auto;
+        padding: 0px;
+        margin: 20px auto;
+    }
+    .diverse{
+        height: 235px;
+    }
+    .elemente-ale-limbajului {
+        grid-template-rows: 2fr 8.5fr;
+        height: 213px;
+    }
+    .probleme-elementare {
+        margin-top: 30px;
+        grid-template-rows: 1.4fr 10.6fr;
+        height: 590px;
+    }
+    .titlu1 , .titlu2 , .titlu3 , .titlu4 , .titlu5 , .titlu6, .titlu7{
+        margin-bottom:23px;
+        margin-top: 0;
+    }
+    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p, .titlu6 p, .titlu7 p{
+        font-size: 26px;
+        margin-top: 22px;
+    }
     .tabel1,
     .tabel2,
     .tabel3,
     .tabel4,
-    .tabel5 {
-        width: 85%;
+    .tabel5, .tabel6, .tabel7 {
+        width: 88%;
         height: 90%;
         border-collapse: collapse;
         justify-self: center;
         align-self: center;
-    }
-    .diverse {
-        grid-template-rows: 1.4fr 8fr;
-    }
-    .titlu1 p, .titlu2 p, .titlu3 p, .titlu4 p, .titlu5 p,  .titlu6, .titlu7{
-        font-size: 27px;
-        margin-top: 11px;
-    }
-    a {
-        font-size: 23px;
-    }
-    .diverse{
-        grid-template-rows: 2.65fr 6fr;
-    }
-    .matrici {
-        grid-template-rows: 2.65fr 12fr;
-    }
-
-    .vectori {
-        grid-template-rows: 2fr 16fr;
-    }
-
-    .elemente-ale-limbajului {
-        grid-template-rows: 2fr 8.5fr;
-    }
-
-    .probleme-elementare {
-        grid-template-rows: 2fr 10.6fr;
-    }
-    .tip-clasa{
-        margin-left: 25px;
-        margin-top: 85px;
-        font-size: 65px;
-    }
-    nav a{
-        font-size: 28px;
     }
 }
