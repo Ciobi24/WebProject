@@ -31,3 +31,8 @@ body {
     font-weight: bold;
     font-family: Calibri, sans-serif;
 }
+
+.img1{
+    width: 50%;
+    align-self: center;
+}

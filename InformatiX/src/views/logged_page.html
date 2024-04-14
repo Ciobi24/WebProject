@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 
 <head>
   <meta charset="UTF-8">
@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/logged_page.css">
   <link rel="stylesheet" href="../../public/css/animation-loggedpage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <script>
     function showSidebar() {
@@ -27,31 +28,36 @@
       const flipCheckbox = document.getElementById('flip');
       flipCheckbox.checked = false;
     }
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
   </script>
+  
 </head>
 
 <body>
   <header>
     <nav>
       <ul class="sidebar">
-        <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
-              width="26">
+        <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+              viewBox="0 96 960 960" width="26">
               <path
                 d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
             </svg></a></li>
         <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
         <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
         <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
-        <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
-        <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
+        <li><a href="logged_page.html" onclick="hideSidebar()">Home</a></li>
       </ul>
+      
       <ul class="menu">
         <li><a href="logged_page.html">Home</a></li>
         <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
         <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
         <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
         <li class="hideOnMobile"><a href="index.html">Logout</a></li>
-        <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+        <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
               viewBox="0 96 960 960" width="26">
               <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
             </svg></a></li>
@@ -59,111 +65,138 @@
     </nav>
   </header>
 
+
   <div class="container-mare">
     <div class="profile">
       <div class="elem1">
         <div class="avatar">
-          <img src="../../public/images/avatar.png" alt="avatar" />
+          <img src="../../public/images/avatar.png" alt="avatar">
         </div>
-        <p>Bine ai venit Alex_Gh07</p>
+        <p>Bine ai venit User_Username</p>
       </div>
-      <div class="footer-sections"></div>
+      <div class="go-to-profile"> <a href="my_profile.html"> Profilul meu</a> </div>
     </div>
     <div class="dreptunghi_dreapta">
       <p class="probleme_noi">Probleme noi</p>
       <div class="probleme">
         <div class="problema">
-          <p1 class="titlu_prb">Titlu problema</p1>
-          <p2 class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
+          <h3 class="titlu_prb">Titlu problema</h3>
+          <p class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
             problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
             problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
             problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
             problema
-          </p2>
+          </p>
           <div class="last_line">
             <div class="tags">
-              <p3 class="tag">Tag1</p3>
-              <p3 class="tag">Tag2</p3>
-              <p3 class="tag">Tag3</p3>
+              <p class="tag">Tag1</p>
+              <p class="tag">Tag2</p>
+              <p class="tag">Tag3</p>
             </div>
-            <p3 class="autor">Autor</p3>
+            <p class="autor">Autor</p>
           </div>
 
         </div>
         <div class="problema">
-          <p1 class="titlu_prb">Titlu problema</p1>
-          <p2 class="descriere_prb">Descriere problema</p2>
+          <h3 class="titlu_prb">Titlu problema</h3>
+          <p class="descriere_prb">Descriere problema</p>
           <div class="last_line">
             <div class="tags">
-              <p3 class="tag">Tag1</p3>
-              <p3 class="tag">Tag2</p3>
-              <p3 class="tag">Tag3</p3>
+              <p class="tag">Tag1</p>
+              <p class="tag">Tag2</p>
+              <p class="tag">Tag3</p>
             </div>
-            <p3 class="autor">Autor</p3>
+            <p class="autor">Autor</p>
           </div>
 
         </div>
         <div class="problema">
-          <p1 class="titlu_prb">Titlu problema</p1>
-          <p2 class="descriere_prb">Descriere problema</p2>
+          <h3 class="titlu_prb">Titlu problema</h3>
+          <p class="descriere_prb">Descriere problema</p>
           <div class="last_line">
             <div class="tags">
-              <p3 class="tag">Tag1</p3>
-              <p3 class="tag">Tag2</p3>
-              <p3 class="tag">Tag3</p3>
+              <p class="tag">Tag1</p>
+              <p class="tag">Tag2</p>
+              <p class="tag">Tag3</p>
             </div>
-            <p3 class="autor">Autor</p3>
+            <p class="autor">Autor</p>
           </div>
         </div>
         <div class="problema">
-          <p1 class="titlu_prb">Titlu problema</p1>
-          <p2 class="descriere_prb">Descriere problema</p2>
+          <h1 class="titlu_prb">Titlu problema</h1>
+          <p class="descriere_prb">Descriere problema</p>
           <div class="last_line">
             <div class="tags">
-              <p3 class="tag">Tag1</p3>
-              <p3 class="tag">Tag2</p3>
-              <p3 class="tag">Tag3</p3>
+              <p class="tag">Tag1</p>
+              <p class="tag">Tag2</p>
+              <p class="tag">Tag3</p>
             </div>
-            <p3 class="autor">Autor</p3>
+            <p class="autor">Autor</p>
           </div>
         </div>
-      </div>
-      <div class="footer-sections" style="grid-row: 3" ;>
       </div>
     </div>
 
     <div class="anunturi">
       <p class="text-anunt1">ANUNȚURI</p>
-      <p class="text-anunt2"> Niciun anunț disponibil din partea echipei Fii la curent cu tot ce se postează</p>
+      <p class="text-anunt2"> Niciun anunț disponibil din partea echipei. <br>Fii la curent cu tot ce se postează!</p>
     </div>
 
     <div class="sectiune-clasa">
+      <img src="../../public/images/team.gif" alt="team">
       <div class="elem2">
-        <div class='animation-example'>
-          <img src="../../public/images/team.gif">
-        </div>
-        <div class="text">
-          <p>Faci parte dintr-o clasă?</p>
-          <p>Hai să rezolvi probleme alături de noi!</p>
-          <p>Trimite soluțiile tale profesorului asignat clasei, și ai ocazia să concurezi cu ceilalți la cât mai multe
-            probleme rezolvate!</p>
-        </div>
+        <p>Faci parte dintr-o clasă?</p>
+        <p>Hai să rezolvi probleme alături de noi!</p>
+        <p>Trimite soluțiile tale profesorului asignat clasei, și ai ocazia să concurezi cu ceilalți la cât mai multe
+          probleme rezolvate!</p>
       </div>
       <a class="join-a-class" href="">Alătură-te unei clase</a>
-      <div class="footer-sections" style="grid-row: 3" ;></div>
     </div>
 
     <div class="domenii">
       <p class="text-domenii1">Categorii de probleme</p>
-      <table>
+      <table class="tabel1">
         <tr>
-          <th>Clasa 9</th>
+          <th><a>Clasa 9</a></th>
         </tr>
         <tr>
-          <td>Clasa 10</td>
+          <td><a>Clasa 10</a></td>
         </tr>
         <tr>
-          <td>Clasa 11</td>
+          <td><a>Clasa 11</a></td>
+        </tr>
+      </table>
+
+      <table class="tabel2">
+        <tr>
+          <th><a>Ușoare</a></th>
+        </tr>
+        <tr>
+          <td><a>Medii</a></td>
+        </tr>
+        <tr>
+          <td><a>Grele</a></td>
+        </tr>
+      </table>
+
+      <table class="tabel3">
+        <tr>
+          <th><a>Backtracking</a></th>
+        </tr>
+        <tr>
+          <td><a>Divizibilitate</a></td>
+        </tr>
+        <tr>
+          <td><a>Secvențe</a></td>
+        </tr>
+        <tr>
+          <td><a>Matrici pătratice</a></td>
+        </tr>
+        <tr>
+          <td><a>Sortări</a></td>
+        </tr>
+        <tr>
+          <td><a href="">mai multe</a></td>
         </tr>
       </table>
     </div>
@@ -182,7 +215,7 @@
     <div class="altele">
       <p><b>Pentru contact admin, raportare erori de funcționare a site-ului, sau alte nelămuriri sau probleme, vă rugăm
           să le raportați folosind <a href="">formularul de contact</a>. </b></p>
-      <img src="../../public/images/bug.jpeg" alt="bug" />
+      <img src="../../public/images/bug.jpeg" alt="bug">
     </div>
   </div>
   <footer>
@@ -190,4 +223,20 @@
   </footer>
 </body>
 
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+const userType = urlParams.get('userType');
+
+function addAdminButton() {
+  if (userType === 'admin') {
+    const menuUl = document.querySelector('.menu');
+    const adminLi = document.createElement('li');
+    adminLi.innerHTML = '<a href="admin_page.html" onclick="hideSidebar()">Administrare</a>';
+    const secondMenuItem = menuUl.children[1];
+    menuUl.insertBefore(adminLi, secondMenuItem);
+  }
+}
+
+addAdminButton();
+</script>
 </html>
