@@ -31,15 +31,6 @@
     function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
     }
-
-    window.onclick = function (e) {
-      if (!e.target.matches('.dropbtn')) {
-        var myDropdown = document.getElementById("myDropdown");
-        if (myDropdown.classList.contains('show')) {
-          myDropdown.classList.remove('show');
-        }
-      }
-    }
   </script>
 </head>
 
@@ -56,26 +47,11 @@
         <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
         <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
         <li><a href="logged_page.html" onclick="hideSidebar()">Home</a></li>
-        <li><a onclick="hideSidebar()">Probleme</a></li>
-        <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
-        <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
-        <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
       </ul>
       
       <ul class="menu">
         <li><a href="logged_page.html">Home</a></li>
-
-        <li class="dropdown hideOnMobile">
-          <button class="dropbtn" onclick="myFunction()">Probleme
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content" id="myDropdown">
-            <a href="probleme-clasa9.html">Probleme clasa a IX-a</a>
-            <a href="#">Probleme clasa a X-a</a>
-            <a href="#">Probleme clasa a XI-a</a>
-          </div>
-        </li>
-
+        <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
         <li class="hideOnMobile"><a href="clasele_mele.html">Clasa mea</a></li>
         <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
         <li class="hideOnMobile"><a href="index.html">Logout</a></li>
