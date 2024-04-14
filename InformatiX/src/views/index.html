@@ -37,10 +37,33 @@
     function showLoginForm() {
       document.getElementById('flip').checked = false;
     }
-    function openLoggedPage() {
-      window.location.href = "logged_page.html";
-    }
   </script>
+
+<script>
+function openLoggedPage() {
+    let emailInput = document.querySelector('#login input[type="email"]');
+    let passwordInput = document.querySelector('#login input[type="password"]');
+    
+    let email = emailInput.value;
+    let userType;
+
+    if (email === "admin") {
+        userType = "admin";
+    } else if (email === "profesor") {
+        userType = "profesor";
+    } else {
+        userType = "user";
+    }
+
+    let nextPageURL = "logged_page.html?userType=" + userType;
+    window.location.href = nextPageURL;
+
+    emailInput.value = "";
+    passwordInput.value = "";
+}
+
+</script>
+
 </head>
 
 <body>

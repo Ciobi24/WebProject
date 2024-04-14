@@ -31,7 +31,9 @@
     function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
     }
+
   </script>
+  
 </head>
 
 <body>
@@ -52,7 +54,7 @@
       <ul class="menu">
         <li><a href="logged_page.html">Home</a></li>
         <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
-        <li class="hideOnMobile"><a href="clasele_mele.html">Clasa mea</a></li>
+        <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
         <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
         <li class="hideOnMobile"><a href="index.html">Logout</a></li>
         <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
@@ -221,4 +223,20 @@
   </footer>
 </body>
 
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+const userType = urlParams.get('userType');
+
+function addAdminButton() {
+  if (userType === 'admin') {
+    const menuUl = document.querySelector('.menu');
+    const adminLi = document.createElement('li');
+    adminLi.innerHTML = '<a href="admin_page.html" onclick="hideSidebar()">Administrare</a>';
+    const secondMenuItem = menuUl.children[1];
+    menuUl.insertBefore(adminLi, secondMenuItem);
+  }
+}
+
+addAdminButton();
+</script>
 </html>
