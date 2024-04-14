@@ -1,0 +1,149 @@
+
+@font-face {
+    font-family: Poppins;
+    src: url('../../public/fonts/Poppins-Regular.ttf') format('truetype');
+  }
+  
+  *{
+    margin:0;
+    padding:0;
+    font-family: Poppins;
+    color:#522157;
+    overflow: hidden;
+}
+
+.probleme{
+    margin-top: 9vh;
+    height: 82vh;
+    background-color: #deccb9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.problema {
+    background-color: #c9afa1;
+    width: 80%;
+    min-height: 30vh;
+    height: auto;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-auto-rows:max-content;
+    border-radius: 15px;
+    overflow-y: auto; /* Add this */
+}
+
+h1 {
+    grid-column: 1/2;
+    grid-row: auto; /* Auto placement */
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+    height: max-content;
+}
+
+button {
+    grid-column: 2/3;
+    grid-row: auto; /* Auto placement */
+    background-color: #8B4C70;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    width: fit-content;
+    height: max-content;
+    margin: 10px;
+    margin-right: 20px;
+    font-size: 14px;
+    padding: 5px;
+    justify-self: end;
+}
+
+button:hover {
+    background-color: #522157;
+}
+
+.ratings {
+    grid-column: 1/3; /* Span across all columns */
+    display: inline-flex;
+    justify-content: center;
+    height: max-content;
+}
+
+.stars,
+.users-tried,
+.users-solved {
+    margin: 10px;
+    margin-top: 0px;
+    height: max-content;
+}
+
+p#cerinta {
+    grid-column: 1/3; /* Span across all columns */
+    padding-left: 40px;
+    margin-bottom: 7px;
+    font-size: 20px;
+    height: max-content;
+}
+
+.tags {
+    grid-column: 1/2;
+    padding-left: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: max-content;
+}
+
+.tags>p {
+    height: max-content;
+    margin: 5px;
+    font-size: 12px;
+    background-color: #e7c2ae;
+    padding: 4px;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.tags>p:hover {
+    background-color: #8B4C70;
+    color: white;
+}
+
+p#autor {
+    height: max-content;
+    grid-column: 2/3;
+    padding-right: 40px;
+    font-size: 15px;
+    justify-self: end;
+    margin-bottom: 40px;
+}
+
+footer {
+    background: linear-gradient(#deccb9, #8B4C70);
+    width: 100%;
+    height: 9vh;
+    z-index: 3;
+    color: #ffffff;
+    align-self: baseline;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c9afa1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #834a89;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #522157;
+}
