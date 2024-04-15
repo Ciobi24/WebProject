@@ -35,3 +35,6 @@ img[class^="responsive"] {
 .continut2 {
     margin-top: 450px;
 }
+.red-link {
+    color: red;
+}
