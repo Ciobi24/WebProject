@@ -4,8 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In&lt;form&gt;atiX</title>
+    <link rel="stylesheet" href="../../public/css/header1.css">
+    <link rel="stylesheet" href="../../public/css/rezolva_pb.css">
+    <link rel="stylesheet" href="../../public/css/footer.css">
+    <script>
+        function showSidebar() {
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'flex'
+        }
+    
+        function hideSidebar() {
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'none'
+        }
+    
+        function showSignUp() {
+          const flipCheckbox = document.getElementById('flip');
+          flipCheckbox.checked = true;
+        }
+    
+        function showLogin() {
+          const flipCheckbox = document.getElementById('flip');
+          flipCheckbox.checked = false;
+        }
+      </script>
 </head>
 <body>
-    
+    <header>
+        <nav>
+          <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
+                  width="26">
+                  <path
+                    d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+                </svg></a></li>
+            <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
+            <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
+            <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasa mea</a></li>
+            <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
+            <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
+          </ul>
+          <ul class="menu">
+            <li><a href="logged_page.html">Home</a></li>
+            <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
+            <li class="hideOnMobile"><a href="clasele_mele.html">Clasa mea</a></li>
+            <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
+            <li class="hideOnMobile"><a href="index.html">Logout</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                  viewBox="0 96 960 960" width="26">
+                  <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+                </svg></a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class="continut">
+        <div class="problema">
+            <h1>Titlu problema</h1>
+            <button>share</button>
+            <div class="ratings">
+                <span class="stars">★★★☆☆</span> 
+                <span class="users-tried">100 încercări</span>
+                <span class="users-solved">50 rezolvări</span>
+            </div>
+            <p class="cerinta">Descriere problema, cerinte, posibile indicatii...</p>
+            <div class="tags">
+                <p>tag1</p>
+                <p>tag2</p>
+            </div>
+            <p class="autor">Autor</p>
+        </div>
+        <div class="rezolvare">
+            <label for="rezolvare">Rezolvare</label>
+            <textarea id="rezolvare" name="rezolvare" class="rezolvare-text" cols="5000" rows="5000"></textarea>
+            <button>Trimite</button>
+        </div>
+        <div class="comments">
+            <h2>Comentarii</h2>
+            <div class="add_comm">
+                <label for="comentariu">Adaugă comentariu</label>
+                <textarea id="comentariu" name="comentariu" class="comentariu" cols="5000" rows="5000"></textarea>
+                <button id="send">Trimite</button>
+            </div>
+            <div class="your_comment">
+                <p class="autor">Numele tău</p>
+                <button id="delete">delete</button>
+                <p class="comentariu">Comentariu</p>
+            </div>
+            <div class="comment">
+                <p class="autor">Autor</p>
+                <p class="comentariu">Comentariu</p>
+            </div>
+        </div>
+      </div>
+      <footer>
+        <p>@ Contact</p>
+        </footer>
 </body>
 </html>

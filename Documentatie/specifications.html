@@ -22,11 +22,11 @@
             Elevii pot vizualiza
             aceste probleme atât înregistrându-se, cât și fără a fi înregistrati, iar rezolvarea acestora presupune
             apartenența la o clasă
-            cu un profesor asignat și trimiterea soluțiilor respective spre a fi corectate de către profesor. Profesorii
-            vor avea
+            cu un profesor asignat și trimiterea soluțiilor respective spre a fi corectate de către profesor.
+             Acestia vor putea lasa comentarii pentru colegi la fiecare problema si vor putea oferi un rating de la 1 la 5 stele pentru ea.
+             Fiecare problema poate fi exportata folosind butonul de share. Profesorii vor avea
             posibilitatea să creeze și să administreze clase, să adauge elevi în aceste clase și să atribuie teme
-            elevilor prin selectarea
-            sau propunerea de probleme existente în aplicație. Ei vor putea, de asemenea, să evalueze soluțiile trimise
+            elevilor prin propunerea sau selectarea de probleme existente în aplicație. Ei vor putea, de asemenea, să evalueze soluțiile trimise
             de elevi și să ofere
             feedback individual. Pe lângă funcționalitatea de bază, aplicația va genera rapoarte care oferă statistici
             detaliate pentru
@@ -34,7 +34,7 @@
             fost încercate. De
             asemenea, vor exista rapoarte pentru fiecare problemă în parte, care vor oferi informații despre numărul de
             utilizatori care au
-            încercat-o, câți au reușit să o rezolve și alte date relevante.</p>
+            încercat-o, câți au reușit să o rezolve și ratingul care a fost acordat de elevi.</p>
         <p> Astfel, pe lângă scopul de a furniza un mediu interactiv și eficient pentru învățarea și practicarea
             programării pentru elevii
             de liceu, aplicația facilitează comunicarea și colaborarea între elevi și profesori și oferă o modalitate
@@ -43,9 +43,9 @@
 
         <h3>1.2. Publicul vizat</h3>
         <p> Platforma noastră va fi destinată în primul rând elevilor care studiază informatica în liceu și gimnaziu, studenților care doresc
-            să aprofundeze noțiunile prin exersare, și până la urmă oricăror pasionați și care doresc să învețe. Administratorii paginii vor
-            avea orice rol, se vor asigura de buna funcționare a site-ului și că legătura elevi-profesori comunică cât mai eficient. Nu în ultimul
-            rând, profesorul, este cel care evaluează elevii, le propune teme, comunică cu aceștia prin intermediul platformei despre soluții mai optime 
+            să aprofundeze noțiunile prin exersare, și până la urmă oricăror pasionați care își doresc să învețe mai mult. Administratorii paginii vor
+            avea orice rol, se vor asigura de buna funcționare a site-ului și că legătura elevi-profesor implică o comunicare eficientă. Nu în ultimul
+            rând, profesorul, este cel care evaluează elevii, le propune teme, comunică cu aceștia prin intermediul platformei despre soluții optime 
             la rezolvări. Platforma este una potrivită atât pentru elevii care doresc să lucreze cât mai mult, cât și pentru profesori pentru a evalua 
             cât mai ușor munca elevilor.
         </p>
@@ -60,12 +60,12 @@
             
             <section id="creare-gestionare-clase">
                 <h2>Crearea și Gestionarea Claselor:</h2>
-                <p>Profesorii pot construi clase și adăuga elevii în aceste clase folosind identificatori precum email sau username.</p>
+                <p>Profesorii pot crea clase și adăuga elevii în aceste clase folosind identificatori precum email sau username.</p>
             </section>
             
             <section id="atribuire-teme">
                 <h2>Atribuirea de Teme:</h2>
-                <p>Profesorii pot atribui teme elevilor fie propunând probleme noi, fie selectând dintr-o bază de date existentă de probleme.</p>
+                <p>Profesorii pot atribui teme elevilor fie propunând probleme noi, ce vor fi aprobate de administratori, fie selectând dintr-o bază de date existentă de probleme.</p>
             </section>
             
             <section id="rezolvare-evaluare">
@@ -110,7 +110,7 @@
                 care leagă celelalte pagini între ele într-o structură arborescentă.
             </p>
             <img class="img5" src="img/img5.png" alt="altcv">
-            <p> Pagina conține o abstractizare a principalelor funcționalități produsului software, afișate in secțiuni în cadrul paginii. Contând foarte mult
+            <p> Pagina conține o abstractizare a principalelor funcționalități ale produsului software, afișate în secțiuni în cadrul paginii. Contând foarte mult
                 modul de detaliere a funcționalităților aplicației web, s-a ales acest mod de afișare a secțiunilor pe pagină și practic așa ne asigurăm că
                 un utilizator nou înregistrat va avea acces la toate informațiile de care are nevoie să se acomodeze cu modul de lucru. Considerăm că un meniu
                 detaliat (în care să se menționeze cât mai multe detalii despre site) atinge orice obiective din partea producătorilor software. 
@@ -147,7 +147,7 @@
                 de admin - care deține și un rol de a accepta cererea de introducere a problemei în sistem.
             </p>
             <img class="img10" src="img/img10.png" alt="altcv">
-            <p>Această pagină se regăsește din mneniul de căutare probleme, la secțiunea de "probleme clasa 9". Acest mod afișează într-un format elegant 
+            <p>Această pagină se regăsește din meniul de căutare probleme, la secțiunea de "probleme clasa 9". Acest mod afișează într-un format elegant 
                 toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe probleme. Pentru fiecare problemă se va putea vizualiza
                 separat anumite statistici care țin de rating-ul oferit de elevi, de câți utilizatori au încercat să o rezolve și câți au rezolvat-o cu
                 succes.
@@ -155,19 +155,30 @@
             <img class="img11" src="img/img11.png" alt="altcv">
             <p>Butonul de share va fi asignat exportului într-un format open (XML / JSON / CSV, etc.). </p>
             <h4>Clasele mele</h4>
+            <img class="img12" src="img/img12.png" alt="altcv">
             <p> În cadrul acestei componente a aplicației este realizată interacțiunea dintre elevi și profesor. Conform cerințelor, un profesor poate deține una
                 sau mai multe clase, acesta având un rol de a manageria clasa/clasele respective și de a lucra eficient cu elevii săi. De asemenea, un elev poate
                 aparține la mai multe clase, acesta rezolvând independent temele pentru o clasă față de cealaltă. Am optat în modul acesta de 
                 preferințe deoarece, în practică un elev ar putea aparține de clasa la care studiază, si totodată se mai poate crea o clasă pentru 
-                elevii care participă la concursuri și olimpiade și de care elevul să aparțină simultan. Printre alte funcții, elevul poate ieși dintr-o clasă,
-                sau dat afară de către profesor, adăugarea la o clasă a unui elev o face explicit profesorul.
+                elevii care participă la concursuri și olimpiade și de care elevul să aparțină simultan. Profesorul este cel care adaugă elevi într-o clasă pe baza usernameului.
+                Tot acesta, apăsând pe butonul + poate crea o nouă clasă.
             </p>
-            <p>Strând legată de componenta claselor este pagina cu "Temele mele", unde un profesor fie poate propune probleme spre rezolvare, fie poate să aleagă din
-                lista de probleme existente în sistem. O tema are un anumit deadline, poate fi pe parcurs modificată prin adăugarea de alte probleme sau modificare
-                deadline, se vor putea adăuga comentarii din partea tuturor membrilor clasei respective, iar în urma finalizării termenului-limită, profesorul poate
-                accesa secțiunea cu răspunsurile primite la probleme și să evalueze munca elevilor.
+            <img class="img13" src="img/img13.png" alt="altcv">
+            <p>Apăsând pe fiecare clasă, profesorul poate vizualiza elevii, poate adăuga alti elevi și poate accesa secțiunea de teme pentru clasa respectivă.</p>
+            <img class="img14" src="img/img14.png" alt="altcv">
+            <p>Strâns legată de componenta claselor este pagina cu "Temele mele", unde un profesor fie poate propune probleme spre rezolvare, fie poate să aleagă din
+                lista de probleme existente în sistem. O tema are un anumit deadline, poate fi pe parcurs modificată prin adăugarea de alte probleme, 
+                se vor putea adăuga comentarii din partea tuturor membrilor clasei respective, iar în urma finalizării termenului-limită, profesorul poate
+                accesa secțiunea cu răspunsurile primite la probleme și să evalueze munca elevilor, lăsând și feedback la fiecare problemă rezolvată de aceștia.
             </p>
-            <img class="img12" src="img/img12.png" alt="altcv">
+            <img class="img15" src="img/img15.png" alt="altcv">
+            <img class="img16" src="img/img16.png" alt="altcv">
+            <img class="img17" src="img/img17.png" alt="altcv">
+            <img class="img18" src="img/img18.png" alt="altcv">
+            <img class="img19" src="img/img19.png" alt="altcv">
+            <img class="img20" src="img/img20.png" alt="altcv">
+
+           
     </section>
 </body>
 
