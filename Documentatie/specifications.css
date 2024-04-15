@@ -21,11 +21,20 @@
     font-weight: bold;
     font-family: Calibri, sans-serif;
 }
-
+.img23 {
+    width: 200px;
+    height: 200px;
+}
 img[class^="img"] {
     width: 70%;
     height: 60%;
 }
+
+img[class^="responsive"] {
+    width: 420px;
+    height: 400px;
+}
+
 .continut2 {
     margin-top: 450px;
 }
