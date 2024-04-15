@@ -417,18 +417,19 @@ footer{
 @media (min-height:800px) {
     body{
         background-color: #deccb9;
+        margin: 0;
     }
     .container-mare {
         background-color: #deccb9; 
         width: 83%;
-        height: 3000px;
+        height: 3300px;
         margin-right: 70px;
         display: grid;
-        grid-template-rows: 13% 25% 12% 13% 12% 13% 12%; 
+        grid-template-rows: 13fr 19fr 12fr 13fr 12fr 13fr 12fr; 
         grid-template-columns: 1fr;
         overflow: hidden;
         margin: auto;
-        border-top: solid 136px rgb(149, 85, 121);
+        border-top: solid 106px rgb(149, 85, 121);
         padding-top: 30px;
     }
     
@@ -439,31 +440,50 @@ footer{
         grid-column: auto;
     }
     .dreptunghi_dreapta{
-        margin-bottom: 45px;
+        height: 500px;
+        width: 345px;
+        margin-right: 361px;
+        margin-left: 0px;
+        margin-bottom: 0;
     }
     .elem1{
+        margin-left: 20px;
         text-align: center;
         justify-self: center;
         align-self: center;
         padding: 0;
+        flex-direction: row;
     }
     .profile {
         width: 99%; 
         height: 80%;
+        grid-row: 1;
+        display: flex;
+    }
+    .probleme {
+        height: 420px;
     }
     .elem1 p{
-        font-size: 32px;
+        margin-top: 10px;
+        font-size: 20px;
+        align-self: center;
+        justify-self: center;
     }   
     .avatar img {
         width: 100%;
         height: 100%;
     }
     .avatar{
-        margin-left: 111px;
+        margin-left: 75px;
+    }
+    .anunturi{
+        width: 345px;
+        margin-right: 370px;
     }
     .go-to-profile {
-        font-size: 28px;
+        font-size: 19px;
         margin-bottom: 30px;
+        display: none;
     }
     .probleme_noi{
         font-size: 35px;
@@ -472,19 +492,32 @@ footer{
         font-size: 35px;
     }
     .text-anunt2{
-        font-size: 25px;
+        padding: 0;
+        font-size: 17px;
+
     }
     .elem2 p {
-        font-size: 24px;
+        font-size: 14px;
     }
     .elem2{
         margin-top: 16px;
+    }
+    .domenii {
+        margin-right: 385px;
+        width: 330px;
+    }
+    .sectiune-clasa{
+        padding: 0;
+        height: 300px;
+        margin: 0;
+        width: 340px;
+        margin-right: 375px;
     }
     .sectiune-clasa img {
         height: 90%;
     }
     .join-a-class {
-        font-size: 26px;
+        font-size: 7px;
         margin-right: 25px;
     }
     .text-domenii1{
@@ -492,41 +525,337 @@ footer{
         margin-top:17px;
     }
     .tabel1 a{
-        font-size: 18px;
+        font-size: 11px;
     }
     .tabel2 a{
-        font-size: 18px;
+        font-size: 11px;
     }
     .tabel3 a{
-        font-size: 18px;
+        font-size: 11px;
     }
     .ce-gasesc-aici {
         margin-top: 21px;
         font-size: 27.7px;
     }
     .ce-gasesc-aici-text{
-        margin-top: 23px;
-        font-size: 23px;
+        margin-top: 5px;
+        font-size: 16.5px;
     }
     .informations{
         grid-template-rows: 2.34fr 10fr;
+        margin-right: 377px;
+        width: 350px;
+        height:400px;
     }
     .altele p{
         margin-top: 28px;
-        font-size: 22px;
+        font-size: 14px;
     }
     .altele {
+        margin-right: 380px;
+        height:350px;
+        width: 350px;
         grid-template-rows: 4fr 10fr;
     }
     .altele img {
-        width: 33%;
+        width: 48%;
     }
 }
 
-@media (max-height:650px) and (min-width:1000px) {}
+@media (max-height:650px) and (min-width:1000px) {
+    body{
+        background-color: #deccb9;
+        margin: 0;
+    }
+    .container-mare {
+        background-color: #deccb9; 
+        width: 83%;
+        height: 3300px;
+        margin-right: 70px;
+        display: grid;
+        grid-template-rows: 13fr 19fr 12fr 13fr 12fr 13fr 12fr; 
+        grid-template-columns: 1fr;
+        overflow: hidden;
+        margin: auto;
+        border-top: solid 106px rgb(149, 85, 121);
+        padding-top: 30px;
+    }
+    
+    .container-mare > div {
+        align-self: center;
+        justify-self: center;
+        grid-row: auto;
+        grid-column: auto;
+    }
+    .dreptunghi_dreapta{
+        height: 500px;
+        width: 345px;
+        margin-right: 361px;
+        margin-left: 0px;
+        margin-bottom: 0;
+    }
+    .elem1{
+        margin-left: 20px;
+        text-align: center;
+        justify-self: center;
+        align-self: center;
+        padding: 0;
+        flex-direction: row;
+    }
+    .profile {
+        width: 99%; 
+        height: 80%;
+        grid-row: 1;
+        display: flex;
+    }
+    .probleme {
+        height: 420px;
+    }
+    .elem1 p{
+        margin-top: 10px;
+        font-size: 20px;
+        align-self: center;
+        justify-self: center;
+    }   
+    .avatar img {
+        width: 100%;
+        height: 100%;
+    }
+    .avatar{
+        margin-left: 75px;
+    }
+    .anunturi{
+        width: 345px;
+        margin-right: 370px;
+    }
+    .go-to-profile {
+        font-size: 19px;
+        margin-bottom: 30px;
+        display: none;
+    }
+    .probleme_noi{
+        font-size: 35px;
+    }
+    .text-anunt1{
+        font-size: 35px;
+    }
+    .text-anunt2{
+        padding: 0;
+        font-size: 17px;
+
+    }
+    .elem2 p {
+        font-size: 14px;
+    }
+    .elem2{
+        margin-top: 16px;
+    }
+    .domenii {
+        margin-right: 385px;
+        width: 330px;
+    }
+    .sectiune-clasa{
+        padding: 0;
+        height: 300px;
+        margin: 0;
+        width: 340px;
+        margin-right: 375px;
+    }
+    .sectiune-clasa img {
+        height: 90%;
+    }
+    .join-a-class {
+        font-size: 7px;
+        margin-right: 25px;
+    }
+    .text-domenii1{
+        font-size: 28px;
+        margin-top:17px;
+    }
+    .tabel1 a{
+        font-size: 11px;
+    }
+    .tabel2 a{
+        font-size: 11px;
+    }
+    .tabel3 a{
+        font-size: 11px;
+    }
+    .ce-gasesc-aici {
+        margin-top: 21px;
+        font-size: 27.7px;
+    }
+    .ce-gasesc-aici-text{
+        margin-top: 5px;
+        font-size: 16.5px;
+    }
+    .informations{
+        grid-template-rows: 2.34fr 10fr;
+        margin-right: 377px;
+        width: 350px;
+        height:400px;
+    }
+    .altele p{
+        margin-top: 28px;
+        font-size: 14px;
+    }
+    .altele {
+        margin-right: 380px;
+        height:350px;
+        width: 350px;
+        grid-template-rows: 4fr 10fr;
+    }
+    .altele img {
+        width: 48%;
+    }
+}
 
 @media (max-width:420px) and (min-width: 330px) {
+    body{
+        background-color: #deccb9;
+        margin: 0;
+    }
+    .container-mare {
+        background-color: #deccb9; 
+        width: 83%;
+        height: 3300px;
+        margin-right: 70px;
+        display: grid;
+        grid-template-rows: 13fr 19fr 12fr 13fr 12fr 13fr 12fr; 
+        grid-template-columns: 1fr;
+        overflow: hidden;
+        margin: auto;
+        border-top: solid 106px rgb(149, 85, 121);
+        padding-top: 30px;
+    }
     
+    .container-mare > div {
+        align-self: center;
+        justify-self: center;
+        grid-row: auto;
+        grid-column: auto;
+    }
+    .dreptunghi_dreapta{
+        height: 500px;
+        width: 345px;
+        margin-right: 361px;
+        margin-left: 0px;
+        margin-bottom: 0;
+    }
+    .elem1{
+        margin-left: 20px;
+        text-align: center;
+        justify-self: center;
+        align-self: center;
+        padding: 0;
+        flex-direction: row;
+    }
+    .profile {
+        width: 99%; 
+        height: 80%;
+        grid-row: 1;
+        display: flex;
+    }
+    .probleme {
+        height: 420px;
+    }
+    .elem1 p{
+        margin-top: 10px;
+        font-size: 20px;
+        align-self: center;
+        justify-self: center;
+    }   
+    .avatar img {
+        width: 100%;
+        height: 100%;
+    }
+    .avatar{
+        margin-left: 75px;
+    }
+    .anunturi{
+        width: 345px;
+        margin-right: 370px;
+    }
+    .go-to-profile {
+        font-size: 19px;
+        margin-bottom: 30px;
+        display: none;
+    }
+    .probleme_noi{
+        font-size: 35px;
+    }
+    .text-anunt1{
+        font-size: 35px;
+    }
+    .text-anunt2{
+        padding: 0;
+        font-size: 17px;
+
+    }
+    .elem2 p {
+        font-size: 14px;
+    }
+    .elem2{
+        margin-top: 16px;
+    }
+    .domenii {
+        margin-right: 385px;
+        width: 330px;
+    }
+    .sectiune-clasa{
+        padding: 0;
+        height: 300px;
+        margin: 0;
+        width: 340px;
+        margin-right: 375px;
+    }
+    .sectiune-clasa img {
+        height: 90%;
+    }
+    .join-a-class {
+        font-size: 7px;
+        margin-right: 25px;
+    }
+    .text-domenii1{
+        font-size: 28px;
+        margin-top:17px;
+    }
+    .tabel1 a{
+        font-size: 11px;
+    }
+    .tabel2 a{
+        font-size: 11px;
+    }
+    .tabel3 a{
+        font-size: 11px;
+    }
+    .ce-gasesc-aici {
+        margin-top: 21px;
+        font-size: 27.7px;
+    }
+    .ce-gasesc-aici-text{
+        margin-top: 5px;
+        font-size: 16.5px;
+    }
+    .informations{
+        grid-template-rows: 2.34fr 10fr;
+        margin-right: 377px;
+        width: 350px;
+        height:400px;
+    }
+    .altele p{
+        margin-top: 28px;
+        font-size: 14px;
+    }
+    .altele {
+        margin-right: 380px;
+        height:350px;
+        width: 350px;
+        grid-template-rows: 4fr 10fr;
+    }
+    .altele img {
+        width: 48%;
+    }
 }
 
 @media (min-width:440px) and (min-height:740px) and (max-width: 1100px) {

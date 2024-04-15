@@ -9,176 +9,358 @@
 
 <body>
     <section class="continut">
-        <h1> Cerințele site-ului</h1>
-        <h2>1. Introducere</h2>
-        <h3>1.1. Scop</h3>
-        <p> Scopul aplicației "In<em>form</em>atiX" este de a furniza un mediu interactiv și educațional pentru elevii
-            de gimnaziu și
-            liceu, pentru învățarea programării prin intermediul rezolvării de probleme. Utilizatorii vor avea acces la
-            o varietate de
-            probleme propuse de profesori, clasificate în funcție de nivelul de studiu (clasa 9/10/11), de dificultate
-            (probleme ușoare,
-            medii, dificile), și de capitolul pe care se bazează problema (backtracking, șiruri de caractere etc.).
-            Elevii pot vizualiza
-            aceste probleme atât înregistrându-se, cât și fără a fi înregistrati, iar rezolvarea acestora presupune
-            apartenența la o clasă
-            cu un profesor asignat și trimiterea soluțiilor respective spre a fi corectate de către profesor.
-             Acestia vor putea lasa comentarii pentru colegi la fiecare problema si vor putea oferi un rating de la 1 la 5 stele pentru ea.
-             Fiecare problema poate fi exportata folosind butonul de share. Profesorii vor avea
-            posibilitatea să creeze și să administreze clase, să adauge elevi în aceste clase și să atribuie teme
-            elevilor prin propunerea sau selectarea de probleme existente în aplicație. Ei vor putea, de asemenea, să evalueze soluțiile trimise
-            de elevi și să ofere
-            feedback individual. Pe lângă funcționalitatea de bază, aplicația va genera rapoarte care oferă statistici
-            detaliate pentru
-            utilizatori, cum ar fi numărul total de probleme rezolvate, câte dintre acestea au fost corecte și câte au
-            fost încercate. De
-            asemenea, vor exista rapoarte pentru fiecare problemă în parte, care vor oferi informații despre numărul de
-            utilizatori care au
-            încercat-o, câți au reușit să o rezolve și ratingul care a fost acordat de elevi.</p>
-        <p> Astfel, pe lângă scopul de a furniza un mediu interactiv și eficient pentru învățarea și practicarea
-            programării pentru elevii
-            de liceu, aplicația facilitează comunicarea și colaborarea între elevi și profesori și oferă o modalitate
-            utilă pentru evaluarea
-            și monitorizarea progresului în învățare.</p>
+        <nav>
+            <ul>
+                <li><a href="#cerinte-site">1. Cerințele site-ului</a></li>
+                <ul>
+                    <li><a href="#introducere">1. Introducere</a></li>
+                    <li><a href="#scop">1.1. Scop</a></li>
+                    <li><a href="#public-vizat">1.2. Publicul vizat</a></li>
+                    <li><a href="#product-scope">1.3. Product scope</a></li>
+                    <ul>
+                        <li><a href="#functionalitati">1.3.1 Functionalități</a></li>
+                    </ul>
+                </ul>
+                <li><a href="#prezentare-aplicatie">2. Prezentarea aplicației</a></li>
+                <ul>
+                    <li><a href="#arhitectura-abordata">2.1. Arhitectura abordată</a></li>
+                    <li><a href="#structura-fisiere">2.2. Structura fișierelor</a></li>
+                    <li><a href="#interfata-utilizator">2.3. Interfața utilizatorului</a></li>
+                    <ul>
+                        <li><a href="#pagina-index">Pagina de index</a></li>
+                        <li><a href="#pagina-profil">Pagina de profil</a></li>
+                        <li><a href="#pagina-probleme">Pagina de probleme</a></li>
+                        <li><a href="#clasele-mele">Clasele mele</a></li>
+                    </ul>
+                    <li><a href="#responsive">2.4. Responsive</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#paleta_font">3. Paleta de culori și familia de fonturi</a></li>
+                    <ul>
+                        <li><a href="#paleta">3.1. Paleta de culori</a></li>
+                        <li><a href="#paleta">3.2. Familia de fonturi</a></li>
+                    </ul>
+                </ul>
+            </ul>
+        </nav>
 
-        <h3>1.2. Publicul vizat</h3>
-        <p> Platforma noastră va fi destinată în primul rând elevilor care studiază informatica în liceu și gimnaziu, studenților care doresc
-            să aprofundeze noțiunile prin exersare, și până la urmă oricăror pasionați care își doresc să învețe mai mult. Administratorii paginii vor
-            avea orice rol, se vor asigura de buna funcționare a site-ului și că legătura elevi-profesor implică o comunicare eficientă. Nu în ultimul
-            rând, profesorul, este cel care evaluează elevii, le propune teme, comunică cu aceștia prin intermediul platformei despre soluții optime 
-            la rezolvări. Platforma este una potrivită atât pentru elevii care doresc să lucreze cât mai mult, cât și pentru profesori pentru a evalua 
-            cât mai ușor munca elevilor.
-        </p>
-        <h3>1.3. Product scope</h3>
-        <p>Obiectivul major este de a sprijini educația și dezvoltarea competențelor tehnice în rândul tinerilor, pregătindu-i pentru 
-            oportunități viitoare în domeniul tehnologiei și informaticii.</p>
-            <h4>Funcționalitățile majore ale aplicației sunt: </h4>
-            <section id="propunere-aprobare">
-                <h2>Propunerea și Aprobarea de Probleme:</h2>
-                <p>Profesorii pot propune probleme informatice care vor fi supuse aprobării administratorilor. Aceste probleme pot fi etichetate cu diverse TAG-uri pentru a facilita căutarea și filtrarea.</p>
+        <section id="cerinte-site" class="continut">
+            <h1>Cerințele site-ului</h1>
+            <section id="introducere">
+                <h2>1. Introducere</h2>
+                <section id="scop">
+                    <h3>1.1. Scop</h3>
+                    <p> Scopul aplicației "In<em>form</em>atiX" este de a furniza un mediu interactiv și educațional
+                        pentru elevii
+                        de gimnaziu și
+                        liceu, pentru învățarea programării prin intermediul rezolvării de probleme. Utilizatorii vor
+                        avea acces la
+                        o varietate de
+                        probleme propuse de profesori, clasificate în funcție de nivelul de studiu (clasa 9/10/11), de
+                        dificultate
+                        (probleme ușoare,
+                        medii, dificile), și de capitolul pe care se bazează problema (backtracking, șiruri de caractere
+                        etc.).
+                        Elevii pot vizualiza
+                        aceste probleme atât înregistrându-se, cât și fără a fi înregistrati, iar rezolvarea acestora
+                        presupune
+                        apartenența la o clasă
+                        cu un profesor asignat și trimiterea soluțiilor respective spre a fi corectate de către
+                        profesor.
+                        Acestia vor putea lasa comentarii pentru colegi la fiecare problema si vor putea oferi un rating
+                        de la 1 la 5 stele pentru ea.
+                        Fiecare problema poate fi exportata folosind butonul de share. Profesorii vor avea
+                        posibilitatea să creeze și să administreze clase, să adauge elevi în aceste clase și să atribuie
+                        teme
+                        elevilor prin propunerea sau selectarea de probleme existente în aplicație. Ei vor putea, de
+                        asemenea, să evalueze soluțiile trimise
+                        de elevi și să ofere
+                        feedback individual. Pe lângă funcționalitatea de bază, aplicația va genera rapoarte care oferă
+                        statistici
+                        detaliate pentru
+                        utilizatori, cum ar fi numărul total de probleme rezolvate, câte dintre acestea au fost corecte
+                        și câte au
+                        fost încercate. De
+                        asemenea, vor exista rapoarte pentru fiecare problemă în parte, care vor oferi informații despre
+                        numărul de
+                        utilizatori care au
+                        încercat-o, câți au reușit să o rezolve și ratingul care a fost acordat de elevi.</p>
+                    <p> Astfel, pe lângă scopul de a furniza un mediu interactiv și eficient pentru învățarea și
+                        practicarea
+                        programării pentru elevii
+                        de liceu, aplicația facilitează comunicarea și colaborarea între elevi și profesori și oferă o
+                        modalitate
+                        utilă pentru evaluarea
+                        și monitorizarea progresului în învățare.</p>
+                </section>
             </section>
-            
-            <section id="creare-gestionare-clase">
-                <h2>Crearea și Gestionarea Claselor:</h2>
-                <p>Profesorii pot crea clase și adăuga elevii în aceste clase folosind identificatori precum email sau username.</p>
+            <section id="public-vizat">
+                <h2>1.2. Publicul vizat</h2>
+                <p> Platforma noastră va fi destinată în primul rând elevilor care studiază informatica în liceu și
+                    gimnaziu, studenților care doresc
+                    să aprofundeze noțiunile prin exersare, și până la urmă oricăror pasionați care își doresc să învețe
+                    mai mult. Administratorii paginii vor
+                    avea orice rol, se vor asigura de buna funcționare a site-ului și că legătura elevi-profesor implică
+                    o comunicare eficientă. Nu în ultimul
+                    rând, profesorul, este cel care evaluează elevii, le propune teme, comunică cu aceștia prin
+                    intermediul platformei despre soluții optime
+                    la rezolvări. Platforma este una potrivită atât pentru elevii care doresc să lucreze cât mai mult,
+                    cât și pentru profesori pentru a evalua
+                    cât mai ușor munca elevilor.
+                </p>
             </section>
-            
-            <section id="atribuire-teme">
-                <h2>Atribuirea de Teme:</h2>
-                <p>Profesorii pot atribui teme elevilor fie propunând probleme noi, ce vor fi aprobate de administratori, fie selectând dintr-o bază de date existentă de probleme.</p>
-            </section>
-            
-            <section id="rezolvare-evaluare">
-                <h2>Rezolvarea Problemelor și Evaluarea:</h2>
-                <p>Elevii pot rezolva problemele și pot trimite soluțiile lor pentru evaluare de către profesor. De asemenea, ei pot oferi comentarii și ponturi colegilor sau pot marca problemele cu un număr de stele pentru a indica nivelul lor de dificultate sau calitate.</p>
-            </section>
-            
-            <section id="accesibilitate-export-import">
-                <h2>Accesibilitatea prin API și Export/Import de Probleme:</h2>
-                <p>Problemele pot fi accesate de alte aplicații web prin intermediul unui API, iar problemele pot fi exportate/importate în formate deschise, cum ar fi XML, JSON sau CSV.</p>
-            </section>
+            <section id="product-scope">
+                <h2>1.3. Product scope</h2>
+                <p>Obiectivul major este de a sprijini educația și dezvoltarea competențelor tehnice în rândul
+                    tinerilor, pregătindu-i pentru
+                    oportunități viitoare în domeniul tehnologiei și informaticii.</p>
+                <section id="functionalitati">
+                    <h3>Funcționalitățile majore ale aplicației sunt: </h3>
+                    <section id="propunere-aprobare">
+                        <h2>Propunerea și Aprobarea de Probleme:</h2>
+                        <p>Profesorii pot propune probleme informatice care vor fi supuse aprobării administratorilor.
+                            Aceste probleme pot fi etichetate cu diverse TAG-uri pentru a facilita căutarea și
+                            filtrarea.</p>
+                    </section>
 
-            <h2>2. Prezentarea aplicației</h2>
-            <h3>2.1. Arhitectura abordată</h3>
-            <p> Aplicația dezvoltă o structură ușor de înțeles, bine implementată și care facilitează comunicarea dintre componenta de frontend(la nivelul interfeței de utilizator)
-                și cea de backend(la nivel de server). S-a adoptat un design-pattern arhitectural, Model-View-Controller, motivația venind din ideea
-                de a separa logica de prezentare a datelor (Model), interfața utilizatorului (View), și logica de control a aplicației (Controller).
-                Cele 3 componente facilitează întreținerea codului, permite un acces mai controlat în cadrul fișierelor și este ușor de înțeles.
-            </p>
-            <h3>2.2. Structura fișierelor</h3>
-            <p> Așa cum s-a menționat anterior despre modelul MVC, aplicația are în componență 2 foldere esențiale: "src" - care deține logica
-                de structurare din cadrul arhitecturii, și "public" - care conține elementele statice - și anume fisierele .css specifice paginilor,
-                imagini, fonturi, favicons etc.
-            </p>
-            <img class="img1" src="img/img1.png" alt="altcv">
+                    <section id="creare-gestionare-clase">
+                        <h2>Crearea și Gestionarea Claselor:</h2>
+                        <p>Profesorii pot crea clase și adăuga elevii în aceste clase folosind identificatori precum
+                            email sau username.</p>
+                    </section>
 
-            <h3>2.3. Interfața utilizatorului</h3>
-            <p> Pagina de "index" a aplicației oferă o scurtă descriere a site-ului și a facilităților lui, răspunde la câteva dintre curiozitățile
-                cele mai mari ale unui utilizator nou, și de asemenea permite utilizatorilor să se logheze în aplicație sau să-și facă un cont nou. S-a utilizat 
-                modul de derulare prin slide-uri a conținutului, celelalte pagini păstrând varianta clasică de scroll.
-            </p>
-            <img class="img2" src="img/img2.png" alt="altcv">
-            <p> Formularul de login este adresat oricărui tip de utilizator; în urma completării acestuia se vor face verificările în baza de date și utilizatorul 
-                va avea acces la cont. Similar și pentru meniul de înregistrare.</p>
-                <img class="img3" src="img/img3.png" alt="altcv">
-            <p>Meniul de înregistrare va fi adresat doar utilizatorilor de tip "elevi", iar mai apoi un user "elev" poate da upgrade la "profesor" 
-                în urma completării unui formular care va fi verificat de administratori. Rolul de administrator este unul privilegiat, deținut de ownerul produsului
-                software.
-                <img class="img4" src="img/img4.png" alt="altcv">
-            </p>   
-            <p>În urma realizării cu succes a procesului de logare, utilizatorul va fi redirecționat către pagina "logged-page", mai pe scurt meniul principal
-                care leagă celelalte pagini între ele într-o structură arborescentă.
-            </p>
-            <img class="img5" src="img/img5.png" alt="altcv">
-            <p> Pagina conține o abstractizare a principalelor funcționalități ale produsului software, afișate în secțiuni în cadrul paginii. Contând foarte mult
-                modul de detaliere a funcționalităților aplicației web, s-a ales acest mod de afișare a secțiunilor pe pagină și practic așa ne asigurăm că
-                un utilizator nou înregistrat va avea acces la toate informațiile de care are nevoie să se acomodeze cu modul de lucru. Considerăm că un meniu
-                detaliat (în care să se menționeze cât mai multe detalii despre site) atinge orice obiective din partea producătorilor software. 
-            </p>
-            <img class="img6" src="img/img6.png" alt="altcv">
-            <p> Navbar-ul, specific header-ului, reprezintă "harta de nevigare" din cadrul aplicației. Acesta are caracter static, elementele din Navbar-ul
-                vizibile din orice pagină a utilizatorului logat, și este dezvoltat responsive în crearea unui "menu-button" specific dispozitivelor
-                cu rezoluție mai mică.
-            </p>
-            <img class="img7" src="img/img7.png" alt="altcv">
+                    <section id="atribuire-teme">
+                        <h2>Atribuirea de Teme:</h2>
+                        <p>Profesorii pot atribui teme elevilor fie propunând probleme noi, ce vor fi aprobate de
+                            administratori, fie selectând dintr-o bază de date existentă de probleme.</p>
+                    </section>
 
-            <h3> Pagini specifice utilizatorului:</h3>
-            <h4> Pagina de profil</h4>
-            <img class="img8" src="img/img8.png" alt="altcv">
-            <p> Această pagină, indispensabilă aplicației, reprezintă modalitatea prin care utilizatorul îsi poate vizualiza datele personale
-                din cont, poate efectua anumite modificări care ulterior vor fi transmise către baza de date, poate să-și modifice parola, și 
-                poate transmite un formular către administrator prin care solicită rol de profesor, cu dovadă. Tododată, în secțiunea de profil,
-                un utilizator poate să-și verifice statisticile: câte probleme a rezolvat, câte a încercat, și apoi să-și planifice singur ce ar 
-                mai putea rezolva sau primi din partea profesorului.
-            </p>
-            <h4> Pagina de probleme</h4>
-            <img class="img9" src="img/img9.png" alt="altcv">
-            <p> În cadrul secțiunii de probleme, userul poate naviga către pagina specifică oricărei probleme, îi poate vizualiza enunțul, și mai apoi
-                o poate rezolva în cadrul clasei virtuale de care ar aparține. Problemele au un anumit tag (de ex #2222), o categorie din informatică pe
-                baza căreia vor fi afișate în pagină, și nivelul de studiu specific: clasa 9, clasa 10 sau clasa 11. Am ales această clasificare pentru a facilita
-                modul de căutare al problemelor. Cerința majoră a aplicației stând în modul cum elevii ar putea rezolva probleme, iar profesorii evaluează și
-                acordă note, am tratat detaliat aceste pagini specifice.
-            </p>
-            <p> Meniul cu titlul "Adaugă o problemă" este destinat doar rolului de profesor pentru ca aceștia să poată propune probleme spre a fi 
-                înregistrate în sistem și ulterior rezolvate de elevi. Se consideră adminul că are orice rol. În general, la un produs software nu este
-                suficient doar să fie în funcțiune și atât, mentenanța și întreținerea acestei aplicații fiind una deosebit de importantă. De aceea,
-                diversitatea de probleme, precum și alte avantaje ale aplicației, vor veni din partea sprijinului profesorilor. Prin "Submit" (apăsarea butonului), 
-                profesorii s-au asigurat că datele introduse sunt corecte și sunt de acord cu politica de validare a problemelor, conform statutului
-                de admin - care deține și un rol de a accepta cererea de introducere a problemei în sistem.
-            </p>
-            <img class="img10" src="img/img10.png" alt="altcv">
-            <p>Această pagină se regăsește din meniul de căutare probleme, la secțiunea de "probleme clasa 9". Acest mod afișează într-un format elegant 
-                toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe probleme. Pentru fiecare problemă se va putea vizualiza
-                separat anumite statistici care țin de rating-ul oferit de elevi, de câți utilizatori au încercat să o rezolve și câți au rezolvat-o cu
-                succes.
-            </p>
-            <img class="img11" src="img/img11.png" alt="altcv">
-            <p>Butonul de share va fi asignat exportului într-un format open (XML / JSON / CSV, etc.). </p>
-            <h4>Clasele mele</h4>
-            <img class="img12" src="img/img12.png" alt="altcv">
-            <p> În cadrul acestei componente a aplicației este realizată interacțiunea dintre elevi și profesor. Conform cerințelor, un profesor poate deține una
-                sau mai multe clase, acesta având un rol de a manageria clasa/clasele respective și de a lucra eficient cu elevii săi. De asemenea, un elev poate
-                aparține la mai multe clase, acesta rezolvând independent temele pentru o clasă față de cealaltă. Am optat în modul acesta de 
-                preferințe deoarece, în practică un elev ar putea aparține de clasa la care studiază, si totodată se mai poate crea o clasă pentru 
-                elevii care participă la concursuri și olimpiade și de care elevul să aparțină simultan. Profesorul este cel care adaugă elevi într-o clasă pe baza usernameului.
-                Tot acesta, apăsând pe butonul + poate crea o nouă clasă.
-            </p>
-            <img class="img13" src="img/img13.png" alt="altcv">
-            <p>Apăsând pe fiecare clasă, profesorul poate vizualiza elevii, poate adăuga alti elevi și poate accesa secțiunea de teme pentru clasa respectivă.</p>
-            <img class="img14" src="img/img14.png" alt="altcv">
-            <p>Strâns legată de componenta claselor este pagina cu "Temele mele", unde un profesor fie poate propune probleme spre rezolvare, fie poate să aleagă din
-                lista de probleme existente în sistem. O tema are un anumit deadline, poate fi pe parcurs modificată prin adăugarea de alte probleme, 
-                se vor putea adăuga comentarii din partea tuturor membrilor clasei respective, iar în urma finalizării termenului-limită, profesorul poate
-                accesa secțiunea cu răspunsurile primite la probleme și să evalueze munca elevilor, lăsând și feedback la fiecare problemă rezolvată de aceștia.
-            </p>
-            <img class="img15" src="img/img15.png" alt="altcv">
-            <img class="img16" src="img/img16.png" alt="altcv">
-            <img class="img17" src="img/img17.png" alt="altcv">
-            <img class="img18" src="img/img18.png" alt="altcv">
-            <img class="img19" src="img/img19.png" alt="altcv">
-            <img class="img20" src="img/img20.png" alt="altcv">
+                    <section id="rezolvare-evaluare">
+                        <h2>Rezolvarea Problemelor și Evaluarea:</h2>
+                        <p>Elevii pot rezolva problemele și pot trimite soluțiile lor pentru evaluare de către profesor.
+                            De asemenea, ei pot oferi comentarii și ponturi colegilor sau pot marca problemele cu un
+                            număr de stele pentru a indica nivelul lor de dificultate sau calitate.</p>
+                    </section>
 
-           
+                    <section id="accesibilitate-export-import">
+                        <h2>Accesibilitatea prin API și Export/Import de Probleme:</h2>
+                        <p>Problemele pot fi accesate de alte aplicații web prin intermediul unui API, iar problemele
+                            pot fi exportate/importate în formate deschise, cum ar fi XML, JSON sau CSV.</p>
+                    </section>
+                </section>
+            </section>
+        </section>
+
+        <section class="continut">
+            <h1>2. Prezentarea aplicației</h1>
+            <section id="arhitectura-abordata">
+                <h2>2.1. Arhitectura abordată</h2>
+                <p> Aplicația dezvoltă o structură ușor de înțeles, bine implementată și care facilitează comunicarea
+                    dintre componenta de frontend(la nivelul interfeței de utilizator)
+                    și cea de backend(la nivel de server). S-a adoptat un design-pattern arhitectural,
+                    Model-View-Controller, motivația venind din ideea
+                    de a separa logica de prezentare a datelor (Model), interfața utilizatorului (View), și logica de
+                    control a aplicației (Controller).
+                    Cele 3 componente facilitează întreținerea codului, permite un acces mai controlat în cadrul
+                    fișierelor și este ușor de înțeles.
+                </p>
+            </section>
+            <section id="structura-fisiere">
+                <h2>2.2. Structura fișierelor</h2>
+                <p> Așa cum s-a menționat anterior despre modelul MVC, aplicația are în componență 2 foldere esențiale:
+                    "src" - care deține logica
+                    de structurare din cadrul arhitecturii, și "public" - care conține elementele statice - și anume
+                    fisierele .css specifice paginilor,
+                    imagini, fonturi, favicons etc.
+                </p>
+                <img class="img1" src="img/img1.png" alt="altcv">
+            </section>
+            <section id="interfata-utilizator">
+                <h2>2.3. Interfața utilizatorului</h2>
+                <section id="pagina-index">
+                    <h3>Pagina de index</h3>
+                    <p> Pagina de "index" a aplicației oferă o scurtă descriere a site-ului și a facilităților lui,
+                        răspunde la câteva dintre curiozitățile
+                        cele mai mari ale unui utilizator nou, și de asemenea permite utilizatorilor să se logheze în
+                        aplicație sau să-și facă un cont nou. S-a utilizat
+                        modul de derulare prin slide-uri a conținutului, celelalte pagini păstrând varianta clasică de
+                        scroll.
+                    </p>
+                    <img class="img2" src="img/img2.png" alt="altcv">
+                    <p> Formularul de login este adresat oricărui tip de utilizator; în urma completării acestuia se vor
+                        face verificările în baza de date și utilizatorul
+                        va avea acces la cont. Similar și pentru meniul de înregistrare.</p>
+                    <img class="img3" src="img/img3.png" alt="altcv">
+                    <p>Meniul de înregistrare va fi adresat doar utilizatorilor de tip "elevi", iar mai apoi un user
+                        "elev" poate da upgrade la "profesor"
+                        în urma completării unui formular care va fi verificat de administratori. Rolul de administrator
+                        este unul privilegiat, deținut de ownerul produsului
+                        software.
+                        <img class="img4" src="img/img4.png" alt="altcv">
+                    </p>
+                    <p>În urma realizării cu succes a procesului de logare, utilizatorul va fi redirecționat către
+                        pagina "logged-page", mai pe scurt meniul principal
+                        care leagă celelalte pagini între ele într-o structură arborescentă.
+                    </p>
+                    <img class="img5" src="img/img5.png" alt="altcv">
+                    <p> Pagina conține o abstractizare a principalelor funcționalități ale produsului software, afișate
+                        în secțiuni în cadrul paginii. Contând foarte mult
+                        modul de detaliere a funcționalităților aplicației web, s-a ales acest mod de afișare a
+                        secțiunilor pe pagină și practic așa ne asigurăm că
+                        un utilizator nou înregistrat va avea acces la toate informațiile de care are nevoie să se
+                        acomodeze cu modul de lucru. Considerăm că un meniu
+                        detaliat (în care să se menționeze cât mai multe detalii despre site) atinge orice obiective din
+                        partea producătorilor software.
+                    </p>
+                    <img class="img6" src="img/img6.png" alt="altcv">
+                    <p> Navbar-ul, specific header-ului, reprezintă "harta de nevigare" din cadrul aplicației. Acesta
+                        are caracter static, elementele din Navbar-ul
+                        vizibile din orice pagină a utilizatorului logat, și este dezvoltat responsive în crearea unui
+                        "menu-button" specific dispozitivelor
+                        cu rezoluție mai mică.
+                    </p>
+                    <img class="img7" src="img/img7.png" alt="altcv">
+                </section>
+                <section id="pagina-profil">
+                    <h3>Pagina de profil</h3>
+                    <img class="img8" src="img/img8.png" alt="altcv">
+                    <p> Această pagină, indispensabilă aplicației, reprezintă modalitatea prin care utilizatorul îsi
+                        poate vizualiza datele personale
+                        din cont, poate efectua anumite modificări care ulterior vor fi transmise către baza de date,
+                        poate să-și modifice parola, și
+                        poate transmite un formular către administrator prin care solicită rol de profesor, cu dovadă.
+                        Tododată, în secțiunea de profil,
+                        un utilizator poate să-și verifice statisticile: câte probleme a rezolvat, câte a încercat, și
+                        apoi să-și planifice singur ce ar
+                        mai putea rezolva sau primi din partea profesorului.
+                    </p>
+
+                </section>
+                <section id="pagina-probleme">
+                    <h3>Pagina de probleme</h3>
+                    <img class="img9" src="img/img9.png" alt="altcv">
+                    <p> În cadrul secțiunii de probleme, userul poate naviga către pagina specifică oricărei probleme,
+                        îi poate vizualiza enunțul, și mai apoi
+                        o poate rezolva în cadrul clasei virtuale de care ar aparține. Problemele au un anumit tag (de
+                        ex #2222), o categorie din informatică pe
+                        baza căreia vor fi afișate în pagină, și nivelul de studiu specific: clasa 9, clasa 10 sau clasa
+                        11. Am ales această clasificare pentru a facilita
+                        modul de căutare al problemelor. Cerința majoră a aplicației stând în modul cum elevii ar putea
+                        rezolva probleme, iar profesorii evaluează și
+                        acordă note, am tratat detaliat aceste pagini specifice.
+                    </p>
+                    <p> Meniul cu titlul "Adaugă o problemă" este destinat doar rolului de profesor pentru ca aceștia să
+                        poată propune probleme spre a fi
+                        înregistrate în sistem și ulterior rezolvate de elevi. Se consideră adminul că are orice rol. În
+                        general, la un produs software nu este
+                        suficient doar să fie în funcțiune și atât, mentenanța și întreținerea acestei aplicații fiind
+                        una deosebit de importantă. De aceea,
+                        diversitatea de probleme, precum și alte avantaje ale aplicației, vor veni din partea
+                        sprijinului profesorilor. Prin "Submit" (apăsarea butonului),
+                        profesorii s-au asigurat că datele introduse sunt corecte și sunt de acord cu politica de
+                        validare a problemelor, conform statutului
+                        de admin - care deține și un rol de a accepta cererea de introducere a problemei în sistem.
+                    </p>
+                    <img class="img10" src="img/img10.png" alt="altcv">
+                    <p>Această pagină se regăsește din meniul de căutare probleme, la secțiunea de "probleme clasa 9".
+                        Acest mod afișează într-un format elegant
+                        toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe
+                        probleme. Pentru fiecare problemă se va putea vizualiza
+                        separat anumite statistici care țin de rating-ul oferit de elevi, de câți utilizatori au
+                        încercat să o rezolve și câți au rezolvat-o cu
+                        succes.
+                    </p>
+                    <img class="img11" src="img/img11.png" alt="altcv">
+                    <p>Butonul de share va fi asignat exportului într-un format open (XML / JSON / CSV, etc.). </p>
+                </section>
+                <section id="clasele-mele">
+                    <h3>Clasele mele</h3>
+                    <img class="img12" src="img/img12.png" alt="altcv">
+                    <p> În cadrul acestei componente a aplicației este realizată interacțiunea dintre elevi și profesor.
+                        Conform cerințelor, un profesor poate deține una
+                        sau mai multe clase, acesta având un rol de a manageria clasa/clasele respective și de a lucra
+                        eficient cu elevii săi. De asemenea, un elev poate
+                        aparține la mai multe clase, acesta rezolvând independent temele pentru o clasă față de
+                        cealaltă. Am optat în modul acesta de
+                        preferințe deoarece, în practică un elev ar putea aparține de clasa la care studiază, si
+                        totodată se mai poate crea o clasă pentru
+                        elevii care participă la concursuri și olimpiade și de care elevul să aparțină simultan.
+                        Profesorul este cel care adaugă elevi într-o clasă pe baza usernameului.
+                        Tot acesta, apăsând pe butonul + poate crea o nouă clasă.
+                    </p>
+                    <img class="img13" src="img/img13.png" alt="altcv">
+                    <p>Apăsând pe fiecare clasă, profesorul poate vizualiza elevii, poate adăuga alti elevi și poate
+                        accesa secțiunea de teme pentru clasa respectivă.</p>
+                    <img class="img14" src="img/img14.png" alt="altcv">
+                    <p>Strâns legată de componenta claselor este pagina cu "Temele mele", unde un profesor fie poate
+                        propune probleme spre rezolvare, fie poate să aleagă din
+                        lista de probleme existente în sistem. O tema are un anumit deadline, poate fi pe parcurs
+                        modificată prin adăugarea de alte probleme,
+                        se vor putea adăuga comentarii din partea tuturor membrilor clasei respective, iar în urma
+                        finalizării termenului-limită, profesorul poate
+                        accesa secțiunea cu răspunsurile primite la probleme și să evalueze munca elevilor, lăsând și
+                        feedback la fiecare problemă rezolvată de aceștia.
+                    </p>
+                    <img class="img15" src="img/img15.png" alt="altcv">
+                    <img class="img16" src="img/img16.png" alt="altcv">
+                    <img class="img17" src="img/img17.png" alt="altcv">
+                    <img class="img18" src="img/img18.png" alt="altcv">
+                    <img class="img19" src="img/img19.png" alt="altcv">
+                    <img class="img20" src="img/img20.png" alt="altcv">
+                </section>
+                <section id="#responsive">
+                    <h2>Responsive</h2>
+                    <p> Aplicația este dezvoltată într-un mod responsive, astfel încât să poată fi accesată de pe orice
+                        dispozitiv, indiferent de rezoluție.
+                        Elementele de pe pagină se adaptează în funcție de dimensiunea ecranului, iar meniul de
+                        navigare este optimizat pentru dispozitivele mobile.
+                        De asemenea, butoanele și formularele sunt ușor de utilizat și de pe dispozitivele mobile. </p>
+                        <img class="responsive" src="img/responsive.png" alt="altcv">
+
+                </section>
+            </section>
+            <section id="#paleta_font">
+                <h2>3. Paleta de culori și familia de fonturi</h2>
+                <section id="paleta">
+                    <h3>3.1. Paleta de culori</h3>
+                    <p>Paleta de culori aleasă se bazează pe nuanțe de violet și nuanțe bazate pe complementara sa
+                        (galben), împreună cu clasicele alb și negru. Motivația din spatele acestei alegeri este faptul
+                        că violet este o culoare vizibilă, puternică, închisă și contrastantă împreună cu galbenul.
+                        Violetul este cunoscut ca fiind o culoare ce stimulează concentrarea și învățarea și captează
+                        atenția utilizatorului spre deosebire de alte culori mai fade. Combinate, culorile din această
+                        paletă oferă o multitudine de combinații în ceea ce privește gradienturile și alte efecte
+                        vizuale atractive pentru utilizatori. Am luat în considerare și persoanele color-blind,
+                        contrastul fiind vizibil și pentru acestea.
+                    </p>
+                    <img class="img21" src="img/img21.png" alt="altcv">
+                </section>
+                <section id="fonturi">
+                    <h3>3.2. Familia de fonturi</h3>
+                    <p>
+                        Familia de fonturi aleasă este Poppins. Poppins este o tipografie versatilă care a câștigat
+                        popularitate din mai multe motive:
+
+                    <p> Stil Geometric Sans Serif: Poppins aparține categoriei de tipografii sans serif geometrice,
+                        cunoscută pentru liniile curate și proporțiile echilibrate. Îmbină estetica modernă cu o notă de
+                        sofisticare.</p>
+                    <p> Suport pentru mai multe sisteme de scriere: Poppins susține atât sistemul de scriere Devanagari
+                        (folosit pentru limbi precum hindi, marathi și sanscrită), cât și cel latin. Acest lucru o face
+                        o adiție internațională la gen.</p>
+                    <p>Geometrie pură: Designul lui Poppins se bazează pe geometria pură, în special cercuri. Fiecare
+                        literă este aproape monolineară, rezultând într-o culoare tipografică constantă. Caracterele
+                        Devanagari sunt, de asemenea, construite geometric.</p>
+                    <p> Gamă de greutăți: Poppins oferă o gamă largă de greutăți de fonturi, de la subțire la negru.
+                        Această versatilitate permite designerilor să o utilizeze în diverse scopuri, inclusiv titluri,
+                        text principal și branding.</p>
+                    <p>Echilibrată și prietenoasă: Caracterul său este descris ca fiind prietenos, echilibrat și
+                        accesibil. Indiferent dacă proiectați logo-uri, site-uri web, reviste sau aplicații, Poppins
+                        oferă o privire contemporană și profesională.</p>
+                    <p>Din aceste motive, am considerat că Poppins este un font potrivit pentru învățatul cu plăcere,
+                        fiind vizibil, lizibil, sofisticat, dar și modern. Nu are un aspect dur și este potrivit în
+                        primul rând pentru a capta atenția și a stârni interesul elevilor.</p>
+                </section>
+            </section>
+        </section>
     </section>
 </body>
 
