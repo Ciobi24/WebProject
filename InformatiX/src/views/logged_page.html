@@ -31,9 +31,8 @@
     function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
     }
-
   </script>
-  
+  <script src="../../public/js/sendArgument.js"></script>
 </head>
 
 <body>
@@ -50,7 +49,7 @@
         <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
         <li><a href="logged_page.html" onclick="hideSidebar()">Home</a></li>
       </ul>
-      
+
       <ul class="menu">
         <li><a href="logged_page.html">Home</a></li>
         <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
@@ -225,18 +224,19 @@
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
-const userType = urlParams.get('userType');
+  const userType = urlParams.get('userType');
 
-function addAdminButton() {
-  if (userType === 'admin') {
-    const menuUl = document.querySelector('.menu');
-    const adminLi = document.createElement('li');
-    adminLi.innerHTML = '<a href="administrare.html" onclick="hideSidebar()">Administrare</a>';
-    const secondMenuItem = menuUl.children[1];
-    menuUl.insertBefore(adminLi, secondMenuItem);
+  function addAdminButton() {
+    if (userType === 'admin') {
+      const menuUl = document.querySelector('.menu');
+      const adminLi = document.createElement('li');
+      adminLi.innerHTML = '<a href="administrare.html" onclick="hideSidebar()">Administrare</a>';
+      const secondMenuItem = menuUl.children[1];
+      menuUl.insertBefore(adminLi, secondMenuItem);
+    }
   }
-}
 
-addAdminButton();
+  addAdminButton();
 </script>
+
 </html>

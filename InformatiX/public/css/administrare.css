@@ -18,19 +18,296 @@ body{
 }
 .container_princ{
   margin-top: 9vh;
-  height:82vh;
   background-color: #deccb9;
   display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   overflow-y:auto;
+  flex-grow: 1; 
 }
 footer{
   background: linear-gradient(#deccb9, #8B4C70);
   width: 100%;
-  height: 9vh;
+  height: 10vh;
   z-index: 3;
   color: #ffffff;
   align-self: baseline;
+}
+.content {
+  width: 85%; 
+  height: 78vh;
+  margin-top: 3vh;
+  display: grid;
+  grid-template-columns: 1fr 1.09fr 1fr;
+  grid-template-rows: 1fr;
+  background-color: #deccb9;
+}
+
+.dreptunghi_dreapta {
+  grid-column: 1;
+  display: grid;
+  grid-template-rows: 3.14fr 13fr;
+  background-color: #dcd6ce;
+  border: 1px solid rgba(18, 0, 20, 0.33);
+  border-top: solid 3px #8d8888;
+  border-radius: 7px;
+  border-bottom: 25px solid rgb(149, 85, 121);
+  margin-top: 10vh;
+  height: 70%;
+  overflow-y: auto; 
+  align-items: center;
+}
+
+
+.dreptunghi_dreapta::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dreptunghi_dreapta::-webkit-scrollbar-track {
+  background: #dcd6ce;
+}
+
+.dreptunghi_dreapta::-webkit-scrollbar-thumb {
+  background: #834a89;
+  border-radius: 5px;
+}
+
+.dreptunghi_dreapta::-webkit-scrollbar-thumb:hover {
+  background: #522157;
+}
+
+
+.probleme_noi {
+  color: #663953;
+  font-size: 28px;
+  margin-top: 30px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 0.3vw;
+}
+
+.probleme {
+  margin-top: 30px;
+  overflow-y: hidden;
+  direction: ltr;
+  border-radius: 5px;
+  height: 70vh;
+  width: 40vw;
+}
+
+.problema {
+  margin-left: 5px;
+  background-color: #d0b6a8;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  height: 250px;
+  width: 400px;
+  padding: 8px;
+}
+.butoane {
+  margin-top: 6vh;
+  margin-right: 3vw;
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end; 
+  justify-self: flex-end;
+}
+
+.aproba-btn,
+.respinge-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.aproba-btn {
+  background-color: green;
+  color: white;
+}
+
+.respinge-btn {
+  background-color: red;
+  color: white;
+}
+
+.formular {
+  grid-column: 2;
+  display: grid;
+  grid-template-rows: 3.14fr 13fr;
+  background-color: #dcd6ce;
+  border: 1px solid rgba(18, 0, 20, 0.33);
+  border-top: solid 3px #8d8888;
+  border-radius: 7px;
+  border-bottom: 25px solid rgb(149, 85, 121);
+  margin-top: 10vh;
+  height: 70%;
+  margin-left: 40px;
+  overflow-y: auto;
+  align-items: center;
+}
+
+.mesaje_noi {
+  color: #663953;
+  font-size: 24px;
+  margin-bottom: 26px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 0.3vw;
+}
+
+.mesaj {
+  grid-row: auto;
+  margin-top: 30px;
+  overflow-y: hidden;
+  direction: ltr;
+  margin-left: 10px;
+  border-radius: 5px;
+  height: auto;
+  width: 90%;
+  background-color: #d0b6a8;
+  padding: 8px;
+}
+
+.titlu_mesaj {
+  color: #522157;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.continut_mesaj {
+  color: #522157;
+  font-size: 16px;
+}
+
+.informatii_mesaj {
+  color: #522157;
+  font-size: 14px;
+}
+
+.expeditor_mesaj {
+  color: #522157;
+}
+
+.data_mesaj {
+  color: #522157;
+}
+
+.raspunde-btn,
+.sterge-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.raspunde-btn {
+  background-color: #834a89;
+  color: white;
+  margin-right: 5px;
+}
+
+.sterge-btn {
+  background-color: #a94b4b;
+  color: white;
+}
+
+.formular::-webkit-scrollbar {
+  width: 10px;
+}
+
+.formular::-webkit-scrollbar-track {
+  background: #dcd6ce;
+}
+
+.formular::-webkit-scrollbar-thumb {
+  background: #834a89;
+  border-radius: 5px;
+}
+
+.formular ::-webkit-scrollbar-thumb:hover {
+  background: #522157;
+}
+
+.admin-conturi {
+  grid-column:3;
+  background-color: #dcd6ce;
+  border: 1px solid rgba(18, 0, 20, 0.33);
+  border-top: solid 3px #8d8888;
+  border-radius: 7px;
+  margin-top: 20px; 
+  padding: 20px;
+  margin-left:35px;
+  align-self: center;
+  height: 50%;
+  border-bottom: 25px solid rgb(149, 85, 121);
+}
+
+.titlu-sectiune {
+  color: #663953;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 3vw;
+}
+
+.butoane-admin {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  height: 40px;
+}
+
+.blocare-btn,
+.sterge-c-btn,
+.modificare-btn {
+  padding: 6px 12px; 
+  margin: 0 4px; 
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 11.2px;
+}
+
+.cautare-btn {
+  background-color: #834a89;
+  color: white;
+}
+
+.blocare-btn {
+  background-color: #a94b4b;
+  color: white;
+}
+
+.sterge-c-btn {
+  background-color: #522157;
+  color: white;
+}
+
+.modificare-btn {
+  background-color: #663953;
+  color: white;
+}
+
+input[type="search"] {
+  width: 87%;
+  height: 5vh;
+  border-radius: 25px;
+  border: 4px solid #bfab9e;
+  margin-top: 26px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+input{
+  color: #522157;
+  width: 80%;
+  height: 5vh;
+  border-radius: 10px;
+  margin: 20px;
+  background-color: #c9afa1;
+  border: 4px solid #bfab9e;
 }
