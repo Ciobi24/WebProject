@@ -32,7 +32,10 @@ body {
     font-family: Calibri, sans-serif;
 }
 
-.img[class^="img"] {
+img[class^="img"] {
     width: 50%;
     align-self: center;
+}
+.continut {
+    margin-bottom: 450px;
 }
