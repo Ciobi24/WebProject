@@ -231,7 +231,7 @@ function addAdminButton() {
   if (userType === 'admin') {
     const menuUl = document.querySelector('.menu');
     const adminLi = document.createElement('li');
-    adminLi.innerHTML = '<a href="admin_page.html" onclick="hideSidebar()">Administrare</a>';
+    adminLi.innerHTML = '<a href="administrare.html" onclick="hideSidebar()">Administrare</a>';
     const secondMenuItem = menuUl.children[1];
     menuUl.insertBefore(adminLi, secondMenuItem);
   }
