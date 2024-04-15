@@ -92,15 +92,82 @@
             </p>
             <img class="img1" src="img/img1.png" alt="altcv">
 
-            <h3>2.3. Pagina de start</h3>
+            <h3>2.3. Interfața utilizatorului</h3>
             <p> Pagina de "index" a aplicației oferă o scurtă descriere a site-ului și a facilităților lui, răspunde la câteva dintre curiozitățile
                 cele mai mari ale unui utilizator nou, și de asemenea permite utilizatorilor să se logheze în aplicație sau să-și facă un cont nou. S-a utilizat 
                 modul de derulare prin slide-uri a conținutului, celelalte pagini păstrând varianta clasică de scroll.
             </p>
             <img class="img2" src="img/img2.png" alt="altcv">
             <p> Formularul de login este adresat oricărui tip de utilizator; în urma completării acestuia se vor face verificările în baza de date și utilizatorul 
-                va avea acces la cont. </p>
-                <img class="img3" src="img/img3.png" alt="altcv">   
+                va avea acces la cont. Similar și pentru meniul de înregistrare.</p>
+                <img class="img3" src="img/img3.png" alt="altcv">
+            <p>Meniul de înregistrare va fi adresat doar utilizatorilor de tip "elevi", iar mai apoi un user "elev" poate da upgrade la "profesor" 
+                în urma completării unui formular care va fi verificat de administratori. Rolul de administrator este unul privilegiat, deținut de ownerul produsului
+                software.
+                <img class="img4" src="img/img4.png" alt="altcv">
+            </p>   
+            <p>În urma realizării cu succes a procesului de logare, utilizatorul va fi redirecționat către pagina "logged-page", mai pe scurt meniul principal
+                care leagă celelalte pagini între ele într-o structură arborescentă.
+            </p>
+            <img class="img5" src="img/img5.png" alt="altcv">
+            <p> Pagina conține o abstractizare a principalelor funcționalități produsului software, afișate in secțiuni în cadrul paginii. Contând foarte mult
+                modul de detaliere a funcționalităților aplicației web, s-a ales acest mod de afișare a secțiunilor pe pagină și practic așa ne asigurăm că
+                un utilizator nou înregistrat va avea acces la toate informațiile de care are nevoie să se acomodeze cu modul de lucru. Considerăm că un meniu
+                detaliat (în care să se menționeze cât mai multe detalii despre site) atinge orice obiective din partea producătorilor software. 
+            </p>
+            <img class="img6" src="img/img6.png" alt="altcv">
+            <p> Navbar-ul, specific header-ului, reprezintă "harta de nevigare" din cadrul aplicației. Acesta are caracter static, elementele din Navbar-ul
+                vizibile din orice pagină a utilizatorului logat, și este dezvoltat responsive în crearea unui "menu-button" specific dispozitivelor
+                cu rezoluție mai mică.
+            </p>
+            <img class="img7" src="img/img7.png" alt="altcv">
+
+            <h3> Pagini specifice utilizatorului:</h3>
+            <h4> Pagina de profil</h4>
+            <img class="img8" src="img/img8.png" alt="altcv">
+            <p> Această pagină, indispensabilă aplicației, reprezintă modalitatea prin care utilizatorul îsi poate vizualiza datele personale
+                din cont, poate efectua anumite modificări care ulterior vor fi transmise către baza de date, poate să-și modifice parola, și 
+                poate transmite un formular către administrator prin care solicită rol de profesor, cu dovadă. Tododată, în secțiunea de profil,
+                un utilizator poate să-și verifice statisticile: câte probleme a rezolvat, câte a încercat, și apoi să-și planifice singur ce ar 
+                mai putea rezolva sau primi din partea profesorului.
+            </p>
+            <h4> Pagina de probleme</h4>
+            <img class="img9" src="img/img9.png" alt="altcv">
+            <p> În cadrul secțiunii de probleme, userul poate naviga către pagina specifică oricărei probleme, îi poate vizualiza enunțul, și mai apoi
+                o poate rezolva în cadrul clasei virtuale de care ar aparține. Problemele au un anumit tag (de ex #2222), o categorie din informatică pe
+                baza căreia vor fi afișate în pagină, și nivelul de studiu specific: clasa 9, clasa 10 sau clasa 11. Am ales această clasificare pentru a facilita
+                modul de căutare al problemelor. Cerința majoră a aplicației stând în modul cum elevii ar putea rezolva probleme, iar profesorii evaluează și
+                acordă note, am tratat detaliat aceste pagini specifice.
+            </p>
+            <p> Meniul cu titlul "Adaugă o problemă" este destinat doar rolului de profesor pentru ca aceștia să poată propune probleme spre a fi 
+                înregistrate în sistem și ulterior rezolvate de elevi. Se consideră adminul că are orice rol. În general, la un produs software nu este
+                suficient doar să fie în funcțiune și atât, mentenanța și întreținerea acestei aplicații fiind una deosebit de importantă. De aceea,
+                diversitatea de probleme, precum și alte avantaje ale aplicației, vor veni din partea sprijinului profesorilor. Prin "Submit" (apăsarea butonului), 
+                profesorii s-au asigurat că datele introduse sunt corecte și sunt de acord cu politica de validare a problemelor, conform statutului
+                de admin - care deține și un rol de a accepta cererea de introducere a problemei în sistem.
+            </p>
+            <img class="img10" src="img/img10.png" alt="altcv">
+            <p>Această pagină se regăsește din mneniul de căutare probleme, la secțiunea de "probleme clasa 9". Acest mod afișează într-un format elegant 
+                toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe probleme. Pentru fiecare problemă se va putea vizualiza
+                separat anumite statistici care țin de rating-ul oferit de elevi, de câți utilizatori au încercat să o rezolve și câți au rezolvat-o cu
+                succes.
+            </p>
+            <img class="img11" src="img/img11.png" alt="altcv">
+            <p>Butonul de share va fi asignat exportului într-un format open (XML / JSON / CSV, etc.). </p>
+            <h4>Clasele mele</h4>
+            <p> În cadrul acestei componente a aplicației este realizată interacțiunea dintre elevi și profesor. Conform cerințelor, un profesor poate deține una
+                sau mai multe clase, acesta având un rol de a manageria clasa/clasele respective și de a lucra eficient cu elevii săi. De asemenea, un elev poate
+                aparține la mai multe clase, acesta rezolvând independent temele pentru o clasă față de cealaltă. Am optat în modul acesta de 
+                preferințe deoarece, în practică un elev ar putea aparține de clasa la care studiază, si totodată se mai poate crea o clasă pentru 
+                elevii care participă la concursuri și olimpiade și de care elevul să aparțină simultan. Printre alte funcții, elevul poate ieși dintr-o clasă,
+                sau dat afară de către profesor, adăugarea la o clasă a unui elev o face explicit profesorul.
+            </p>
+            <p>Strând legată de componenta claselor este pagina cu "Temele mele", unde un profesor fie poate propune probleme spre rezolvare, fie poate să aleagă din
+                lista de probleme existente în sistem. O tema are un anumit deadline, poate fi pe parcurs modificată prin adăugarea de alte probleme sau modificare
+                deadline, se vor putea adăuga comentarii din partea tuturor membrilor clasei respective, iar în urma finalizării termenului-limită, profesorul poate
+                accesa secțiunea cu răspunsurile primite la probleme și să evalueze munca elevilor.
+            </p>
+            <img class="img12" src="img/img12.png" alt="altcv">
     </section>
 </body>
 
