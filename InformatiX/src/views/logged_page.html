@@ -218,23 +218,23 @@
   <footer>
     <p>@ Contact</p>
   </footer>
-</body>
 
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const userType = urlParams.get('userType');
-
-  function addAdminButton() {
-    if (userType === 'admin') {
-      const menuUl = document.querySelector('.menu');
-      const adminLi = document.createElement('li');
-      adminLi.innerHTML = '<a href="administrare.html" onclick="hideSidebar()">Administrare</a>';
-      const secondMenuItem = menuUl.children[1];
-      menuUl.insertBefore(adminLi, secondMenuItem);
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const userType = urlParams.get('userType');
+  
+    function addAdminButton() {
+      if (userType === 'admin') {
+        const menuUl = document.querySelector('.menu');
+        const adminLi = document.createElement('li');
+        adminLi.innerHTML = '<a href="administrare.html" onclick="hideSidebar()">Administrare</a>';
+        const secondMenuItem = menuUl.children[1];
+        menuUl.insertBefore(adminLi, secondMenuItem);
+      }
     }
-  }
-
-  addAdminButton();
-</script>
+  
+    addAdminButton();
+  </script>
+</body>
 
 </html>
