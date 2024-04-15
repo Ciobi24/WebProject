@@ -28,8 +28,14 @@
       </script>
     <script>
         function navigateTo(url) {
-            window.location.href = url;
-        }
+    const userType = getUrlParam('userType');
+    if (url.includes('?')) {
+        window.location.href = `${url}&userType=${userType}`;
+    } else {
+        window.location.href = `${url}?userType=${userType}`;
+    }
+}
+
     </script>
     <script src="../../public/js/sendArgument.js"></script>
 </head>
@@ -71,21 +77,64 @@
             <button onclick="navigateTo('probleme-clasa11.html')">Clasa a 11-a</button>
         </div>
         <div id="problemInputs">
-            <h3>Adaugă o problemă</h3>
-            <input type="text" id="problemName" placeholder="Numele problemei"><br>
-            <textarea id="problemText" placeholder="Textul problemei"></textarea><br>
-            <input type="text" id="problemTags" placeholder="Tags #tag1 #tag2..."><br>
-            <select id="classSelect">
-                <option value="clasa9">Clasa a 9a</option>
-                <option value="clasa10">Clasa a 10a</option>
-                <option value="clasa11">Clasa a 11a</option>
-            </select><br>
-            <button type="submit">Submit</button>
         </div>
     </div>
     <footer>
         <p>@ Contact</p>
     </footer>
 </body>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const userType = urlParams.get('userType');
+
+  function addSection() {
+      if (userType === 'profesor') {
+          const addProblemTitle = document.createElement('h3');
+          addProblemTitle.textContent = 'Adaugă o problemă';
+
+          const problemNameInput = document.createElement('input');
+          problemNameInput.type = 'text';
+          problemNameInput.id = 'problemName';
+          problemNameInput.placeholder = 'Numele problemei';
+          const problemTextInput = document.createElement('textarea');
+          problemTextInput.id = 'problemText';
+          problemTextInput.placeholder = 'Textul problemei';
+          const problemTagsInput = document.createElement('input');
+          problemTagsInput.type = 'text';
+          problemTagsInput.id = 'problemTags';
+          problemTagsInput.placeholder = 'Tags #tag1 #tag2...';
+          const classSelectInput = document.createElement('select');
+          classSelectInput.id = 'classSelect';
+          const classOptions = ['Clasa a 9a', 'Clasa a 10a', 'Clasa a 11a'];
+          classOptions.forEach((optionText, index) => {
+              const option = document.createElement('option');
+              option.value = `clasa${index + 9}`;
+              option.textContent = optionText;
+              classSelectInput.appendChild(option);
+          });
+          const submitButton = document.createElement('button');
+          submitButton.type = 'submit';
+          submitButton.textContent = 'Submit';
+
+          const problemInputsContainer = document.getElementById('problemInputs');
+          if (problemInputsContainer) {
+              problemInputsContainer.innerHTML = '';
+
+              problemInputsContainer.appendChild(addProblemTitle);
+              problemInputsContainer.appendChild(problemNameInput);
+              problemInputsContainer.appendChild(document.createElement('br'));
+              problemInputsContainer.appendChild(problemTextInput);
+              problemInputsContainer.appendChild(document.createElement('br'));
+              problemInputsContainer.appendChild(problemTagsInput);
+              problemInputsContainer.appendChild(document.createElement('br'));
+              problemInputsContainer.appendChild(classSelectInput);
+              problemInputsContainer.appendChild(document.createElement('br'));
+              problemInputsContainer.appendChild(submitButton);
+          }
+      }
+  }
+
+  addSection();
+</script>
 
 </html>
