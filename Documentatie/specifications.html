@@ -32,7 +32,7 @@
                         <li><a href="#pagina-probleme">Pagina de probleme</a></li>
                         <li><a href="#clasele-mele">Clasele mele</a></li>
                     </ul>
-                    <li><a href="#responsive">2.4. Responsive</a></li>
+                    <li><a href="#responsive">2.5. Responsive</a></li>
                 </ul>
                 <li><a href="#paleta_font">3. Paleta de culori și familia de fonturi</a></li>
                 <ul>
@@ -179,8 +179,28 @@
                 </p>
                 <img class="img1" src="img/img1.png" alt="altcv">
             </section>
+            <section class="logare">
+                <h2>2.2. Cum funcționează procesul de logare - demo(important!)</h2>
+                <p> Important, în procesul demo s-a implementat o logare minimalistă, bazată pe 2 cuvinte cheie:
+                    admin și profesor. Pentru elev am folosit orice alt identificator, mai puțin "elev" și "profesor".
+                </p>
+                <img class="img22" src="img/img22.png" alt="altcv">
+                <p> Pentru a diferenția utilizatorii și a crea conținuturi în pagină diferite pentru fiecare în parte,
+                    aceasta
+                    din nevoia de a nu face pagini diferite pentru fiecare, am abordat o modalitate de a stoca o
+                    variabilă
+                    <b>userType</b> în URL-ul paginii, pe care am trimis-o de la fiecare pagină către alta, și în
+                    fiecare pagină unde aveam
+                    de creat conținut diferit pentru fiecare categorie de utilizatori, am parsat acea valoare în string
+                    și apoi am
+                    modelat mai departe informația în funcții de JavaScript de display.
+                </p>
+                <img class="img23" src="img/img23.png" alt="altcv">
+                Deci, în procesul de logare, a se completa la secțiunea "email" cu "profesor" - pentru categoria de profesor
+                , "admin" pentru categoria de administrator, si orice altceva pentru categoria de user obișnuit.
+            </section>
             <section id="interfata-utilizator">
-                <h2>2.3. Interfața utilizatorului</h2>
+                <h2>2.4. Interfața utilizatorului</h2>
                 <section id="pagina-index">
                     <h3>Pagina de index</h3>
                     <p> Pagina de "index" a aplicației oferă o scurtă descriere a site-ului și a facilităților lui,
@@ -335,22 +355,41 @@
                         respective.
                     </p>
                     <img class="img17" src="img/img17.png" alt="altcv">
-                    <p>În secțiunea de evaluare, profesorul poate vedea soluțiile parțiale, respectiv finale, pentru fiecare
-                        utilizator în pagini web diferite. 
+                    <p>În secțiunea de evaluare, profesorul poate vedea soluțiile parțiale, respectiv finale, pentru
+                        fiecare
+                        utilizator în pagini web diferite.
                     </p>
                     <img class="img18" src="img/img18.png" alt="altcv">
                     <p> În cadrul paginii de evaluare pentru un utilizator, membru clasei pentru care profesorul face
                         verificarea soluțiilor, profesorul primeste enuntul problemei, codul sursă aferent, urmând apoi
-                        să efectueze verificările, și apoi poate încărca evaluarea pe server, elevul primind răspunsul și
-                        punctajul acordat, iar pentru server se va face un update la statisticile problemei respective pentru
-                        încă un user care a încercat să o rezolve și în situație favorabilă, este marcată ca și rezolvată cu 
+                        să efectueze verificările, și apoi poate încărca evaluarea pe server, elevul primind răspunsul
+                        și
+                        punctajul acordat, iar pentru server se va face un update la statisticile problemei respective
+                        pentru
+                        încă un user care a încercat să o rezolve și în situație favorabilă, este marcată ca și
+                        rezolvată cu
                         punctaj maxim.
                     </p>
-                    <p>Important de menționat este că în această secțiune are acces și un admin, deoarece un admin poate fi 
+                    <p>Important de menționat este că în această secțiune are acces și un admin, deoarece un admin poate
+                        fi
                         și profesor, iar elevilor nu li se va afișa în interfață acest meniu.
                     </p>
                     <img class="img19" src="img/img19.png" alt="altcv">
-                    <p></p>
+                    <p>Interfața de user(elev), are mai multe restrângeri care au fost discutate, anterior, iar una
+                        foarte
+                        importantă la nivel de interfață este la modul cum acesta poate rezolva și trimite o problemă.
+                        Prin
+                        intermediul de cod JavaScript se crează anumite verificări în funcție de tipul de user, și apoi
+                        display-ul anumitor componente Html se face după constrângerile impuse.
+                    </p>
+                    <img class="img20" src="img/img20.png" alt="altcv">
+                    <p>În această pagină, utilizatorul poate vizualiza conținutul problemei, poate trimite soluția dacă
+                        acesta
+                        este sigur pe ce a lucrat, și tot în această secțiune poate încărca anumite comentarii care pot
+                        fi văzute
+                        de toți membrii clasei și unde se pot oferi hint-uri pentru rezolvarea problemei, precum și alte
+                        comentarii.
+                    </p>
                 </section>
             </section>
 
@@ -423,8 +462,13 @@
                     de date.</p>
                 <p>În plus, sunt impuse restricții de acces la anumite funcționalități sau date în funcție de rolurile
                     utilizatorilor, iar activitățile suspecte trebuie să fie monitorizate și înregistrate pentru a
-                    detecta eventualele încercări de acces neautorizat. Administratorii sunt singurii cu acces la pagina de administrare și toate funcționalitățile acesteia(gestionarea conturilor, mesajele de feedback, aprobarea problemelor).
-                     Profesorii sunt singurii care pot da teme, pot crea clase și pot adăuga elevi în ele, pot corecta teme și oferi feedback și punctaje, pot propune probleme noi. Elevii sunt cei care vor primi aceste teme și vor fi incluși în clasele menționate, vor rezolva problemele și vor putea lăsa comentarii la ele epntru ceilalți colegi.</p>
+                    detecta eventualele încercări de acces neautorizat. Administratorii sunt singurii cu acces la pagina
+                    de administrare și toate funcționalitățile acesteia(gestionarea conturilor, mesajele de feedback,
+                    aprobarea problemelor).
+                    Profesorii sunt singurii care pot da teme, pot crea clase și pot adăuga elevi în ele, pot corecta
+                    teme și oferi feedback și punctaje, pot propune probleme noi. Elevii sunt cei care vor primi aceste
+                    teme și vor fi incluși în clasele menționate, vor rezolva problemele și vor putea lăsa comentarii la
+                    ele epntru ceilalți colegi.</p>
             </section>
             <section id="performanta">
                 <h3>4.2. Performanță</h3>
