@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,22 +10,23 @@
     <title>In&lt;form&gt;atiX</title>
     <script>
         function showSidebar() {
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'flex'
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
         }
         function hideSidebar() {
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'none'
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
         }
         function showSignUp() {
-          const flipCheckbox = document.getElementById('flip');
-          flipCheckbox.checked = true;
+            const flipCheckbox = document.getElementById('flip');
+            flipCheckbox.checked = true;
         }
         function showLogin() {
-          const flipCheckbox = document.getElementById('flip');
-          flipCheckbox.checked = false;
+            const flipCheckbox = document.getElementById('flip');
+            flipCheckbox.checked = false;
         }
       </script>
+
     <script src="../../public/js/sendArgument.js"></script>
     <script>
         function showModal(className) {
@@ -33,42 +35,42 @@
             var userListElement = document.getElementById('userList');
             classNameElement.innerText = className;
             modal.style.display = "block";
-            
+
             var usersMap = {
                 "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
                 "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
                 "Clasa a X-a C": ["Daniel Thomas", "Sophia White", "Matthew Clark", "Isabella Hall", "William Lee"],
                 "Clasa a X-a D": ["Ethan Walker", "Ava Lewis", "Alexander King", "Chloe Scott", "Jacob Green"]
             };
-            
+
             var users = usersMap[className];
             userListElement.innerHTML = ""; // Clear previous list
-            
-            users.forEach(function(user) {
+
+            users.forEach(function (user) {
                 var listItem = document.createElement('div');
                 listItem.textContent = user;
                 userListElement.appendChild(listItem);
             });
         }
-    
+
         // Function to close the modal
         function closeModal() {
             var modal = document.getElementById('myModal');
             modal.style.display = "none";
         }
-    
+
         // Function to open the add user modal
         function openAddUserModal() {
             var modal = document.getElementById('addUserModal');
             modal.style.display = "block";
         }
-    
+
         // Function to close the add user modal
         function closeAddUserModal() {
             var modal = document.getElementById('addUserModal');
             modal.style.display = "none";
         }
-    
+
         // Function to add user 
         function addUser() {
             // Add 
@@ -86,7 +88,6 @@
         function addClass() {
             var className = document.getElementById('newClassName').value;
             if (className) {
-                // Here you can add the logic to add the new class
                 console.log("New class added:", className);
                 closeAddClassModal();
             } else {
@@ -95,89 +96,154 @@
         }
     </script>
     <script>
-        // Function to open "Teme" page
         function openTemePage() {
-        window.location.href = 'temele_mele.html';
-    }
+            const userType = getUrlParam('userType');
+            const url = 'temele_mele.html'; 
+            if (url.includes('?')) {
+                window.location.href = `${url}&userType=${userType}`;
+            } else {
+                window.location.href = `${url}?userType=${userType}`;
+            }
+        }
+
+        function getUrlParam(paramName) {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.get(paramName);
+        }
     </script>
 </head>
+
 <body>
-<header>
-    <nav>
-        <ul class="sidebar">
-          <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
-                width="26">
-                <path
-                  d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
-              </svg></a></li>
-          <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
-          <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
-          <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
-          <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
-          <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
-        </ul>
-        <ul class="menu">
-          <li><a href="logged_page.html">Home</a></li>
-          <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
-          <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
-          <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
-          <li class="hideOnMobile"><a href="index.html">Logout</a></li>
-          <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                viewBox="0 96 960 960" width="26">
-                <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-              </svg></a></li>
-        </ul>
-      </nav>
-</header>
-<div class="container_princ">
-    <h2>Clasele mele</h2>
-    <button onclick="openAddClassModal()">+</button>
-    <div class="clase" id="clase">
-        <div class="clasa" onclick="showModal('Clasa a X-a B')"><h3>Clasa a X-a B</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a A')"><h3>Clasa a X-a A</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a C')"><h3>Clasa a X-a C</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a D')"><h3>Clasa a X-a D</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a B')"><h3>Clasa a X-a B</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a A')"><h3>Clasa a X-a A</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a C')"><h3>Clasa a X-a C</h3></div>
-        <div class="clasa" onclick="showModal('Clasa a X-a D')"><h3>Clasa a X-a D</h3></div>
-    </div>
-</div>
-<footer>
-    <p>@ Contact</p>
-</footer>
-
-
-<div id="myModal" class="modal">
-
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="className">Clasa a X-a B</h2>
-        <div id="userList">
+    <header>
+        <nav>
+            <ul class="sidebar">
+                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                            viewBox="0 96 960 960" width="26">
+                            <path
+                                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+                        </svg></a></li>
+                <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
+                <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
+                <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
+                <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
+                <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
+            </ul>
+            <ul class="menu">
+                <li><a href="logged_page.html">Home</a></li>
+                <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
+                <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
+                <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
+                <li class="hideOnMobile"><a href="index.html">Logout</a></li>
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                            height="26" viewBox="0 96 960 960" width="26">
+                            <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+                        </svg></a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container_princ">
+        <h2>Clasele mele</h2>
+        <div class="clase" id="clase">
+            <div class="clasa" onclick="showModal('Clasa a X-a B')">
+                <h3>Clasa a X-a B</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a A')">
+                <h3>Clasa a X-a A</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a C')">
+                <h3>Clasa a X-a C</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a D')">
+                <h3>Clasa a X-a D</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a B')">
+                <h3>Clasa a X-a B</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a A')">
+                <h3>Clasa a X-a A</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a C')">
+                <h3>Clasa a X-a C</h3>
+            </div>
+            <div class="clasa" onclick="showModal('Clasa a X-a D')">
+                <h3>Clasa a X-a D</h3>
+            </div>
         </div>
-       
-        <button onclick="openAddUserModal()">Add User</button>
-        <button onclick="openTemePage()">Teme</button>
     </div>
-</div>
+    <footer>
+        <p>@ Contact</p>
+    </footer>
 
-<div id="addUserModal" class="modal">
 
-    <div class="modal-content">
-        <span class="close" onclick="closeAddUserModal()">&times;</span>
-        <h2>Add User</h2>
-        <input type="text" class="search-input" placeholder="Search user...">
-        <button onclick="addUser()">Add User</button>
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="className">Clasa a X-a B</h2>
+            <div id="userList">
+            </div>
+
+            <button onclick="openTemePage()">Teme</button>
+        </div>
     </div>
-</div>
 
-<div id="addClassModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeAddClassModal()">&times;</span>
-        <h2>Add New Class</h2>
-        <input type="text" id="newClassName" placeholder="Enter class name">
-        <button onclick="addClass()">Add Class</button>
+    <div id="addUserModal" class="modal">
+
+        <div class="modal-content">
+            <span class="close" onclick="closeAddUserModal()">&times;</span>
+            <h2>Add User</h2>
+            <input type="text" class="search-input" placeholder="Search user...">
+            <button onclick="addUser()">Add User</button>
+        </div>
     </div>
-</div>
+
+    <div id="addClassModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddClassModal()">&times;</span>
+            <h2>Add New Class</h2>
+            <input type="text" id="newClassName" placeholder="Enter class name">
+            <button onclick="addClass()">Add Class</button>
+        </div>
+    </div>
 </body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const userType = urlParams.get('userType');
+    function addButton() {
+        if (userType === 'profesor' || userType == 'admin') {
+            const container = document.querySelector('.container_princ');
+            const addButton = document.createElement('button');
+
+            addButton.textContent = '+';
+            addButton.onclick = openAddClassModal;
+
+            const secondElement = container.children[1];
+            container.insertBefore(addButton, secondElement);
+        }
+    }
+    addButton();
+</script>
+<script>
+    const urlParams1 = new URLSearchParams(window.location.search);
+    const userType1 = urlParams1.get('userType');
+
+    function addButtonToFirstModal() {
+        if (userType1 === 'profesor' || userType1 === 'admin') {
+            const firstModalContent = document.querySelector('#myModal .modal-content');
+
+            if (firstModalContent) {
+                const addUserButton = document.createElement('button');
+                addUserButton.textContent = 'Add User';
+                addUserButton.onclick = openAddUserModal;
+
+                firstModalContent.appendChild(addUserButton);
+            }
+        }
+    }
+    addButtonToFirstModal();
+</script>
+
+
 </html>
