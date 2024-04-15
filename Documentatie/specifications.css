@@ -29,3 +29,6 @@ img[class^="img"] {
 .continut2 {
     margin-top: 450px;
 }
+.red-link {
+    color: red;
+}
