@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,24 @@
     <link rel="stylesheet" href="../../public/css/footer.css">
     <script>
         function showSidebar() {
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'flex'
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
         }
         function hideSidebar() {
-          const sidebar = document.querySelector('.sidebar')
-          sidebar.style.display = 'none'
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
         }
         function showSignUp() {
-          const flipCheckbox = document.getElementById('flip');
-          flipCheckbox.checked = true;
+            const flipCheckbox = document.getElementById('flip');
+            flipCheckbox.checked = true;
         }
         function showLogin() {
-          const flipCheckbox = document.getElementById('flip');
-          flipCheckbox.checked = false;
+            const flipCheckbox = document.getElementById('flip');
+            flipCheckbox.checked = false;
         }
-      </script>
-      <script>
+    </script>
+    <script src="../../public/js/sendArgument.js"></script>
+    <script>
         // Function to open the modal for searching problems
         function openSearchModal() {
             var modal = document.getElementById('searchModal');
@@ -49,42 +51,56 @@
             var modal = document.getElementById('evaluateModal');
             modal.style.display = "block";
         }
-
         // Function to close the evaluate modal
         function closeEvaluateModal() {
             var modal = document.getElementById('evaluateModal');
             modal.style.display = "none";
         }
-
-        // Function to open solutions for a user
-        function openUserSolution() {
-            // Navigate to solution.html
-            window.location.href = "solution.html";
+        function openProblemModal() {
+            var modal = document.getElementById('problemModal');
+            modal.style.display = "block";
         }
-        function searchProblem(){
-            //implement
+        function closeProblemModal() {
+            var modal = document.getElementById('problemModal');
+            modal.style.display = "none";
+        }
+        function openUserSolution() {
+            const userType = getUrlParam('userType');
+            const url = 'solution.html';
+            if (url.includes('?')) {
+                window.location.href = `${url}&userType=${userType}`;
+            } else {
+                window.location.href = `${url}?userType=${userType}`;
+            }
+        }
+
+        function getUrlParam(paramName) {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            return urlParams.get(paramName);
+        }
+
+        function searchProblem() {
+            
         }
     </script>
     <script>
-        // Function to open the modal for adding a new topic
         function openAddTemaModal() {
             var modal = document.getElementById('addTemaModal');
             modal.style.display = "block";
         }
-    
-        // Function to close the modal for adding a new topic
+
         function closeAddTemaModal() {
             var modal = document.getElementById('addTemaModal');
             modal.style.display = "none";
         }
-    
-        // Function to submit the new topic
+
         function submitNewTema() {
             // // Get input values
             // var clasa = document.getElementById('clasaInput').value;
             // var deadline = document.getElementById('deadlineInput').value;
             // var problems = document.getElementById('problemsInput').value.split('\n'); // Split problems by newline
-    
+
             // // Create new topic element
             // var container = document.querySelector('.teme');
             // var newTema = document.createElement('div');
@@ -98,43 +114,44 @@
             //     <button onclick="openSearchModal()">Adauga</button>
             //     <button onclick="openEvaluateModal()">Evalueaza</button>
             // `;
-    
+
             // // Append new topic to container
             // container.appendChild(newTema);
-    
+
             // // Close the modal
             closeAddTemaModal();
         }
     </script>
-    
+
 </head>
+
 <body>
     <header>
         <nav>
             <ul class="sidebar">
-              <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
-                    width="26">
-                    <path
-                      d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
-                  </svg></a></li>
-              <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
-              <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
-              <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
-              <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
-              <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
+                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                            viewBox="0 96 960 960" width="26">
+                            <path
+                                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+                        </svg></a></li>
+                <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
+                <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
+                <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
+                <li><a href="my_profile.html" onclick="hideSidebar()">Profil</a></li>
+                <li><a href="index.html" onclick="hideSidebar()">Logout</a></li>
             </ul>
             <ul class="menu">
-              <li><a href="logged_page.html">Home</a></li>
-              <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
-              <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
-              <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
-              <li class="hideOnMobile"><a href="index.html">Logout</a></li>
-              <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                    viewBox="0 96 960 960" width="26">
-                    <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-                  </svg></a></li>
+                <li><a href="logged_page.html">Home</a></li>
+                <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
+                <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
+                <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
+                <li class="hideOnMobile"><a href="index.html">Logout</a></li>
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                            height="26" viewBox="0 96 960 960" width="26">
+                            <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+                        </svg></a></li>
             </ul>
-          </nav>
+        </nav>
     </header>
     <div class="container_princ">
         <h2>Temele Mele</h2>
@@ -148,8 +165,6 @@
                     <li>Problem 2</li>
                     <li>Problem 3</li>
                 </ul>
-                <button onclick="openSearchModal()">Adauga</button>
-                <button onclick="openEvaluateModal()">Evalueaza</button>
             </div>
             <div class="tema">
                 <h3>Tema 2</h3>
@@ -159,13 +174,10 @@
                     <li>Problem 1</li>
                     <li>Problem 2</li>
                 </ul>
-                <button onclick="openSearchModal()">Adauga</button>
-                <button onclick="openEvaluateModal()">Evalueaza</button>
             </div>
         </div>
-        <button onclick="openAddTemaModal()">+</button> 
     </div>
-    <!-- Modal for adding new topic -->
+
     <div id="addTemaModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddTemaModal()">&times;</span>
@@ -179,7 +191,7 @@
             <button onclick="submitNewTema()">Submit</button>
         </div>
     </div>
-    <!-- Modal for searching problems -->
+
     <div id="searchModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeSearchModal()">&times;</span>
@@ -188,7 +200,7 @@
             <button onclick="searchProblem()">Adauga</button>
         </div>
     </div>
-    <!-- Modal for users -->
+
     <div id="userModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeUserModal()">&times;</span>
@@ -202,7 +214,7 @@
             </ul>
         </div>
     </div>
-    <!-- Modal for evaluating -->
+
     <div id="evaluateModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeEvaluateModal()">&times;</span>
@@ -216,8 +228,119 @@
             </ul>
         </div>
     </div>
+    <div id="problemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProblemModal()">&times;</span>
+            <h2>Rezolva Probleme</h2>
+            <ul>
+                <li onclick="openProblemSolution('Problema 1')">Problema 1</li>
+                <li onclick="openProblemSolution('Problema 2')">Problema 2</li>
+                <li onclick="openProblemSolution('Problema 3')">Problema 3</li>
+                <li onclick="openProblemSolution('Problema 3')">Problema 4</li>
+            </ul>
+        </div>
+    </div>
     <footer>
         <p>@ Contact</p>
     </footer>
 </body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const userType = urlParams.get('userType');
+
+    function AddButton() {
+        if (userType === 'profesor') {
+            const addButton = document.createElement('button');
+            addButton.textContent = '+';
+            addButton.onclick = openAddTemaModal;
+
+            const container = document.querySelector('.container_princ');
+            if (container) {
+                container.appendChild(addButton);
+            }
+        }
+    }
+    AddButton();
+</script>
+
+<script>
+    const urlParams1 = new URLSearchParams(window.location.search);
+    const userType1 = urlParams1.get('userType');
+
+    function addButtonToTemeleMele() {
+        if (userType1 === 'profesor' || userType1 === 'admin') {
+            const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
+
+            if (buttons.length > 0) {
+                buttons.forEach(button => {
+                    button.classList.add('hidden');
+                });
+            }
+
+            const temaDivs = document.querySelectorAll('.tema');
+
+            if (temaDivs.length > 0) {
+                temaDivs.forEach(div => {
+
+                    const addButton = document.createElement('button');
+                    addButton.textContent = 'Adauga';
+                    addButton.onclick = openSearchModal;
+
+                    const evaluateButton = document.createElement('button');
+                    evaluateButton.textContent = 'Evalueaza';
+                    evaluateButton.onclick = openEvaluateModal;
+
+                    div.appendChild(addButton);
+                    div.appendChild(evaluateButton);
+                });
+            }
+        }
+        else {
+            const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
+
+            if (buttons.length > 0) {
+                buttons.forEach(button => {
+                    button.classList.add('hidden');
+                });
+            }
+            const temaDivs = document.querySelectorAll('.tema');
+
+            if (temaDivs.length > 0) {
+                temaDivs.forEach(div => {
+                    const solveButton = document.createElement('button');
+                    solveButton.textContent = 'Rezolva';
+                    solveButton.onclick = openProblemModal;
+
+                    div.appendChild(solveButton);
+                });
+            }
+        }
+    }
+
+    addButtonToTemeleMele();
+</script>
+<script>
+    function openProblemSolution(problemName) {
+        window.location.href = `rezolva.html?problem=${encodeURIComponent(problemName)}`;
+        openTemePage();
+    }
+
+    function openTemePage() {
+        const userType = getUrlParam('userType');
+        const url = 'rezolva_pb.html';
+        if (url.includes('?')) {
+            window.location.href = `${url}&userType=${userType}`;
+        } else {
+            window.location.href = `${url}?userType=${userType}`;
+        }
+    }
+
+    function getUrlParam(paramName) {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get(paramName);
+    }
+</script>
+
 </html>
