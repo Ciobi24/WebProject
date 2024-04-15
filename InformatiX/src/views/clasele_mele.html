@@ -206,44 +206,42 @@
             <button onclick="addClass()">Add Class</button>
         </div>
     </div>
-</body>
 
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const userType = urlParams.get('userType');
-    function addButton() {
-        if (userType === 'profesor' || userType == 'admin') {
-            const container = document.querySelector('.container_princ');
-            const addButton = document.createElement('button');
-
-            addButton.textContent = '+';
-            addButton.onclick = openAddClassModal;
-
-            const secondElement = container.children[1];
-            container.insertBefore(addButton, secondElement);
-        }
-    }
-    addButton();
-</script>
-<script>
-    const urlParams1 = new URLSearchParams(window.location.search);
-    const userType1 = urlParams1.get('userType');
-
-    function addButtonToFirstModal() {
-        if (userType1 === 'profesor' || userType1 === 'admin') {
-            const firstModalContent = document.querySelector('#myModal .modal-content');
-
-            if (firstModalContent) {
-                const addUserButton = document.createElement('button');
-                addUserButton.textContent = 'Add User';
-                addUserButton.onclick = openAddUserModal;
-
-                firstModalContent.appendChild(addUserButton);
+    <script>
+        const urlParams1 = new URLSearchParams(window.location.search);
+        const userType1 = urlParams1.get('userType');
+    
+        function addButtonToFirstModal() {
+            if (userType1 === 'profesor' || userType1 === 'admin') {
+                const firstModalContent = document.querySelector('#myModal .modal-content');
+    
+                if (firstModalContent) {
+                    const addUserButton = document.createElement('button');
+                    addUserButton.textContent = 'Add User';
+                    addUserButton.onclick = openAddUserModal;
+    
+                    firstModalContent.appendChild(addUserButton);
+                }
             }
         }
-    }
-    addButtonToFirstModal();
-</script>
-
-
+        addButtonToFirstModal();
+    </script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userType = urlParams.get('userType');
+        function addButton() {
+            if (userType === 'profesor' || userType == 'admin') {
+                const container = document.querySelector('.container_princ');
+                const addButton = document.createElement('button');
+    
+                addButton.textContent = '+';
+                addButton.onclick = openAddClassModal;
+    
+                const secondElement = container.children[1];
+                container.insertBefore(addButton, secondElement);
+            }
+        }
+        addButton();
+    </script>
+</body>
 </html>
