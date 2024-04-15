@@ -1,0 +1,6 @@
+
+
+La logare noi am setat ca atunci cand se completează cu "profesor", utilizatorul să intre în modul specific cu anumite permisiuni în plus față de
+utilizatorii obișnuiți, "admin" - pentru rolul de admin, și orice altceva pentru rolul de user normal.
+
+index-ul, rădăcina aplicației, se găsește în view la fel ca și toate paginile
