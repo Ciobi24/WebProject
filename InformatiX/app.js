@@ -3,6 +3,31 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
+const { MongoClient } = require("mongodb");
+const { default: mongoose } = require('mongoose');
+
+const uri = "mongodb+srv://infoX:tehnologii-web2024@informatixdb.hw325xp.mongodb.net/?retryWrites=true&w=majority&appName=informatixDB";
+async function connect() {
+    try {
+        await mongoose.connect(uri);
+        console.log("Connected to DB.");
+    } catch (error) {
+        console.error("Error connecting to DB: " + error);
+    }
+
+    const db = mongoose.connection;
+    const userSchema = new mongoose.Schema({
+        nume: String,
+        prenume: String
+    });
+
+    const User = mongoose.model('User', userSchema);
+    const users = await User.find();
+
+    console.log("Users:", users); // an example of SELECT
+}
+connect();
+
 const server = http.createServer((req, res) => {
     let q = url.parse(req.url, true);
     let pathname = q.pathname;
@@ -33,11 +58,11 @@ const server = http.createServer((req, res) => {
         case '.png':
         case '.gif':
             filename = '.' + pathname;
-            contentType = 'image/' + extname.substring(1); 
+            contentType = 'image/' + extname.substring(1);
             break;
         case '.ttf':
             filename = '.' + pathname;
-            contentType = 'font/ttf'; 
+            contentType = 'font/ttf';
             break;
         default:
             filename = '.' + pathname;
@@ -50,7 +75,7 @@ const server = http.createServer((req, res) => {
             res.writeHead(404, { 'Content-Type': 'text/html' });
             return res.end("Page not found");
         }
-        res.writeHead(200, {'Content-Type': contentType });
+        res.writeHead(200, { 'Content-Type': contentType });
         res.write(data);
         res.end();
     });
