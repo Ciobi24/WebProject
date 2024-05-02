@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="../../public/css/login.css">
   <link rel="stylesheet" href="../../public/css/index.css">
 
+  <script src="../../public/js/registerForm.js"></script>
+
   <script>
     function showSidebar() {
       const sidebar = document.querySelector('.sidebar')
@@ -38,31 +40,6 @@
       document.getElementById('flip').checked = false;
     }
   </script>
-
-<script>
-function openLoggedPage() {
-    let emailInput = document.querySelector('#login input[type="email"]');
-    let passwordInput = document.querySelector('#login input[type="password"]');
-    
-    let email = emailInput.value;
-    let userType;
-
-    if (email === "admin") {
-        userType = "admin";
-    } else if (email === "profesor") {
-        userType = "profesor";
-    } else {
-        userType = "user";
-    }
-
-    let nextPageURL = "logged_page.html?userType=" + userType;
-    window.location.href = nextPageURL;
-
-    emailInput.value = "";
-    passwordInput.value = "";
-}
-
-</script>
 
 </head>
 
@@ -143,7 +120,7 @@ function openLoggedPage() {
           <div class="form-content">
             <div class="login-form" id="login">
               <div class="title">Login</div>
-              <form action="#">
+              <form action="/user" method="post">
                 <div class="input-boxes">
                   <div class="input-box">
                     <i class="fas fa-envelope"></i>
@@ -155,7 +132,7 @@ function openLoggedPage() {
                   </div>
                   <div class="text"><a href="#">Forgot password?</a></div>
                   <div class="button input-box">
-                    <input type="submit" value="Submit" onclick="openLoggedPage()">
+                    <input type="submit" value="Submit">
                   </div>
                   <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up</label></div>
                 </div>
@@ -163,11 +140,11 @@ function openLoggedPage() {
             </div>
             <div class="signup-form" id="signup">
               <div class="title">Sign up</div>
-              <form action="#">
+              <form action="/index.html" method="post">
                 <div class="input-boxes">
                   <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Enter your name" required>
+                    <input type="text" placeholder="Enter your username" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-envelope"></i>

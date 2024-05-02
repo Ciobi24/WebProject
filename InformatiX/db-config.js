@@ -1,0 +1,30 @@
+const mongoose = require('mongoose');
+
+const uri = "mongodb+srv://infoX:tehnologii-web2024@informatixdb.hw325xp.mongodb.net/?retryWrites=true&w=majority&appName=informatixDB";
+
+async function connect() {
+    try {
+        await mongoose.connect(uri);
+        console.log("Connected to DB.");
+
+        await mongoose.connection.createCollection("users");
+
+        await mongoose.connection.collection("users").insertOne({
+            username: "username",
+            email: "email",
+            password: "parola",
+            role: ".",
+            lastname: ".",
+            firstname: ".",
+            birthday: ".",
+            city: ".",
+            school: ".",
+        });
+
+        console.log("Document inserted.");
+    } catch (error) {
+        console.error("Error connecting to DB: " + error);
+    }
+}
+
+connect();

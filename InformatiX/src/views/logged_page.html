@@ -31,7 +31,6 @@
       document.getElementById("myDropdown").classList.toggle("show");
     }
   </script>
-  <script src="../../public/js/sendArgument.js"></script>
 </head>
 
 <body>
@@ -43,18 +42,19 @@
               <path
                 d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
             </svg></a></li>
-        <li><a href="logged_page.html" onclick=hideSidebar()>Home</a></li>
-        <li><a href="probleme.html" onclick=hideSidebar()>Probleme</a></li>
-        <li><a href="clasele_mele.html" onclick="hideSidebar()">Clasele mele</a></li>
-        <li><a href="logged_page.html" onclick="hideSidebar()">Home</a></li>
+            <li><a href="/user" onclick=hideSidebar()>Home</a></li>
+            <li><a href="/user/probleme" onclick=hideSidebar()>Probleme</a></li>
+            <li><a href="/user/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
+            <li><a href="/user/profil" onclick="hideSidebar()">Profil</a></li>
+            <li><a href="/" onclick="hideSidebar()">Logout</a></li>
       </ul>
 
       <ul class="menu">
-        <li><a href="logged_page.html">Home</a></li>
-        <li class="hideOnMobile"><a href="probleme.html">Probleme</a></li>
-        <li class="hideOnMobile"><a href="clasele_mele.html">Clasele mele</a></li>
-        <li class="hideOnMobile"><a href="my_profile.html">Profil</a></li>
-        <li class="hideOnMobile"><a href="index.html">Logout</a></li>
+        <li><a href="/user">Home</a></li>
+        <li class="hideOnMobile"><a href="/user/probleme">Probleme</a></li>
+        <li class="hideOnMobile"><a href="/user/clasele-mele">Clasele mele</a></li>
+        <li class="hideOnMobile"><a href="/user/profil">Profil</a></li>
+        <li class="hideOnMobile"><a href="/">Logout</a></li>
         <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
               viewBox="0 96 960 960" width="26">
               <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
