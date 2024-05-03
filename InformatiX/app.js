@@ -5,9 +5,10 @@ const url = require('url');
 
 const { MongoClient } = require("mongodb");
 const { default: mongoose } = require('mongoose');
-const { handleLogin } = require('./src/controllers/loginController.js');
+const handleUserRoute = require('./routes.js');
 
 const uri = "mongodb+srv://infoX:tehnologii-web2024@informatixdb.hw325xp.mongodb.net/?retryWrites=true&w=majority&appName=informatixDB";
+
 async function connect() {
     try {
         await mongoose.connect(uri);
@@ -66,16 +67,16 @@ function serveHTMLFile(filePath, res) {
 const server = http.createServer((req, res) => {
     let q = url.parse(req.url, true);
     let pathname = q.pathname;
-    if (req.method === 'POST' && pathname === '/user') {
-        handleLogin(req, res); 
-    }
-    else if (routes[pathname]) 
-    {
-        routes[pathname](req, res); 
-    } 
-    else 
-    {
-        serveStaticFile(pathname, res);
+
+    if (req.method == 'POST')
+        handleUserRoute(req, res);
+    else {
+        if (routes[pathname]) {
+            routes[pathname](req, res);
+        }
+        else {
+            serveStaticFile(pathname, res);
+        }
     }
 });
 
