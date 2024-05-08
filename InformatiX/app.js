@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-const { MongoClient } = require("mongodb");
 const { default: mongoose } = require('mongoose');
 const handleUserRoute = require('./routes.js');
 
@@ -68,9 +67,10 @@ const server = http.createServer((req, res) => {
     let q = url.parse(req.url, true);
     let pathname = q.pathname;
 
-    if (req.method == 'POST')
+    if (req.method == 'POST') {
         handleUserRoute(req, res);
-    else {
+    }
+    else { 
         if (routes[pathname]) {
             routes[pathname](req, res);
         }
@@ -84,7 +84,6 @@ function serveStaticFile(pathname, res) {
     let filename;
     let extname = path.extname(pathname);
     let contentType = '';
-
     switch (extname) {
         case '.css':
             filename = '.' + pathname;

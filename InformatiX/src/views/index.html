@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/login.css">
   <link rel="stylesheet" href="../../public/css/index.css">
-
-  <script src="../../public/js/registerForm.js"></script>
-
   <script>
     function showSidebar() {
       const sidebar = document.querySelector('.sidebar')
@@ -42,7 +39,6 @@
   </script>
 
 </head>
-
 <body>
   <header>
     <nav>
@@ -70,7 +66,6 @@
       </ul>
     </nav>
   </header>
-
   <div class="sections">
     <div class="sect1" id="home">
       <div class="container1">
@@ -120,40 +115,41 @@
           <div class="form-content">
             <div class="login-form" id="login">
               <div class="title">Login</div>
-              <form action="/user" method="post">
+              <form id="login-form" action="/user" method="post">
                 <div class="input-boxes">
                   <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Enter your email" required>
+                    <input type="email" name="email" placeholder="Enter your email" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Enter your password" required>
+                    <input type="password" name="password" placeholder="Enter your password" required>
                   </div>
                   <div class="text"><a href="#">Forgot password?</a></div>
+                  <div id="error-message" class="error-message"></div>
                   <div class="button input-box">
                     <input type="submit" value="Submit">
                   </div>
                   <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up</label></div>
                 </div>
               </form>
-            </div>
+            </div>            
             <div class="signup-form" id="signup">
               <div class="title">Sign up</div>
-              <form action="/index.html" method="post">
+              <form action="/register" method="post">
                 <div class="input-boxes">
                   <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Enter your username" required>
+                    <input id="username" type="text" placeholder="Enter your username" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Enter your email" required>
+                    <input id="email" type="email" placeholder="Enter your email" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Enter your password" required>
-                  </div>
+                    <input id="password" type="password" placeholder="Enter your password" required>
+                  </div>                  
                   <div class="button input-box">
                     <input type="submit" value="Submit">
                   </div>
@@ -170,6 +166,8 @@
     </div>
     
   </div>
+
+  <script src="../../public/js/index.js"></script>
 </body>
 
 </html>

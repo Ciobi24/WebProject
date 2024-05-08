@@ -9,22 +9,8 @@ async function connect() {
 
         await mongoose.connection.createCollection("users");
 
-        await mongoose.connection.collection("users").insertOne({
-            username: "username",
-            email: "email",
-            password: "parola",
-            role: ".",
-            lastname: ".",
-            firstname: ".",
-            birthday: ".",
-            city: ".",
-            school: ".",
-        });
-
-        console.log("Document inserted.");
     } catch (error) {
         console.error("Error connecting to DB: " + error);
     }
 }
-
 connect();

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const User = require('../models/userModel.js');
-// const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');   // de implementat mai incolo
 
 async function handleLogin(req, res) {
     let body = '';
@@ -13,14 +13,12 @@ async function handleLogin(req, res) {
  
         const formData = new URLSearchParams(body);
        
-        const username = formData.get('email');
+        const email = formData.get('email');
         const password = formData.get('password');
 
-        console.log(username + " " + password);
         try {
-
-            const user = await User.findOne({ username });
-            if (user && bcrypt.compareSync(password, user.password)) {
+            const user = await User.findOne({ email });
+            if (user && user.password === password) {
          
                 res.writeHead(302, { 'Location': '/user' });
                 res.end();
@@ -36,7 +34,6 @@ async function handleLogin(req, res) {
         }
     });
 }
-
 
 module.exports = {
     handleLogin
