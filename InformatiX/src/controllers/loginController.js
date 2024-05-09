@@ -1,7 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const User = require('../models/userModel.js');
+
 //const bcrypt = require('bcrypt');   // de implementat mai incolo
+const User = require('../models/userModel.js');
 
 async function handleLogin(req, res) {
     let body = '';
@@ -11,21 +10,18 @@ async function handleLogin(req, res) {
 
     req.on('end', async () => {
  
-        const formData = new URLSearchParams(body);
-       
-        const email = formData.get('email');
-        const password = formData.get('password');
-
+        const formData = JSON.parse(body);
+        const email = formData.email;
+        const password = formData.password;
+        
         try {
             const user = await User.findOne({ email });
             if (user && user.password === password) {
-         
-                res.writeHead(302, { 'Location': '/user' });
                 res.end();
-            } else {
-  
-                res.writeHead(302, { 'Location': '/' });
-                res.end();
+            } 
+            else {
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Email sau parolă incorecte' }));
             }
         } catch (error) {
             console.error(error);

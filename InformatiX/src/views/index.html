@@ -115,25 +115,25 @@
           <div class="form-content">
             <div class="login-form" id="login">
               <div class="title">Login</div>
-              <form id="login-form" action="/user" method="post">
-                <div class="input-boxes">
-                  <div class="input-box">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" name="email" placeholder="Enter your email" required>
+              <form action="/user" method="post">
+                  <div class="input-boxes">
+                      <div class="input-box">
+                          <i class="fas fa-envelope"></i>
+                          <input id="login-email" type="email" name="email" placeholder="Enter your email" required>
+                      </div>
+                      <div class="input-box">
+                          <i class="fas fa-lock"></i>
+                          <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
+                      </div>
+                      <div class="text"><a href="#">Forgot password?</a></div>
+                      <div id="error-message" style="display: none;"></div>
+                      <div class="button input-box">
+                          <input type="submit" value="Submit">
+                      </div>
+                      <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up</label></div>
                   </div>
-                  <div class="input-box">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" name="password" placeholder="Enter your password" required>
-                  </div>
-                  <div class="text"><a href="#">Forgot password?</a></div>
-                  <div id="error-message" class="error-message"></div>
-                  <div class="button input-box">
-                    <input type="submit" value="Submit">
-                  </div>
-                  <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up</label></div>
-                </div>
               </form>
-            </div>            
+          </div>            
             <div class="signup-form" id="signup">
               <div class="title">Sign up</div>
               <form action="/register" method="post">
@@ -149,7 +149,9 @@
                   <div class="input-box">
                     <i class="fas fa-lock"></i>
                     <input id="password" type="password" placeholder="Enter your password" required>
-                  </div>                  
+                  </div>
+                  <div id="error-message-register" style="display: none;"></div>
+                  <div id="success-message-register" style="display: none;"></div>                  
                   <div class="button input-box">
                     <input type="submit" value="Submit">
                   </div>
