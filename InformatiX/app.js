@@ -2,22 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
-
-const { default: mongoose } = require('mongoose');
+const connect = require('./src/models/db-config.js');
 const handleUserRoute = require('./routes.js');
 
-const uri = "mongodb+srv://infoX:tehnologii-web2024@informatixdb.hw325xp.mongodb.net/?retryWrites=true&w=majority&appName=informatixDB";
-
-async function connect() {
-    try {
-        await mongoose.connect(uri);
-        console.log("Connected to DB.");
-    } catch (error) {
-        console.error("Error connecting to DB: " + error);
-    }
-
-    const db = mongoose.connection;
-}
 connect();
 
 const routes = {
@@ -117,6 +104,6 @@ function serveStaticFile(pathname, res) {
     });
 }
 
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
+server.listen(3001, () => {
+    console.log("Server running on port 3001");
 });
