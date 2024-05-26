@@ -1,4 +1,8 @@
 const connect = require('../models/db-config');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const secretKey = crypto.randomBytes(64).toString('hex');
+var token;
 
 async function handleLogin(req, res) {
     let body = '';
@@ -24,7 +28,11 @@ async function handleLogin(req, res) {
                 }
 
                 if (results.length > 0) {
-                    res.end();
+                    const user = results[0];
+                    token = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '6h' });
+
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, token }));
                 } else {
                     res.writeHead(401, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ success: false, message: 'Email sau parolă incorecte' }));
@@ -38,6 +46,15 @@ async function handleLogin(req, res) {
     });
 }
 
+function deleteCookie(req, res) {
+    res.writeHead(200, {
+        'Set-Cookie': 'token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
+        'Content-Type': 'application/json'
+    });
+    res.end(JSON.stringify({ success: true, message: 'Cookie deleted' }));
+}
+
 module.exports = {
-    handleLogin
+    handleLogin,
+    deleteCookie
 };

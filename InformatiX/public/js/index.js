@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var email = document.getElementById('login-email').value;
         var password = document.getElementById('login-password').value;
-        console.log(email);
         var xhr = new XMLHttpRequest();
 
         xhr.open('POST', '/user', true);
@@ -54,6 +53,10 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
+
+                    var token = xhr.responseText;
+                    document.cookie = 'jwt=' + token + ';path=/'; 
+        
                     window.location.href = '/user';
                     document.getElementById('error-message').style.display = 'none';
                 }
@@ -61,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var errorMessage = document.getElementById('error-message');
                     errorMessage.innerText = 'Eroare la autentificare! Email și/sau parolă incorecte.';
                     errorMessage.style.display = 'block';
-
+        
                     setTimeout(function () {
                         errorMessage.style.display = 'none';
                     }, 7000); //timer de 7 secunde 
@@ -73,4 +76,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
+    document.getElementById('resetPasswordForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var email = document.getElementById('emailForgotPassword').value;
+        var xhr = new XMLHttpRequest();
+    
+        xhr.open('POST', '/reset-password', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    alert('A password reset link has been sent to your email.');
+                    document.getElementById('emailForgotPassword').value = ''; // clear the input field
+                } else {
+                    var errorMessage = document.createElement('div');
+                    errorMessage.id = 'error-message-reset';
+                    errorMessage.innerText = 'Failed to send reset link. Please try again.';
+                    errorMessage.style.display = 'block';
+                    errorMessage.style.color = 'red';
+                    document.querySelector('.modal-content').appendChild(errorMessage);
+    
+                    setTimeout(function () {
+                        errorMessage.style.display = 'none';
+                    }, 7000); // 7-second timer
+                }
+            }
+        };
+    
+        xhr.send(JSON.stringify({ email: email }));
+    });
+    
+    
+
+    window.addEventListener('scroll', function() {
+        var modal = document.getElementById('myModal');
+        var modalRect = modal.getBoundingClientRect(); 
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight; 
+      
+        if (modalRect.top >= 0 && modalRect.bottom <= windowHeight) {
+          closeModal(); 
+        }
+      });
+      
+      
 });

@@ -4,6 +4,7 @@ const path = require('path');
 const url = require('url');
 const connect = require('./src/models/db-config.js');
 const handleUserRoute = require('./routes.js');
+const { deleteCookie } = require('./src/controllers/loginController.js');
 
 connect();
 
@@ -57,8 +58,10 @@ const server = http.createServer((req, res) => {
     if (req.method == 'POST') {
         handleUserRoute(req, res);
     }
-    else { 
-        if (routes[pathname]) {
+    else 
+    { 
+        if (routes[pathname]) 
+        {
             routes[pathname](req, res);
         }
         else {
