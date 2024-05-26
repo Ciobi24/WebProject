@@ -36,6 +36,9 @@ const routes = {
     '/user/clasele-mele/teme': (req, res) => {
         serveHTMLFile('/temele_mele.html', res);
     },
+    '/reset-password' : (req, res) => {
+        serveHTMLFile('/reset-password.html', res);
+    },
 };
 
 function serveHTMLFile(filePath, res) {

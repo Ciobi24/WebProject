@@ -1,5 +1,7 @@
-const userModel = require('../models/userModel');
 const mail = require('../services/emailService');
+const generateAndSaveToken = require('../services/manageResetToken')
+const { checkValabilyTokens } = require('../models/tokenModel');
+const { findUserByEmail } = require('../models/userModel');
 
 async function handleResetPassword(req, res) {
     let body = '';
@@ -9,13 +11,26 @@ async function handleResetPassword(req, res) {
 
     req.on('end', async () => {
         try {
+            await checkValabilyTokens();
+            
             const parsedBody = JSON.parse(body);
             const email = parsedBody.email;
 
-            var userExists = await userModel.findUserByEmail(email);
+            const userExists = await findUserByEmail(email);
 
-            if (userExists != null) {
-                mail.sendMailforResetPassword(email, userExists, 'link-resetare-parola'); // apel serviciu pt trimitere mail la emailul specific
+            if (userExists) {
+                var currentDate = new Date();
+                currentDate.setHours(currentDate.getHours() + 3); // pt a ajunge la ora Romaniei, serverul ruleaza la noi!
+
+                currentDate.setDate(currentDate.getDate() + 1);
+                var dateTime = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+                var resetToken = await generateAndSaveToken(email, dateTime);
+
+                const resetLink = `http://192.168.1.2:3001/reset-password?token=${resetToken}`; //serverul e localhost
+
+                // FOARTE IMPORTANT ESTE 192.168.1.2:3001  - PT A RULA LOCAL
+                // difera de la un PC la altul
+                //mail.sendMailforResetPassword(email, userExists, resetLink);  // TRIMITE MAIL !!! E VALIDA SI FUNCTIONEAZA BINE
 
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end('Password reset link sent');
@@ -31,6 +46,12 @@ async function handleResetPassword(req, res) {
     });
 }
 
+async function getDateResetPassword()
+{
+
+}
+
 module.exports = {
-    handleResetPassword
+    handleResetPassword,
+    getDateResetPassword
 };

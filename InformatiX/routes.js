@@ -10,7 +10,9 @@ function handleUserRoute(req, res) {
         handleRegister(req, res);
     }
     else if (req.url == '/reset-password') {
-        handleResetPassword(req, res);
+        handleResetPassword(req, res); //acest serviciu trimite mailul si valideaza existenta mailului in DB
+    } else if (req.url == '/getDateResetPassword') {
+        handleUpdatePassword(req, res); // acest serviciu este responsabil cu actualizarea parolei din baza de date
     } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Page not found');

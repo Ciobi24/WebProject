@@ -1,4 +1,5 @@
 const connect = require('./db-config');
+
 async function findUserByEmailAndPassword(email, password) {
     const connection = await connect(); 
     try {
@@ -35,24 +36,19 @@ async function insertUser(username, email, password, role) {
     }
 }
 async function findUserByEmail(email) {
-    const connection = await connect(); 
+    const connection = await connect();
     try {
-        const query = `SELECT username FROM users WHERE email = ?`;
-        const queryResult = await connection.query(query, [email]);
-        if(queryResult == 1)
-        {
-            return queryResult.results;
-        }
-        else
-        {
-            return null;
-        }
+      const [rows] = await connection.query('SELECT username FROM users WHERE email = ?', [email]);
+      if (rows.length == 1) {
+        return rows[0].username;
+      } else {
+        return null; 
+      }
     } catch (error) {
-        console.error('Error executing query:', error);
-        throw error;
-    } 
-}
-
+      console.error("Error fetching username: " + error);
+      throw error;
+    }
+  }
 
 module.exports = {
     findUserByEmailAndPassword,
