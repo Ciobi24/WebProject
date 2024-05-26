@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>In&lt;form&gt;atiX</title>
+  <link rel="icon" type="image/png" href="../../public/favicons/icon.png">
   <link rel="stylesheet" href="../../public/css/header1.css">
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/login.css">
   <link rel="stylesheet" href="../../public/css/index.css">
-
   <script>
     function showSidebar() {
       const sidebar = document.querySelector('.sidebar')
@@ -37,32 +37,33 @@
     function showLoginForm() {
       document.getElementById('flip').checked = false;
     }
-  </script>
+    function showModal() {
+      var modal = document.getElementById('myModal');
+      var userListElement = document.getElementById('userList');
+      var footer = document.querySelector('footer');
 
-<script>
-function openLoggedPage() {
-    let emailInput = document.querySelector('#login input[type="email"]');
-    let passwordInput = document.querySelector('#login input[type="password"]');
-    
-    let email = emailInput.value;
-    let userType;
+      document.getElementById('container3').style.display = 'none';
 
-    if (email === "admin") {
-        userType = "admin";
-    } else if (email === "profesor") {
-        userType = "profesor";
-    } else {
-        userType = "user";
+      modal.style.display = 'block';
+      modal.style.position = 'relative';
+      modal.style.top = '0';
+      modal.style.left = '0';
+      modal.style.width = '100%';
+      modal.style.height = '100%';
+
+      footer.style.marginTop = '0';
     }
 
-    let nextPageURL = "logged_page.html?userType=" + userType;
-    window.location.href = nextPageURL;
 
-    emailInput.value = "";
-    passwordInput.value = "";
-}
+    function closeModal() {
+      var modal = document.getElementById('myModal');
+      modal.style.display = "none";
+      document.getElementById('container3').style.display = 'block';
 
-</script>
+      var footer = document.querySelector('footer');
+      footer.style.marginTop = '88px';
+    }
+  </script>
 
 </head>
 
@@ -93,7 +94,6 @@ function openLoggedPage() {
       </ul>
     </nav>
   </header>
-
   <div class="sections">
     <div class="sect1" id="home">
       <div class="container1">
@@ -129,7 +129,24 @@ function openLoggedPage() {
       </div>
     </div>
     <div class="sect3">
-      <div class="container3">
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h2 id="className">Schimba parola</h2>
+          <form id="resetPasswordForm" action="/reset-password" method="post">
+            <div class="input-box">
+              <label for="email">Email:</label>
+              <input type="email" id="emailForgotPassword" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="button input-box">
+              <input type="submit" value="Schimba parola">
+            </div>
+          </form>
+        </div>
+      </div>      
+
+      <div class="container3" id="container3">
         <input type="checkbox" id="flip">
         <div class="cover">
           <div class="front">
@@ -143,19 +160,21 @@ function openLoggedPage() {
           <div class="form-content">
             <div class="login-form" id="login">
               <div class="title">Login</div>
-              <form action="#">
+              <form action="/user" method="post">
                 <div class="input-boxes">
                   <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Enter your email" required>
+                    <input id="login-email" type="email" name="email" placeholder="Enter your email" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Enter your password" required>
+                    <input id="login-password" type="password" name="password" placeholder="Enter your password"
+                      required>
                   </div>
-                  <div class="text"><a href="#">Forgot password?</a></div>
+                  <div class="text"><a href='#' onclick="showModal()">Forgot password?</a></div>
+                  <div id="error-message" style="display: none;"></div>
                   <div class="button input-box">
-                    <input type="submit" value="Submit" onclick="openLoggedPage()">
+                    <input type="submit" value="Submit">
                   </div>
                   <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up</label></div>
                 </div>
@@ -163,20 +182,22 @@ function openLoggedPage() {
             </div>
             <div class="signup-form" id="signup">
               <div class="title">Sign up</div>
-              <form action="#">
+              <form action="/register" method="post">
                 <div class="input-boxes">
                   <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Enter your name" required>
+                    <input id="username" type="text" placeholder="Enter your username" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Enter your email" required>
+                    <input id="email" type="email" placeholder="Enter your email" required>
                   </div>
                   <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Enter your password" required>
+                    <input id="password" type="password" placeholder="Enter your password" required>
                   </div>
+                  <div id="error-message-register" style="display: none;"></div>
+                  <div id="success-message-register" style="display: none;"></div>
                   <div class="button input-box">
                     <input type="submit" value="Submit">
                   </div>
@@ -191,8 +212,10 @@ function openLoggedPage() {
         <p>@ Contact</p>
       </footer>
     </div>
-    
+
   </div>
+
+  <script src="../../public/js/index.js"></script>
 </body>
 
 </html>

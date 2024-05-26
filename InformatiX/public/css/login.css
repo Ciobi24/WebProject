@@ -1,3 +1,38 @@
+
+#error-message {
+  color: #fff; 
+  font-size: 16px;
+  background-color: #a85252; 
+  padding: 10px; 
+  border-radius: 5px; 
+  margin-top: 10px; 
+  display: none; 
+  text-align: center; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#error-message-register{
+  color: #fff; 
+  font-size: 16px;
+  background-color: #a85252; 
+  padding: 10px; 
+  border-radius: 5px; 
+  margin-top: 10px; 
+  display: none; 
+  text-align: center; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#success-message-register{
+  color: #fff; 
+  font-size: 16px;
+  background-color: #4CAF50; 
+  padding: 10px; 
+  border-radius: 5px; 
+  margin-top: 10px; 
+  display: none; 
+  text-align: center; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 .container3{
    height: 70vh;
    position: relative;
