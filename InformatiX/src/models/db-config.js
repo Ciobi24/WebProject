@@ -1,5 +1,39 @@
 const mysql = require('mysql2/promise');
-const createTables = require('./createTabels');
+const {createTablesUsers,  createTablesResetPasswordToken}= require('./createTabels');
+
+class Database {
+  constructor(config) {
+    this.config = config;
+    this.connection = null;
+  }
+
+  async connect() {
+    if (this.connection) {
+      return this.connection;
+    }
+
+    try {
+      this.connection = await mysql.createConnection(this.config);
+      console.log("Connected to DB.");
+
+      await this.createTables();
+      return this.connection;
+    } catch (error) {
+      console.error("Error connecting to DB: " + error);
+      throw error;
+    }
+  }
+
+  async createTables() {
+    try {
+      await this.connection.execute(createTablesUsers);
+      await this.connection.execute(createTablesResetPasswordToken);
+    } catch (error) {
+      console.error("Error creating tables: " + error);
+      throw error;
+    }
+  }
+}
 
 const connectionString = {
   host: "localhost",
@@ -9,25 +43,6 @@ const connectionString = {
   database: "informatix"
 };
 
-let connection;
+const dbInstance = new Database(connectionString);
 
-async function connect() {
-  if (connection) {
-    return connection;
-  }
-
-  try {
-    connection = await mysql.createConnection(connectionString);
-    console.log("Connected to DB.");
-
-    await connection.execute(createTables.createTablesUsers);
-    await connection.execute(createTables.createTablesResetPasswordToken);
-
-    return connection;
-  } catch (error) {
-    console.error("Error connecting to DB: " + error);
-    throw error;
-  }
-}
-
-module.exports = connect;
+module.exports = dbInstance;

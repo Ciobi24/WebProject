@@ -2,11 +2,12 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
-const connect = require('./src/models/db-config.js');
-const handleUserRoute = require('./routes.js');
-const { deleteCookie } = require('./src/controllers/loginController.js');
+const dbInstance = require('./src/models/db-config.js');
+const handleUserRoute = require('./routes');
+const { checkTokenExistence } = require('./src/services/TokenResetService.js')
 
-connect();
+require('dotenv').config();
+dbInstance.connect();
 
 const routes = {
     '/': (req, res) => {
@@ -36,9 +37,25 @@ const routes = {
     '/user/clasele-mele/teme': (req, res) => {
         serveHTMLFile('/temele_mele.html', res);
     },
-    '/reset-password' : (req, res) => {
-        serveHTMLFile('/reset-password.html', res);
-    },
+    '/reset-password': async (req, res) => {
+        const urlString = req.url;
+        const parameter = url.parse(urlString, true).query;
+        const token = parameter.token;
+
+        try {
+            const email = await checkTokenExistence(token); 
+            if (email) {
+                serveHTMLFile('/reset-password.html', res);
+            } else {
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                return res.end("Token not found");
+            }
+        } catch (error) {
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+            return res.end("Internal server error!" + error);
+        }
+    }
+    
 };
 
 function serveHTMLFile(filePath, res) {
