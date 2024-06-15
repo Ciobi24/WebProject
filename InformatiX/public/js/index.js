@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var password = document.getElementById('login-password').value;
         var xhr = new XMLHttpRequest();
 
-        xhr.open('POST', '/user', true);
+        xhr.open('POST', '/home', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var token = xhr.responseText;
                     document.cookie = 'jwt=' + token + ';path=/'; 
         
-                    window.location.href = '/user';
+                    window.location.href = '/home';
                     document.getElementById('error-message').style.display = 'none';
                 }
                 else {

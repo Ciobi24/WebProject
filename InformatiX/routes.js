@@ -1,10 +1,11 @@
 
-const { handleLogin } = require('./src/controllers/loginController.js');
-const { handleRegister } = require('./src/controllers/registerController.js');
-const { handleResetPassword } = require('./src/controllers/forgotPasswordController.js');
+const { handleLogin } = require('./src/controllers/AuthController');
+const { handleRegister } = require('./src/controllers/RegisterController');
+const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
+const { handleUpdatePassword } = require ('./src/controllers/ForgotPasswordController');
 
 function handleUserRoute(req, res) {
-    if (req.url === '/user') {
+    if (req.url === '/home') {
         handleLogin(req, res);
     } else if (req.url === '/register') {
         handleRegister(req, res);

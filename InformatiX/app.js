@@ -2,43 +2,60 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
-const connect = require('./src/models/db-config.js');
-const handleUserRoute = require('./routes.js');
-const { deleteCookie } = require('./src/controllers/loginController.js');
+const dbInstance = require('./src/models/db-config.js');
+const handleUserRoute = require('./routes');
+const { checkTokenExistence } = require('./src/services/TokenResetService.js');
+const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
 
-connect();
+require('dotenv').config();
+dbInstance.connect();
 
 const routes = {
     '/': (req, res) => {
         serveHTMLFile('/index.html', res);
     },
-    '/user': (req, res) => {
+    '/home': (req, res) => {
         serveHTMLFile('/logged_page.html', res);
     },
-    '/user/profil': (req, res) => {
+    '/home/profil': (req, res) => {
         serveHTMLFile('/my_profile.html', res);
     },
-    '/user/probleme': (req, res) => {
+    '/home/probleme': (req, res) => {
         serveHTMLFile('/probleme.html', res);
     },
-    '/user/clasele-mele': (req, res) => {
+    '/home/clasele-mele': (req, res) => {
         serveHTMLFile('/clasele_mele.html', res);
     },
-    '/user/probleme-clasa-9': (req, res) => {
+    '/home/probleme-clasa-9': (req, res) => {
         serveHTMLFile('/probleme-clasa9.html', res);
     },
-    '/user/probleme-clasa-10': (req, res) => {
+    '/home/probleme-clasa-10': (req, res) => {
         serveHTMLFile('/probleme-clasa10.html', res);
     },
-    '/user/probleme-clasa-11': (req, res) => {
+    '/home/probleme-clasa-11': (req, res) => {
         serveHTMLFile('/probleme-clasa11.html', res);
     },
-    '/user/clasele-mele/teme': (req, res) => {
+    '/home/clasele-mele/teme': (req, res) => {
         serveHTMLFile('/temele_mele.html', res);
     },
-    '/reset-password' : (req, res) => {
-        serveHTMLFile('/reset-password.html', res);
-    },
+    '/reset-password': async (req, res) => {
+        const urlString = req.url;
+        const parameter = url.parse(urlString, true).query;
+        const token = parameter.token;
+
+        try {
+            const email = await checkTokenExistence(token); 
+            if (email) {
+                serveHTMLFile('/reset-password.html', res);
+            } else {
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                return res.end("Token not found");
+            }
+        } catch (error) {
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+            return res.end("Internal server error!" + error);
+        }
+    }
 };
 
 function serveHTMLFile(filePath, res) {
@@ -58,20 +75,40 @@ const server = http.createServer((req, res) => {
     let q = url.parse(req.url, true);
     let pathname = q.pathname;
 
-    if (req.method == 'POST') {
+    if (req.method === 'POST') {
         handleUserRoute(req, res);
-    }
-    else 
-    { 
-        if (routes[pathname]) 
-        {
-            routes[pathname](req, res);
-        }
-        else {
+    } else {
+        if (pathname === '/') {
+            routes['/'](req, res);
+        } else if (routes[pathname]) {
+            verifyToken(req, res, () => routes[pathname](req, res));
+        } else {
             serveStaticFile(pathname, res);
         }
     }
 });
+
+function serveStaticFile(filePath, res) {
+    const extname = path.extname(filePath);
+    const contentType = {
+        '.html': 'text/html',
+        '.js': 'text/javascript',
+        '.css': 'text/css',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+    }[extname] || 'application/octet-stream';
+
+    fs.readFile(path.join(__dirname, 'public', filePath), (err, data) => {
+        if (err) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Not Found');
+            return;
+        }
+
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(data);
+    });
+}
 
 function serveStaticFile(pathname, res) {
     let filename;
