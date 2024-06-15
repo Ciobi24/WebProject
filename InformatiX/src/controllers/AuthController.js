@@ -26,7 +26,7 @@ async function handleLogin(req, res) {
                 const token = jwt.sign({ id: user.id, email: user.email }, secretKey);
 
                 res.writeHead(200, {
-                    'Set-Cookie': `token=${token}; HttpOnly; Path=/; SameSite=Strict`, // Cookie de sesiune
+                    'Set-Cookie': `token=${token}; HttpOnly; Path=/; SameSite=Strict`,
                     'Content-Type': 'application/json'
                 });
 

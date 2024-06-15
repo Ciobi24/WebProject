@@ -5,7 +5,7 @@ const { handleResetPassword } = require('./src/controllers/ForgotPasswordControl
 const { handleUpdatePassword } = require ('./src/controllers/ForgotPasswordController');
 
 function handleUserRoute(req, res) {
-    if (req.url === '/user') {
+    if (req.url === '/home') {
         handleLogin(req, res);
     } else if (req.url === '/register') {
         handleRegister(req, res);
