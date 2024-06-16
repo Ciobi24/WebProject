@@ -44,7 +44,7 @@ const routes = {
         const token = parameter.token;
 
         try {
-            const email = await checkTokenExistence(token); 
+            const email = await checkTokenExistence(token);
             if (email) {
                 serveHTMLFile('/reset-password.html', res);
             } else {
@@ -80,6 +80,10 @@ const server = http.createServer((req, res) => {
     } else {
         if (pathname === '/') {
             routes['/'](req, res);
+        }
+        else
+        if (pathname === '/reset-password') {
+            routes['/reset-password'](req, res);
         } else if (routes[pathname]) {
             verifyToken(req, res, () => routes[pathname](req, res));
         } else {
@@ -88,27 +92,27 @@ const server = http.createServer((req, res) => {
     }
 });
 
-function serveStaticFile(filePath, res) {
-    const extname = path.extname(filePath);
-    const contentType = {
-        '.html': 'text/html',
-        '.js': 'text/javascript',
-        '.css': 'text/css',
-        '.png': 'image/png',
-        '.jpg': 'image/jpeg',
-    }[extname] || 'application/octet-stream';
+// function serveStaticFile(filePath, res) {
+//     const extname = path.extname(filePath);
+//     const contentType = {
+//         '.html': 'text/html',
+//         '.js': 'text/javascript',
+//         '.css': 'text/css',
+//         '.png': 'image/png',
+//         '.jpg': 'image/jpeg',
+//     }[extname] || 'application/octet-stream';
 
-    fs.readFile(path.join(__dirname, 'public', filePath), (err, data) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('Not Found');
-            return;
-        }
+//     fs.readFile(path.join(__dirname, 'public', filePath), (err, data) => {
+//         if (err) {
+//             res.writeHead(404, { 'Content-Type': 'text/plain' });
+//             res.end('Not Found');
+//             return;
+//         }
 
-        res.writeHead(200, { 'Content-Type': contentType });
-        res.end(data);
-    });
-}
+//         res.writeHead(200, { 'Content-Type': contentType });
+//         res.end(data);
+//     });
+// }
 
 function serveStaticFile(pathname, res) {
     let filename;
