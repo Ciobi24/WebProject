@@ -1,50 +1,70 @@
 @font-face {
     font-family: Poppins;
     src: url('../../public/fonts/Poppins-Regular.ttf') format('truetype');
-  }
-  
-  *{
+}
+
+* {
     font-family: Poppins;
-  }
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     background-color: #E4DFD9;
-    margin: 0;
-    padding: 0;
-    overflow-y: scroll;
-}
-
-body::-webkit-scrollbar {
-    width: 10px; 
-}
-
-body::-webkit-scrollbar-track {
-    background: #c9afa1; 
-}
-
-body::-webkit-scrollbar-thumb {
-    background: #834a89; 
-    border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: #522157; 
 }
 
 .container-mare {
-    width: 1250px;
-    height: 1940px;
-    margin-top: 85px;
-    display: grid;
+    margin-top: 9vh;
+    height: 82vh;
     background-color: #deccb9;
-    margin: auto;
-    overflow: auto;
-    grid-template-columns: 3fr 4fr;
-    grid-template-rows: 2fr 2fr 2fr 1fr;
-    border-top: solid 100px rgb(149, 85, 121);;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* gap: 20px; */
+    /* padding: 20px; */
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dreptunghi_stanga, .dreptunghi_dreapta {
+    margin-top: 9vh;
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; Add gap for spacing between items */
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+footer {
+    background: linear-gradient(#deccb9, #8B4C70);
+    width: 100%;
+    height: 9vh;
+    z-index: 3;
+    color: #ffffff;
+    align-self: baseline;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c9afa1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #834a89;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #522157;
 }
 
 .avatar {
-    grid-row: 1;
     width: 150px;
     height: 150px;
     box-sizing: border-box;
@@ -53,9 +73,7 @@ body::-webkit-scrollbar-thumb:hover {
     overflow: hidden;
     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
     animation: float 6s ease-in-out infinite;
-    margin-left: 95px;
-    grid-column: 1;
-    grid-row: 1;
+    margin: 0 auto;
 }
 
 .avatar img {
@@ -63,1008 +81,305 @@ body::-webkit-scrollbar-thumb:hover {
     height: 100%;
 }
 
-.elem1 {
-    grid-row: 1;
-    padding: 50px 50px 100px 50px;
-}
-
-.footer-sections {
-    grid-row: 2;
-    background-color: #955579;
-    opacity: 0.87;
+.profile {
+    background-color: #dcd6ce;
+    padding: 20px;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+    border-top: solid 3px #8d8888;
     border-radius: 7px;
+    border-bottom: 25px solid rgb(149, 85, 121);
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .profile p {
-    display: block;
     font-size: 29px;
     margin-top: 20px;
-    margin-left: 5px;
     color: #8B4C70;
-    align-self: center;
-    justify-content: center;
 }
 
-.profile {
-    display: grid;
-    grid-template-rows: 14fr 3fr;
-    background-color: #dcd6ce;
-    margin-top: 65px;
-    margin-left: 45px;
-    margin-right: 35px;
-    border: 1px solid rgba(18, 0, 20, 0.33);
-    border-top: solid 3px #8d8888;
-    padding: 50px 0px 0px 0px;
-    border-radius: 7px;
-    border-bottom: 25px solid rgb(149, 85, 121);
-}
-.go-to-profile{
-    grid-row: 2;
-    justify-self: flex-end;
-    margin-right: 30px;
-    align-self: center;
+.go-to-profile {
     font-size: 20px;
     color: #44064b;
+    margin-top: 10px;
 }
-
-.dreptunghi_dreapta {
-    display: grid;
-    grid-template-rows: 1.14fr 13fr;
-    background-color: #dcd6ce;
-    margin-right: 30px;
-    margin-left: 25px;
-    margin-bottom: 147px;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    grid-row-end: 4;
-    border: 1px solid rgba(18, 0, 20, 0.33);
-    border-top: solid 3px #8d8888;
-    border-radius: 7px;
-    border-bottom: 25px solid rgb(149, 85, 121);
-    height: 71%;
-    overflow-y: hidden
-}
-
-.probleme::-webkit-scrollbar {
-    width: 10px; 
-}
-
-.probleme::-webkit-scrollbar-track {
-    background: #dcd6ce; 
-}
-
-.probleme::-webkit-scrollbar-thumb {
-    background: #834a89; 
-    border-radius: 5px;
-}
-
-.probleme::-webkit-scrollbar-thumb:hover {
-    background: #522157; 
-}
-
 
 .probleme_noi {
     color: #663953;
     font-size: 34px;
-    margin-top: 20px;
-    padding-left: 30px;
+    margin-bottom: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .probleme {
-    margin-top: 10px;
-    overflow-y: auto;
-    direction: ltr;
+    /* overflow-y: auto; */
     border-radius: 5px;
-    height: 711px;
+    height: auto;
+    background-color: #dcd6ce;
+    padding: 20px;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+    border-top: solid 3px #8d8888;
+    border-radius: 7px;
+    border-bottom: 25px solid rgb(149, 85, 121);
+    margin-bottom: 20px;
 }
 
 .problema {
-    margin-left: 5px;
     background-color: #d0b6a8;
     border-radius: 10px;
-    margin-bottom: 7px;
-    height: 230px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.img-team img{
-    height: 200px;
-    width: 100px;
+
+.problema .titlu_prb {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
-.sectiune-clasa {
-    height: 80%;
-    border-radius: 7px;
-    grid-row: 2;
-    grid-column: 1;
-    display: grid;
-    grid-template-rows: 6fr 12fr 2fr;
+
+.problema .descriere_prb {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.problema .tags {
+    display: flex;
+    gap: 10px;
+}
+
+.problema .tag {
+    background-color: #834a89;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.problema .autor {
+    font-size: 14px;
+    color: #663953;
+}
+
+.anunturi {
     background-color: #dcd6ce;
-    justify-self: center;
-    align-self: center;
-    margin-top: 55px;
-    margin-left: 40px;
-    margin-right: 35px;
+    padding: 20px;
     border: 1px solid rgba(18, 0, 20, 0.33);
     border-top: solid 3px #8d8888;
-    padding: 30px 0px 0px 0px;
+    border-radius: 7px;
     border-bottom: 25px solid rgb(149, 85, 121);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.anunturi .text-anunt1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #742d55;
+}
+
+.anunturi .text-anunt2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #742d55;
+    margin-top: 10px;
+}
+
+.sectiune-clasa {
+    background-color: #dcd6ce;
+    padding: 20px;
+    border: 1px solid rgba(18, 0, 20, 0.33);
+    border-top: solid 3px #8d8888;
+    border-radius: 7px;
+    border-bottom: 25px solid rgb(149, 85, 121);
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .sectiune-clasa img {
-    opacity: 0.94;
-    grid-row: 2;
-    width: 75%;
-    justify-self: center;
+    width: 100%;
+    max-width: 300px;
     border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .sectiune-clasa p {
     color: #531439;
     font-weight: bold;
     font-size: 20px;
-    text-align: center;
+    margin-bottom: 10px;
 }
 
 .join-a-class {
-    grid-row: 3;
     color: #531439;
     font-size: 1.1em;
-    padding: 2px 2px 2px 2px;
-    transition: transform 0.3s;
-    margin-left: auto;
-    margin-right: 10px;
+    padding: 10px 20px;
+    border: 2px solid #531439;
+    border-radius: 5px;
+    display: inline-block;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
 }
 
 .join-a-class:hover {
     transform: scale(1.05);
-}
-
-.anunturi {
-    grid-row: 1;
-    grid-column: 2;
-    display: grid;
-    grid-template-rows: 1fr 6fr;
-    width: 600px;
-    height: 340px;
-    background-color: #dcd6ce;
-    justify-self: center;
-    align-self: center;
-    margin-right: 58px;
-    border: 1px solid rgba(18, 0, 20, 0.33);
-    border-bottom: 25px solid rgb(149, 85, 121);
-    border-top: solid 3px #8d8888;
-    padding: 0px 0px 0px 0px;
-    border-radius: 7px;
-}
-
-.elem3 {
-    grid-row: 2;
-    padding: 50px 50px 100px 50px;
-}
-
-.text-anunt1 {
-    grid-row: 1;
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 17px;
-    justify-self: center;
-    align-self: center;
-    color: #742d55;
-    transition: font-size 0.3s;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.text-anunt1:hover {
-    font-size: 30px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.text-anunt2 {
-    grid-row: 2;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-    justify-self: center;
-    align-self: center;
-    color: #742d55;
-    padding: 125px;
-    text-align: center;
+    background-color: #531439;
+    color: white;
 }
 
 .domenii {
-    grid-row: 3;
-    grid-column: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 9fr;
-    width: 465px;
-    height: 340px;
     background-color: #dcd6ce;
-    justify-self: center;
-    align-self: center;
-    margin-left: 5px;
+    padding: 20px;
     border: 1px solid rgba(18, 0, 20, 0.33);
-    border-bottom: 25px solid rgb(149, 85, 121);
     border-top: solid 3px #8d8888;
-    padding: 0px 0px 0px 0px;
     border-radius: 7px;
+    border-bottom: 25px solid rgb(149, 85, 121);
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.text-domenii1 {
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 4;
+.domenii .text-domenii1 {
     font-size: 24px;
     font-weight: bold;
-    margin-top: 10px;
-    justify-self: center;
-    align-self: center;
     color: #742d55;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
-table {
-    color:#531439;
-    width: 80%;
-    height: 60%;
-    align-self: center;
-    justify-self: center;
+.domenii table {
+    color: #531439;
+    width: 100%;
+    margin-bottom: 10px;
     border: 1px solid black;
     border-collapse: collapse;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14.5px;
-    border-bottom: 9px solid rgb(111, 55, 87);
-    border-top: 3.5px solid gray;
 }
 
-th,
-td {
+.domenii th, .domenii td {
     border: 1px solid black;
     padding: 8px;
     text-align: center;
-    width: 10px;
-    height: 10px;
     font-weight: bold;
-}
-
-.tabel2 {
-    height: 45%;
-}
-
-.tabel3 {
-    height: 80%;
-}
-.tabel1 {
-    height: 43%;
 }
 
 .informations {
-    grid-row: 4;
-    grid-column: 1;
-    display: grid;
-    grid-template-rows: 1fr 6fr;
-    width: 472px;
-    height: 240px;
     background-color: #dcd6ce;
-    justify-self: center;
+    padding: 20px;
     border: 1px solid rgba(18, 0, 20, 0.33);
-    border-bottom: 25px solid rgb(149, 85, 121);
     border-top: solid 3px #8d8888;
-    padding: 0px 0px 0px 0px;
     border-radius: 7px;
+    border-bottom: 25px solid rgb(149, 85, 121);
+    margin-bottom: 20px;
 }
 
-.ce-gasesc-aici {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 4;
+.informations .ce-gasesc-aici {
     font-size: 18px;
     font-weight: bold;
-    margin-top: 10px;
-    justify-self: center;
-    align-self: center;
     color: #742d55;
     text-align: center;
+    margin-bottom: 10px;
 }
-.ce-gasesc-aici-text {
+
+.informations .ce-gasesc-aici-text {
     color: #531439;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 6px 20px 20px 20px;
+    font-size: 16px;
+    text-align: center;
 }
+
 .altele {
-    grid-row-start: 4;
-    grid-column: 2;
-    display: grid;
-    grid-template-rows: 1fr 6fr;
-    width: 648px;
-    height: 240px;
     background-color: #dcd6ce;
-    justify-self: center;
+    padding: 20px;
     border: 1px solid rgba(18, 0, 20, 0.33);
-    border-bottom: 25px solid rgb(149, 85, 121);
     border-top: solid 3px #8d8888;
-    padding: 0px 0px 0px 0px;
     border-radius: 7px;
+    border-bottom: 25px solid rgb(149, 85, 121);
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .altele p {
     color: #531439;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin-top: 8px;
-    padding: 10px;
-    text-align: center;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
+
 .altele img {
-    width: 170px;
-    align-self: center;
-    justify-self: center;
+    width: 100%;
+    max-width: 170px;
     border-radius: 5px;
     opacity: 0.86;
 }
 
-footer{
-    position: relative;
-    background: linear-gradient(rgba(128, 128, 128, 0.1), #8B4C70);
-    width: 100%;
-    height: 130px;
-    color: #ffffff;
-  }
-
-@media (min-width: 250px) and (max-width: 500px) {}
-
-@media (min-width:500px) and (max-width: 800px) {}
-
-@media (min-height:800px) {
-    body{
-        background-color: #deccb9;
-        margin: 0;
-    }
+@media (max-width: 768px) {
     .container-mare {
-        background-color: #deccb9; 
-        width: 83%;
-        height: 3300px;
-        margin-right: 70px;
-        display: grid;
-        grid-template-rows: 13fr 19fr 12fr 13fr 12fr 13fr 12fr; 
-        grid-template-columns: 1fr;
-        overflow: hidden;
-        margin: auto;
-        border-top: solid 106px rgb(149, 85, 121);
-        padding-top: 30px;
+        grid-template-columns: 1fr; /* One column for small screens */
+        /* padding: 10px; */
+        margin-top: 9vh;
+        padding-left: 10px;
+        padding-right: 10px;
+
     }
-    
-    .container-mare > div {
-        align-self: center;
-        justify-self: center;
-        grid-row: auto;
-        grid-column: auto;
-    }
-    .dreptunghi_dreapta{
-        height: 500px;
-        width: 345px;
-        margin-right: 361px;
-        margin-left: 0px;
-        margin-bottom: 0;
-    }
-    .elem1{
-        margin-left: 20px;
-        text-align: center;
-        justify-self: center;
-        align-self: center;
-        padding: 0;
-        flex-direction: row;
-    }
-    .profile {
-        width: 99%; 
-        height: 80%;
-        grid-row: 1;
-        display: flex;
-    }
-    .probleme {
-        height: 420px;
-    }
-    .elem1 p{
-        margin-top: 10px;
-        font-size: 20px;
-        align-self: center;
-        justify-self: center;
-    }   
-    .avatar img {
+
+    .dreptunghi_stanga, .dreptunghi_dreapta {
+        margin-top: 20px;
         width: 100%;
-        height: 100%;
-    }
-    .avatar{
-        margin-left: 75px;
-    }
-    .anunturi{
-        width: 345px;
-        margin-right: 370px;
-    }
-    .go-to-profile {
-        font-size: 19px;
-        margin-bottom: 30px;
-        display: none;
-    }
-    .probleme_noi{
-        font-size: 35px;
-    }
-    .text-anunt1{
-        font-size: 35px;
-    }
-    .text-anunt2{
+        grid-column: 1 / 2; /* Ensure each element takes full width */
+        /* padding-left: 10px;
+        padding-right: 10px; */
         padding: 0;
-        font-size: 17px;
-
     }
-    .elem2 p {
-        font-size: 14px;
+    .dreptunghi_dreapta {
+        margin-top: 0;
     }
-    .elem2{
-        margin-top: 16px;
-    }
-    .domenii {
-        margin-right: 385px;
-        width: 330px;
-    }
-    .sectiune-clasa{
-        padding: 0;
-        height: 300px;
-        margin: 0;
-        width: 340px;
-        margin-right: 375px;
-    }
-    .sectiune-clasa img {
-        height: 90%;
-    }
-    .join-a-class {
-        font-size: 7px;
-        margin-right: 25px;
-    }
-    .text-domenii1{
-        font-size: 28px;
-        margin-top:17px;
-    }
-    .tabel1 a{
-        font-size: 11px;
-    }
-    .tabel2 a{
-        font-size: 11px;
-    }
-    .tabel3 a{
-        font-size: 11px;
-    }
-    .ce-gasesc-aici {
-        margin-top: 21px;
-        font-size: 27.7px;
-    }
-    .ce-gasesc-aici-text{
-        margin-top: 5px;
-        font-size: 16.5px;
-    }
-    .informations{
-        grid-template-rows: 2.34fr 10fr;
-        margin-right: 377px;
-        width: 350px;
-        height:400px;
-    }
-    .altele p{
-        margin-top: 28px;
-        font-size: 14px;
-    }
-    .altele {
-        margin-right: 380px;
-        height:350px;
-        width: 350px;
-        grid-template-rows: 4fr 10fr;
-    }
-    .altele img {
-        width: 48%;
-    }
-}
-
-@media (max-height:650px) and (min-width:1000px) {
-    body{
-        background-color: #deccb9;
-        margin: 0;
-    }
-    .container-mare {
-        background-color: #deccb9; 
-        width: 83%;
-        height: 3300px;
-        margin-right: 70px;
-        display: grid;
-        grid-template-rows: 13fr 19fr 12fr 13fr 12fr 13fr 12fr; 
-        grid-template-columns: 1fr;
-        overflow: hidden;
-        margin: auto;
-        border-top: solid 106px rgb(149, 85, 121);
-        padding-top: 30px;
-    }
-    
-    .container-mare > div {
-        align-self: center;
-        justify-self: center;
-        grid-row: auto;
-        grid-column: auto;
-    }
-    .dreptunghi_dreapta{
-        height: 500px;
-        width: 345px;
-        margin-right: 361px;
-        margin-left: 0px;
-        margin-bottom: 0;
-    }
-    .elem1{
-        margin-left: 20px;
-        text-align: center;
-        justify-self: center;
-        align-self: center;
-        padding: 0;
-        flex-direction: row;
-    }
-    .profile {
-        width: 99%; 
-        height: 80%;
-        grid-row: 1;
-        display: flex;
-    }
-    .probleme {
-        height: 420px;
-    }
-    .elem1 p{
-        margin-top: 10px;
-        font-size: 20px;
-        align-self: center;
-        justify-self: center;
-    }   
-    .avatar img {
-        width: 100%;
-        height: 100%;
-    }
-    .avatar{
-        margin-left: 75px;
-    }
-    .anunturi{
-        width: 345px;
-        margin-right: 370px;
-    }
-    .go-to-profile {
-        font-size: 19px;
-        margin-bottom: 30px;
-        display: none;
-    }
-    .probleme_noi{
-        font-size: 35px;
-    }
-    .text-anunt1{
-        font-size: 35px;
-    }
-    .text-anunt2{
-        padding: 0;
-        font-size: 17px;
-
-    }
-    .elem2 p {
-        font-size: 14px;
-    }
-    .elem2{
-        margin-top: 16px;
-    }
-    .domenii {
-        margin-right: 385px;
-        width: 330px;
-    }
-    .sectiune-clasa{
-        padding: 0;
-        height: 300px;
-        margin: 0;
-        width: 340px;
-        margin-right: 375px;
-    }
-    .sectiune-clasa img {
-        height: 90%;
-    }
-    .join-a-class {
-        font-size: 7px;
-        margin-right: 25px;
-    }
-    .text-domenii1{
-        font-size: 28px;
-        margin-top:17px;
-    }
-    .tabel1 a{
-        font-size: 11px;
-    }
-    .tabel2 a{
-        font-size: 11px;
-    }
-    .tabel3 a{
-        font-size: 11px;
-    }
-    .ce-gasesc-aici {
-        margin-top: 21px;
-        font-size: 27.7px;
-    }
-    .ce-gasesc-aici-text{
-        margin-top: 5px;
-        font-size: 16.5px;
-    }
-    .informations{
-        grid-template-rows: 2.34fr 10fr;
-        margin-right: 377px;
-        width: 350px;
-        height:400px;
-    }
-    .altele p{
-        margin-top: 28px;
-        font-size: 14px;
-    }
-    .altele {
-        margin-right: 380px;
-        height:350px;
-        width: 350px;
-        grid-template-rows: 4fr 10fr;
-    }
-    .altele img {
-        width: 48%;
-    }
-}
-
-@media (max-width:420px) and (min-width: 330px) {
-    body{
-        background-color: #deccb9;
-        margin: 0;
-    }
-    .container-mare {
-        background-color: #deccb9; 
-        width: 83%;
-        height: 3300px;
-        margin-right: 70px;
-        display: grid;
-        grid-template-rows: 13fr 19fr 12fr 13fr 12fr 13fr 12fr; 
-        grid-template-columns: 1fr;
-        overflow: hidden;
-        margin: auto;
-        border-top: solid 106px rgb(149, 85, 121);
-        padding-top: 30px;
-    }
-    
-    .container-mare > div {
-        align-self: center;
-        justify-self: center;
-        grid-row: auto;
-        grid-column: auto;
-    }
-    .dreptunghi_dreapta{
-        height: 500px;
-        width: 345px;
-        margin-right: 361px;
-        margin-left: 0px;
-        margin-bottom: 0;
-    }
-    .elem1{
-        margin-left: 20px;
-        text-align: center;
-        justify-self: center;
-        align-self: center;
-        padding: 0;
-        flex-direction: row;
-    }
-    .profile {
-        width: 99%; 
-        height: 80%;
-        grid-row: 1;
-        display: flex;
-    }
-    .probleme {
-        height: 420px;
-    }
-    .elem1 p{
-        margin-top: 10px;
-        font-size: 20px;
-        align-self: center;
-        justify-self: center;
-    }   
-    .avatar img {
-        width: 100%;
-        height: 100%;
-    }
-    .avatar{
-        margin-left: 75px;
-    }
-    .anunturi{
-        width: 345px;
-        margin-right: 370px;
-    }
-    .go-to-profile {
-        font-size: 19px;
-        margin-bottom: 30px;
-        display: none;
-    }
-    .probleme_noi{
-        font-size: 35px;
-    }
-    .text-anunt1{
-        font-size: 35px;
-    }
-    .text-anunt2{
-        padding: 0;
-        font-size: 17px;
-
-    }
-    .elem2 p {
-        font-size: 14px;
-    }
-    .elem2{
-        margin-top: 16px;
-    }
-    .domenii {
-        margin-right: 385px;
-        width: 330px;
-    }
-    .sectiune-clasa{
-        padding: 0;
-        height: 300px;
-        margin: 0;
-        width: 340px;
-        margin-right: 375px;
-    }
-    .sectiune-clasa img {
-        height: 90%;
-    }
-    .join-a-class {
-        font-size: 7px;
-        margin-right: 25px;
-    }
-    .text-domenii1{
-        font-size: 28px;
-        margin-top:17px;
-    }
-    .tabel1 a{
-        font-size: 11px;
-    }
-    .tabel2 a{
-        font-size: 11px;
-    }
-    .tabel3 a{
-        font-size: 11px;
-    }
-    .ce-gasesc-aici {
-        margin-top: 21px;
-        font-size: 27.7px;
-    }
-    .ce-gasesc-aici-text{
-        margin-top: 5px;
-        font-size: 16.5px;
-    }
-    .informations{
-        grid-template-rows: 2.34fr 10fr;
-        margin-right: 377px;
-        width: 350px;
-        height:400px;
-    }
-    .altele p{
-        margin-top: 28px;
-        font-size: 14px;
-    }
-    .altele {
-        margin-right: 380px;
-        height:350px;
-        width: 350px;
-        grid-template-rows: 4fr 10fr;
-    }
-    .altele img {
-        width: 48%;
-    }
-}
-
-@media (min-width:440px) and (min-height:740px) and (max-width: 1100px) {
-    body{
-        background-color: #deccb9;
-    }
-    .container-mare {
-        background-color: #deccb9; 
-        width: 83%;
-        height: 4200px;
-        margin-right: 70px;
-        display: grid;
-        grid-template-rows: 6.2fr 9.5fr 5fr 6fr 5fr 5fr 5fr;
-        grid-template-columns: 1fr;
-        overflow: hidden;
-        margin: auto;
-        border-top: solid 110px rgb(149, 85, 121);
-        padding-top: 30px;
-    }
-    
-    .container-mare > div {
-        align-self: center;
-        justify-self: center;
-        width: 97%;
-        height: 80%;
-        grid-row: auto;
-        grid-column: auto;
-        padding: 0px;
-        margin: 20px auto;
-    }
-    .elem1{
-        text-align: center;
-        justify-self: center;
-        align-self: center;
-    }
-    .elem1 p{
-        font-size: 32px;
-    }   
-    .avatar img {
-        width: 100%;
-        height: 100%;
-    }
-    .avatar{
-        margin-left: 111px;
-    }
-    .go-to-profile {
-        font-size: 28px;
-        margin-bottom: 30px;
-    }
-    .probleme_noi{
-        font-size: 35px;
-    }
-    .text-anunt1{
-        font-size: 35px;
-    }
-    .text-anunt2{
-        font-size: 25px;
-    }
-    .elem2 p {
+    .profile p {
         font-size: 24px;
     }
-    .elem2{
-        margin-top: 16px;
-    }
-    .sectiune-clasa img {
-        height: 80%;
-        align-self: center;
-    }
-    .join-a-class {
-        font-size: 26px;
-        margin-right: 25px;
-    }
-    .text-domenii1{
-        font-size: 28px;
-        margin-top:17px;
-    }
-    .tabel1 a{
-        font-size: 18px;
-    }
-    .tabel2 a{
-        font-size: 18px;
-    }
-    .tabel3 a{
-        font-size: 18px;
-    }
-    .ce-gasesc-aici {
-        margin-top: 21px;
-        font-size: 27.7px;
-    }
-    .ce-gasesc-aici-text{
-        margin-top: 23px;
-        font-size: 23px;
-    }
-    .informations{
-        grid-template-rows: 2.34fr 10fr;
-    }
-    .altele p{
-        margin-top: 28px;
-        font-size: 22px;
-    }
-    .altele {
-        grid-template-rows: 4fr 10fr;
-    }
-    .altele img {
-        width: 33%;
-    }
-}
 
-@media (max-width: 1024px) and (min-height:1191px) {  
-    body{
-        background-color: #deccb9;
-    }
-    .container-mare {
-        background-color: #deccb9; 
-        width: 83%;
-        height: 4200px;
-        margin-right: 70px;
-        display: grid;
-        grid-template-rows: 6.2fr 9.5fr 5fr 6fr 5fr 5fr 5fr;
-        grid-template-columns: 1fr;
-        overflow: hidden;
-        margin: auto;
-        border-top: solid 136px rgb(149, 85, 121);
-        padding-top: 30px;
-    }
-    
-    .container-mare > div {
-        align-self: center;
-        justify-self: center;
-        width: 97%;
-        height: 80%;
-        grid-row: auto;
-        grid-column: auto;
-        padding: 0px;
-        margin: 20px auto;
-    }
-    .elem1{
-        text-align: center;
-        justify-self: center;
-        align-self: center;
-    }
-    .elem1 p{
-        font-size: 32px;
-    }   
-    .avatar img {
-        width: 100%;
-        height: 100%;
-    }
-    .avatar{
-        margin-left: 111px;
-    }
     .go-to-profile {
+        font-size: 16px;
+    }
+
+    .probleme_noi {
         font-size: 28px;
-        margin-bottom: 30px;
     }
-    .probleme_noi{
-        font-size: 35px;
+
+    .problema .titlu_prb {
+        font-size: 18px;
     }
-    .text-anunt1{
-        font-size: 35px;
+
+    .problema .descriere_prb {
+        font-size: 14px;
     }
-    .text-anunt2{
-        font-size: 25px;
-    }
-    .elem2 p {
+
+    .anunturi .text-anunt1, .text-anunt2 {
         font-size: 24px;
     }
-    .elem2{
-        margin-top: 16px;
+
+    .sectiune-clasa p {
+        font-size: 18px;
     }
-    .sectiune-clasa img {
-        height: 90%;
-    }
+
     .join-a-class {
-        font-size: 26px;
-        margin-right: 25px;
-    }
-    .text-domenii1{
-        font-size: 28px;
-        margin-top:17px;
-    }
-    .tabel1 a{
         font-size: 18px;
     }
-    .tabel2 a{
-        font-size: 18px;
+
+    .domenii .text-domenii1 {
+        font-size: 20px;
     }
-    .tabel3 a{
-        font-size: 18px;
+
+    .domenii th, .domenii td {
+        font-size: 12px;
     }
-    .ce-gasesc-aici {
-        margin-top: 21px;
-        font-size: 27.7px;
+
+    .informations .ce-gasesc-aici {
+        font-size: 16px;
     }
-    .ce-gasesc-aici-text{
-        margin-top: 23px;
-        font-size: 23px;
+
+    .informations .ce-gasesc-aici-text {
+        font-size: 14px;
     }
-    .informations{
-        grid-template-rows: 2.34fr 10fr;
+
+    .altele p {
+        font-size: 12px;
     }
-    .altele p{
-        margin-top: 28px;
-        font-size: 22px;
-    }
-    .altele {
-        grid-template-rows: 4fr 10fr;
-    }
+
     .altele img {
-        width: 33%;
+        max-width: 100px;
     }
 }
