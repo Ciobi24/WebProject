@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('signup').addEventListener('submit', function (event) {
@@ -53,11 +51,12 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-
-                    var token = xhr.responseText;
+                    var response = JSON.parse(xhr.responseText);
+                    var token = response.token;
+                    var redirectUrl = response.redirectUrl;
                     document.cookie = 'jwt=' + token + ';path=/'; 
-        
-                    window.location.href = '/home';
+                    
+                    window.location.href = redirectUrl;
                     document.getElementById('error-message').style.display = 'none';
                 }
                 else {
@@ -106,8 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send(JSON.stringify({ email: email }));
     });
     
-    
-
     window.addEventListener('scroll', function() {
         var modal = document.getElementById('myModal');
         var modalRect = modal.getBoundingClientRect(); 
@@ -117,6 +114,4 @@ document.addEventListener('DOMContentLoaded', function () {
           closeModal(); 
         }
       });
-      
-      
 });

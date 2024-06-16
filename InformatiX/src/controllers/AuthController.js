@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { findUserByEmailAndPassword } = require('../services/UserService');
+const { findUserByEmailAndPassword, getUserById } = require('../services/UserService');
+const { getUserByIdHandler } = require('./UserController');
 
 require('dotenv').config();
 const secretKey = process.env.SECRET_KEY;
@@ -24,13 +25,20 @@ async function handleLogin(req, res) {
             if (results.length > 0) {
                 const user = results[0];
                 const token = jwt.sign({ id: user.id, email: user.email }, secretKey);
+                const userDetails = await getUserById(user.id);
+
+                let redirectUrl = '/home'; // default redirect URL
+                console.log(userDetails.role);
+                if (userDetails.role === 'admin') {
+                    redirectUrl = '/home/administrare'; // admin redirect URL
+                }
 
                 res.writeHead(200, {
                     'Set-Cookie': `token=${token}; HttpOnly; Path=/; SameSite=Strict`,
                     'Content-Type': 'application/json'
                 });
 
-                res.end(JSON.stringify({ success: true }));
+                res.end(JSON.stringify({ success: true, redirectUrl }));
             } else {
                 res.writeHead(401, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, message: 'Email sau parolă incorecte' }));

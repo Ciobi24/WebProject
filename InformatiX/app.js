@@ -38,6 +38,9 @@ const routes = {
     '/home/clasele-mele/teme': (req, res) => {
         serveHTMLFile('/temele_mele.html', res);
     },
+    '/home/administrare': (req, res) => {
+        serveHTMLFile('/administrare.html', res);
+    },
     '/reset-password': async (req, res) => {
         const urlString = req.url;
         const parameter = url.parse(urlString, true).query;
