@@ -1,5 +1,4 @@
-
-const createTabels = `
+const createTablesUsers = `
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL UNIQUE,
@@ -11,7 +10,20 @@ CREATE TABLE IF NOT EXISTS users (
   birthday DATE,
   city VARCHAR(255),
   school VARCHAR(255)
-)
+);
 `;
 
-module.exports = createTabels;
+const createTablesResetPasswordToken = `
+CREATE TABLE IF NOT EXISTS reset_password_token (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  token VARCHAR(255) NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+`;
+
+module.exports = {
+    createTablesUsers,
+    createTablesResetPasswordToken
+};

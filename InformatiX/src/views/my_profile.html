@@ -30,7 +30,6 @@
       flipCheckbox.checked = false;
     }
   </script>
-  <script src="../../public/js/sendArgument.js"></script>
   <script>
     function showDiv(id) {
       // Get all div elements
@@ -89,18 +88,18 @@
                 <path
                   d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
               </svg></a></li>
-              <li><a href="/user" onclick=hideSidebar()>Home</a></li>
-              <li><a href="/user/probleme" onclick=hideSidebar()>Probleme</a></li>
-              <li><a href="/user/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
-              <li><a href="/user/profil" onclick="hideSidebar()">Profil</a></li>
+              <li><a href="/home" onclick=hideSidebar()>Home</a></li>
+              <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
+              <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
+              <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
               <li><a href="/" onclick="hideSidebar()">Logout</a></li>
         </ul>
   
         <ul class="menu">
-          <li><a href="/user">Home</a></li>
-          <li class="hideOnMobile"><a href="/user/probleme">Probleme</a></li>
-          <li class="hideOnMobile"><a href="/user/clasele-mele">Clasele mele</a></li>
-          <li class="hideOnMobile"><a href="/user/profil">Profil</a></li>
+          <li><a href="/home">Home</a></li>
+          <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
+          <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
+          <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
           <li class="hideOnMobile"><a href="/">Logout</a></li>
           <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
                 viewBox="0 96 960 960" width="26">
@@ -137,34 +136,39 @@
           <h2>Edit Profile Information</h2>
           <form action="#">
             <div class="input-group">
-              <label for="name">Last Name</label>
-              <input type="text" id="name" name="name" placeholder="Enter your name" value="John" required>
+              <label for="lastname">Last Name</label>
+              <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" value="" required>
             </div>
             <div class="input-group">
-              <label for="surname">First Name</label>
-              <input type="text" id="surname" name="surname" placeholder="Enter your surname" value="Doe" required>
+              <label for="firstname">First Name</label>
+              <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" value="" required>
             </div>
             <div class="input-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Enter your email" value="john@example.com"
-                required>
+              <input type="email" id="email" name="email" placeholder="Enter your email" value="" required>
             </div>
             <div class="input-group">
-              <label for="dob">Birthday</label>
-              <input type="date" id="dob" name="dob" value="2000-01-01" required>
+              <label for="birthday">Birthday</label>
+              <input type="date" id="birthday" name="birthday" value="" required>
             </div>
             <div class="input-group">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" placeholder="Enter your city" value="New York" required>
+              <input type="text" id="city" name="city" placeholder="Enter your city" value="" required>
             </div>
             <div class="input-group">
               <label for="school">School</label>
-              <input type="text" id="school" name="school" placeholder="Enter your school" value="ABC School" required>
+              <input type="text" id="school" name="school" placeholder="Enter your school" value="" required>
             </div>
-            <button type="submit">Save Changes</button>
+            
+            <div id="successMessage" class="success-message" style="display:none;">
+              Datele s-au actualizat cu succes!
+            </div>
+            
+            <button type="submit" id="submit1">Save Changes</button>
           </form>
         </div>
       </div>
+    
       <div class="passwrd_page" id="passwrd_page" style="display:none;">
         <div class="container">
           <h2>Password Change</h2>
@@ -203,6 +207,14 @@
       </footer>
     </div>
   </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Datele s-au actualizat cu succes!</p>
+    </div>
+  </div>
+
+  <script src="../../public/js/my_profile.js"></script>
 </body>
 
 </html>

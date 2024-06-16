@@ -1,32 +1,48 @@
-const mysql = require('mysql');
-const createTables = require('./createTabels');
+const mysql = require('mysql2/promise');
+const {createTablesUsers,  createTablesResetPasswordToken}= require('./createTabels');
 
-const connectionString = {
-  host: "localhost",  // pt ca ruleaza pe aceiasi masina cu aplicatia web
-  port: 3000, // port-ul utilizat
-  user: "alex", // userul conectat la instanta de BD
-  password: "alex123K!!", // parola
-  database: "informatix" // baza de date la care se incearca conexiunea
-};
-
-let connection;
-
-async function connect() {
-  if (connection) {
-    return connection; // folosesc o singura data apelul de a crea o conexiune - am de a face cu un singleton
+class Database {
+  constructor(config) {
+    this.config = config;
+    this.connection = null;
   }
 
-  try {
-    connection = await mysql.createConnection(connectionString);
-    console.log("Connected to DB.");
+  async connect() {
+    if (this.connection) {
+      return this.connection;
+    }
 
-    await connection.query(createTables); // creare tabele - in cazul in care nu exista
+    try {
+      this.connection = await mysql.createConnection(this.config);
+      console.log("Connected to DB.");
 
-    return connection;
-  } catch (error) {
-    console.error("Error connecting to DB: " + error);
-    throw error;
+      await this.createTables();
+      return this.connection;
+    } catch (error) {
+      console.error("Error connecting to DB: " + error);
+      throw error;
+    }
+  }
+
+  async createTables() {
+    try {
+      await this.connection.execute(createTablesUsers);
+      await this.connection.execute(createTablesResetPasswordToken);
+    } catch (error) {
+      console.error("Error creating tables: " + error);
+      throw error;
+    }
   }
 }
 
-module.exports = connect;
+const connectionString = {
+  host: "localhost",
+  port: 3000,
+  user: "alex",
+  password: "alex123K!!",
+  database: "informatix"
+};
+
+const dbInstance = new Database(connectionString);
+
+module.exports = dbInstance;
