@@ -45,7 +45,6 @@ const routes = {
 
         try {
             const email = await checkTokenExistence(token);
-            const email = await checkTokenExistence(token);
             if (email) {
                 serveHTMLFile('/reset-password.html', res);
             } else {

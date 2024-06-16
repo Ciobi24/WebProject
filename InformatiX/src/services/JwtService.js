@@ -23,7 +23,6 @@ function getJwt(cookieHeader) {
 
     try {
         const decoded = jwt.verify(token, secretKey);
-        console.log(decoded);
         return decoded;
     } catch (error) {
         return { success: false, message: error.message };

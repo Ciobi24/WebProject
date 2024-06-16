@@ -85,33 +85,56 @@ async function updatePassword(newPassword, email)
     }
 }
 
-async function updateUserByCredentials(userId, userData) {
+async function updateUserByCredentials(userFromDB, userData) {
     const connection = await dbInstance.connect();
     try {
-        console.log(userData.email);
+        const currentUser = await getUserById(userFromDB.id);
+        const userId = userFromDB.id;
 
-        const query = `
-            UPDATE users 
-            SET lastname = ?, firstname = ?, birthday = ?, city = ?, school = ? 
-            WHERE id = ?
-        `;
-        // const [result] = await connection.query(query, [lastname, firstname, birthday, city, school, userId]);
+        if (!currentUser) {
+            console.log('No user found with this id');
+            return null;
+        }
 
-        // console.log('Query result:', result);
+        const updatePromises = [];
 
-        // if (result.affectedRows === 1) {
-        //     console.log("User updated successfully!");
-        //     const updatedUser = await getUserById(userId);
-        //     return updatedUser;
-        // } else {
-        //     console.log('No user found with this id or no changes were made.');
-        //     return null;
-        // }
+        if (userData.lastname !== undefined && userData.lastname !== userFromDB.lastname) {
+            updatePromises.push(connection.query('UPDATE users SET lastname = ? WHERE id = ?', [userData.lastname, userId]));
+        }
+
+        if (userData.firstname !== undefined && userData.firstname !== userFromDB.firstname) {
+            updatePromises.push(connection.query('UPDATE users SET firstname = ? WHERE id = ?', [userData.firstname, userId]));
+        }
+
+        if (userData.birthday !== undefined && userData.birthday !== userFromDB.birthday) {
+            const birthdayDate = new Date(userData.birthday);
+            birthdayDate.setDate(birthdayDate.getDate() + 1); 
+            const formattedBirthday = birthdayDate.toISOString().slice(0, 10);
+            updatePromises.push(connection.query('UPDATE users SET birthday = ? WHERE id = ?', [formattedBirthday, userId]));
+        }
+
+        if (userData.city !== undefined && userData.city !== userFromDB.city) {
+            updatePromises.push(connection.query('UPDATE users SET city = ? WHERE id = ?', [userData.city, userId]));
+        }
+
+        if (userData.school !== undefined && userData.school !== userFromDB.school) {
+            updatePromises.push(connection.query('UPDATE users SET school = ? WHERE id = ?', [userData.school, userId]));
+        }
+
+        await Promise.all(updatePromises);
+
+        const updatedUser = await getUserById(userId);
+        console.log('User updated successfully!');
+        return updatedUser;
+
     } catch (error) {
         console.error('Error updating user:', error);
         throw error;
     }
 }
+
+
+
 
 module.exports = {
     findUserByEmailAndPassword,

@@ -35,8 +35,6 @@ async function updateUserByCredentialsHandler(req, res) {
 
         req.on('end', async () => {
 
-            console.log("Received data from request:", JSON.parse(body));
-
             const user = await updateUserByCredentials(decoded, JSON.parse(body));
 
             if (user) {
