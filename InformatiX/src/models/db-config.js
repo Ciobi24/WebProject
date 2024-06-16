@@ -38,8 +38,8 @@ class Database {
 const connectionString = {
   host: "localhost",
   port: 3000,
-  user: "andra",
-  password: "andraciobanu24",
+  user: "alex",
+  password: "alex123K!!",
   database: "informatix"
 };
 

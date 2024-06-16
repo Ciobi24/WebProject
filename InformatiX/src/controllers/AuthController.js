@@ -24,7 +24,8 @@ async function handleLogin(req, res) {
             const results = await findUserByEmailAndPassword(email, password);
             if (results.length > 0) {
                 const user = results[0];
-                const token = jwt.sign({ id: user.id, email: user.email }, secretKey);
+                console.log(user);
+                const token = jwt.sign({ id: user.id, role: user.role}, secretKey);
                 const userDetails = await getUserById(user.id);
 
                 let redirectUrl = '/home'; // default redirect URL
