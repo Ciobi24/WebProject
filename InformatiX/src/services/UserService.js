@@ -1,5 +1,17 @@
 const dbInstance = require('../models/db-config');
 
+async function getUserById(id) {
+    const connection = await dbInstance.connect();
+    try {
+        const query = `SELECT * FROM users WHERE id = ?`;
+        const [rows, _] = await connection.query(query, [id]);
+        return rows[0]; 
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    }
+}
+
 async function findUserByEmailAndPassword(email, password) {
     const connection = await dbInstance.connect(); 
     try {
@@ -73,10 +85,40 @@ async function updatePassword(newPassword, email)
     }
 }
 
+async function updateUserByCredentials(userId, userData) {
+    const connection = await dbInstance.connect();
+    try {
+        console.log(userData.email);
+
+        const query = `
+            UPDATE users 
+            SET lastname = ?, firstname = ?, birthday = ?, city = ?, school = ? 
+            WHERE id = ?
+        `;
+        // const [result] = await connection.query(query, [lastname, firstname, birthday, city, school, userId]);
+
+        // console.log('Query result:', result);
+
+        // if (result.affectedRows === 1) {
+        //     console.log("User updated successfully!");
+        //     const updatedUser = await getUserById(userId);
+        //     return updatedUser;
+        // } else {
+        //     console.log('No user found with this id or no changes were made.');
+        //     return null;
+        // }
+    } catch (error) {
+        console.error('Error updating user:', error);
+        throw error;
+    }
+}
+
 module.exports = {
     findUserByEmailAndPassword,
     findUserByEmailOrUsername,
     insertUser,
     findUserByEmail,
-    updatePassword
+    updatePassword,
+    getUserById,
+    updateUserByCredentials
 };

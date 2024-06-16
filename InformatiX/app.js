@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 const dbInstance = require('./src/models/db-config.js');
-const handleUserRoute = require('./routes');
+const { handleUserRoute, handleApiRoute } = require('./routes');
 const { checkTokenExistence } = require('./src/services/TokenResetService.js');
 const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
 
@@ -44,7 +44,7 @@ const routes = {
         const token = parameter.token;
 
         try {
-            const email = await checkTokenExistence(token); 
+            const email = await checkTokenExistence(token);
             if (email) {
                 serveHTMLFile('/reset-password.html', res);
             } else {
@@ -77,38 +77,55 @@ const server = http.createServer((req, res) => {
 
     if (req.method === 'POST') {
         handleUserRoute(req, res);
-    } else {
-        if (pathname === '/') {
-            routes['/'](req, res);
-        } else if (routes[pathname]) {
-            verifyToken(req, res, () => routes[pathname](req, res));
-        } else {
-            serveStaticFile(pathname, res);
-        }
+        return;
     }
+
+    if (pathname === '/') {
+        routes['/'](req, res);
+        return;
+    }
+
+    if (pathname === '/reset-password') {
+        routes['/reset-password'](req, res);
+        return;
+    }
+
+    if (pathname.startsWith('/api/')) {
+        verifyToken(req, res, () => {
+            handleApiRoute(req, res); // aici cumva fac cererile doar catre baza de date sa-mi dea informatii, n-am treaba cu paginile
+        });
+        return;
+    }
+
+    if (routes[pathname]) {
+        verifyToken(req, res, () => routes[pathname](req, res));
+        return;
+    }
+
+    serveStaticFile(pathname, res);
 });
 
-function serveStaticFile(filePath, res) {
-    const extname = path.extname(filePath);
-    const contentType = {
-        '.html': 'text/html',
-        '.js': 'text/javascript',
-        '.css': 'text/css',
-        '.png': 'image/png',
-        '.jpg': 'image/jpeg',
-    }[extname] || 'application/octet-stream';
+// function serveStaticFile(filePath, res) {
+//     const extname = path.extname(filePath);
+//     const contentType = {
+//         '.html': 'text/html',
+//         '.js': 'text/javascript',
+//         '.css': 'text/css',
+//         '.png': 'image/png',
+//         '.jpg': 'image/jpeg',
+//     }[extname] || 'application/octet-stream';
 
-    fs.readFile(path.join(__dirname, 'public', filePath), (err, data) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('Not Found');
-            return;
-        }
+//     fs.readFile(path.join(__dirname, 'public', filePath), (err, data) => {
+//         if (err) {
+//             res.writeHead(404, { 'Content-Type': 'text/plain' });
+//             res.end('Not Found');
+//             return;
+//         }
 
-        res.writeHead(200, { 'Content-Type': contentType });
-        res.end(data);
-    });
-}
+//         res.writeHead(200, { 'Content-Type': contentType });
+//         res.end(data);
+//     });
+// }
 
 function serveStaticFile(pathname, res) {
     let filename;

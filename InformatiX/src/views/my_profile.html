@@ -30,7 +30,6 @@
       flipCheckbox.checked = false;
     }
   </script>
-  <script src="../../public/js/sendArgument.js"></script>
   <script>
     function showDiv(id) {
       // Get all div elements
@@ -137,31 +136,30 @@
           <h2>Edit Profile Information</h2>
           <form action="#">
             <div class="input-group">
-              <label for="name">Last Name</label>
-              <input type="text" id="name" name="name" placeholder="Enter your name" value="John" required>
+              <label for="lastname">Last Name</label>
+              <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" value="" required>
             </div>
             <div class="input-group">
-              <label for="surname">First Name</label>
-              <input type="text" id="surname" name="surname" placeholder="Enter your surname" value="Doe" required>
+              <label for="firstname">First Name</label>
+              <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" value="" required>
             </div>
             <div class="input-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="Enter your email" value="john@example.com"
-                required>
+              <input type="email" id="email" name="email" placeholder="Enter your email" value="" required>
             </div>
             <div class="input-group">
-              <label for="dob">Birthday</label>
-              <input type="date" id="dob" name="dob" value="2000-01-01" required>
+              <label for="birthday">Birthday</label>
+              <input type="date" id="birthday" name="birthday" value="" required>
             </div>
             <div class="input-group">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" placeholder="Enter your city" value="New York" required>
+              <input type="text" id="city" name="city" placeholder="Enter your city" value="" required>
             </div>
             <div class="input-group">
               <label for="school">School</label>
-              <input type="text" id="school" name="school" placeholder="Enter your school" value="ABC School" required>
+              <input type="text" id="school" name="school" placeholder="Enter your school" value="" required>
             </div>
-            <button type="submit">Save Changes</button>
+            <button type="submit" id="submit1">Save Changes</button>
           </form>
         </div>
       </div>
@@ -203,6 +201,8 @@
       </footer>
     </div>
   </div>
+
+  <script src="../../public/js/my_profile.js"></script>
 </body>
 
 </html>
