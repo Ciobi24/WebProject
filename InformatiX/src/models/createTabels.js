@@ -23,7 +23,23 @@ CREATE TABLE IF NOT EXISTS reset_password_token (
 );
 `;
 
+const createTablesProbleme = `
+CREATE TABLE IF NOT EXISTS probleme (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  tag VARCHAR(255) NOT NULL UNIQUE,
+  nume_problema VARCHAR(255) NOT NULL,
+  dificultate VARCHAR(255) NOT NULL,
+  categorie VARCHAR(255) NOT NULL,
+  clasa VARCHAR(255) NOT NULL,
+  text_problema TEXT NOT NULL,
+  verified BOOLEAN DEFAULT FALSE,
+  rating INT DEFAULT 0,
+  utilizatori_incercat INT DEFAULT 0,
+  utilizatori_rezolvat INT DEFAULT 0
+)`;
+
 module.exports = {
     createTablesUsers,
-    createTablesResetPasswordToken
+    createTablesResetPasswordToken,
+    createTablesProbleme
 };

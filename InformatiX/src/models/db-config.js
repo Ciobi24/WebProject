@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const {createTablesUsers,  createTablesResetPasswordToken}= require('./createTabels');
+const {createTablesUsers,  createTablesResetPasswordToken, createTablesProbleme}= require('./createTabels');
 
 class Database {
   constructor(config) {
@@ -28,6 +28,7 @@ class Database {
     try {
       await this.connection.execute(createTablesUsers);
       await this.connection.execute(createTablesResetPasswordToken);
+      await this.connection.execute(createTablesProbleme);
     } catch (error) {
       console.error("Error creating tables: " + error);
       throw error;
