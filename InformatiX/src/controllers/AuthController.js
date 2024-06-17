@@ -29,7 +29,7 @@ async function handleLogin(req, res) {
                 const userDetails = await getUserById(user.id);
 
                 let redirectUrl = '/home'; // default redirect URL
-                console.log(userDetails.role);
+                // console.log(userDetails.role);
                 if (userDetails.role === 'admin') {
                     redirectUrl = '/home/administrare'; // admin redirect URL
                 }

@@ -193,6 +193,10 @@ function serveStaticFile(pathname, res) {
             filename = '.' + pathname;
             contentType = 'text/css';
             break;
+        case '.js':
+            filename = '.' + pathname;
+            contentType = 'application/javascript';
+            break;
         case '.jpg':
         case '.jpeg':
         case '.png':
@@ -206,6 +210,7 @@ function serveStaticFile(pathname, res) {
             break;
         default:
             filename = '.' + pathname;
+            contentType = 'application/octet-stream'; // Default MIME type
             break;
     }
 
@@ -220,6 +225,7 @@ function serveStaticFile(pathname, res) {
         res.end();
     });
 }
+
 
 server.listen(3001, () => {
     console.log("Server running on port 3001");
