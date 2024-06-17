@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const userType = 'profesor'; // Example, this should be dynamic
 
     function addSection() {
-        if (userType === 'profesor') {
+        if (userType === 'profesor'|| userType === 'admin') {
             const addProblemTitle = document.createElement('h3');
             addProblemTitle.textContent = 'Adaugă o problemă';
 
