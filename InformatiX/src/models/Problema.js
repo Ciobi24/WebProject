@@ -1,3 +1,5 @@
+const dbInstance = require('../models/db-config');
+
 class Problema {
     constructor(id, nume_problema, dificultate, categorie, clasa, text_problema, creatorId) {
         this.id = id;

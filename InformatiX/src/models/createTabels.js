@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS probleme (
   rating INT DEFAULT 0,
   utilizatori_incercat INT DEFAULT 0,
   utilizatori_rezolvat INT DEFAULT 0,
-  creator_id INT,
+  creator_id INT
 )`;
 
 module.exports = {

@@ -93,6 +93,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 const response = JSON.parse(xhr.responseText);
                 if (xhr.status === 200) {
+                    document.getElementById('problemName').value = '';
+                    document.getElementById('problemDifficulty').value = '';
+                    document.getElementById('problemCategory').value = '';
+                    document.getElementById('classSelect').value = '';
+                    document.getElementById('problemText').value = '';
                     alert(response.message);
                 } else {
                     alert('Error: ' + response.message);
