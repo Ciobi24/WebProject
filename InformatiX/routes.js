@@ -1,9 +1,9 @@
-
 const { handleLogin } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler } = require('./src/controllers/UserController');
+const { addProblemaHandler } = require('./src/controllers/ProblemeController');
 
 function handleUserRoute(req, res) {
     if (req.url === '/home') {
@@ -12,9 +12,11 @@ function handleUserRoute(req, res) {
         handleRegister(req, res);
     }
     else if (req.url == '/reset-password') {
-        handleResetPassword(req, res); //acest serviciu trimite mailul si valideaza existenta token-ului in DB
+        handleResetPassword(req, res); 
     } else if (req.url == '/getDateResetPassword') {
-        handleUpdatePassword(req, res); // acest serviciu este responsabil cu actualizarea parolei din baza de date
+        handleUpdatePassword(req, res); 
+    } else if (req.url === '/addProblema' && req.method === 'POST') {
+        addProblemaHandler(req, res);
     } else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Page not found');
@@ -23,7 +25,7 @@ function handleUserRoute(req, res) {
 
 function handleApiRoute(req, res) {
     if (req.url === '/api/user') {
-        getUserByIdHandler(req, res); // asociez cererea functiei mele specifice din controller care va returna un user dupa id ul din jwt !!!
+        getUserByIdHandler(req, res);
     }
     else if (req.url === '/api/updateUser') {
         updateUserByCredentialsHandler(req, res);
