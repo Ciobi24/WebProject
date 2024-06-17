@@ -3,7 +3,7 @@ const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler } = require('./src/controllers/UserController');
-const { addProblemaHandler } = require('./src/controllers/ProblemeController');
+const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa } = require('./src/controllers/ProblemeController');
 
 function handleUserRoute(req, res) {
     if (req.url === '/home') {
@@ -29,6 +29,11 @@ function handleApiRoute(req, res) {
     }
     else if (req.url === '/api/updateUser') {
         updateUserByCredentialsHandler(req, res);
+    }else if (req.url.startsWith('/api/problemeByCategorie') && req.method === 'GET') {
+        getProblemeByCategorie(req, res);
+    }
+    else if (req.url.startsWith('/api/problemeByClasa') && req.method === 'GET') {
+        getProblemeByClasa(req, res);
     }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });

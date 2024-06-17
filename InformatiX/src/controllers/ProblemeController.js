@@ -27,7 +27,34 @@ async function addProblemaHandler(req, res) {
         }
     });
 }
+ async function getProblemeByCategorie(req, res) {
+    const urlParams = new URLSearchParams(req.url.split('?')[1]);
+    const categorie = urlParams.get('categorie');
+
+    try {
+        const probleme = await ProblemeService.getProblemeByCategorie(categorie);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(probleme));
+    } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'A apărut o eroare.', error: error.message }));
+    }
+}
+
+ async function getProblemeByClasa(req, res) {
+    const urlParams = new URLSearchParams(req.url.split('?')[1]);
+    const clasa = urlParams.get('clasa');
+
+    try {
+        const probleme = await ProblemeService.getProblemeByClasa(clasa);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(probleme));
+    } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'A apărut o eroare.', error: error.message }));
+    }
+}
 
 module.exports = {
-    addProblemaHandler,
+    addProblemaHandler, getProblemeByCategorie, getProblemeByClasa
 };
