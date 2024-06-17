@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const problemCategorySelect = document.createElement('select');
             problemCategorySelect.id = 'problemCategory';
             const categoryOptions = [
-                'Probleme elementare', 'Elemente ale limbajului', 'Tablouri unidimensionale/vectori',
-                'Tablouri bidimensionale/matrici', 'Probleme diverse', 'Subprograme', 'Recursivitate',
+                'Probleme elementare', 'Elemente ale limbajului', 'Tablouri unidimensionale',
+                'Tablouri bidimensionale', 'Probleme diverse', 'Subprograme', 'Recursivitate',
                 'Divide et Impera', 'Șiruri de caractere', 'Structuri de date liniare', 'Liste alocate dinamic',
-                'Tipul struct', 'Teoria grafurilor', 'Programare dinamică', 'Metoda Greedy', 'Backtracking',
-                'Arbori', 'Programare orientată pe obiecte'
+                'Tipul struct', 'Teoria grafurilor', 'Programare dinamica', 'Metoda Greedy', 'Backtracking',
+                'Arbori', 'Programare orientata pe obiecte'
             ];
             categoryOptions.forEach((optionText) => {
                 const option = document.createElement('option');

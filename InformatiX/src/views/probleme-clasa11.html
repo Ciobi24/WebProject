@@ -10,6 +10,38 @@
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/probleme-clasa-11.css">
 
+  <style>
+    .categorie a {
+      display: block;
+      color: #333;
+    }
+
+    .categorie a:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .categorie a:active {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .container-mare {
+      padding: 20px;
+    }
+
+    .categorie {
+      margin-bottom: 20px;
+    }
+
+    .categorie .titlu {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .nr_probleme {
+      color: #666;
+    }
+  </style>
+
   <script>
     function showSidebar() {
       const sidebar = document.querySelector('.sidebar')
@@ -40,11 +72,11 @@
               <path
                 d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
             </svg></a></li>
-            <li><a href="/home" onclick=hideSidebar()>Home</a></li>
-            <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
-            <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
-            <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
-            <li><a href="/" onclick="hideSidebar()">Logout</a></li>
+        <li><a href="/home" onclick=hideSidebar()>Home</a></li>
+        <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
+        <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
+        <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
+        <li><a href="/" onclick="hideSidebar()">Logout</a></li>
       </ul>
 
       <ul class="menu">
@@ -63,129 +95,43 @@
 
   <div class="container-mare">
     <h1 class="tip-clasa"> Clasa a XI-a</h1>
-    <div class="probleme-elementare">
-      <div class="titlu1">
-        <p>Teoria grafurilor</p>
+    
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-11/teoria-grafurilor">Teoria grafurilor <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel1">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Probleme elementare cu grafuri neorientate<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Parcurgerea grafurilor neorientate<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse cu grafuri orientate<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Grafuri cu costuri<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Arbori cu rădăcină<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse <span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="diverse">
-      <div class="titlu5">
-        <p>Programare dinamică</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-11/programare-dinamica">Programare dinamică <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel5">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Probleme de numărare<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse de programare dinamică<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="divide">
-      <div class="titlu6">
-        <p>Metoda Greedy</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-11/metoda-greedy">Metoda Greedy <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel6">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse cu metoda Greedy<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="elemente-ale-limbajului">
-      <div class="titlu2">
-        <p>Backtracking</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-11/backtracking">Backtracking <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel2">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Elemente de combinatorică<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="vectori">
-      <div class="titlu3">
-        <p>Programare orientată pe obiecte</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-11/programare-orientata-pe-obiecte">Programare orientata pe obiecte <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel3">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="matrici">
-      <div class="titlu4">
-        <p>Arbori</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-11/arbori">Arbori <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel4">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Arbori binari<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Structuri de date<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Arbori de intervale<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-
-    <div class="structuri">
-      <div class="titlu7">
-        <p>Probleme diverse</p>
-      </div>
-      <table class="tabel7">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Matematica<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Geometrie<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Altele<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    
   </div>
 
   <footer><p>@ Contact</p></footer>

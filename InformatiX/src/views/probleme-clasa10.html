@@ -10,6 +10,38 @@
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/probleme-clasa-10.css">
 
+  <style>
+    .categorie a {
+      display: block;
+      color: #333;
+    }
+
+    .categorie a:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .categorie a:active {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .container-mare {
+      padding: 20px;
+    }
+
+    .categorie {
+      margin-bottom: 20px;
+    }
+
+    .categorie .titlu {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .nr_probleme {
+      color: #666;
+    }
+  </style>
+
   <script>
     function showSidebar() {
       const sidebar = document.querySelector('.sidebar')
@@ -35,16 +67,14 @@
   <header>
     <nav>
       <ul class="sidebar">
-        <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-              viewBox="0 96 960 960" width="26">
-              <path
-                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+        <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
+              <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
             </svg></a></li>
-            <li><a href="/home" onclick=hideSidebar()>Home</a></li>
-            <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
-            <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
-            <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
-            <li><a href="/" onclick="hideSidebar()">Logout</a></li>
+        <li><a href="/home" onclick=hideSidebar()>Home</a></li>
+        <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
+        <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
+        <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
+        <li><a href="/" onclick="hideSidebar()">Logout</a></li>
       </ul>
 
       <ul class="menu">
@@ -53,8 +83,7 @@
         <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
         <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
         <li class="hideOnMobile"><a href="/">Logout</a></li>
-        <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-              viewBox="0 96 960 960" width="26">
+        <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
               <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
             </svg></a></li>
       </ul>
@@ -63,132 +92,49 @@
 
   <div class="container-mare">
     <h1 class="tip-clasa"> Clasa a X-a</h1>
-    <div class="probleme-elementare">
-      <div class="titlu1">
-        <p>Subprograme</p>
+    
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/subprograme">Subprograme <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel1">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Subprograme care returnează valori<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Subprograme care întorc valori prin parametrii<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Subprograme cu vectori<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Subprograme cu matrici<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">STL<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse <span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="diverse">
-      <div class="titlu5">
-        <p>Recursivitate</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/recursivitate">Recursivitate <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel5">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Subprograme recursive<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="divide">
-      <div class="titlu6">
-        <p>Divide et Impera</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/divide-et-impera">Divide et Impera <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel6">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Algoritmi de sortare<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="elemente-ale-limbajului">
-      <div class="titlu2">
-        <p>Șiruri de caractere</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/siruri-de-caractere">Siruri de caractere <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel2">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Prelucrări elementare pe șiruri<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Funcții predefinite<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="vectori">
-      <div class="titlu3">
-        <p>Structuri de date liniare</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/structuri-de-date-liniare">Structuri de date liniare <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel3">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Stiva<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Coadă<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="matrici">
-      <div class="titlu4">
-        <p>Liste alocate dinamic</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/liste-alocate-dinamic">Liste alocate dinamic <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel4">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Liste simplu înlănțuite<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Liste dublu înlănțuite<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
 
-    <div class="structuri">
-      <div class="titlu7">
-        <p>Tipul struct</p>
+    <div class="categorie">
+      <div class="titlu">
+        <a href="/home/probleme-clasa-10/tipul-struct">Tipul struct <span class="nr_probleme">- 0 probleme</span></a>
       </div>
-      <table class="tabel7">
-        <tbody>
-          <tr>
-            <td><a href="lista_pb.html">Exerciții cu structuri<span class="nr_probleme">- 0 probleme</span></a></td>
-          </tr>
-          <tr>
-            <td><a href="lista_pb.html">Probleme diverse<span class="nr_probleme">- 0 probleme</span> </a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
+
   </div>
 
   <footer><p>@ Contact</p></footer>

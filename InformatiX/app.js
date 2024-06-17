@@ -41,6 +41,60 @@ const routes = {
     '/home/administrare': (req, res) => {
         serveHTMLFile('/administrare.html', res);
     },
+    '/home/probleme-clasa-9/probleme-elementare': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-9/elemente-ale-limbajului': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-9/tablouri-unidimensionale': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-9/tablouri-bidimensionale': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-9/probleme-diverse': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/subprograme': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/recursivitate': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/divide-et-impera': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/siruri-de-caractere': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/structuri-de-date-liniare': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/liste-alocate-dinamic': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-10/tipul-struct': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-11/teoria-grafurilor': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-11/programare-dinamica': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-11/metoda-greedy': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-11/backtracking': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-11/programare-orientata-pe-obiecte': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/probleme-clasa-11/arbori': (req, res) => {
+        serveHTMLFile('/lista_pb.html', res);
+    },
     '/reset-password': async (req, res) => {
         const urlString = req.url;
         const parameter = url.parse(urlString, true).query;
