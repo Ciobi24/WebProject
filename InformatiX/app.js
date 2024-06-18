@@ -38,6 +38,9 @@ const routes = {
     '/home/clasele-mele/teme': (req, res) => {
         serveHTMLFile('/temele_mele.html', res);
     },
+    '/home/clasele-mele/teme/rezolvare': (req, res) => {   // DE VAZUT AICI O CHESTIE! PT MN SA N-O UIT
+        serveHTMLFile('/solution.html', res);
+    },
     '/home/administrare': (req, res) => {
         serveHTMLFile('/administrare.html', res);
     },

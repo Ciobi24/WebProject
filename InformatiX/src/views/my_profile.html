@@ -32,46 +32,34 @@
   </script>
   <script>
     function showDiv(id) {
-      // Get all div elements
       var divs = document.getElementsByClassName('corp_dreapta')[0].getElementsByTagName('div');
-
-      // Hide all div elements
       for (var i = 0; i < divs.length; i++) {
         divs[i].style.display = 'none';
       }
-
-      // Show the selected div
       var selectedDiv = document.getElementById(id);
       selectedDiv.style.display = 'block';
 
-      // Recursive function to display all descendants
       function showAllDescendants(element) {
         var children = element.children;
         for (var i = 0; i < children.length; i++) {
           children[i].style.display = 'block';
-          showAllDescendants(children[i]); // Recursively call the function for each child
+          showAllDescendants(children[i]); 
         }
       }
 
-      // Call the function for the selected div
       showAllDescendants(selectedDiv);
     }
   </script>
   <script>
     window.onload = function () {
-      // Get all buttons
       var buttons = document.querySelectorAll('button');
-
-      // Loop through all buttons
       for (var i = 0; i < buttons.length; i++) {
-        // Add click event listener to each button
+  
         buttons[i].addEventListener('click', function () {
-          // Remove active class from all buttons
           for (var i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('active');
           }
 
-          // Add active class to the clicked button
           this.classList.add('active');
         });
       }

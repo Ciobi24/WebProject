@@ -9,118 +9,50 @@
     <link rel="stylesheet" href="../../public/css/header1.css">
     <link rel="stylesheet" href="../../public/css/temele_mele.css">
     <link rel="stylesheet" href="../../public/css/footer.css">
-    <script>
-        function showSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-            sidebar.style.display = 'flex'
-        }
-        function hideSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-            sidebar.style.display = 'none'
-        }
-
-      </script>
-      <!-- <script src="../../public/js/sendArgument.js"></script> -->
-      <script>
-
-        // Function to open the modal for searching problems
-        function openSearchModal() {
-            var modal = document.getElementById('searchModal');
-            modal.style.display = "block";
-        }
-
-        // Function to close the modal for searching problems
-        function closeSearchModal() {
-            var modal = document.getElementById('searchModal');
-            modal.style.display = "none";
-        }
-
-        // Function to open the solutions page for a user
-        function openSolutionsPage() {
-            // Navigate to solutions.html
-            window.location.href = "solutions.html";
-        }
-
-        // Function to open the evaluate modal
-        function openEvaluateModal() {
-            var modal = document.getElementById('evaluateModal');
-            modal.style.display = "block";
-        }
-        // Function to close the evaluate modal
-        function closeEvaluateModal() {
-            var modal = document.getElementById('evaluateModal');
-            modal.style.display = "none";
-        }
-        function openProblemModal() {
-            var modal = document.getElementById('problemModal');
-            modal.style.display = "block";
-        }
-        function closeProblemModal() {
-            var modal = document.getElementById('problemModal');
-            modal.style.display = "none";
-        }
-        function openUserSolution() {
-            const userType = getUrlParam('userType');
-            const url = 'solution.html';
-            if (url.includes('?')) {
-                window.location.href = `${url}&userType=${userType}`;
-            } else {
-                window.location.href = `${url}?userType=${userType}`;
-            }
-        }
-
-        function getUrlParam(paramName) {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            return urlParams.get(paramName);
-        }
-
-        function searchProblem() {
-            
-        }
-    </script>
-    <script>
-        function openAddTemaModal() {
-            var modal = document.getElementById('addTemaModal');
-            modal.style.display = "block";
-        }
-
-        function closeAddTemaModal() {
-            var modal = document.getElementById('addTemaModal');
-            modal.style.display = "none";
-        }
-
-        function submitNewTema() {
-            // // Get input values
-            // var clasa = document.getElementById('clasaInput').value;
-            // var deadline = document.getElementById('deadlineInput').value;
-            // var problems = document.getElementById('problemsInput').value.split('\n'); // Split problems by newline
-
-            // // Create new topic element
-            // var container = document.querySelector('.teme');
-            // var newTema = document.createElement('div');
-            // newTema.classList.add('tema');
-            // newTema.innerHTML = `
-            //     <h3>${clasa}</h3>
-            //     <p>Deadline: ${deadline}</p>
-            //     <ul>
-            //         ${problems.map(problem => `<li>${problem}</li>`).join('')}
-            //     </ul>
-            //     <button onclick="openSearchModal()">Adauga</button>
-            //     <button onclick="openEvaluateModal()">Evalueaza</button>
-            // `;
-
-            // // Append new topic to container
-            // container.appendChild(newTema);
-
-            // // Close the modal
-            closeAddTemaModal();
-        }
-    </script>
-  <script src="../../public/js/checkAdmin.js"></script>
-
+    <script src="../../public/js/temele-mele.js"></script>
+    <script src="../../public/js/checkAdmin.js"></script>
 </head>
+<script>
+    function showSidebar() {
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.style.display = 'flex'
+}
 
+function hideSidebar() {
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.style.display = 'none'
+}
+
+function closeSearchModal() {
+    var modal = document.getElementById('searchModal');
+    modal.style.display = "none";
+}
+function closeEvaluateModal() {
+    var modal = document.getElementById('evaluateModal');
+    modal.style.display = "none";
+}
+function closeProblemModal() {
+    var modal = document.getElementById('problemModal');
+    modal.style.display = "none";
+}
+function closeEvaluateModal() {
+    var modal = document.getElementById('evaluateModal');
+    modal.style.display = "none";
+}
+function openUserSolution() {
+    const userType = getUrlParam('userType');
+    const url = 'solution.html';
+    if (url.includes('?')) {
+        window.location.href = `${url}&userType=${userType}`;
+    } else {
+        window.location.href = `${url}?userType=${userType}`;
+    }
+}
+function closeAddTemaModal() {
+    var modal = document.getElementById('addTemaModal');
+    modal.style.display = "none";
+}
+</script>
 <body>
     <header>
         <nav>
@@ -241,105 +173,6 @@
     <footer>
         <p>@ Contact</p>
     </footer>
-
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const userType = urlParams.get('userType');
-    
-        function AddButton() {
-            if (userType === 'profesor') {
-                const addButton = document.createElement('button');
-                addButton.textContent = '+';
-                addButton.onclick = openAddTemaModal;
-    
-                const container = document.querySelector('.container_princ');
-                if (container) {
-                    container.appendChild(addButton);
-                }
-            }
-        }
-        AddButton();
-    </script>
-    
-    <script>
-        const urlParams1 = new URLSearchParams(window.location.search);
-        const userType1 = urlParams1.get('userType');
-    
-        function addButtonToTemeleMele() {
-            if (userType1 === 'profesor' || userType1 === 'admin') {
-                const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
-    
-                if (buttons.length > 0) {
-                    buttons.forEach(button => {
-                        button.classList.add('hidden');
-                    });
-                }
-    
-                const temaDivs = document.querySelectorAll('.tema');
-    
-                if (temaDivs.length > 0) {
-                    temaDivs.forEach(div => {
-    
-                        const addButton = document.createElement('button');
-                        addButton.textContent = 'Adauga';
-                        addButton.onclick = openSearchModal;
-    
-                        const evaluateButton = document.createElement('button');
-                        evaluateButton.textContent = 'Evalueaza';
-                        evaluateButton.onclick = openEvaluateModal;
-    
-                        div.appendChild(addButton);
-                        div.appendChild(evaluateButton);
-                    });
-                }
-            }
-            else {
-                const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
-    
-                if (buttons.length > 0) {
-                    buttons.forEach(button => {
-                        button.classList.add('hidden');
-                    });
-                }
-                const temaDivs = document.querySelectorAll('.tema');
-    
-                if (temaDivs.length > 0) {
-                    temaDivs.forEach(div => {
-                        const solveButton = document.createElement('button');
-                        solveButton.textContent = 'Rezolva';
-                        solveButton.onclick = openProblemModal;
-    
-                        div.appendChild(solveButton);
-                    });
-                }
-            }
-        }
-    
-        addButtonToTemeleMele();
-    </script>
-    <script>
-        function openProblemSolution(problemName) {
-            window.location.href = `rezolva.html?problem=${encodeURIComponent(problemName)}`;
-            openTemePage();
-        }
-    
-        function openTemePage() {
-            const userType = getUrlParam('userType');
-            const url = 'rezolva_pb.html';
-            if (url.includes('?')) {
-                window.location.href = `${url}&userType=${userType}`;
-            } else {
-                window.location.href = `${url}?userType=${userType}`;
-            }
-        }
-    
-        function getUrlParam(paramName) {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            return urlParams.get(paramName);
-        }
-    </script>
 </body>
 
 </html>
