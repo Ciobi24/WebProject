@@ -42,10 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
             lastname: document.getElementById('lastname').value,
             firstname: document.getElementById('firstname').value,
             email: document.getElementById('email').value,
-            birthday: document.getElementById('birthday').value,
+            birthday: validateDate(document.getElementById('birthday').value),
             city: document.getElementById('city').value,
             school: document.getElementById('school').value
         };
+        
+        function validateDate(dateString) {
+            var regex = /^\d{4}-\d{2}-\d{2}$/;
+            if (regex.test(dateString)) {
+                return dateString; 
+            } else {
+                return null;
+            }
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.open('PATCH', '/api/updateUser', true);
