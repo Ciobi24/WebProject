@@ -10,37 +10,6 @@
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/probleme-clasa-10.css">
 
-  <style>
-    .categorie a {
-      display: block;
-      color: #333;
-    }
-
-    .categorie a:hover {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .categorie a:active {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    .container-mare {
-      padding: 20px;
-    }
-
-    .categorie {
-      margin-bottom: 20px;
-    }
-
-    .categorie .titlu {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-
-    .nr_probleme {
-      color: #666;
-    }
-  </style>
 
   <script>
     function showSidebar() {
@@ -51,16 +20,9 @@
       const sidebar = document.querySelector('.sidebar')
       sidebar.style.display = 'none'
     }
-    function showSignUp() {
-      const flipCheckbox = document.getElementById('flip');
-      flipCheckbox.checked = true;
-    }
-    function showLogin() {
-      const flipCheckbox = document.getElementById('flip');
-      flipCheckbox.checked = false;
-    }
   </script>
-  <script src="../../public/js/sendArgument.js"></script>
+  <!-- <script src="../../public/js/sendArgument.js"></script> -->
+   <script type="module" src="../../public/js/loadCategories10.js"></script>
 </head>
 
 <body>
@@ -92,49 +54,6 @@
 
   <div class="container-mare">
     <h1 class="tip-clasa"> Clasa a X-a</h1>
-    
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/subprograme">Subprograme <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/recursivitate">Recursivitate <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/divide-et-impera">Divide et Impera <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/siruri-de-caractere">Siruri de caractere <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/structuri-de-date-liniare">Structuri de date liniare <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/liste-alocate-dinamic">Liste alocate dinamic <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-10/tipul-struct">Tipul struct <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
   </div>
 
   <footer><p>@ Contact</p></footer>

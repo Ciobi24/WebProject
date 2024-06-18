@@ -52,6 +52,35 @@ footer {
     justify-content: center;
     align-items: center;
 }
+.categorie a {
+    display: block;
+    color: #333;
+  }
+
+  .categorie a:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .categorie a:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .container-mare {
+    padding: 20px;
+  }
+
+  .categorie {
+    margin-bottom: 20px;
+  }
+
+  .categorie .titlu {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .nr_probleme {
+    color: #666;
+  }
 
 .tip-clasa {
     margin-top: 0;

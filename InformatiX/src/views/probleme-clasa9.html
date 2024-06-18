@@ -10,39 +10,8 @@
   <link rel="stylesheet" href="../../public/css/footer.css">
   <link rel="stylesheet" href="../../public/css/probleme-clasa-9.css">
 
-  <style>
-    .categorie a {
-      display: block;
-      color: #333;
-    }
-
-    .categorie a:hover {
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .categorie a:active {
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    .container-mare {
-      padding: 20px;
-    }
-
-    .categorie {
-      margin-bottom: 20px;
-    }
-
-    .categorie .titlu {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-
-    .nr_probleme {
-      color: #666;
-    }
-  </style>
-
-  <script>
+  <!-- <script src="../../public/js/sendArgument.js"></script> -->
+   <script>
     function showSidebar() {
       const sidebar = document.querySelector('.sidebar')
       sidebar.style.display = 'flex'
@@ -51,16 +20,8 @@
       const sidebar = document.querySelector('.sidebar')
       sidebar.style.display = 'none'
     }
-    function showSignUp() {
-      const flipCheckbox = document.getElementById('flip');
-      flipCheckbox.checked = true;
-    }
-    function showLogin() {
-      const flipCheckbox = document.getElementById('flip');
-      flipCheckbox.checked = false;
-    }
-  </script>
-  <script src="../../public/js/sendArgument.js"></script>
+  </script> 
+  <script type="module" src="../../public/js/loadCategories.js"></script>
 </head>
 
 <body>
@@ -95,37 +56,6 @@
 
   <div class="container-mare">
     <h1 class="tip-clasa"> Clasa a IX-a</h1>
-    
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-9/probleme-elementare">Probleme elementare <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-9/elemente-ale-limbajului">Elemente ale limbajului <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-9/tablouri-unidimensionale">Tablouri unidimensionale <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-9/tablouri-bidimensionale">Tablouri bidimensionale <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-
-    <div class="categorie">
-      <div class="titlu">
-        <a href="/home/probleme-clasa-9/probleme-diverse">Probleme diverse <span class="nr_probleme">- 0 probleme</span></a>
-      </div>
-    </div>
-    
   </div>
 
   <footer><p>@ Contact</p></footer>
