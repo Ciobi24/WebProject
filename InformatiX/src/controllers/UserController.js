@@ -7,7 +7,6 @@ async function getUserByIdHandler(req, res) {
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
     try {
-        console.log(decoded);
         const userId = decoded.id;
 
         const user = await getUserById(userId);
