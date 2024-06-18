@@ -119,20 +119,16 @@ td:hover {
     opacity: 0.75;
 }
 
-a {
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: block;
-    color: inherit; /* Ensure the link inherits the text color */
-}
 .categorie a {
     display: block;
     color: #333;
+    text-decoration: none;
   }
 
   .categorie a:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color:#662066;
+    transform: scale(1.002, 1.002);
   }
 
   .categorie a:active {

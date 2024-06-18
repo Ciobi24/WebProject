@@ -9,10 +9,19 @@
     <link rel="stylesheet" href="../../public/css/pb.css">
     <link rel="stylesheet" href="../../public/css/footer.css">
     <link rel="stylesheet" href="../../public/css/header1.css">
-    <!-- <script src="../../public/js/sendArgument.js"></script> -->
-    <script type="module" src="../../public/js/probleme.js"></script> <!-- Ensure you specify type="module" -->
+    <script type="module" src="../../public/js/probleme.js"></script>
 </head>
 
+<script>
+    function showSidebar() {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'flex'
+    }
+    function hideSidebar() {
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'none'
+    }
+  </script>
 <body>
     <header>
         <nav>
