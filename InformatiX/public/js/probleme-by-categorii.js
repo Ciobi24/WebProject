@@ -5,11 +5,17 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   async function fetchAndDisplayProbleme() {
       try {
+          console.log('Fetching problems for category:', categorie);
           const response = await fetch(`/api/problemeByCategorie?categorie=${categorie}`);
           if (!response.ok) {
               throw new Error('Network response was not ok.');
           }
-          const probleme = await response.json();
+          let probleme = await response.json();
+          console.log('Fetched problems:', probleme);
+
+          probleme = probleme.filter(problema => problema.verified);
+          console.log('Filtered problems:', probleme);
+
           displayProbleme(probleme);
       } catch (error) {
           console.error('Error fetching data:', error);
@@ -18,11 +24,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   async function fetchUserById(userId) {
       try {
+          console.log('Fetching user for ID:', userId);
           const response = await fetch(`/api/user?id=${userId}`);
           if (!response.ok) {
               throw new Error('Network response was not ok.');
           }
           const user = await response.json();
+          console.log('Fetched user:', user);
           return user.firstname + ' ' + user.lastname; // assuming user object has firstname and lastname
       } catch (error) {
           console.error('Error fetching user data:', error);
@@ -36,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
       for (const problema of probleme) {
           const authorName = await fetchUserById(problema.creatorId);
+          console.log('Author name:', authorName);
 
           const problemaHTML = `
               <div class="problema">
