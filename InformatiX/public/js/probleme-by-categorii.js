@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                   <h1>${problema.nume_problema}</h1>
                   <button>Share</button>
                   <div class="ratings">
-                      <span class="stars">★★★☆☆</span> 
+                      <span class="stars">${problema.rating}★</span> 
                       <span class="users-tried">${problema.utilizatori_incercat} încercări</span>
                       <span class="users-solved">${problema.utilizatori_rezolvat} rezolvări</span>
                   </div>
