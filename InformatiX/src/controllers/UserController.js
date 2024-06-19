@@ -22,6 +22,31 @@ async function getUserByIdHandler(req, res) {
         res.end(JSON.stringify({ message: 'Unauthorized', error: error.message }));
     }
 }
+async function getUserByIdnotCookieHandler(req, res) {
+    const urlParams = new URLSearchParams(req.url.split('?')[1]);
+    const userId = urlParams.get('id');
+
+    try {
+        if (!userId) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ message: 'User ID is required' }));
+        }
+
+        const user = await getUserById(userId);
+
+        if (user) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(user));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'User not found' }));
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Internal server error' }));
+    }
+}
 
 async function updateUserByCredentialsHandler(req, res) {
     try {
@@ -52,4 +77,4 @@ async function updateUserByCredentialsHandler(req, res) {
     }
 }
 
-module.exports = { getUserByIdHandler, updateUserByCredentialsHandler };
+module.exports = { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler };

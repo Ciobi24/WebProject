@@ -2,7 +2,7 @@ const { handleLogin } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
-const { getUserByIdHandler, updateUserByCredentialsHandler } = require('./src/controllers/UserController');
+const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
 const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
 
 function handleUserRoute(req, res) {
@@ -24,9 +24,12 @@ function handleUserRoute(req, res) {
 }
 
 function handleApiRoute(req, res) {
-    if (req.url === '/api/user') {
-        getUserByIdHandler(req, res);
+    if (req.url.startsWith('/api/user?id=') && req.method === 'GET') {
+        getUserByIdnotCookieHandler(req, res);
     }
+    else if (req.url === '/api/user') {
+        getUserByIdHandler(req, res);
+    } 
     else if (req.url === '/api/updateUser') {
         updateUserByCredentialsHandler(req, res);
     }else if (req.url.startsWith('/api/problemeByCategorie') && req.method === 'GET') {

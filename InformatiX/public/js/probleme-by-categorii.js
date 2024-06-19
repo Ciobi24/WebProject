@@ -16,11 +16,27 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
   }
 
-  function displayProbleme(probleme) {
+  async function fetchUserById(userId) {
+      try {
+          const response = await fetch(`/api/user?id=${userId}`);
+          if (!response.ok) {
+              throw new Error('Network response was not ok.');
+          }
+          const user = await response.json();
+          return user.firstname + ' ' + user.lastname; // assuming user object has firstname and lastname
+      } catch (error) {
+          console.error('Error fetching user data:', error);
+          return 'Unknown Author';
+      }
+  }
+
+  async function displayProbleme(probleme) {
       const container = document.querySelector('.probleme');
       container.innerHTML = '';
 
-      probleme.forEach(problema => {
+      for (const problema of probleme) {
+          const authorName = await fetchUserById(problema.creatorId);
+
           const problemaHTML = `
               <div class="problema">
                   <h1>${problema.nume_problema}</h1>
@@ -35,11 +51,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                       <p>${problema.categorie}</p>
                       <p>${problema.dificultate}</p>
                   </div>
-                  <p class="autor">Autor: ${problema.creatorId}</p>
+                  <p class="autor">Autor: ${authorName}</p>
               </div>
           `;
           container.insertAdjacentHTML('beforeend', problemaHTML);
-      });
+      }
   }
 
   fetchAndDisplayProbleme();
