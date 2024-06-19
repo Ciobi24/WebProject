@@ -13,7 +13,6 @@ const categories = {
         "Divide et Impera",
         "Siruri de caractere",
         "Structuri de date liniare",
-        "Liste alocate dinamic",
         "Tipul struct"
     ],
     clasa11: [

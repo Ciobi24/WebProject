@@ -16,11 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const link = document.createElement('a');
         link.href = `/home/probleme-clasa-11/${category.toLowerCase().replace(/ /g, '-')}`;
         link.textContent = category;
-        const span = document.createElement('span');
-        span.className = 'nr_probleme';
-        span.textContent = ' - 0 probleme';
 
-        link.appendChild(span);
         titleDiv.appendChild(link);
         categoryDiv.appendChild(titleDiv);
         containerMare.appendChild(categoryDiv);
