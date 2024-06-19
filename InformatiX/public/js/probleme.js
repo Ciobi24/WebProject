@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const categoryOptions = [
                 'Probleme elementare', 'Elemente ale limbajului', 'Tablouri unidimensionale',
                 'Tablouri bidimensionale', 'Probleme diverse', 'Subprograme', 'Recursivitate',
-                'Divide et Impera', 'Șiruri de caractere', 'Structuri de date liniare', 'Liste alocate dinamic',
+                'Divide et Impera', 'Șiruri de caractere', 'Structuri de date liniare',
                 'Tipul struct', 'Teoria grafurilor', 'Programare dinamica', 'Metoda Greedy', 'Backtracking',
-                'Arbori', 'Programare orientata pe obiecte'
+                'Arbori'
             ];
             categoryOptions.forEach((optionText) => {
                 const option = document.createElement('option');

@@ -12,6 +12,7 @@ async function getUserById(id) {
     }
 }
 
+
 async function findUserByEmailAndPassword(email, password) {
     const connection = await dbInstance.connect(); 
     try {

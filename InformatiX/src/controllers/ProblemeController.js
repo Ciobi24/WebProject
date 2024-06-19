@@ -54,7 +54,28 @@ async function addProblemaHandler(req, res) {
         res.end(JSON.stringify({ success: false, message: 'A apărut o eroare.', error: error.message }));
     }
 }
+async function getProblemaStats(req, res) {
+    const urlParams = new URLSearchParams(req.url.split('?')[1]);
+    const id = urlParams.get('id');
+
+    try {
+        const problema = await Problema.findById(id);
+        if (problema) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+                utilizatori_incercat: problema.utilizatori_incercat,
+                utilizatori_rezolvat: problema.utilizatori_rezolvat
+            }));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Problema not found' }));
+        }
+    } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Internal Server Error' }));
+    }
+}
 
 module.exports = {
-    addProblemaHandler, getProblemeByCategorie, getProblemeByClasa
+    addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats
 };

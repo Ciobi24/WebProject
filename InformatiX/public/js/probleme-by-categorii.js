@@ -1,27 +1,71 @@
-function getCategorieFromUrl() {
-    const urlPath = window.location.pathname;
-    const parts = urlPath.split('/');
-    return parts[parts.length - 1]; 
-  }
+document.addEventListener('DOMContentLoaded', async function() {
+  const urlPath = window.location.pathname;
+  const parts = urlPath.split('/');
+  const categorie = parts[parts.length - 1];
 
-  function fetchProbleme() {
-    const categorie = getCategorieFromUrl();
-    const url = `/api/problemeByCategorie?categorie=${encodeURIComponent(categorie)}`;
+  async function fetchAndDisplayProbleme() {
+      try {
+          console.log('Fetching problems for category:', categorie);
+          const response = await fetch(`/api/problemeByCategorie?categorie=${categorie}`);
+          if (!response.ok) {
+              throw new Error('Network response was not ok.');
+          }
+          let probleme = await response.json();
+          console.log('Fetched problems:', probleme);
 
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          const probleme = JSON.parse(xhr.responseText);
-          console.log('Probleme:', probleme);
-        } else {
-          console.error('Request error:', xhr.status);
-        }
+          probleme = probleme.filter(problema => problema.verified);
+          console.log('Filtered problems:', probleme);
+
+          displayProbleme(probleme);
+      } catch (error) {
+          console.error('Error fetching data:', error);
       }
-    };
-
-    xhr.open('GET', url, true);
-    xhr.send();
   }
 
-  fetchProbleme();
+  async function fetchUserById(userId) {
+      try {
+          console.log('Fetching user for ID:', userId);
+          const response = await fetch(`/api/user?id=${userId}`);
+          if (!response.ok) {
+              throw new Error('Network response was not ok.');
+          }
+          const user = await response.json();
+          console.log('Fetched user:', user);
+          return user.firstname + ' ' + user.lastname; // assuming user object has firstname and lastname
+      } catch (error) {
+          console.error('Error fetching user data:', error);
+          return 'Unknown Author';
+      }
+  }
+
+  async function displayProbleme(probleme) {
+      const container = document.querySelector('.probleme');
+      container.innerHTML = '';
+
+      for (const problema of probleme) {
+          const authorName = await fetchUserById(problema.creatorId);
+          console.log('Author name:', authorName);
+
+          const problemaHTML = `
+              <div class="problema">
+                  <h1>${problema.nume_problema}</h1>
+                  <button>Share</button>
+                  <div class="ratings">
+                      <span class="stars">${problema.rating}★</span> 
+                      <span class="users-tried">${problema.utilizatori_incercat} încercări</span>
+                      <span class="users-solved">${problema.utilizatori_rezolvat} rezolvări</span>
+                  </div>
+                  <p class="cerinta">${problema.text_problema}</p>
+                  <div class="tags">
+                      <p>${problema.categorie}</p>
+                      <p>${problema.dificultate}</p>
+                  </div>
+                  <p class="autor">Autor: ${authorName}</p>
+              </div>
+          `;
+          container.insertAdjacentHTML('beforeend', problemaHTML);
+      }
+  }
+
+  fetchAndDisplayProbleme();
+});

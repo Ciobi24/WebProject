@@ -2,8 +2,8 @@ const { handleLogin } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
-const { getUserByIdHandler, updateUserByCredentialsHandler } = require('./src/controllers/UserController');
-const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa } = require('./src/controllers/ProblemeController');
+const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
+const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass } = require('./src/controllers/ClassesController');
 
 function handleUserRoute(req, res) {
@@ -25,9 +25,12 @@ function handleUserRoute(req, res) {
 }
 
 function handleApiRoute(req, res) {
-    if (req.url === '/api/user') {
-        getUserByIdHandler(req, res);
+    if (req.url.startsWith('/api/user?id=') && req.method === 'GET') {
+        getUserByIdnotCookieHandler(req, res);
     }
+    else if (req.url === '/api/user') {
+        getUserByIdHandler(req, res);
+    } 
     else if (req.url === '/api/updateUser') {
         updateUserByCredentialsHandler(req, res);
     }else if (req.url.startsWith('/api/problemeByCategorie') && req.method === 'GET') {
@@ -35,6 +38,9 @@ function handleApiRoute(req, res) {
     }
     else if (req.url.startsWith('/api/problemeByClasa') && req.method === 'GET') {
         getProblemeByClasa(req, res);
+    }
+    else if (req.url.startsWith('/api/problemaStats') && req.method === 'GET') {
+        getProblemaStats(req, res);
     }
     else if (req.url === '/api/allClasses' && req.method === 'GET') {
         getClassesByUser(req, res);

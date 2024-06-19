@@ -9,84 +9,17 @@
     <link rel="stylesheet" href="../../public/css/header1.css">
     <link rel="stylesheet" href="../../public/css/lista_pb.css">
     <link rel="stylesheet" href="../../public/css/footer.css">
-    <script>
-        function showSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.style.display = 'flex';
-        }
-
-        function hideSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.style.display = 'none';
-        }
-
-        function showSignUp() {
-            const flipCheckbox = document.getElementById('flip');
-            flipCheckbox.checked = true;
-        }
-
-        function showLogin() {
-            const flipCheckbox = document.getElementById('flip');
-            flipCheckbox.checked = false;
-        }
-
-        function getCategorieFromUrl() {
-            const urlPath = window.location.pathname;
-            const parts = urlPath.split('/');
-            return parts[parts.length - 1];
-        }
-        async function fetchAndDisplayProbleme() {
-            try {
-                const response = await fetch(`/api/problemeByCategorie?categorie=${getCategorieFromUrl()}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok.');
-                }
-                const probleme = await response.json();
-                displayProbleme(probleme);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        function displayProbleme(probleme) {
-            const container = document.querySelector('.probleme');
-            container.innerHTML = '';
-
-            probleme.forEach(problema => {
-                const problemaHTML = `
-                    <div class="problema">
-                        <h1>${problema.nume_problema}</h1>
-                        <button>Share</button>
-                        <div class="ratings">
-                            <span class="stars">★★★☆☆</span> 
-                            <span class="users-tried">${problema.utilizatori_incercat} încercări</span>
-                            <span class="users-solved">${problema.utilizatori_rezolvat} rezolvări</span>
-                        </div>
-                        <p class="cerinta">${problema.text_problema}</p>
-                        <div class="tags">
-                            <p>${problema.categorie}</p>
-                            <p>${problema.dificultate}</p>
-                        </div>
-                        <p class="autor">Autor: ${problema.creatorId}</p>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', problemaHTML);
-            });
-        }
-        document.addEventListener('DOMContentLoaded', fetchAndDisplayProbleme);
-    </script>
-      <script src="../../public/js/checkAdmin.js"></script>
-
+    <script src="../../public/js/checkAdmin.js"></script>
+    <script src="../../public/js/probleme-by-categorii.js"></script>
+    <script src="../../public/js/modal.js"></script>
 </head>
 
 <body>
     <header>
         <nav>
             <ul class="sidebar">
-                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                            viewBox="0 96 960 960" width="26">
-                            <path
-                                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
+                            <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
                         </svg></a></li>
                 <li><a href="/home" onclick=hideSidebar()>Home</a></li>
                 <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
@@ -102,18 +35,24 @@
                 <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
                 <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
                 <li class="hideOnMobile"><a href="/">Logout</a></li>
-                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                            height="26" viewBox="0 96 960 960" width="26">
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
                             <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
                         </svg></a></li>
             </ul>
         </nav>
     </header>
-    <div class="probleme">
-
+    <div class="probleme"></div>
+    
+    <div id="problemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h1 id="modalTitle"></h1>
+            <p id="modalCerinta"></p>
+            <div id="modalTags" class="tags"></div>
+            <p class="autor" id="modalAutor"></p>
+        </div>
     </div>
 
-    <script src="../../public/js/probleme-by-categorii.js"></script>
     <footer>
         <p>@ Contact</p>
     </footer>
