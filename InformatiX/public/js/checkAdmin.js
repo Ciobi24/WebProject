@@ -13,10 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const adminLinkSidebar = document.querySelector('.sidebar a[href="/home/administrare"]');
                     const adminLinkMenu = document.querySelector('.menu a[href="/home/administrare"]');
 
-                    if (isAdmin) {
-                        adminLinkSidebar.style.display = 'block';
-                        adminLinkMenu.style.display = 'block';
-                    } else {
+                    if (!isAdmin) {
                         adminLinkSidebar.style.display = 'none';
                         adminLinkMenu.style.display = 'none';
                     }

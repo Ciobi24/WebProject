@@ -1,27 +1,46 @@
-function getCategorieFromUrl() {
-    const urlPath = window.location.pathname;
-    const parts = urlPath.split('/');
-    return parts[parts.length - 1]; 
-  }
+document.addEventListener('DOMContentLoaded', async function() {
+  const urlPath = window.location.pathname;
+  const parts = urlPath.split('/');
+  const categorie = parts[parts.length - 1];
 
-  function fetchProbleme() {
-    const categorie = getCategorieFromUrl();
-    const url = `/api/problemeByCategorie?categorie=${encodeURIComponent(categorie)}`;
-
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          const probleme = JSON.parse(xhr.responseText);
-          console.log('Probleme:', probleme);
-        } else {
-          console.error('Request error:', xhr.status);
-        }
+  async function fetchAndDisplayProbleme() {
+      try {
+          const response = await fetch(`/api/problemeByCategorie?categorie=${categorie}`);
+          if (!response.ok) {
+              throw new Error('Network response was not ok.');
+          }
+          const probleme = await response.json();
+          displayProbleme(probleme);
+      } catch (error) {
+          console.error('Error fetching data:', error);
       }
-    };
-
-    xhr.open('GET', url, true);
-    xhr.send();
   }
 
-  fetchProbleme();
+  function displayProbleme(probleme) {
+      const container = document.querySelector('.probleme');
+      container.innerHTML = '';
+
+      probleme.forEach(problema => {
+          const problemaHTML = `
+              <div class="problema">
+                  <h1>${problema.nume_problema}</h1>
+                  <button>Share</button>
+                  <div class="ratings">
+                      <span class="stars">★★★☆☆</span> 
+                      <span class="users-tried">${problema.utilizatori_incercat} încercări</span>
+                      <span class="users-solved">${problema.utilizatori_rezolvat} rezolvări</span>
+                  </div>
+                  <p class="cerinta">${problema.text_problema}</p>
+                  <div class="tags">
+                      <p>${problema.categorie}</p>
+                      <p>${problema.dificultate}</p>
+                  </div>
+                  <p class="autor">Autor: ${problema.creatorId}</p>
+              </div>
+          `;
+          container.insertAdjacentHTML('beforeend', problemaHTML);
+      });
+  }
+
+  fetchAndDisplayProbleme();
+});
