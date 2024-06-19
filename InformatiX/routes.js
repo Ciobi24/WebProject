@@ -4,6 +4,7 @@ const { handleResetPassword } = require('./src/controllers/ForgotPasswordControl
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler } = require('./src/controllers/UserController');
 const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa } = require('./src/controllers/ProblemeController');
+const { getClassesByUser, createClass } = require('./src/controllers/ClassesController');
 
 function handleUserRoute(req, res) {
     if (req.url === '/home') {
@@ -34,6 +35,12 @@ function handleApiRoute(req, res) {
     }
     else if (req.url.startsWith('/api/problemeByClasa') && req.method === 'GET') {
         getProblemeByClasa(req, res);
+    }
+    else if (req.url === '/api/allClasses' && req.method === 'GET') {
+        getClassesByUser(req, res);
+    }
+    else if (req.url === '/api/createClass' && req.method === 'POST') {
+        createClass(req, res);
     }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });

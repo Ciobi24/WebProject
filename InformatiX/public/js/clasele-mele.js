@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert("Please enter a class name.");
             }
         }
+        
     
         if (userType === 'profesor' || userType === 'admin') {
 
@@ -76,4 +77,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     fetchUserDetails();
+
+
+    var addClassButton = document.getElementById('buttonCreareClasa');
+    addClassButton.addEventListener('click', function () {
+        var className = document.getElementById('newClassName').value.trim();
+    
+        if (className) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/createClass', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+    
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    alert('Clasă adăugată cu succes!');
+                    document.getElementById('newClassName').value = "";
+                    closeAddClassModal();
+                } else if (xhr.status === 409) { 
+                    alert('Eroare! Numele clasei este deja utilizat.');
+                } else {
+                    alert('Eroare! Serverul a returnat statusul ' + xhr.status);
+                }
+            };
+    
+            xhr.onerror = function () {
+                alert('Eroare! Cererea a eșuat.');
+            };
+    
+            var formData = JSON.stringify({ className: className });
+            xhr.send(formData);
+        } else {
+            alert('Eroare! Numele clasei nu poate fi gol.');
+        }
+    });
+    
+
+    
 });

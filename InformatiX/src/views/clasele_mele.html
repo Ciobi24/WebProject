@@ -19,8 +19,7 @@
             sidebar.style.display = 'none'
         }
     </script>
-      <script src="../../public/js/checkAdmin.js"></script>
-
+    <script src="../../public/js/checkAdmin.js"></script>
 </head>
 
 <body>
@@ -56,27 +55,14 @@
     <div class="container_princ">
         <h2>Clasele mele</h2>
         <div class="clase" id="clase">
-            <div class="clasa" onclick="showModal('Clasa a X-a B')">
-                <h3>Clasa a X-a B</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a A')">
-                <h3>Clasa a X-a A</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a C')">
-                <h3>Clasa a X-a C</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a D')">
-                <h3>Clasa a X-a D</h3>
-            </div>
+
         </div>
     </div>
     <footer>
         <p>@ Contact</p>
     </footer>
 
-
     <div id="myModal" class="modal">
-
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 id="className">Clasa a X-a B</h2>
@@ -87,7 +73,6 @@
     </div>
 
     <div id="addUserModal" class="modal">
-
         <div class="modal-content">
             <span class="close" onclick="closeAddUserModal()">&times;</span>
             <h2>Add User</h2>
@@ -101,49 +86,87 @@
             <span class="close" onclick="closeAddClassModal()">&times;</span>
             <h2>Add New Class</h2>
             <input type="text" id="newClassName" placeholder="Enter class name">
-            <button onclick="addClass()">Add Class</button>
+            <button id="buttonCreareClasa">Add Class</button>
+            <div id="successMessage" class="message success">
+                Clasă adăugată cu succes!
+            </div>
+        
+            <div id="errorMessage" class="message error">
+                Eroare! Câmp gol sau numele clasei este deja utilizat!
+            </div>
+        
         </div>
     </div>
-</body>
-<script src="../../public/js/clasele-mele.js"></script>
-<script>
-    function closeModal() {
-        var modal = document.getElementById('myModal');
-        modal.style.display = "none";
-    }
-    function closeAddUserModal() {
-        var modal = document.getElementById('addUserModal');
-        modal.style.display = "none";
-    }
 
-    function showModal(className) {
-        var modal = document.getElementById('myModal');
-        var classNameElement = document.getElementById('className');
-        var userListElement = document.getElementById('userList');
-        classNameElement.innerText = className;
-        modal.style.display = "block";
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/allClasses', true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    var classes = JSON.parse(xhr.responseText);
+                    var classContainer = document.getElementById('clase');
 
-        var usersMap = {
-            "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
-            "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
-            "Clasa a X-a C": ["Daniel Thomas", "Sophia White", "Matthew Clark", "Isabella Hall", "William Lee"],
-            "Clasa a X-a D": ["Ethan Walker", "Ava Lewis", "Alexander King", "Chloe Scott", "Jacob Green"]
-        };
-
-        var users = usersMap[className];
-        userListElement.innerHTML = "";
-
-        users.forEach(function (user) {
-            var listItem = document.createElement('div');
-            listItem.textContent = user;
-            userListElement.appendChild(listItem);
+                    classes.forEach(function (classObj) {
+                        var classDiv = document.createElement('div');
+                        classDiv.className = 'clasa';
+                        classDiv.innerHTML = '<h3>' + classObj.nume + '</h3>';
+                        classDiv.setAttribute('onclick', `showModal('${classObj.nume}')`);
+                        classContainer.appendChild(classDiv);
+                    });
+                } else {
+                    console.error('Request failed. Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send();
         });
-    }
 
-    function closeAddClassModal() {
-        var modal = document.getElementById('addClassModal');
-        modal.style.display = "none";
-    }
-</script>
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+
+        function closeAddUserModal() {
+            var modal = document.getElementById('addUserModal');
+            modal.style.display = "none";
+        }
+
+        function showModal(className) {
+            var modal = document.getElementById('myModal');
+            var classNameElement = document.getElementById('className');
+            var userListElement = document.getElementById('userList');
+            
+            classNameElement.innerText = className;
+            modal.style.display = "block";
+
+            var usersMap = {
+                "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
+                "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
+                "Clasa a X-a C": ["Daniel Thomas", "Sophia White", "Matthew Clark", "Isabella Hall", "William Lee"],
+                "Clasa a X-a D": ["Ethan Walker", "Ava Lewis", "Alexander King", "Chloe Scott", "Jacob Green"]
+            };
+
+            var users = usersMap[className];
+            userListElement.innerHTML = "";
+
+            if (users) {
+                users.forEach(function (user) {
+                    var listItem = document.createElement('div');
+                    listItem.textContent = user;
+                    userListElement.appendChild(listItem);
+                });
+            } else {
+                console.error('Users for class ' + className + ' not found.');
+            }
+        }
+
+        function closeAddClassModal() {
+            var modal = document.getElementById('addClassModal');
+            modal.style.display = "none";
+        }
+
+    </script>
+    <script src="../../public/js/clasele-mele.js"></script>
+</body>
 
 </html>

@@ -6,6 +6,7 @@ const dbInstance = require('./src/models/db-config.js');
 const { handleUserRoute, handleApiRoute } = require('./routes');
 const { checkTokenExistence } = require('./src/services/TokenResetService.js');
 const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
+const { getJwt } = require("./src/services/JwtService.js");
 
 require('dotenv').config();
 dbInstance.connect();
@@ -41,8 +42,15 @@ const routes = {
     '/home/clasele-mele/teme/rezolvare': (req, res) => {   // DE VAZUT AICI O CHESTIE! PT MN SA N-O UIT
         serveHTMLFile('/solution.html', res);
     },
-    '/home/administrare': (req, res) => {
-        serveHTMLFile('/administrare.html', res);
+    '/home/administrare': (req, res) => 
+    {
+        if(checkAdminRole(req, res))
+           serveHTMLFile('/administrare.html', res);
+        else
+        {
+            res.writeHead(401, { 'Content-Type': 'text/plain' });
+            res.end('Unauthorized');
+        }
     },
     '/home/probleme-clasa-9/probleme-elementare': (req, res) => {
         serveHTMLFile('/lista_pb.html', res);
@@ -135,11 +143,6 @@ const server = http.createServer((req, res) => {
     let q = url.parse(req.url, true);
     let pathname = q.pathname;
 
-    if (req.method === 'POST') {
-        handleUserRoute(req, res);
-        return;
-    }
-
     if (pathname === '/') {
         routes['/'](req, res);
         return;
@@ -157,6 +160,11 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    if (req.method === 'POST') {
+        handleUserRoute(req, res);
+        return;
+    }
+
     if (routes[pathname]) {
         verifyToken(req, res, () => routes[pathname](req, res));
         return;
@@ -164,28 +172,6 @@ const server = http.createServer((req, res) => {
 
     serveStaticFile(pathname, res);
 });
-
-// function serveStaticFile(filePath, res) {
-//     const extname = path.extname(filePath);
-//     const contentType = {
-//         '.html': 'text/html',
-//         '.js': 'text/javascript',
-//         '.css': 'text/css',
-//         '.png': 'image/png',
-//         '.jpg': 'image/jpeg',
-//     }[extname] || 'application/octet-stream';
-
-//     fs.readFile(path.join(__dirname, 'public', filePath), (err, data) => {
-//         if (err) {
-//             res.writeHead(404, { 'Content-Type': 'text/plain' });
-//             res.end('Not Found');
-//             return;
-//         }
-
-//         res.writeHead(200, { 'Content-Type': contentType });
-//         res.end(data);
-//     });
-// }
 
 function serveStaticFile(pathname, res) {
     let filename;
@@ -233,3 +219,14 @@ function serveStaticFile(pathname, res) {
 server.listen(3001, () => {
     console.log("Server running on port 3001");
 });
+
+
+
+function checkAdminRole(req, res, next) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    if (decoded.role !== 'admin') {
+       return false;
+    }
+    return true;
+}

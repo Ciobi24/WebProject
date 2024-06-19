@@ -38,8 +38,30 @@ CREATE TABLE IF NOT EXISTS probleme (
   creator_id INT
 )`;
 
+const createTablesClase = `
+CREATE TABLE IF NOT EXISTS clase (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nume VARCHAR(255) NOT NULL,
+  id_user INT NOT NULL,
+  FOREIGN KEY (id_user) REFERENCES users(id)
+);
+`;
+
+const createTablesClasaElev = `
+CREATE TABLE IF NOT EXISTS clase_elevi (
+  id_clasa INT NOT NULL,
+  id_user INT NOT NULL,
+  PRIMARY KEY (id_clasa, id_user),
+  FOREIGN KEY (id_clasa) REFERENCES clase(id),
+  FOREIGN KEY (id_user) REFERENCES users(id)
+);
+`;
+
 module.exports = {
     createTablesUsers,
     createTablesResetPasswordToken,
-    createTablesProbleme
+    createTablesProbleme,
+    createTablesClase,
+    createTablesClasaElev
 };
+
