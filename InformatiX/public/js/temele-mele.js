@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     function fetchUserDetails() {
         const xhr = new XMLHttpRequest();
@@ -17,9 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function addSections(userType, userId) {
-
         if (userType === 'profesor' || userType === 'admin') {
-
             const addButton = document.createElement('button');
             addButton.textContent = '+';
             addButton.onclick = openAddTemaModal;
@@ -30,47 +27,41 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             
             const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
-
             if (buttons.length > 0) {
                 buttons.forEach(button => {
                     button.classList.add('hidden');
                 });
             }
-    
+
             const temaDivs = document.querySelectorAll('.tema');
-    
             if (temaDivs.length > 0) {
                 temaDivs.forEach(div => {
-    
                     const addButton = document.createElement('button');
                     addButton.textContent = 'Adauga';
                     addButton.onclick = openSearchModal;
-    
+
                     const evaluateButton = document.createElement('button');
                     evaluateButton.textContent = 'Evalueaza';
                     evaluateButton.onclick = openEvaluateModal;
-    
+
                     div.appendChild(addButton);
                     div.appendChild(evaluateButton);
                 });
             }
-        }
-        else{
+        } else {
             const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
-
             if (buttons.length > 0) {
                 buttons.forEach(button => {
                     button.classList.add('hidden');
                 });
             }
             const temaDivs = document.querySelectorAll('.tema');
-    
             if (temaDivs.length > 0) {
                 temaDivs.forEach(div => {
                     const solveButton = document.createElement('button');
                     solveButton.textContent = 'Rezolva';
                     solveButton.onclick = openProblemModal;
-    
+
                     div.appendChild(solveButton);
                 });
             }
@@ -149,9 +140,8 @@ function submitNewTema() {
     closeAddTemaModal();
 }
 
-function openProblemSolution(problemName) {
-    window.location.href = `rezolva.html?problem=${encodeURIComponent(problemName)}`;
-    openTemePage();
+function openProblemSolution(problemName, idTema, idProblema) {
+    window.location.href = `/home/clasele-mele/teme/${idTema}/rezolva-pb/${idProblema}`;
 }
 
 function openTemePage() {

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In&lt;form&gt;atiX</title>
-    <link rel="icon" type="image/png" href="../../public/favicons/icon.png">
-    <link rel="stylesheet" href="../../public/css/header1.css">
-    <link rel="stylesheet" href="../../public/css/rezolva_pb.css">
-    <link rel="stylesheet" href="../../public/css/footer.css">
+    <link rel="icon" type="image/png" href="../../../../../public/favicons/icon.png">
+    <link rel="stylesheet" href="../../../../../public/css/header1.css">
+    <link rel="stylesheet" href="../../../../../public/css/rezolva_pb.css">
+    <link rel="stylesheet" href="../../../../../public/css/footer.css">
     <script>
         function showSidebar() {
           const sidebar = document.querySelector('.sidebar')
@@ -18,57 +18,52 @@
           const sidebar = document.querySelector('.sidebar')
           sidebar.style.display = 'none'
         }
-  
       </script>
-        <script src="../../public/js/checkAdmin.js"></script>
-
-      <!-- <script src="../../public/js/sendArgument.js"></script> -->
+      <script src="../../../../../public/js/checkAdmin.js"></script>
+      <script src="../../../../../public/js/rezolva_pb.js"></script>
 </head>
 <body>
-  <header>
-    <nav>
-        <ul class="sidebar">
-            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                        viewBox="0 96 960 960" width="26">
-                        <path
-                            d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+    <header>
+        <nav>
+            <ul class="sidebar">
+                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
+                        <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
                     </svg></a></li>
-            <li><a href="/home" onclick=hideSidebar()>Home</a></li>
-            <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
-            <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
-            <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
-            <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
-            <li><a href="/" onclick="hideSidebar()">Logout</a></li>
-        </ul>
-        <ul class="menu">
-            <li><a href="/home">Home</a></li>
-            <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
-            <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
-            <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
-            <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
-            <li class="hideOnMobile"><a href="/">Logout</a></li>
-            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                        height="26" viewBox="0 96 960 960" width="26">
+                <li><a href="/home" onclick=hideSidebar()>Home</a></li>
+                <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
+                <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
+                <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
+                <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
+                <li><a href="/" onclick="hideSidebar()">Logout</a></li>
+            </ul>
+            <ul class="menu">
+                <li><a href="/home">Home</a></li>
+                <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
+                <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
+                <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
+                <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
+                <li class="hideOnMobile"><a href="/">Logout</a></li>
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
                         <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
                     </svg></a></li>
-        </ul>
-    </nav>
-</header>
-      <div class="continut">
+            </ul>
+        </nav>
+    </header>
+    <div class="continut">
         <div class="problema">
-            <h1>Titlu problema</h1>
-            <button>share</button>
+            <h1 id="problema-titlu">Titlu problema</h1>
+            <button id="share-button">share</button>
             <div class="ratings">
-                <span class="stars">★★★☆☆</span> 
-                <span class="users-tried">100 încercări</span>
-                <span class="users-solved">50 rezolvări</span>
+                <span class="stars" id="problema-stelute">★★★☆☆</span> 
+                <span class="users-tried" id="problema-incercari">100 încercări</span>
+                <span class="users-solved" id="problema-rezolvari">50 rezolvări</span>
             </div>
-            <p class="cerinta">Descriere problema, cerinte, posibile indicatii...</p>
-            <div class="tags">
+            <p class="cerinta" id="problema-descriere">Descriere problema, cerinte, posibile indicatii...</p>
+            <div class="tags" id="problema-tags">
                 <p>tag1</p>
                 <p>tag2</p>
             </div>
-            <p class="autor">Autor</p>
+            <p class="autor" id="problema-autor">Autor</p>
         </div>
         <div class="rezolvare">
             <label for="rezolvare">Rezolvare</label>
@@ -92,9 +87,9 @@
                 <p class="comentariu">Comentariu</p>
             </div>
         </div>
-      </div>
-      <footer>
+    </div>
+    <footer>
         <p>@ Contact</p>
-        </footer>
+    </footer>
 </body>
 </html>

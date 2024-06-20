@@ -1,5 +1,6 @@
 const ProblemeService = require('../services/ProblemeService');
 const { getJwt } = require("../services/JwtService");
+const url = require('url');
 
 async function addProblemaHandler(req, res) {
     let body = '';
@@ -75,7 +76,27 @@ async function getProblemaStats(req, res) {
         res.end(JSON.stringify({ message: 'Internal Server Error' }));
     }
 }
+async function getProblemaById(req, res) {
+    const urlParts = url.parse(req.url, true);
+    const pathParts = urlParts.pathname.split('/');
+    const idProblema = pathParts[pathParts.length - 1];
+
+    try {
+        const problema = await ProblemeService.getProblemaById(idProblema);
+        if (problema) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(problema));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Problema not found');
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+    }
+}
 
 module.exports = {
-    addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats
+    getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats
 };

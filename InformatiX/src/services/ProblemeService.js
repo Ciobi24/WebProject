@@ -11,6 +11,10 @@ class ProblemeService {
     static async getProblemeByClasa(clasa) {
         return await Problema.getAllByClasa(clasa);
     }
+    static async getProblemaById(id){
+        console.log(id);
+        return await Problema.getById(id);
+    }
 }
 
 module.exports = ProblemeService;
