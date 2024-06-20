@@ -1,37 +1,33 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function() {
   const urlPath = window.location.pathname;
   const parts = urlPath.split('/');
   const categorie = parts[parts.length - 1];
 
   async function fetchAndDisplayProbleme() {
       try {
-          console.log('Fetching problems for category:', categorie);
           const response = await fetch(`/api/problemeByCategorie?categorie=${categorie}`);
           if (!response.ok) {
               throw new Error('Network response was not ok.');
           }
           let probleme = await response.json();
-          console.log('Fetched problems:', probleme);
-
+          
+          // Filter problems that are verified
           probleme = probleme.filter(problema => problema.verified);
-          console.log('Filtered problems:', probleme);
 
           displayProbleme(probleme);
       } catch (error) {
           console.error('Error fetching data:', error);
       }
   }
-
+//check this
   async function fetchUserById(userId) {
       try {
-          console.log('Fetching user for ID:', userId);
           const response = await fetch(`/api/user?id=${userId}`);
           if (!response.ok) {
               throw new Error('Network response was not ok.');
           }
           const user = await response.json();
-          console.log('Fetched user:', user);
-          return user.firstname + ' ' + user.lastname; // assuming user object has firstname and lastname
+          return user.firstname + ' ' + user.lastname; 
       } catch (error) {
           console.error('Error fetching user data:', error);
           return 'Unknown Author';
@@ -44,12 +40,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
       for (const problema of probleme) {
           const authorName = await fetchUserById(problema.creatorId);
-          console.log('Author name:', authorName);
 
           const problemaHTML = `
               <div class="problema">
                   <h1>${problema.nume_problema}</h1>
-                  <button>Share</button>
+                  <button class="share-button">Share</button>
                   <div class="ratings">
                       <span class="stars">${problema.rating}★</span> 
                       <span class="users-tried">${problema.utilizatori_incercat} încercări</span>
@@ -65,6 +60,36 @@ document.addEventListener('DOMContentLoaded', async function() {
           `;
           container.insertAdjacentHTML('beforeend', problemaHTML);
       }
+
+      // Add event listeners to the share buttons after they are inserted into the DOM
+      document.querySelectorAll('.share-button').forEach(button => {
+          button.addEventListener('click', function() {
+              const problemaElement = this.closest('.problema');
+              const problemaData = {
+                  nume_problema: problemaElement.querySelector('h1').textContent,
+                  rating: problemaElement.querySelector('.stars').textContent,
+                  utilizatori_incercat: problemaElement.querySelector('.users-tried').textContent,
+                  utilizatori_rezolvat: problemaElement.querySelector('.users-solved').textContent,
+                  text_problema: problemaElement.querySelector('.cerinta').textContent,
+                  categorie: problemaElement.querySelector('.tags p:nth-child(1)').textContent,
+                  dificultate: problemaElement.querySelector('.tags p:nth-child(2)').textContent,
+                  autor: problemaElement.querySelector('.autor').textContent,
+              };
+              downloadJSON(problemaData, `${problemaData.nume_problema}.json`);
+          });
+      });
+  }
+
+  function downloadJSON(obj, filename) {
+      const jsonStr = JSON.stringify(obj, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
   }
 
   fetchAndDisplayProbleme();
