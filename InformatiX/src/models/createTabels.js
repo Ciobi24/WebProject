@@ -72,7 +72,6 @@ CREATE TABLE IF NOT EXISTS clase_elevi (
   FOREIGN KEY (id_user) REFERENCES users(id)
 );
 `;
-
 const createTablesTeme = `
 CREATE TABLE IF NOT EXISTS teme (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -94,6 +93,20 @@ CREATE TABLE IF NOT EXISTS probleme_teme (
 );
 `;
 
+const createTablesSolutii = `
+CREATE TABLE IF NOT EXISTS solutii (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_problema INT NOT NULL,
+  id_user INT NOT NULL,
+  id_tema INT NOT NULL,
+  text_solutie TEXT NOT NULL,
+  rating FLOAT,
+  comentariu TEXT,
+  FOREIGN KEY (id_problema) REFERENCES probleme(id),
+  FOREIGN KEY (id_user) REFERENCES users(id)
+);
+`;
+
 
 module.exports = {
     createTablesUsers,
@@ -103,6 +116,7 @@ module.exports = {
     createTablesClase,
     createTablesClasaElev,
     createTablesTeme,
-    createTablesProblemeTeme
+    createTablesProblemeTeme,
+    createTablesSolutii
 };
 

@@ -1,5 +1,10 @@
 const { findUserByEmailOrUsername, insertUser } = require('../services/UserService');
 
+// Functia de validare a emailului
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 async function handleRegister(req, res) {
     let body = '';
@@ -12,6 +17,12 @@ async function handleRegister(req, res) {
         const username = formData.username;
         const email = formData.email;
         const password = formData.password;
+
+        // Verificăm dacă emailul este valid
+        if (!isValidEmail(email)) {
+            res.writeHead(400, { 'Content-Type': 'text/plain' });
+            return res.end('Email invalid');
+        }
 
         try {
             const existingUsers = await findUserByEmailOrUsername(email, username);

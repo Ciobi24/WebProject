@@ -3,9 +3,9 @@ const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
+const { setProblemaRating,getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
+const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,deleteUserFromClassController} = require('./src/controllers/ClassesController');
 const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
-const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,
-    deleteUserFromClassController} = require('./src/controllers/ClassesController');
 const { createTema, getTeme } = require('./src/controllers/TemeController');
 
 function handleUserRoute(req, res) {
@@ -62,6 +62,12 @@ function handleApiRoute(req, res) {
     else if (req.url.startsWith('/api/deleteUser?id=') && req.method === 'DELETE') {
         deleteUserFromClassController(req, res);
     } 
+    else if(req.url.match(/^\/api\/probleme\/\d+$/) && req.method === 'GET') {
+        console.log(req.url);
+        getProblemaById(req, res);
+    }else if (req.url.match(/^\/api\/probleme\/\d+\/rating$/) && req.method === 'PUT') {
+        setProblemaRating(req, res);
+    }
     else if (req.url === '/api/createTema' && req.method === 'POST') {
         createTema(req, res);
     }

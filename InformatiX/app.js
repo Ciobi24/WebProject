@@ -36,15 +36,16 @@ const routes = {
     '/home/probleme-clasa-11': (req, res) => {
         serveHTMLFile('/probleme-clasa11.html', res);
     },
-    '/home/clasele-mele/teme/rezolvare': (req, res) => {   // DE VAZUT AICI O CHESTIE! PT MN SA N-O UIT
+    '/home/clasele-mele/teme': (req, res) => {
+        serveHTMLFile('/temele_mele.html', res);
+    },
+    '/home/clasele-mele/teme/rezolvare': (req, res) => {
         serveHTMLFile('/solution.html', res);
     },
-    '/home/administrare': (req, res) => 
-    {
-        if(checkAdminRole(req, res))
-           serveHTMLFile('/administrare.html', res);
-        else
-        {
+    '/home/administrare': (req, res) => {
+        if (checkAdminRole(req, res)) {
+            serveHTMLFile('/administrare.html', res);
+        } else {
             res.writeHead(401, { 'Content-Type': 'text/plain' });
             res.end('Unauthorized');
         }
@@ -102,6 +103,9 @@ const routes = {
     },
     '/home/probleme-clasa-11/arbori': (req, res) => {
         serveHTMLFile('/lista_pb.html', res);
+    },
+    '/home/clasele-mele/teme/:idTema/rezolva-pb/:idProblema': (req, res) => {
+        serveHTMLFile('/rezolva_pb.html', res);
     },
     '/reset-password': async (req, res) => {
         const urlString = req.url;
@@ -168,6 +172,13 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    const regex = /\/home\/clasele-mele\/teme\/[^/]+\/rezolva-pb\/[^/]+/;
+    if (regex.test(pathname)) {
+        verifyToken(req, res, () => routes['/home/clasele-mele/teme/:idTema/rezolva-pb/:idProblema'](req, res));
+        return;
+    }
+    
+
     if (routes[pathname]) {
         verifyToken(req, res, () => routes[pathname](req, res));
         return;
@@ -218,18 +229,15 @@ function serveStaticFile(pathname, res) {
     });
 }
 
-
 server.listen(3001, () => {
     console.log("Server running on port 3001");
 });
-
-
 
 function checkAdminRole(req, res, next) {
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
     if (decoded.role !== 'admin') {
-       return false;
+        return false;
     }
     return true;
 }
