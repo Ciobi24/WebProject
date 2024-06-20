@@ -4,7 +4,8 @@ const { handleResetPassword } = require('./src/controllers/ForgotPasswordControl
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
 const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
-const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController } = require('./src/controllers/ClassesController');
+const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,
+    deleteUserFromClassController} = require('./src/controllers/ClassesController');
 
 function handleUserRoute(req, res) {
     if (req.url === '/home') {
@@ -54,6 +55,12 @@ function handleApiRoute(req, res) {
     else if (req.url.startsWith('/api/addUserToClass?id=') && req.method === 'POST') {
         addUserToClassController(req, res);
     }
+    else if (req.url.startsWith('/api/deleteClass?id=') && req.method === 'DELETE') {
+        deleteClassByIdController(req, res);
+    } 
+    else if (req.url.startsWith('/api/deleteUser?id=') && req.method === 'DELETE') {
+        deleteUserFromClassController(req, res);
+    } 
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Content not found!');

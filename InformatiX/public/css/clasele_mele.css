@@ -79,8 +79,9 @@ footer{
 }
 
 .modal-content button {
-    font-size: 20px;
-    padding: 10px 20px;
+    font-size: 16px;
+    padding: 8px;
+    margin-left: 10px;
     background-color: #C2649A;
     color: white;
     border: none;
@@ -153,6 +154,13 @@ footer{
     margin-bottom: 10px;
 }
 .search-input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.search-input1 {
     width: 80%;
     padding: 10px;
     margin: 10px auto;

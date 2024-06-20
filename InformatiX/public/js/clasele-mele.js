@@ -41,6 +41,15 @@ document.addEventListener('DOMContentLoaded', function () {
             var modal = document.getElementById('addClassModal');
             modal.style.display = "none";
         }
+        function openDeleteUserModal() {
+            var modal = document.getElementById('deleteUserModal');
+            modal.style.display = "block";
+        }
+    
+        function closeDeleteUserModal() {
+            var modal = document.getElementById('deleteUserModal');
+            modal.style.display = "none";
+        }
     
         if (userType === 'profesor' || userType === 'admin') {
 
@@ -51,9 +60,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 addUserButton.textContent = 'Add User';
                 addUserButton.onclick = openAddUserModal;
     
+                const deleteUserButton = document.createElement('button');
+                deleteUserButton.textContent = 'Delete User';
+                deleteUserButton.onclick = openDeleteUserModal;
+    
                 firstModalContent.appendChild(addUserButton);
+                firstModalContent.appendChild(deleteUserButton);
             }
-
             const container = document.querySelector('.container_princ');
             const addButton = document.createElement('button');
     
@@ -100,5 +113,5 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Eroare! Numele clasei nu poate fi gol.');
         }
     });
-    
+
 });

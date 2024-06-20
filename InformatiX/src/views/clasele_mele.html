@@ -69,6 +69,18 @@
             <div id="userList">
             </div>
             <button onclick="window.location.href = '/home/clasele-mele/teme'">Teme</button>
+            <button onclick="confirmDeleteClass()">Șterge clasa</button>
+        </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmare ștergere clasă</h2>
+            <p>Sunteți sigur că doriți să ștergeți clasa?</p>
+            <div>
+                <button onclick="deleteClass()">Da, șterge clasa</button>
+                <button onclick="closeConfirmDeleteModal()">Anulează</button>
+            </div>
         </div>
     </div>
 
@@ -78,6 +90,15 @@
             <h2>Add User</h2>
             <input type="text" class="search-input" placeholder="Search user...">
             <button id="addUserButton">Add User</button>
+        </div>
+    </div>
+
+    <div id="deleteUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDeleteUserModal()">&times;</span>
+            <h2>Delete User</h2>
+            <input type="text" class="search-input1" placeholder="Search user...">
+            <button onclick="deleteUser()" id="deleteUserButton">Delete User</button>
         </div>
     </div>
 
@@ -100,6 +121,8 @@
 
     <script>
         var classes;
+        var classId;
+
         document.addEventListener('DOMContentLoaded', function () {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/api/allClasses', true);
@@ -135,6 +158,11 @@
             modal.style.display = "none";
         }
 
+        function closeDeleteUserModal() {
+            var modal = document.getElementById('deleteUserModal');
+            modal.style.display = "none";
+        }
+
         function showModal(className) {
             var modal = document.getElementById('myModal');
             var classNameElement = document.getElementById('className');
@@ -143,7 +171,6 @@
             classNameElement.innerText = className;
             modal.style.display = "block";
 
-            var classId;
             var userArray = [];
             classes.forEach(function (classObj) {
                 if (classObj.nume === className) {
@@ -203,48 +230,47 @@
                 }
             });
 
-            const addUserButton = document.getElementById('addUserButton');
-            addUserButton.addEventListener('click', function add() {
-                const searchInput = document.querySelector('.search-input');
-                const idFormular = searchInput.value.trim();
-
-                if (!idFormular) {
-                    alert('Please enter a number.');
-                    return;
-                }
-
-                if (!/^\d+$/.test(idFormular)) {
-                    alert('Username must contain only numbers.');
-                    return;
-                }
-
-                const url = `/api/addUserToClass?id=${classId}`;
-                searchInput.value = '';
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ idFormular: idFormular })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.message);
-                        if (!data.message === 'Utilizatorul cu id-ul specificat nu există.') {
-                            closeAddUserModal();
-                            closeAddClassModal();
-                            window.location.href = '/home/clasele-mele';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred. Please try again later.');
-                        closeAddUserModal();
-                        closeAddClassModal();
-                    });
-            });
-
         }
+
+        const addUserButton = document.getElementById('addUserButton');
+        addUserButton.addEventListener('click', function add() {
+            const searchInput = document.querySelector('.search-input');
+            const idFormular = searchInput.value.trim();
+
+            if (!idFormular) {
+                alert('Please enter a number.');
+                return;
+            }
+
+            if (!/^\d+$/.test(idFormular)) {
+                alert('Id invalid.');
+                return;
+            }
+
+            const url = `/api/addUserToClass?id=${classId}`;
+            searchInput.value = '';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idFormular: idFormular })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    if (!(data.message === 'Utilizatorul cu id-ul specificat nu există.') && !(data.message === 'Utilizatorul există deja în clasă.')) {
+                        closeAddUserModal();
+                        closeModal();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                    closeAddUserModal();
+                    closeAddClassModal();
+                });
+        });
 
         function closeAddClassModal() {
             const addUserButton = document.getElementById('addUserButton');
@@ -255,6 +281,83 @@
             modal.style.display = "none";
         }
 
+        function deleteClass() {
+            const url = `/api/deleteClass?id=${classId}`;
+
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Clasa a fost ștearsă cu succes.');
+                        closeModal();
+                        window.location.href = '/home/clasele-mele';
+                    } else {
+                        alert('Eroare la ștergerea clasei: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('A apărut o eroare!');
+                });
+        }
+
+
+        function deleteUser() {
+
+            const searchInput = document.querySelector('.search-input1');
+            const idFormular = searchInput.value.trim();
+
+            searchInput.value = "";
+            if (!idFormular) {
+                alert('Please enter a number.');
+                return;
+            }
+
+            if (!/^\d+$/.test(idFormular)) {
+                alert('Id invalid.');
+                return;
+            }
+
+            const url = `/api/deleteUser?id=${classId}`;
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idFormular: idFormular })
+            };
+
+            fetch(url, requestOptions)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    alert(data.message);
+                    closeDeleteUserModal();
+                    closeModal();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('A apărut o eroare. Vă rugăm să încercați din nou mai târziu.');
+                    closeDeleteUserModal();
+                    closeModal();
+                });
+        }
+
+        function confirmDeleteClass() {
+            var confirmModal = document.getElementById('confirmDeleteModal');
+            confirmModal.style.display = "block";
+        }
+
+        function closeConfirmDeleteModal() {
+            var confirmModal = document.getElementById('confirmDeleteModal');
+            confirmModal.style.display = "none";
+        }
     </script>
     <script src="../../public/js/clasele-mele.js"></script>
 </body>
