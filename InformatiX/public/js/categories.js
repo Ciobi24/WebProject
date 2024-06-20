@@ -5,14 +5,15 @@ const categories = {
         "Elemente ale limbajului",
         "Tablouri unidimensionale",
         "Tablouri bidimensionale",
-        "Probleme diverse"
+        "Structuri de date liniare"
+        
     ],
     clasa10: [
         "Subprograme",
         "Recursivitate",
         "Divide et Impera",
         "Siruri de caractere",
-        "Structuri de date liniare",
+        "Probleme diverse",
         "Tipul struct"
     ],
     clasa11: [

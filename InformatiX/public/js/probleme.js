@@ -1,3 +1,5 @@
+import categories from './categories.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     function fetchUserDetails() {
         const xhr = new XMLHttpRequest();
@@ -38,33 +40,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const problemCategorySelect = document.createElement('select');
             problemCategorySelect.id = 'problemCategory';
-            const categoryOptions = [
-                'Probleme elementare', 'Elemente ale limbajului', 'Tablouri unidimensionale',
-                'Tablouri bidimensionale', 'Probleme diverse', 'Subprograme', 'Recursivitate',
-                'Divide et Impera', 'Șiruri de caractere', 'Structuri de date liniare',
-                'Tipul struct', 'Teoria grafurilor', 'Programare dinamica', 'Metoda Greedy', 'Backtracking',
-                'Arbori'
-            ];
-            categoryOptions.forEach((optionText) => {
-                const option = document.createElement('option');
-                option.value = optionText.toLowerCase().replace(/ /g, '-');
-                option.textContent = optionText;
-                problemCategorySelect.appendChild(option);
+            Object.keys(categories).forEach((clasa) => {
+                categories[clasa].forEach((optionText) => {
+                    const option = document.createElement('option');
+                    option.value = optionText.toLowerCase().replace(/ /g, '-');
+                    option.textContent = optionText;
+                    problemCategorySelect.appendChild(option);
+                });
             });
 
             const problemTextInput = document.createElement('textarea');
             problemTextInput.id = 'problemText';
             problemTextInput.placeholder = 'Textul problemei';
-
-            const classSelectInput = document.createElement('select');
-            classSelectInput.id = 'classSelect';
-            const classOptions = ['Clasa a 9a', 'Clasa a 10a', 'Clasa a 11a'];
-            classOptions.forEach((optionText, index) => {
-                const option = document.createElement('option');
-                option.value = `clasa${index + 9}`;
-                option.textContent = optionText;
-                classSelectInput.appendChild(option);
-            });
 
             const submitButton = document.createElement('button');
             submitButton.type = 'submit';
@@ -84,13 +71,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 problemInputsContainer.appendChild(document.createElement('br'));
                 problemInputsContainer.appendChild(problemCategorySelect);
                 problemInputsContainer.appendChild(document.createElement('br'));
-                problemInputsContainer.appendChild(classSelectInput);
-                problemInputsContainer.appendChild(document.createElement('br'));
                 problemInputsContainer.appendChild(problemTextInput);
                 problemInputsContainer.appendChild(document.createElement('br'));
                 problemInputsContainer.appendChild(submitButton);
             }
         }
+    }
+
+    function getClassByCategory(category) {
+        for (const clasa in categories) {
+            if (categories[clasa].map(cat => cat.toLowerCase().replace(/ /g, '-')).includes(category)) {
+                return clasa;
+            }
+        }
+        return null;
     }
 
     function submitProblem(event, userId) {
@@ -99,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nume_problema = document.getElementById('problemName').value;
         const dificultate = document.getElementById('problemDifficulty').value;
         const categorie = document.getElementById('problemCategory').value;
-        const clasa = document.getElementById('classSelect').value;
+        const clasa = getClassByCategory(categorie); // Get class based on category
         const text_problema = document.getElementById('problemText').value;
 
         const xhr = new XMLHttpRequest();
@@ -112,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('problemName').value = '';
                     document.getElementById('problemDifficulty').value = '';
                     document.getElementById('problemCategory').value = '';
-                    document.getElementById('classSelect').value = '';
                     document.getElementById('problemText').value = '';
                     alert(response.message);
                 } else {
