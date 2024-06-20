@@ -36,9 +36,6 @@ const routes = {
     '/home/probleme-clasa-11': (req, res) => {
         serveHTMLFile('/probleme-clasa11.html', res);
     },
-    '/home/clasele-mele/teme': (req, res) => {
-        serveHTMLFile('/temele_mele.html', res);
-    },
     '/home/clasele-mele/teme/rezolvare': (req, res) => {   // DE VAZUT AICI O CHESTIE! PT MN SA N-O UIT
         serveHTMLFile('/solution.html', res);
     },
@@ -152,6 +149,12 @@ const server = http.createServer((req, res) => {
         routes['/reset-password'](req, res);
         return;
     }
+    
+    if(pathname.startsWith('/home/clasele-mele/teme/'))
+        {
+            serveHTMLFile('/temele_mele.html', res);
+            return;
+        }
 
     if (pathname.startsWith('/api/')) {
         verifyToken(req, res, () => {

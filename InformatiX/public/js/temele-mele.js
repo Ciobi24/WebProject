@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const container = document.querySelector('.container_princ');
             if (container) {
-                container.appendChild(addButton);
-            }
+                container.insertBefore(addButton, container.firstChild );
+            }           
             
             const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
 

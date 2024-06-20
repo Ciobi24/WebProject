@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
-const {createTablesUsers,  createTablesResetPasswordToken, createTablesProbleme, createTablesRating, 
-  createTablesClase, createTablesClasaElev }= require('./createTabels');
+const {createTablesUsers,  createTablesResetPasswordToken, createTablesProbleme, createTablesRating, createTablesClase, 
+  createTablesClasaElev, createTablesTeme, createTablesProblemeTeme }= require('./createTabels');
 
 class Database {
   constructor(config) {
@@ -31,10 +31,12 @@ class Database {
       await this.connection.execute(createTablesResetPasswordToken);
       await this.connection.execute(createTablesProbleme);
       await this.connection.execute(createTablesRating);
-
       await this.connection.execute(createTablesClase);
       await this.connection.execute(createTablesClasaElev);
-    } catch (error) {
+      await this.connection.execute(createTablesTeme);
+      await this.connection.execute(createTablesProblemeTeme);
+
+    } catch (error) { 
       console.error("Error creating tables: " + error);
       throw error;
     }
@@ -44,8 +46,8 @@ class Database {
 const connectionString = {
   host: "localhost",
   port: 3000,
-  user: "andra",
-  password: "andraciobanu24",
+  user: "alex",
+  password: "alex123K!!",
   database: "informatix"
 };
 
