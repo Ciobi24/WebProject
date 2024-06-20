@@ -1,5 +1,5 @@
 const { getJwt } = require("../services/JwtService");
-const { createTemaService } = require("../services/TemeService");
+const { createTemaService, getTemeByIdClass } = require("../services/TemeService");
 
 async function createTema(req, res) {
     let body = '';
@@ -42,4 +42,28 @@ async function createTema(req, res) {
     });
 }
 
-module.exports = { createTema }
+async function getTeme(req, res) {
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idClass = queryObject.get('id');
+
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'admin' && role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+
+    try {
+        const results = await getTemeByIdClass(idClass, decoded.id);
+        
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(results));
+    } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Internal Server Error', error: error.message }));
+    }
+}
+module.exports = { createTema, getTeme }

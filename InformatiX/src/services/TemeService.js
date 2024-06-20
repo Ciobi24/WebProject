@@ -30,4 +30,29 @@ async function createTemaService(nume, deadline, classId, userId) {
     } 
 }
 
-module.exports = { createTemaService };
+async function getTemeByIdClass(classId, userId) {
+    let connection; 
+    try {
+        connection = await dbInstance.connect();
+        const [classCheck] = await connection.execute(
+            'SELECT * FROM clase WHERE id = ? AND id_user = ?',
+            [classId, userId]
+        );
+
+        if (classCheck.length === 0) {  //protectie
+            return null;
+        }
+
+        const [results] = await connection.execute(
+            'SELECT * FROM teme WHERE id_clasa = ?',
+            [classId]
+        );
+
+        return results;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw error;
+    }
+}
+
+module.exports = { createTemaService, getTemeByIdClass };

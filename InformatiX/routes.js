@@ -6,7 +6,7 @@ const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieH
 const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,
     deleteUserFromClassController} = require('./src/controllers/ClassesController');
-const { createTema } = require('./src/controllers/TemeController');
+const { createTema, getTeme } = require('./src/controllers/TemeController');
 
 function handleUserRoute(req, res) {
     if (req.url === '/home') {
@@ -64,6 +64,9 @@ function handleApiRoute(req, res) {
     } 
     else if (req.url === '/api/createTema' && req.method === 'POST') {
         createTema(req, res);
+    }
+    else if (req.url.startsWith('/api/getTeme?id=') && req.method === 'GET') {
+        getTeme(req, res);
     }
     else { 
         res.writeHead(404, { 'Content-Type': 'text/plain' });

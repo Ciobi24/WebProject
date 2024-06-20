@@ -44,40 +44,10 @@
         </nav>
     </header>
     <div class="container_princ">
-        <h2 class="temeleMele">Temele Mele</h2>
-        <div class="teme">
-            <div class="tema">
-                <h3>Tema 1</h3>
-                <p>Clasa a X-a B</p>
-                <p>Deadline: January 31, 2024</p>
-                <ul>
-                    <li>Problem 1</li>
-                    <li>Problem 2</li>
-                    <li>Problem 3</li>
-                </ul>
-            </div>
-            <div class="tema">
-                <h3>Tema 2</h3>
-                <p>Clasa a X-a B</p>
-                <p>Deadline: February 15, 2024</p>
-                <ul>
-                    <li>Problem 1</li>
-                    <li>Problem 2</li>
-                </ul>
-            </div>
-            <div class="tema">
-                <h3>Tema 3</h3>
-                <p>Clasa a XI-a A</p>
-                <p>Deadline: March 1, 2024</p>
-                <ul>
-                    <li>Problem 1</li>
-                    <li>Problem 2</li>
-                    <li>Problem 3</li>
-                    <li>Problem 4</li>
-                </ul>
-            </div>
-        </div>
+    <h2 class="temeleMele">Temele Mele</h2>
+    <div class="teme" id="temele">
     </div>
+</div>
 
     <div id="addTemaModal" class="modal">
         <div class="modal-content">
@@ -240,12 +210,70 @@
         }
 
         function searchProblem() {
-            // Placeholder function for searching a problem
-            // You can replace this with the actual logic for searching and adding a problem
             alert("Problem added!");
             closeSearchModal();
         }
     </script>
+
+<script>
+    function getTeme() {
+        const url = window.location.href;
+        const classId = url.substring(url.lastIndexOf('/') + 1);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `/api/getTeme?id=${classId}`, true);
+        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const teme = JSON.parse(xhr.responseText);
+                    console.log(teme);
+                    displayTeme(teme);
+                } else {
+                    alert('Eroare la obținerea temelor.');
+                }
+            }
+        };
+        
+        xhr.send();
+    }
+
+    // Funcția pentru a afișa temele în HTML
+    function displayTeme(teme) {
+    const temeContainer = document.getElementById('temele');
+    temeContainer.innerHTML = '';
+
+    // Ensure teme is an array
+    const temeArray = Array.isArray(teme) ? teme : [teme];
+
+    temeArray.forEach(function(tema) {
+        const divTema = document.createElement('div');
+        divTema.classList.add('tema');
+
+        divTema.innerHTML = `
+            <h3>${tema.nume}</h3>
+            <p>Clasa: ${tema.id_clasa}</p>
+            <p>Deadline: ${new Date(tema.deadline).toLocaleString()}</p>
+            <ul>
+                <!-- Aici poți adăuga dinamic listă cu problemele temei -->
+            </ul>
+        `;
+
+        const ulProbleme = divTema.querySelector('ul');
+        tema.probleme?.forEach(function(problema) {
+            const liProblema = document.createElement('li');
+            liProblema.textContent = problema;
+            ulProbleme.appendChild(liProblema);
+        });
+
+        temeContainer.appendChild(divTema);
+    });
+}
+
+    window.onload = function() {
+        getTeme();
+    };
+</script>
+
 </body>
 
 </html>
