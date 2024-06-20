@@ -41,17 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var modal = document.getElementById('addClassModal');
             modal.style.display = "none";
         }
-        
-        function addClass() {
-            var className = document.getElementById('newClassName').value;
-            if (className) {
-                console.log("New class added:", className);
-                closeAddClassModal();
-            } else {
-                alert("Please enter a class name.");
-            }
-        }
-        
     
         if (userType === 'profesor' || userType === 'admin') {
 
@@ -93,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('Clasă adăugată cu succes!');
                     document.getElementById('newClassName').value = "";
                     closeAddClassModal();
+                    window.location.href='/home/clasele-mele';
                 } else if (xhr.status === 409) { 
                     alert('Eroare! Numele clasei este deja utilizat.');
                 } else {
@@ -110,7 +100,5 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Eroare! Numele clasei nu poate fi gol.');
         }
     });
-    
-
     
 });

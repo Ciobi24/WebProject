@@ -1,5 +1,6 @@
 const { getJwt } = require("../services/JwtService");
-const { getClassesForProf, getClassesForElev, insertClass, checkDuplicateClassName} = require("../services/ClassesService");
+const { getClassesForProf, getClassesForElev, insertClass, addUserToClass, 
+    checkDuplicateClassName, getUsersByClassId} = require("../services/ClassesService");
 
 async function getClassesByUser(req, res) {
     const cookieHeader = req.headers.cookie;
@@ -8,7 +9,6 @@ async function getClassesByUser(req, res) {
         const role = decoded.role;
         const userId = decoded.id;
 
-        console.log(role);
         let body = [];
         if (role === 'elev') {
             body = await getClassesForElev(userId);
@@ -51,7 +51,7 @@ async function createClass(req, res) {
                 res.end(JSON.stringify({ message: 'Bad Request', error: 'Class name is required' }));
                 return;
             }
-            if( await checkDuplicateClassName(formData.className))
+            if( await checkDuplicateClassName(decoded.id, formData.className))
             {
                 res.writeHead(409, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ message: 'Nume pentru clasă deja folosit!'}));
@@ -75,5 +75,64 @@ async function createClass(req, res) {
         }
     });
 }
+async function getUsersByIdClass(req, res) {
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idClass = queryObject.get('id');
 
-module.exports = { getClassesByUser, createClass }
+    if (!idClass) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Bad Request', error: 'Class ID is required' }));
+        return;
+    }
+
+    try {
+        const users = await getUsersByClassId(idClass);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(users));
+    } catch (error) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Internal Server Error', error: error.message }));
+    }
+}
+
+async function addUserToClassController(req, res) {
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idClass = queryObject.get('id');
+    
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    let body = '';
+
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        const role = decoded.role;
+        if (role !== 'admin' && role !== 'profesor') {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+            return;
+        }
+
+        const formData = JSON.parse(body);
+        try {
+            const result = await addUserToClass(formData.idFormular, idClass);
+       
+            if (result.success) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: result.message }));
+            } else {
+                res.writeHead(409, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: result.message }));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            res.status(500).json({ message: 'Error!' });
+        }
+    });
+}
+
+
+module.exports = { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController }

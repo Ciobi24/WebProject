@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS clase (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nume VARCHAR(255) NOT NULL,
   id_user INT NOT NULL,
+  UNIQUE KEY unique_class_name_user_id (nume, id_user),
   FOREIGN KEY (id_user) REFERENCES users(id)
 );
 `;

@@ -4,7 +4,7 @@ const { handleResetPassword } = require('./src/controllers/ForgotPasswordControl
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
 const { addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
-const { getClassesByUser, createClass } = require('./src/controllers/ClassesController');
+const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController } = require('./src/controllers/ClassesController');
 
 function handleUserRoute(req, res) {
     if (req.url === '/home') {
@@ -48,10 +48,16 @@ function handleApiRoute(req, res) {
     else if (req.url === '/api/createClass' && req.method === 'POST') {
         createClass(req, res);
     }
+    else if (req.url.startsWith('/api/getEleviByIdClass?id=') && req.method === 'GET') {
+        getUsersByIdClass(req, res);
+    }
+    else if (req.url.startsWith('/api/addUserToClass?id=') && req.method === 'POST') {
+        addUserToClassController(req, res);
+    }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Content not found!');
-    }
-}
+    } 
+} 
 
 module.exports = { handleUserRoute, handleApiRoute };

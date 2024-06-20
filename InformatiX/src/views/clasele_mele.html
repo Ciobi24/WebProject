@@ -77,7 +77,7 @@
             <span class="close" onclick="closeAddUserModal()">&times;</span>
             <h2>Add User</h2>
             <input type="text" class="search-input" placeholder="Search user...">
-            <button onclick="addUser()">Add User</button>
+            <button id="addUserButton">Add User</button>
         </div>
     </div>
 
@@ -90,21 +90,23 @@
             <div id="successMessage" class="message success">
                 Clasă adăugată cu succes!
             </div>
-        
+
             <div id="errorMessage" class="message error">
                 Eroare! Câmp gol sau numele clasei este deja utilizat!
             </div>
-        
+
         </div>
     </div>
 
     <script>
+        var classes;
         document.addEventListener('DOMContentLoaded', function () {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', '/api/allClasses', true);
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    var classes = JSON.parse(xhr.responseText);
+                    classes = JSON.parse(xhr.responseText);
+                    console.log(classes);
                     var classContainer = document.getElementById('clase');
 
                     classes.forEach(function (classObj) {
@@ -119,6 +121,8 @@
                 }
             };
             xhr.send();
+
+
         });
 
         function closeModal() {
@@ -135,32 +139,118 @@
             var modal = document.getElementById('myModal');
             var classNameElement = document.getElementById('className');
             var userListElement = document.getElementById('userList');
-            
+
             classNameElement.innerText = className;
             modal.style.display = "block";
 
-            var usersMap = {
-                "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
-                "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
-                "Clasa a X-a C": ["Daniel Thomas", "Sophia White", "Matthew Clark", "Isabella Hall", "William Lee"],
-                "Clasa a X-a D": ["Ethan Walker", "Ava Lewis", "Alexander King", "Chloe Scott", "Jacob Green"]
-            };
+            var classId;
+            var userArray = [];
+            classes.forEach(function (classObj) {
+                if (classObj.nume === className) {
+                    classId = classObj.id;
+                    fetch(`/api/getEleviByIdClass?id=${classObj.id}`)
+                        .then(response => response.json())
+                        .then(data => {
 
-            var users = usersMap[className];
-            userListElement.innerHTML = "";
+                            for (var i = 0; i < data.length; i++) {
+                                userArray.push(data[i]);
+                            }
+                            userListElement.innerHTML = "";
+                            if (userArray.length !== 0) {
+                                var specialElement = document.createElement('div');
+                                specialElement.style.fontWeight = 'bold';
+                                specialElement.style.whiteSpace = 'pre';
+                                specialElement.textContent = "ID         Nume         Prenume         Email";
 
-            if (users) {
-                users.forEach(function (user) {
-                    var listItem = document.createElement('div');
-                    listItem.textContent = user;
-                    userListElement.appendChild(listItem);
-                });
-            } else {
-                console.error('Users for class ' + className + ' not found.');
-            }
+                                userListElement.appendChild(specialElement);
+                                userArray.forEach(function (user) {
+                                    var listItem = document.createElement('div');
+
+                                    var nameElement = document.createElement('div');
+                                    nameElement.style.fontWeight = 'bold';
+
+                                    var idSpan = document.createElement('span');
+                                    idSpan.style.color = '#2c3e50';
+                                    idSpan.textContent = `#${user.id}`;
+
+                                    var fullNameSpan = document.createElement('span');
+                                    fullNameSpan.style.color = '#1e3799';
+                                    fullNameSpan.textContent = ` ${user.lastname || ("necunoscut")} ${user.firstname || ("necunoscut")}`;
+
+                                    var emailSpan = document.createElement('span');
+                                    emailSpan.style.color = 'green';
+                                    emailSpan.textContent = `  ${user.email}`;
+
+                                    nameElement.appendChild(idSpan);
+                                    nameElement.appendChild(fullNameSpan);
+                                    nameElement.appendChild(emailSpan);
+
+                                    listItem.appendChild(nameElement);
+                                    userListElement.appendChild(listItem);
+                                });
+                            } else {
+                                var noUsersElement = document.createElement('div');
+                                noUsersElement.style.fontWeight = 'bold';
+                                noUsersElement.textContent = 'Niciun utilizator adăugat';
+                                noUsersElement.style.color = 'green';
+                                userListElement.appendChild(noUsersElement);
+                            }
+
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            });
+
+            const addUserButton = document.getElementById('addUserButton');
+            addUserButton.addEventListener('click', function add() {
+                const searchInput = document.querySelector('.search-input');
+                const idFormular = searchInput.value.trim();
+
+                if (!idFormular) {
+                    alert('Please enter a number.');
+                    return;
+                }
+
+                if (!/^\d+$/.test(idFormular)) {
+                    alert('Username must contain only numbers.');
+                    return;
+                }
+
+                const url = `/api/addUserToClass?id=${classId}`;
+                searchInput.value = '';
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ idFormular: idFormular })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        if (!data.message === 'Utilizatorul cu id-ul specificat nu există.') {
+                            closeAddUserModal();
+                            closeAddClassModal();
+                            window.location.href = '/home/clasele-mele';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                        closeAddUserModal();
+                        closeAddClassModal();
+                    });
+            });
+
         }
 
         function closeAddClassModal() {
+            const addUserButton = document.getElementById('addUserButton');
+            const clonedButton = addUserButton.cloneNode(true);
+            addUserButton.parentNode.replaceChild(clonedButton, addUserButton);
+
             var modal = document.getElementById('addClassModal');
             modal.style.display = "none";
         }

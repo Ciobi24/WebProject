@@ -37,42 +37,97 @@ async function insertClass(className, idProf) {
             VALUES (?, ?);
         `;
         const [result] = await connection.query(query, [className, idProf]);
-        
+
         if (result.affectedRows > 0) {
-            return true; 
+            return true;
         } else {
-            return false; 
+            return false;
         }
     } catch (error) {
         console.error('Error executing query:', error);
-        throw error; 
-    } 
+        throw error;
+    }
 }
 
-async function checkDuplicateClassName(className) {
+async function checkDuplicateClassName(id, className) {
     const connection = await dbInstance.connect();
     try {
         const query = `
             SELECT COUNT(*) AS count
             FROM clase
-            WHERE nume LIKE ?;
+            WHERE nume LIKE ? AND id_user = ?;
         `;
-        const [rows] = await connection.query(query, [className]);
-        console.log(rows[0].count);
+        const [rows] = await connection.query(query, [className, id]);
+
         if (rows[0].count > 0) {
-            return true; 
+            return true;
         } else {
-            return false; 
+            return false;
         }
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
-    } 
+    }
 }
 
+async function getUsersByClassId(classId) {
+    const connection = await dbInstance.connect();
+    try {
+        const [rows] = await connection.query(`
+            SELECT u.id, u.firstname, u.lastname, u.email
+            FROM clase_elevi ce
+            JOIN users u ON ce.id_user = u.id
+            WHERE ce.id_clasa = ?
+        `, [classId]);
+        return rows;
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    }
+}
+
+async function addUserToClass(id_user, id_clasa) {
+    const connection = await dbInstance.connect();
+    try {
+        const exists = `
+        SELECT COUNT(*) AS count
+        FROM users
+        WHERE id = ?
+    `;
+    
+    const [findUser] = await connection.query(exists, [id_user]);
+    
+    if (findUser.length !== 1 || findUser[0].count !== 1) {
+        return { success: false, message: 'Utilizatorul cu id-ul specificat nu există.' };
+    }
+
+        const checkQuery = `
+            SELECT COUNT(*) AS count
+            FROM clase_elevi
+            WHERE id_clasa = ? AND id_user = ?
+        `;
+        const [checkRows] = await connection.query(checkQuery, [id_clasa, id_user]);
+
+        if (checkRows[0].count > 0) {
+            return { success: false, message: 'Utilizatorul există deja în clasă.' };
+        } else {
+            const insertQuery = `
+                INSERT INTO clase_elevi (id_clasa, id_user)
+                VALUES (?, ?)
+            `;
+            await connection.query(insertQuery, [id_clasa, id_user]);
+            return { success: true, message: 'Utilizatorul a fost adăugat în clasă cu succes.' };
+        }
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    }
+}
 module.exports = {
     getClassesForProf,
     getClassesForElev,
     insertClass,
-    checkDuplicateClassName
+    checkDuplicateClassName,
+    getUsersByClassId,
+    addUserToClass
 };
