@@ -28,7 +28,7 @@ header {
 }
 
 .problema {
-    margin:20px ;
+    margin: 20px;
     margin-top: 40px;
     background-color: #c9afa1;
     width: 80%;
@@ -309,4 +309,22 @@ footer {
     .autor {
         font-size: 10px;
     }
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.star-rating span {
+    font-size: 24px;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.star-rating span.highlighted {
+    color: #f39c12;
 }

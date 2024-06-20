@@ -114,6 +114,9 @@ module.exports = {
     createTablesProbleme,
     createTablesRating,
     createTablesClase,
-    createTablesClasaElev
+    createTablesClasaElev,
+    createTablesTeme,
+    createTablesProblemeTeme,
+    createTablesSolutii
 };
 

@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function displayProblem(problema) {
-        document.querySelector('.problema h1').innerText = problema.nume_problema;
-        document.querySelector('.problema .stars').innerText = `${problema.rating}★`;
-        document.querySelector('.problema .users-tried').innerText = `${problema.utilizatori_incercat} încercări`;
-        document.querySelector('.problema .users-solved').innerText = `${problema.utilizatori_rezolvat} rezolvări`;
-        document.querySelector('.problema .cerinta').innerText = problema.text_problema;
-        document.querySelector('.problema .autor').innerText = `Autor: ${problema.creatorId}`;
+        document.getElementById('problema-titlu').innerText = problema.nume_problema;
+        document.getElementById('problema-stelute').innerText = `${problema.rating}★`;
+        document.getElementById('problema-incercari').innerText = `${problema.utilizatori_incercat} încercări`;
+        document.getElementById('problema-rezolvari').innerText = `${problema.utilizatori_rezolvat} rezolvări`;
+        document.getElementById('problema-descriere').innerText = problema.text_problema;
+        document.getElementById('problema-autor').innerText = `Autor: ${problema.creator_nume}`;
 
         const tagsContainer = document.getElementById('problema-tags');
         tagsContainer.innerHTML = '';
@@ -32,6 +32,45 @@ document.addEventListener('DOMContentLoaded', function () {
             tagElement.innerText = tag;
             tagsContainer.appendChild(tagElement);
         });
+
+        const starElements = document.querySelectorAll('.star-rating span');
+        starElements.forEach(star => {
+            star.addEventListener('click', function () {
+                const ratingValue = this.getAttribute('data-value');
+                submitRating(idProblema, ratingValue);
+                highlightStars(ratingValue);
+            });
+        });
+    }
+
+    function highlightStars(ratingValue) {
+        const starElements = document.querySelectorAll('.star-rating span');
+        starElements.forEach(star => {
+            if (star.getAttribute('data-value') <= ratingValue) {
+                star.classList.add('highlighted');
+            } else {
+                star.classList.remove('highlighted');
+            }
+        });
+    }
+
+    async function submitRating(idProblema, ratingValue) {
+        try {
+            const response = await fetch(`/api/probleme/${idProblema}/rating`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ rating: ratingValue })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+        } catch (error) {
+            console.error('Error submitting rating:', error);
+        }
     }
 
     fetchProblemDetails(idProblema);
