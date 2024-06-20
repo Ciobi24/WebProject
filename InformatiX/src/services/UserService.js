@@ -12,10 +12,11 @@ async function getUserById(id) {
     }
 }
 
+
 async function findUserByEmailAndPassword(email, password) {
     const connection = await dbInstance.connect(); 
     try {
-        const query = `SELECT id FROM users WHERE email = ? AND password = ?`;
+        const query = `SELECT id, role FROM users WHERE email = ? AND password = ?`;
         const [rows, _] = await connection.query(query, [email, password]);
         return rows;
     } catch (error) {

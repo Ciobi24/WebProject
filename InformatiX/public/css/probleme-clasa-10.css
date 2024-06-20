@@ -119,13 +119,37 @@ td:hover {
     opacity: 0.75;
 }
 
-a {
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
+.categorie a {
     display: block;
-    color: inherit; /* Ensure the link inherits the text color */
-}
+    color: #333;
+    text-decoration: none;
+  }
+
+  .categorie a:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color:#662066;
+    transform: scale(1.002, 1.002);
+  }
+  .categorie a:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .container-mare {
+    padding: 20px;
+  }
+
+  .categorie {
+    margin-bottom: 20px;
+  }
+
+  .categorie .titlu {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .nr_probleme {
+    color: #666;
+  }
 
 @media (max-width: 768px) {
     .container-mare {

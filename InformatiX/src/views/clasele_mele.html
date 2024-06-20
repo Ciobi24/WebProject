@@ -18,158 +18,51 @@
             const sidebar = document.querySelector('.sidebar')
             sidebar.style.display = 'none'
         }
-        function showSignUp() {
-            const flipCheckbox = document.getElementById('flip');
-            flipCheckbox.checked = true;
-        }
-        function showLogin() {
-            const flipCheckbox = document.getElementById('flip');
-            flipCheckbox.checked = false;
-        }
-      </script>
-
-    <script src="../../public/js/sendArgument.js"></script>
-    <script>
-        function showModal(className) {
-            var modal = document.getElementById('myModal');
-            var classNameElement = document.getElementById('className');
-            var userListElement = document.getElementById('userList');
-            classNameElement.innerText = className;
-            modal.style.display = "block";
-
-            var usersMap = {
-                "Clasa a X-a B": ["John Doe", "Alice Smith", "Bob Johnson", "Emily Brown", "Michael Wilson"],
-                "Clasa a X-a A": ["Sarah Davis", "David Martinez", "Emma Taylor", "James Anderson", "Olivia Hernandez"],
-                "Clasa a X-a C": ["Daniel Thomas", "Sophia White", "Matthew Clark", "Isabella Hall", "William Lee"],
-                "Clasa a X-a D": ["Ethan Walker", "Ava Lewis", "Alexander King", "Chloe Scott", "Jacob Green"]
-            };
-
-            var users = usersMap[className];
-            userListElement.innerHTML = ""; // Clear previous list
-
-            users.forEach(function (user) {
-                var listItem = document.createElement('div');
-                listItem.textContent = user;
-                userListElement.appendChild(listItem);
-            });
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            var modal = document.getElementById('myModal');
-            modal.style.display = "none";
-        }
-
-        // Function to open the add user modal
-        function openAddUserModal() {
-            var modal = document.getElementById('addUserModal');
-            modal.style.display = "block";
-        }
-
-        // Function to close the add user modal
-        function closeAddUserModal() {
-            var modal = document.getElementById('addUserModal');
-            modal.style.display = "none";
-        }
-
-        // Function to add user 
-        function addUser() {
-            // Add 
-        }
-        function openAddClassModal() {
-            var modal = document.getElementById('addClassModal');
-            modal.style.display = "block";
-        }
-
-        function closeAddClassModal() {
-            var modal = document.getElementById('addClassModal');
-            modal.style.display = "none";
-        }
-
-        function addClass() {
-            var className = document.getElementById('newClassName').value;
-            if (className) {
-                console.log("New class added:", className);
-                closeAddClassModal();
-            } else {
-                alert("Please enter a class name.");
-            }
-        }
     </script>
-    <script>
-        function getUrlParam(paramName) {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            return urlParams.get(paramName);
-        }
-    </script>
+    <script src="../../public/js/checkAdmin.js"></script>
 </head>
 
 <body>
     <header>
         <nav>
-          <ul class="sidebar">
-            <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                  viewBox="0 96 960 960" width="26">
-                  <path
-                    d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
-                </svg></a></li>
+            <ul class="sidebar">
+                <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                            viewBox="0 96 960 960" width="26">
+                            <path
+                                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+                        </svg></a></li>
                 <li><a href="/home" onclick=hideSidebar()>Home</a></li>
                 <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
                 <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
                 <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
+                <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
                 <li><a href="/" onclick="hideSidebar()">Logout</a></li>
-          </ul>
-    
-          <ul class="menu">
-            <li><a href="/home">Home</a></li>
-            <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
-            <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
-            <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
-            <li class="hideOnMobile"><a href="/">Logout</a></li>
-            <li class="menu-button" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                  viewBox="0 96 960 960" width="26">
-                  <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-                </svg></a></li>
-          </ul>
+            </ul>
+            <ul class="menu">
+                <li><a href="/home">Home</a></li>
+                <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
+                <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
+                <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
+                <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
+                <li class="hideOnMobile"><a href="/">Logout</a></li>
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                            height="26" viewBox="0 96 960 960" width="26">
+                            <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+                        </svg></a></li>
+            </ul>
         </nav>
     </header>
     <div class="container_princ">
         <h2>Clasele mele</h2>
         <div class="clase" id="clase">
-            <div class="clasa" onclick="showModal('Clasa a X-a B')">
-                <h3>Clasa a X-a B</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a A')">
-                <h3>Clasa a X-a A</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a C')">
-                <h3>Clasa a X-a C</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a D')">
-                <h3>Clasa a X-a D</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a B')">
-                <h3>Clasa a X-a B</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a A')">
-                <h3>Clasa a X-a A</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a C')">
-                <h3>Clasa a X-a C</h3>
-            </div>
-            <div class="clasa" onclick="showModal('Clasa a X-a D')">
-                <h3>Clasa a X-a D</h3>
-            </div>
+
         </div>
     </div>
     <footer>
         <p>@ Contact</p>
     </footer>
 
-
     <div id="myModal" class="modal">
-
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2 id="className">Clasa a X-a B</h2>
@@ -180,12 +73,11 @@
     </div>
 
     <div id="addUserModal" class="modal">
-
         <div class="modal-content">
             <span class="close" onclick="closeAddUserModal()">&times;</span>
             <h2>Add User</h2>
             <input type="text" class="search-input" placeholder="Search user...">
-            <button onclick="addUser()">Add User</button>
+            <button id="addUserButton">Add User</button>
         </div>
     </div>
 
@@ -194,45 +86,177 @@
             <span class="close" onclick="closeAddClassModal()">&times;</span>
             <h2>Add New Class</h2>
             <input type="text" id="newClassName" placeholder="Enter class name">
-            <button onclick="addClass()">Add Class</button>
+            <button id="buttonCreareClasa">Add Class</button>
+            <div id="successMessage" class="message success">
+                Clasă adăugată cu succes!
+            </div>
+
+            <div id="errorMessage" class="message error">
+                Eroare! Câmp gol sau numele clasei este deja utilizat!
+            </div>
+
         </div>
     </div>
 
     <script>
-        const urlParams1 = new URLSearchParams(window.location.search);
-        const userType1 = urlParams1.get('userType');
-    
-        function addButtonToFirstModal() {
-            if (userType1 === 'profesor' || userType1 === 'admin') {
-                const firstModalContent = document.querySelector('#myModal .modal-content');
-    
-                if (firstModalContent) {
-                    const addUserButton = document.createElement('button');
-                    addUserButton.textContent = 'Add User';
-                    addUserButton.onclick = openAddUserModal;
-    
-                    firstModalContent.appendChild(addUserButton);
+        var classes;
+        document.addEventListener('DOMContentLoaded', function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/allClasses', true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    classes = JSON.parse(xhr.responseText);
+                    console.log(classes);
+                    var classContainer = document.getElementById('clase');
+
+                    classes.forEach(function (classObj) {
+                        var classDiv = document.createElement('div');
+                        classDiv.className = 'clasa';
+                        classDiv.innerHTML = '<h3>' + classObj.nume + '</h3>';
+                        classDiv.setAttribute('onclick', `showModal('${classObj.nume}')`);
+                        classContainer.appendChild(classDiv);
+                    });
+                } else {
+                    console.error('Request failed. Returned status of ' + xhr.status);
                 }
-            }
+            };
+            xhr.send();
+
+
+        });
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
         }
-        addButtonToFirstModal();
-    </script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const userType = urlParams.get('userType');
-        function addButton() {
-            if (userType === 'profesor' || userType == 'admin') {
-                const container = document.querySelector('.container_princ');
-                const addButton = document.createElement('button');
-    
-                addButton.textContent = '+';
-                addButton.onclick = openAddClassModal;
-    
-                const secondElement = container.children[1];
-                container.insertBefore(addButton, secondElement);
-            }
+
+        function closeAddUserModal() {
+            var modal = document.getElementById('addUserModal');
+            modal.style.display = "none";
         }
-        addButton();
+
+        function showModal(className) {
+            var modal = document.getElementById('myModal');
+            var classNameElement = document.getElementById('className');
+            var userListElement = document.getElementById('userList');
+
+            classNameElement.innerText = className;
+            modal.style.display = "block";
+
+            var classId;
+            var userArray = [];
+            classes.forEach(function (classObj) {
+                if (classObj.nume === className) {
+                    classId = classObj.id;
+                    fetch(`/api/getEleviByIdClass?id=${classObj.id}`)
+                        .then(response => response.json())
+                        .then(data => {
+
+                            for (var i = 0; i < data.length; i++) {
+                                userArray.push(data[i]);
+                            }
+                            userListElement.innerHTML = "";
+                            if (userArray.length !== 0) {
+                                var specialElement = document.createElement('div');
+                                specialElement.style.fontWeight = 'bold';
+                                specialElement.style.whiteSpace = 'pre';
+                                specialElement.textContent = "ID         Nume         Prenume         Email";
+
+                                userListElement.appendChild(specialElement);
+                                userArray.forEach(function (user) {
+                                    var listItem = document.createElement('div');
+
+                                    var nameElement = document.createElement('div');
+                                    nameElement.style.fontWeight = 'bold';
+
+                                    var idSpan = document.createElement('span');
+                                    idSpan.style.color = '#2c3e50';
+                                    idSpan.textContent = `#${user.id}`;
+
+                                    var fullNameSpan = document.createElement('span');
+                                    fullNameSpan.style.color = '#1e3799';
+                                    fullNameSpan.textContent = ` ${user.lastname || ("necunoscut")} ${user.firstname || ("necunoscut")}`;
+
+                                    var emailSpan = document.createElement('span');
+                                    emailSpan.style.color = 'green';
+                                    emailSpan.textContent = `  ${user.email}`;
+
+                                    nameElement.appendChild(idSpan);
+                                    nameElement.appendChild(fullNameSpan);
+                                    nameElement.appendChild(emailSpan);
+
+                                    listItem.appendChild(nameElement);
+                                    userListElement.appendChild(listItem);
+                                });
+                            } else {
+                                var noUsersElement = document.createElement('div');
+                                noUsersElement.style.fontWeight = 'bold';
+                                noUsersElement.textContent = 'Niciun utilizator adăugat';
+                                noUsersElement.style.color = 'green';
+                                userListElement.appendChild(noUsersElement);
+                            }
+
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            });
+
+            const addUserButton = document.getElementById('addUserButton');
+            addUserButton.addEventListener('click', function add() {
+                const searchInput = document.querySelector('.search-input');
+                const idFormular = searchInput.value.trim();
+
+                if (!idFormular) {
+                    alert('Please enter a number.');
+                    return;
+                }
+
+                if (!/^\d+$/.test(idFormular)) {
+                    alert('Username must contain only numbers.');
+                    return;
+                }
+
+                const url = `/api/addUserToClass?id=${classId}`;
+                searchInput.value = '';
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ idFormular: idFormular })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        if (!data.message === 'Utilizatorul cu id-ul specificat nu există.') {
+                            closeAddUserModal();
+                            closeAddClassModal();
+                            window.location.href = '/home/clasele-mele';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                        closeAddUserModal();
+                        closeAddClassModal();
+                    });
+            });
+
+        }
+
+        function closeAddClassModal() {
+            const addUserButton = document.getElementById('addUserButton');
+            const clonedButton = addUserButton.cloneNode(true);
+            addUserButton.parentNode.replaceChild(clonedButton, addUserButton);
+
+            var modal = document.getElementById('addClassModal');
+            modal.style.display = "none";
+        }
+
     </script>
+    <script src="../../public/js/clasele-mele.js"></script>
 </body>
+
 </html>
