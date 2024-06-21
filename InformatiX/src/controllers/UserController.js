@@ -1,4 +1,4 @@
-const { getUserById, updateUserByCredentials } = require('../services/UserService');
+const { getUserById, updateUserByCredentials, getAllUsers} = require('../services/UserService');
 const { getJwt } = require("../services/JwtService");
 const querystring = require('querystring');
 
@@ -77,4 +77,31 @@ async function updateUserByCredentialsHandler(req, res) {
     }
 }
 
-module.exports = { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler };
+async function getAllUsersHandler(req, res)
+{
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+
+    if (!decoded || (decoded.role !== 'admin')) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+
+    try {
+
+        const useri = await getAllUsers();
+        if (useri) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(useri));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Content not found!' }));
+        }
+    } catch (error) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: error.message }));
+    }
+}
+
+module.exports = { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler };

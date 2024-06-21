@@ -2,6 +2,7 @@ const ProblemeService = require('../services/ProblemeService');
 const { getJwt } = require("../services/JwtService");
 const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
+const { respingereProblemaService, aprobareProblemaService} = require('../services/AdministratoriService');
 
 async function getSolutionByUserAndProblem(req, res) {
     const urlParts = url.parse(req.url, true);
@@ -248,6 +249,96 @@ async function getProblemaStats(req, res) {
         res.end(JSON.stringify({ message: 'Internal Server Error' }));
     }
 }
+
+async function getProblemsUnverified(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+    if (role !== 'admin' && role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+    try {
+        const probleme = await ProblemeService.getProblemsUnverifiedService();
+
+        if (probleme) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(probleme));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Not found!');
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+    }
+}
+
+async function aprobareProblema(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'admin') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idProblema = queryObject.get('id');
+
+    try {
+        const result = await aprobareProblemaService(idProblema);
+   
+        if (result) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Problema aprobată cu succes!' }));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Problema nu a putut fi aprobată. Fie nu există, fie a fost deja aprobată!' }));
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Eroare internă a serverului.' }));
+    }
+}
+
+async function respingereProblema(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'admin') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idProblema = queryObject.get('id');
+
+    try {
+        const result = await respingereProblemaService(idProblema);
+        
+        if (result) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Problema respinsă cu succes!' }));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Problema nu a putut fi respinsă! Fie nu există, fie nu a putut fi ștearsă.' }));
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Eroare internă a serverului.' }));
+    }
+}
+
+
 async function getProblemaById(req, res) {
     const urlParts = url.parse(req.url, true);
     const pathParts = urlParts.pathname.split('/');
@@ -270,5 +361,6 @@ async function getProblemaById(req, res) {
 }
 
 module.exports = { setProblemaRating, getDeadlineByTema,submitSolution, getSolutionByUserAndProblem,
-    getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats
+    getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
+    aprobareProblema, respingereProblema
 };

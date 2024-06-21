@@ -30,7 +30,9 @@ header {
   align-items: center;
   justify-content: center;
   overflow: auto;
+  width: 100%;
 }
+
 .dreptunghi_dreapta{
   height:70vh;
   margin:20px;
@@ -40,6 +42,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 400px;
 }
 .probleme_noi{
   font-size: 20px;
@@ -47,6 +50,34 @@ header {
   margin: 20px;
 }
 .probleme{
+  overflow-y: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+} 
+.delete-button {
+  background-color: #ff6666;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background-color: #ff3333;
+}
+.user-table {
+  width: 100%;
+}
+.user-table {
   overflow-y: auto;
 }
 .problema{
@@ -129,6 +160,11 @@ header {
 .mesaje{
   overflow-y: auto;
 }
+.stitlu-sectiune{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px;
+}
 .mesaj{
   display: flex;
   flex-direction: column;
@@ -145,20 +181,40 @@ header {
   margin:10px;
 }
 
-.admin-conturi{
-  height:70vh;
-  margin:20px;
-  border:5px solid #8B4C70;
+.admin-conturi {
+  height: 67vh; 
+  margin: 20px;
+  border: 5px solid #8B4C70;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 770px;
 }
-.titlu_sectiune{
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c9afa1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #834a89;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #522157;
+}
+
+
+.titlu-sectiune{
   font-size: 20px;
   font-weight: bold;
-  margin: 20px;
+  padding: 20px;
 }
 .blocare-btn,
 .sterge-c-btn,
@@ -235,6 +291,9 @@ footer {
   align-self: baseline;
 }
 footer p{  color: #ffffff;}
+.user-table td {
+  font-size: 12px;
+}
 @media (max-width:1023px){
   .content{
     flex-direction: column;

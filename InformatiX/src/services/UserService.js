@@ -37,6 +37,19 @@ async function findUserByEmailOrUsername(email, username) {
     } 
 }       
 
+async function getAllUsers()
+{
+    const connection = await dbInstance.connect(); 
+    try {
+        const query = `SELECT id, username, role, lastname, firstname, birthday, city, school FROM users`;
+        const [rows, _] = await connection.query(query);
+        return rows;
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    } 
+}
+
 async function insertUser(username, email, password, role) {
     const connection = await dbInstance.connect(); 
     try {
@@ -144,5 +157,6 @@ module.exports = {
     findUserByEmail,
     updatePassword,
     getUserById,
-    updateUserByCredentials
+    updateUserByCredentials,
+    getAllUsers
 };

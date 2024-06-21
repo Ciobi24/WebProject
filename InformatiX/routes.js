@@ -2,8 +2,9 @@ const { handleLogin } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
-const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
-const { getSolutionByUserAndProblem,submitSolution,getDeadlineByTema,setProblemaRating,getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
+const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
+const { getSolutionByUserAndProblem,submitSolution,getDeadlineByTema,setProblemaRating,getProblemaById,addProblemaHandler, 
+    getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,deleteUserFromClassController} = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
 
@@ -40,11 +41,14 @@ function handleApiRoute(req, res) {
     else if (req.url.startsWith('/api/problemeByClasa') && req.method === 'GET') {
         getProblemeByClasa(req, res);
     }
+    else if (req.url.startsWith('/api/getAllProblemsUnverified') && req.method === 'GET') {
+        getProblemsUnverified(req, res);
+    }
     else if (req.url.startsWith('/api/problemaStats') && req.method === 'GET') {
         getProblemaStats(req, res);
     }
     else if (req.url === '/api/allClasses' && req.method === 'GET') {
-        getClassesByUser(req, res);
+        getClassesByUser(req, res); 
     }
     else if (req.url === '/api/createClass' && req.method === 'POST') {
         createClass(req, res);
@@ -85,6 +89,15 @@ function handleApiRoute(req, res) {
     else if (req.url.startsWith('/api/addProblem?id=') && req.method === 'POST') {
         addProblemToTema(req, res); 
     } 
+    else if (req.url.startsWith('/api/checkSuccesProblem?id=') && req.method === 'PATCH') {
+        aprobareProblema(req, res); 
+    }
+    else if (req.url.startsWith('/api/checkFailProblem?id=') && req.method === 'DELETE') {
+        respingereProblema(req, res); 
+    }
+    else if (req.url === '/api/getAllUsers' && req.method === 'GET') {
+        getAllUsersHandler(req, res); 
+    }
     else { 
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Content not found!');
