@@ -32,7 +32,6 @@ header {
     margin-top: 40px;
     background-color: #c9afa1;
     width: 80%;
-    min-height: 40vh;
     height: auto;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -313,7 +312,7 @@ footer {
 
 .star-rating {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: flex-start;
     cursor: pointer;
     margin: 20px 0;
@@ -321,7 +320,7 @@ footer {
 
 .star-rating span {
     font-size: 24px;
-    color: #ccc;
+    color: #604b4b;
     transition: color 0.2s;
 }
 

@@ -100,7 +100,6 @@ CREATE TABLE IF NOT EXISTS solutii (
   id_user INT NOT NULL,
   id_tema INT NOT NULL,
   text_solutie TEXT NOT NULL,
-  rating FLOAT,
   comentariu TEXT,
   FOREIGN KEY (id_problema) REFERENCES probleme(id),
   FOREIGN KEY (id_user) REFERENCES users(id)

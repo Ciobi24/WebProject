@@ -3,7 +3,7 @@ const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler } = require('./src/controllers/UserController');
-const { setProblemaRating,getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
+const { getSolutionByUserAndProblem,submitSolution,getDeadlineByTema,setProblemaRating,getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,deleteUserFromClassController} = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
 
@@ -66,6 +66,12 @@ function handleApiRoute(req, res) {
         getProblemaById(req, res);
     }else if (req.url.match(/^\/api\/probleme\/\d+\/rating$/) && req.method === 'PUT') {
         setProblemaRating(req, res);
+    }else if (req.url.startsWith('/api/teme/') && req.url.endsWith('/deadline') && req.method === 'GET') {
+        getDeadlineByTema(req, res);
+    }else  if (req.url === '/api/submitSolution' && req.method === 'PUT') {
+        submitSolution(req, res);
+    }else if (req.url.startsWith('/api/getSolution') && req.method === 'GET') {
+        getSolutionByUserAndProblem(req, res);
     }
     else if (req.url === '/api/createTema' && req.method === 'POST') {
         createTema(req, res);
