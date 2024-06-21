@@ -60,6 +60,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 downloadJSON(problemaData, `${problema.nume_problema}.json`);
             });
         }
+        const submitButton = document.querySelector('.rezolvare button');
+        if (submitButton) {
+            submitButton.addEventListener('click', async function(event) {
+                // console.log('submit button clicked');
+                event.preventDefault();
+                const isDeadlineValid = await checkDeadline(idTema);
+                if (!isDeadlineValid) {
+                    alert('Deadline-ul temei a fost depășit. Nu mai puteți trimite rezolvarea.');
+                } else {
+                    // console.log('submitting solution');
+                    submitSolution();
+                }
+            });
+        }
     }
 
     function downloadJSON(obj, filename) {
@@ -103,6 +117,62 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error submitting rating:', error);
         }
     }
+    async function checkDeadline(idTema) {
+        try {
+            const response = await fetch(`/api/teme/${idTema}/deadline`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const { deadline } = await response.json();
+            const currentDate = new Date( Date.now());
+            const deadlineDate = new Date(deadline);
+            return currentDate <= deadlineDate;
+        } catch (error) {
+            console.error('Error checking deadline:', error);
+            return false;
+        }
+    }
+    async function fetchSolution(idProblema, idTema) {
+        try {
+            const response = await fetch(`/api/getSolution?idProblema=${idProblema}&idTema=${idTema}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            if (result.success && result.solution) {
+                document.getElementById('rezolvare').value = result.solution;
+            }
+        } catch (error) {
+            console.error('Error fetching solution:', error);
+        }
+    }
 
+    async function submitSolution() {
+        const urlParams = window.location.pathname.split('/');
+        const idTema = urlParams[4];
+        const idProblema = urlParams[6];
+        const textSolutie = document.getElementById('rezolvare').value;
+    
+        try {
+            const response = await fetch('/api/submitSolution', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProblema, idTema, textSolutie })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+        } catch (error) {
+            console.error('Error submitting solution:', error);
+        }
+    }
+    
+    // // Add event listener for the submit button
+    // document.querySelector('button').addEventListener('click', submitSolution);
     fetchProblemDetails(idProblema);
+    fetchSolution(idProblema, idTema);
 });

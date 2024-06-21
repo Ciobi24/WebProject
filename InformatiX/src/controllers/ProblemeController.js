@@ -3,6 +3,103 @@ const { getJwt } = require("../services/JwtService");
 const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
 
+async function getSolutionByUserAndProblem(req, res) {
+    const urlParts = url.parse(req.url, true);
+    const idProblema = parseInt(urlParts.query.idProblema, 10);
+    const idTema = parseInt(urlParts.query.idTema, 10);
+    
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = parseInt(decoded.id, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [existingSolution] = await connection.execute(`
+            SELECT text_solutie FROM solutii WHERE id_problema = ? AND id_user = ? AND id_tema = ?;
+        `, [idProblema, idUser, idTema]);
+
+        if (existingSolution.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, solution: existingSolution[0].text_solutie }));
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, solution: '' }));
+        }
+    } catch (error) {
+        console.error('Error fetching solution:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching solution.' }));
+    }
+}
+
+async function submitSolution(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, textSolutie } = formData;
+
+            const cookieHeader = req.headers.cookie;
+            const decoded = getJwt(cookieHeader);
+            const idUser = parseInt(decoded.id, 10);
+
+            const connection = await dbInstance.connect();
+
+            // Check if solution exists
+            const [existingSolution] = await connection.execute(`
+                SELECT * FROM solutii WHERE id_problema = ? AND id_user = ? AND id_tema = ?
+            `, [idProblema, idUser, idTema]);
+
+            if (existingSolution.length > 0) {
+                // Update the existing solution
+                await connection.execute(`
+                    UPDATE solutii SET text_solutie = ? WHERE id_problema = ? AND id_user = ? AND id_tema = ?
+                `, [textSolutie, idProblema, idUser, idTema]);
+            } else {
+                // Insert a new solution
+                await connection.execute(`
+                    INSERT INTO solutii (id_problema, id_user, id_tema, text_solutie) VALUES (?, ?, ?, ?)
+                `, [idProblema, idUser, idTema, textSolutie]);
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Solution submitted successfully!' }));
+        } catch (error) {
+            console.error('Error submitting solution:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Error submitting solution.' }));
+        }
+    });
+}
+
+async function getDeadlineByTema(req, res) {
+    const urlParts = url.parse(req.url, true);
+    const pathParts = urlParts.pathname.split('/');
+    const idTema = parseInt(pathParts[3], 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const query = 'SELECT deadline FROM teme WHERE id = ?';
+        const [results] = await connection.query(query, [idTema]);
+
+        if (results.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ deadline: results[0].deadline }));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Tema not found' }));
+        }
+    } catch (error) {
+        console.error('Error fetching deadline:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Internal Server Error' }));
+    }
+}
+
 async function setProblemaRating(req, res) {
     let body = '';
     req.on('data', chunk => {
@@ -172,6 +269,6 @@ async function getProblemaById(req, res) {
     }
 }
 
-module.exports = { setProblemaRating,
+module.exports = { setProblemaRating, getDeadlineByTema,submitSolution, getSolutionByUserAndProblem,
     getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats
 };
