@@ -312,7 +312,7 @@ footer {
 
 .star-rating {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: flex-start;
     cursor: pointer;
     margin: 20px 0;

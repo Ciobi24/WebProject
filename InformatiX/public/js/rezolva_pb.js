@@ -15,14 +15,29 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching problem data:', error);
         }
     }
-
-    function displayProblem(problema) {
+    async function fetchUserById(userId) {
+        try {
+            const response = await fetch(`/api/user?id=${userId}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const user = await response.json();
+            return user.firstname + ' ' + user.lastname; 
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            return 'Unknown Author';
+        }
+    }
+    async function displayProblem(problema) {
         document.getElementById('problema-titlu').innerText = problema.nume_problema;
         document.getElementById('problema-stelute').innerText = `${problema.rating}★`;
         document.getElementById('problema-incercari').innerText = `${problema.utilizatori_incercat} încercări`;
         document.getElementById('problema-rezolvari').innerText = `${problema.utilizatori_rezolvat} rezolvări`;
         document.getElementById('problema-descriere').innerText = problema.text_problema;
-        document.getElementById('problema-autor').innerText = `Autor: ${problema.creatorId}`;
+        
+        const authorName = await fetchUserById(problema.creatorId);
+
+        document.getElementById('problema-autor').innerText = `Autor: ${authorName}`;
 
         const tagsContainer = document.getElementById('problema-tags');
         tagsContainer.innerHTML = '';
@@ -41,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 highlightStars(ratingValue);
             });
         });
+
 
         // Ensure the share button is referenced correctly
         const shareButton = document.getElementById('share-button');
@@ -98,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
     async function submitRating(idProblema, ratingValue) {
         try {
             const response = await fetch(`/api/probleme/${idProblema}/rating`, {
