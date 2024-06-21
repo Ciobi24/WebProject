@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('problema-incercari').innerText = `${problema.utilizatori_incercat} încercări`;
         document.getElementById('problema-rezolvari').innerText = `${problema.utilizatori_rezolvat} rezolvări`;
         document.getElementById('problema-descriere').innerText = problema.text_problema;
-        document.getElementById('problema-autor').innerText = `Autor: ${problema.creator_nume}`;
+        document.getElementById('problema-autor').innerText = `Autor: ${problema.creatorId}`;
 
         const tagsContainer = document.getElementById('problema-tags');
         tagsContainer.innerHTML = '';
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ rating: ratingValue })
+                body: JSON.stringify({ Rating: ratingValue })
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok.');

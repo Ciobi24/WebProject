@@ -4,7 +4,6 @@ const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
 
 async function setProblemaRating(req, res) {
-    console.log('setProblemaRating');
     let body = '';
     req.on('data', chunk => {
         body += chunk.toString();
@@ -12,79 +11,63 @@ async function setProblemaRating(req, res) {
 
     req.on('end', async () => {
         try {
-            console.log('setProblemaRating');
             const formData = JSON.parse(body);
-            const { rating } = formData;
-
+            const { Rating } = formData;
+            const rating = parseInt(Rating, 10);
             const urlParts = url.parse(req.url, true);
             const pathParts = urlParts.pathname.split('/');
-            const idProblema = pathParts[pathParts.length - 2]; // Extract `idProblema` from URL
-
-            // Assume `idUser` is obtained from JWT
+            const idProblema = parseInt(pathParts[pathParts.length - 2], 10);
             const cookieHeader = req.headers.cookie;
             const decoded = getJwt(cookieHeader);
-            const idUser = decoded.id;
-            console.log('setProblemaRating');
-            ///aici crapa
-            console.log(idProblema);
-            console.log(idUser);
-            dbInstance.connection.query(`
+            const idUser = parseInt(decoded.id, 10);
+
+            console.log(`Rating: ${rating}, idProblema: ${idProblema}, idUser: ${idUser}`);
+
+            const connection = await dbInstance.connect();
+
+            // Check if a rating already exists
+            const [existingRating] = await connection.query(`
                 SELECT * FROM rating WHERE id_problema = ? AND id_user = ?;
-            `, [idProblema, idUser], (err, results) => {
-                console.log('setProblemaRating');
-                if (err) throw err;
-                console.log(results);
-                let oldRating = 0;
+            `, [idProblema, idUser]);
+                console.log('HEI');
+            let oldRating = 0;
 
-                if (results.length > 0) {
-                    // If it exists, get the old rating
-                    oldRating = results[0].rating;
+            if (existingRating.length > 0) {
+                oldRating = existingRating[0].rating;
+                // Update existing rating
+                await connection.query(`
+                    UPDATE rating SET rating = ? WHERE id_problema = ? AND id_user = ?;
+                `, [rating, idProblema, idUser]);
+            } else {
+                // Insert new rating
+                await connection.query(`
+                    INSERT INTO rating (id_problema, id_user, rating) VALUES (?, ?, ?);
+                `, [idProblema, idUser, rating]);
+            }
 
-                    // Update existing rating
-                    dbInstance.connection.query(`
-                        UPDATE rating SET rating = ? WHERE id_problema = ? AND id_user = ?;
-                    `, [rating, idProblema, idUser], (err) => {
-                        if (err) throw err;
-                    });
-                } else {
-                    // Insert new rating
-                    dbInstance.connection.query(`
-                        INSERT INTO rating (id_problema, id_user, rating) VALUES (?, ?, ?);
-                    `, [idProblema, idUser, rating], (err) => {
-                        if (err) throw err;
-                    });
-                }
+            // Get current rating info from `probleme` table
+            const [problemaInfo] = await connection.query(`
+                SELECT rating, nr_rating FROM probleme WHERE id = ?;
+            `, [idProblema]);
 
-                // Get current rating info from `probleme` table
-                dbInstance.connection.query(`
-                    SELECT rating, nr_rating FROM probleme WHERE id = ?;
-                `, [idProblema], (err, results) => {
-                    if (err) throw err;
+            const currentRating = problemaInfo[0].rating;
+            const currentNrRating = problemaInfo[0].nr_rating;
 
-                    const currentRating = results[0].rating;
-                    const currentNrRating = results[0].nr_rating;
+            // Calculate new rating average
+            let newRating;
+            if (existingRating.length > 0) {
+                newRating = ((currentRating * currentNrRating) - oldRating + rating) / currentNrRating;
+            } else {
+                newRating = ((currentRating * currentNrRating) + rating) / (currentNrRating + 1);
+            }
+            console.log('newRating', newRating);
+            // Update `probleme` table with new rating and number of ratings
+            await connection.query(`
+                UPDATE probleme SET rating = ?, nr_rating = ? WHERE id = ?;
+            `, [newRating, existingRating.length > 0 ? currentNrRating : currentNrRating + 1, idProblema]);
 
-                    // Calculate new rating average
-                    let newRating;
-                    if (results.length > 0) {
-                        // If updating existing rating
-                        newRating = ((currentRating * currentNrRating) - oldRating + rating) / currentNrRating;
-                    } else {
-                        // If adding a new rating
-                        newRating = ((currentRating * currentNrRating) + rating) / (currentNrRating + 1);
-                    }
-
-                    // Update `probleme` table with new rating and number of ratings
-                    dbInstance.connection.query(`
-                        UPDATE probleme SET rating = ?, nr_rating = ? WHERE id = ?;
-                    `, [newRating, results.length > 0 ? currentNrRating : currentNrRating + 1, idProblema], (err) => {
-                        if (err) throw err;
-
-                        res.writeHead(200, { 'Content-Type': 'application/json' });
-                        res.end(JSON.stringify({ success: true, message: 'Rating-ul a fost actualizat cu succes.' }));
-                    });
-                });
-            });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Rating-ul a fost actualizat cu succes.' }));
         } catch (error) {
             console.error('Error setting problem rating:', error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -92,8 +75,6 @@ async function setProblemaRating(req, res) {
         }
     });
 }
-
-
 
 
 async function addProblemaHandler(req, res) {
