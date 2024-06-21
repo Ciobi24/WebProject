@@ -41,6 +41,37 @@ document.addEventListener('DOMContentLoaded', function () {
                 highlightStars(ratingValue);
             });
         });
+
+        // Ensure the share button is referenced correctly
+        const shareButton = document.getElementById('share-button');
+        if (shareButton) {
+            shareButton.addEventListener('click', function() {
+                const problemaData = {
+                    nume_problema: problema.nume_problema,
+                    rating: problema.rating,
+                    utilizatori_incercat: problema.utilizatori_incercat,
+                    utilizatori_rezolvat: problema.utilizatori_rezolvat,
+                    text_problema: problema.text_problema,
+                    clasa: problema.clasa,
+                    dificultate: problema.dificultate,
+                    categorie: problema.categorie,
+                    autor: problema.creatorId,
+                };
+                downloadJSON(problemaData, `${problema.nume_problema}.json`);
+            });
+        }
+    }
+
+    function downloadJSON(obj, filename) {
+        const jsonStr = JSON.stringify(obj, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
     function highlightStars(ratingValue) {

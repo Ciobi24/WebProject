@@ -32,7 +32,6 @@ header {
     margin-top: 40px;
     background-color: #c9afa1;
     width: 80%;
-    min-height: 40vh;
     height: auto;
     display: grid;
     grid-template-columns: 2fr 1fr;
