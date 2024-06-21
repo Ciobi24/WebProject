@@ -33,21 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
-            const temaDivs = document.querySelectorAll('.tema');
-            if (temaDivs.length > 0) {
-                temaDivs.forEach(div => {
-                    const addButton = document.createElement('button');
-                    addButton.textContent = 'Adauga';
-                    addButton.onclick = openSearchModal;
-
-                    const evaluateButton = document.createElement('button');
-                    evaluateButton.textContent = 'Evalueaza';
-                    evaluateButton.onclick = openEvaluateModal;
-
-                    div.appendChild(addButton);
-                    div.appendChild(evaluateButton);
-                });
-            }
         } else {
             const buttons = document.querySelectorAll('.tema button, #myModal .modal-content button');
             if (buttons.length > 0) {
@@ -71,18 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchUserDetails();
 });
 
-function openSearchModal() {
-    var modal = document.getElementById('searchModal');
-    modal.style.display = "block";
-}
-
 function openSolutionsPage() {
     window.location.href = "solutions.html";
-}
-
-function openEvaluateModal() {
-    var modal = document.getElementById('evaluateModal');
-    modal.style.display = "block";
 }
 
 function openProblemModal() {
@@ -100,10 +75,6 @@ function openUserSolution() {
     }
 }
 
-function searchProblem() {  // !!!!!!!!!!!!!!
-    // TODO
-}
-
 function openAddTemaModal() {
     var modal = document.getElementById('addTemaModal');
     modal.style.display = "block";
@@ -112,32 +83,6 @@ function openAddTemaModal() {
 function closeAddTemaModal() {
     var modal = document.getElementById('addTemaModal');
     modal.style.display = "none";
-}
-
-function submitNewTema() {
-    // Get input values
-    var clasa = document.getElementById('clasaInput').value;
-    var deadline = document.getElementById('deadlineInput').value;
-    var problems = document.getElementById('problemsInput').value.split('\n'); // Split problems by newline
-
-    // Create new topic element
-    var container = document.querySelector('.teme');
-    var newTema = document.createElement('div');
-    newTema.classList.add('tema');
-    newTema.innerHTML = `
-        <h3>${clasa}</h3>
-        <p>Deadline: ${deadline}</p>
-        <ul>
-            ${problems.map(problem => `<li>${problem}</li>`).join('')}
-        </ul>
-        <button onclick="openSearchModal()">Adauga</button>
-        <button onclick="openEvaluateModal()">Evalueaza</button>
-    `;
-
-    // Append new topic to container
-    container.appendChild(newTema);
-
-    closeAddTemaModal();
 }
 
 function openProblemSolution(problemName, idTema, idProblema) {

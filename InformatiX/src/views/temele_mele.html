@@ -44,10 +44,11 @@
         </nav>
     </header>
     <div class="container_princ">
-    <h2 class="temeleMele">Temele Mele</h2>
-    <div class="teme" id="temele">
+        <h2>Temele Mele</h2>
+        <div id="temele">
+
+        </div>
     </div>
-</div>
 
     <div id="addTemaModal" class="modal">
         <div class="modal-content">
@@ -89,11 +90,7 @@
             <span class="close" onclick="closeEvaluateModal()">&times;</span>
             <h2>Evalueaza Elevii</h2>
             <ul>
-                <li onclick="openUserSolution()">User 1</li>
-                <li onclick="openUserSolution()">User 2</li>
-                <li onclick="openUserSolution()">User 3</li>
-                <li onclick="openUserSolution()">User 4</li>
-                <li onclick="openUserSolution()">User 5</li>
+                
             </ul>
         </div>
     </div>
@@ -113,6 +110,22 @@
         <p>@ Contact</p>
     </footer>
     <script>
+        let users;
+        function getElevi() {
+            const url = window.location.href;
+            const classId = url.substring(url.lastIndexOf('/') + 1);
+            fetch(`/api/getEleviByIdClass?id=${classId}`)
+                .then(response => response.json())
+                .then(data => {
+                    users = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        getElevi();
+        var idTemaGlobal;
+
         function showSidebar() {
             const sidebar = document.querySelector('.sidebar')
             sidebar.style.display = 'flex'
@@ -123,6 +136,11 @@
             sidebar.style.display = 'none'
         }
 
+        function openEvaluateModal() {
+         var modal = document.getElementById('evaluateModal');
+         modal.style.display = "block";
+         populateUsersList(users);
+        }
         function closeSearchModal() {
             var modal = document.getElementById('searchModal');
             modal.style.display = "none";
@@ -157,6 +175,11 @@
             var modal = document.getElementById('addTemaModal');
             modal.style.display = "block";
         }
+        function openSearchModal(id) {
+            idTemaGlobal = id;
+            var modal = document.getElementById('searchModal');
+            modal.style.display = "block";
+        }
 
         function submitNewTema() {
 
@@ -183,7 +206,7 @@
                 deadline: deadlineInput,
                 classId: classId
             };
-            console.log(data);
+
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/api/createTema', true);
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
@@ -207,72 +230,134 @@
             closeAddTemaModal();
             document.getElementById('clasaInput').value = '';
             document.getElementById('deadlineInput').value = '';
+            location.reload();
         }
 
+
         function searchProblem() {
-            alert("Problem added!");
-            closeSearchModal();
+            const searchInput = document.getElementById('searchInput').value.trim();
+
+            if (!searchInput) {
+                alert('Introduceti un ID de problema.');
+                return;
+            }
+
+            if (!/^\d+$/.test(searchInput)) {
+                alert('ID-ul problemei trebuie să conțină doar numere.');
+                return;
+            }
+
+            const url = window.location.href;
+            const idTema = url.substring(url.lastIndexOf('/') + 1);
+
+            const data = {
+                problemId: searchInput
+            };
+
+            console.log(idTemaGlobal);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `/api/addProblem?id=${idTemaGlobal}`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (xhr.status === 200) {
+                        document.getElementById('searchInput').value = '';
+                        closeSearchModal();
+                        location.reload();
+                    } else {
+                        document.getElementById('searchInput').value = '';
+                        alert(response.message);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify(data));
         }
     </script>
 
-<script>
-    function getTeme() {
-        const url = window.location.href;
-        const classId = url.substring(url.lastIndexOf('/') + 1);
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `/api/getTeme?id=${classId}`, true);
-        
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    const teme = JSON.parse(xhr.responseText);
-                    console.log(teme);
-                    displayTeme(teme);
-                } else {
-                    alert('Eroare la obținerea temelor.');
+    <script>
+        function getTeme() {
+            const url = window.location.href;
+            const classId = url.substring(url.lastIndexOf('/') + 1);
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `/api/getTeme?id=${classId}`, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const teme = JSON.parse(xhr.responseText);
+                        displayTeme(teme);
+                    } else {
+                        alert('Eroare la obținerea temelor.');
+                    }
                 }
-            }
-        };
-        
-        xhr.send();
-    }
+            };
 
-    // Funcția pentru a afișa temele în HTML
-    function displayTeme(teme) {
-    const temeContainer = document.getElementById('temele');
-    temeContainer.innerHTML = '';
+            xhr.send();
+        }
 
-    // Ensure teme is an array
-    const temeArray = Array.isArray(teme) ? teme : [teme];
+        async function displayTeme(teme) {
+            const temeContainer = document.getElementById('temele');
+            temeContainer.innerHTML = '';
 
-    temeArray.forEach(function(tema) {
-        const divTema = document.createElement('div');
-        divTema.classList.add('tema');
+            const temeArray = Array.isArray(teme) ? teme : [teme];
 
-        divTema.innerHTML = `
-            <h3>${tema.nume}</h3>
-            <p>Clasa: ${tema.id_clasa}</p>
+            for (const tema of temeArray) {
+                const divTema = document.createElement('div');
+                divTema.classList.add('tema');
+
+                const problems = await fetchProblemsByTemaId(tema.id);
+
+                const problemsList = problems.map(problem => `
+            <li>Id: ${problem.id} - ${problem.nume_problema} - ${problem.dificultate}</li>
+        `).join('');
+
+                divTema.innerHTML = `
+            <h3> Tema: ${tema.nume}</h3>
+            <p>Probleme: ${problemsList}<p>
             <p>Deadline: ${new Date(tema.deadline).toLocaleString()}</p>
-            <ul>
-                <!-- Aici poți adăuga dinamic listă cu problemele temei -->
-            </ul>
+            <button id="${tema.id}" onclick="openSearchModal(this.id)">Adauga</button>
+            <button onclick="openEvaluateModal()">Evalueaza</button>
         `;
 
-        const ulProbleme = divTema.querySelector('ul');
-        tema.probleme?.forEach(function(problema) {
-            const liProblema = document.createElement('li');
-            liProblema.textContent = problema;
-            ulProbleme.appendChild(liProblema);
-        });
+                temeContainer.appendChild(divTema);
+            }
+        }
 
-        temeContainer.appendChild(divTema);
-    });
-}
+        async function fetchProblemsByTemaId(temaId) {
+            try {
+                const response = await fetch(`/api/getProblemsByIdTema?id=${temaId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            } catch (error) {
+                console.error('Error fetching problems:', error);
+                return [];
+            }
+        }
 
-    window.onload = function() {
-        getTeme();
-    };
-</script>
+        function populateUsersList(users) {
+            console.log(users);
+            const ul = document.querySelector('#evaluateModal ul');
+            ul.innerHTML = '';
+
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.textContent = "#" + user.id + " - " + (user.firstname || "nesetat") + " " + (user.lastname || "nesetat") + " - " + user.email;
+                li.onclick = function () {
+                    openUserSolution(user.id);
+                };
+                ul.appendChild(li);
+            });
+        }
+
+        window.onload = function () {
+            getTeme();
+        };
+    </script>
 
 </body>
 

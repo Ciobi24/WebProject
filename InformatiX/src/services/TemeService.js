@@ -3,7 +3,7 @@ const dbInstance = require('../models/db-config');
 async function createTemaService(nume, deadline, classId, userId) {
     let connection;
     try {
-        const connection = await dbInstance.connect();
+        connection = await dbInstance.connect();
 
         let query = 'SELECT * FROM clase WHERE id = ? AND id_user = ?';
         let [rows] = await connection.query(query, [classId, userId]);
@@ -34,12 +34,16 @@ async function getTemeByIdClass(classId, userId) {
     let connection; 
     try {
         connection = await dbInstance.connect();
-        const [classCheck] = await connection.execute(
+        const [classCheck1] = await connection.execute(
             'SELECT * FROM clase WHERE id = ? AND id_user = ?',
             [classId, userId]
         );
+        const [classCheck2] = await connection.execute(
+            'SELECT * FROM clase_elevi WHERE id_user = ? AND id_clasa = ?',
+            [userId, classId]
+        );
 
-        if (classCheck.length === 0) {  //protectie
+        if (classCheck1.length === 0 && classCheck2.length === 0) {  //protectie
             return null;
         }
 
@@ -55,4 +59,74 @@ async function getTemeByIdClass(classId, userId) {
     }
 }
 
-module.exports = { createTemaService, getTemeByIdClass };
+async function getProblemeByIdTema(idTema, userId)
+{
+    let connection; 
+    try {
+        connection = await dbInstance.connect();
+        const [classCheck1] = await connection.execute(
+            'SELECT * FROM clase WHERE id_user = ?',
+            [userId]
+        );
+
+        const [classCheck2] = await connection.execute(
+            'SELECT * FROM clase_elevi WHERE id_user = ?',
+            [userId]
+        );
+
+        if (classCheck1.length === 0 && classCheck2.length === 0) {  
+            return null;
+        }
+
+        const [results] = await connection.execute(
+            'SELECT p.nume_problema, p.id, p.dificultate FROM probleme_teme pt JOIN probleme p ON pt.id_problema = p.id WHERE pt.id_tema = ?',
+            [idTema]
+        );
+
+        return results;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw error;
+    }
+}
+
+async function addProblemToTemaService(problemId, idTema, idUser) {
+    let connection;
+    try {
+        connection = await dbInstance.connect();
+
+        let query3 = 'SELECT * FROM probleme WHERE id = ?';
+        let [rows3] = await connection.query(query3, [problemId]);
+        if(!rows3)
+            return false;
+
+        let query2 = 'SELECT id_clasa FROM teme WHERE id = ?';
+        let [rows2] = await connection.query(query2, [idTema]);
+
+        if(!rows2)
+            return false;
+
+        let query = 'SELECT * FROM clase WHERE id = ? AND id_user = ?';
+        let [rows] = await connection.query(query, [rows2[0].id_clasa, idUser]);
+        if (rows.length === 0) {
+            return false; 
+        }
+        query = 'SELECT * FROM probleme_teme WHERE id_problema = ? AND id_tema = ?';
+        [rows] = await connection.query(query, [problemId, idTema]);
+        if (rows.length > 0) {
+            return false; 
+        }
+        query = 'INSERT INTO probleme_teme (id_tema, id_problema) VALUES (?, ?)';
+        const result = await connection.query(query, [idTema, problemId]);
+
+        if(result.affectedRows) 
+           return false;
+        else
+           return true; 
+    } catch (error) {
+        console.error('Error:', error);
+        return 2; 
+    } 
+}
+
+module.exports = { createTemaService, getTemeByIdClass, getProblemeByIdTema, addProblemToTemaService};
