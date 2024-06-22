@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const { getJwt } = require("../services/JwtService");
-const { insertTeacherApplication, getApplications } = require("../services/SwitchToTeacherService");
+const { insertTeacherApplication, getApplications, aprobareApplicationService, respingereApplicationService } = require("../services/SwitchToTeacherService");
+const { getUserById } = require('../services/UserService');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,9 +23,17 @@ async function applyToTeacherController(req, res) {
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
 
-    if (!decoded || (decoded.role !== 'elev')) {
+    const user = await getUserById(decoded.id);
+
+    if (!decoded || (user.role !== 'elev')) {
         res.writeHead(401, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        res.end(JSON.stringify({ message: 'User does not have permission!', error: 'User does not have permission!' }));
+        return;
+    } 
+    
+    if (user.role === 'profesor' || user.role === 'admin') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Aveți deja rol de profesor!', error: 'Aveți deja rol de profesor!' }));
         return;
     }
 
@@ -105,5 +114,115 @@ async function getAllApplicationsController(req, res) {
     }
 }
 
+async function respingereApplicationController(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
 
-module.exports = { applyToTeacherController, getAllApplicationsController };
+    if (!decoded || decoded.role !== 'admin') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+    const urlParts = req.url.split('/');
+    const idUser = urlParts[urlParts.length - 1];
+
+    if (!idUser || isNaN(idUser)) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'Bad request!' }));
+        return;
+    }
+
+    try {
+        const result = await respingereApplicationService(idUser);
+
+        if (result) {
+            await deleteFilesById(idUser);
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Cerere respinsa cu succes!' }));
+        } else {
+            res.writeHead(409, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Nu s-a putut respinge! Cerere inexistentă!' }));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Eroare la adăugarea problemei.' }));
+    }
+}
+
+async function aprobareApplicationController(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+
+    if (!decoded || decoded.role !== 'admin') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+    const urlParts = req.url.split('/');
+    const idUser = urlParts[urlParts.length - 1];
+
+    if (!idUser || isNaN(idUser)) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'Bad request!' }));
+        return;
+    }
+
+    try {
+        const result = await aprobareApplicationService(idUser);
+        if (result) {
+            await deleteFilesById(idUser);
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Cerere aprobată cu succes!' }));
+        } else {
+            res.writeHead(409, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Nu s-a putut aproba! Cerere inexistentă!' }));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Eroare la adăugarea problemei.' }));
+    }
+}
+
+async function deleteFilesById(idUser) {
+    const directoryPath = path.join(__dirname, '../../public/uploads');
+
+    return new Promise((resolve, reject) => {
+        fs.readdir(directoryPath, (err, files) => {
+            if (err) {
+                console.error('Unable to scan directory:', err);
+                reject(err);
+                return;
+            }
+
+            const userFiles = files.filter(file => file.startsWith(idUser));
+
+            if (userFiles.length === 0) {
+                console.warn('No files found for user:', idUser);
+                resolve(false);
+                return;
+            }
+
+            let deletePromises = userFiles.map(file => {
+                return new Promise((res, rej) => {
+                    fs.unlink(path.join(directoryPath, file), err => {
+                        if (err) {
+                            console.error('Error deleting file:', err);
+                            rej(err);
+                        } else {
+                            console.log('File deleted successfully:', file);
+                            res(true);
+                        }
+                    });
+                });
+            });
+
+            Promise.all(deletePromises)
+                .then(() => resolve(true))
+                .catch(err => reject(err));
+        });
+    });
+}
+
+module.exports = { applyToTeacherController, getAllApplicationsController, respingereApplicationController, aprobareApplicationController };

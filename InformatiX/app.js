@@ -7,7 +7,7 @@ const { handleUserRoute, handleApiRoute } = require('./routes');
 const { checkTokenExistence } = require('./src/services/TokenResetService.js');
 const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
 const { getJwt } = require("./src/services/JwtService.js");
-const { applyToTeacherController, getAllApplicationsController } = require('./src/controllers/ApplyToTeacherController.js');
+const { applyToTeacherController, getAllApplicationsController, respingereApplicationController , aprobareApplicationController } = require('./src/controllers/ApplyToTeacherController.js');
 
 require('dotenv').config();
 dbInstance.connect();
@@ -163,11 +163,21 @@ const server = http.createServer((req, res) => {
         return;
     }
     if(pathname === '/getAllApplications')
-        {
+    {
             getAllApplicationsController(req,res);
             return;
-        }
-    
+    }
+    if(pathname.startsWith('/applyToTeacherRespingere/'))
+    {
+        respingereApplicationController(req,res);
+        return;
+    }
+    if(pathname.startsWith('/applyToTeacherAprobare/'))
+    {
+        aprobareApplicationController(req,res);
+        return;
+    }
+
     if (pathname.startsWith('/api/')) {
         verifyToken(req, res, () => {
             handleApiRoute(req, res); // aici cumva fac cererile doar catre baza de date sa-mi dea informatii, n-am treaba cu paginile

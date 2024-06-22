@@ -30,4 +30,46 @@ async function getApplications() {
     }
 }
 
-module.exports = { insertTeacherApplication, getApplications };
+async function aprobareApplicationService(idUser) {
+    let connection;
+    try {
+        connection = await dbInstance.connect();
+
+        const [userCheck] = await connection.execute('SELECT * FROM users WHERE id = ?', [idUser]);
+        if (userCheck.length === 0) {
+            return false;
+        }
+
+        const [deleteApplication] = await connection.execute('DELETE FROM teacher_application WHERE user_id = ?', [idUser]);
+        if (deleteApplication.affectedRows === 0) {
+            return false;
+        }
+
+        const [updateRole] = await connection.execute('UPDATE users SET role = ? WHERE id = ?', ['profesor', idUser]);
+        if (updateRole.affectedRows === 0) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Database Error:', error);
+        return false;
+    }
+}
+
+async function respingereApplicationService(idUser) {
+    let connection;
+    try {
+        connection = await dbInstance.connect();
+        const [deleteApplication] = await connection.execute('DELETE FROM teacher_application WHERE user_id = ?', [idUser]);
+        if (deleteApplication.affectedRows === 0) {
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error('Database Error:', error);
+        return false;
+    }
+}
+
+module.exports = { insertTeacherApplication, getApplications, aprobareApplicationService, respingereApplicationService };

@@ -215,14 +215,61 @@ document.addEventListener('DOMContentLoaded', function () {
             documentLink.textContent = 'Vizualizează Document';
             documentLink.target = '_blank';
 
-            documentLink.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                window.open(documentLink.href, '_blank');
+            const approveButton = document.createElement('button');
+            approveButton.textContent = 'Aprobă';
+
+            const rejectButton = document.createElement('button');
+            rejectButton.textContent = 'Respinge';
+
+            // Set common styles for both buttons
+            const buttonStyle = `
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                margin-top: 10px;
+                width: 100px;
+                border-radius: 7px;
+            `;
+
+            approveButton.style.cssText = buttonStyle;
+            rejectButton.style.cssText = buttonStyle;
+            rejectButton.style.backgroundColor = '#f44336'; 
+
+            approveButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                handleAction(`/applyToTeacherAprobare/${idUser}`, 'Aprobat');
             });
+
+            rejectButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                handleAction(`/applyToTeacherRespingere/${idUser}`, 'Respins');
+            });
+
+            function handleAction(url, actionType) {
+                fetch(url, { method: 'DELETE' })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(`${actionType}:`, data);
+                        alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error(`${actionType} Error:`, error);
+                        alert(data.message);
+                    });
+            }
 
             aplicare.appendChild(idUserParagraph);
             aplicare.appendChild(schoolNameParagraph);
             aplicare.appendChild(documentLink);
+            aplicare.appendChild(approveButton);
+            aplicare.appendChild(rejectButton);
 
             aplicariContainer.appendChild(aplicare);
         });
@@ -230,6 +277,9 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(error => {
         console.error('Eroare la preluarea datelor:', error);
     });
+
+
+
 
 
 

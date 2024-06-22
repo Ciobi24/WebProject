@@ -154,8 +154,13 @@ th {
   align-items: center;
   width: 300px;
 }
-
+.mesaje { 
+  overflow-y: auto;
+  width: 100%;
+}
 .aplicare {
+  margin-right: 10px;
+  margin-left: 10px;
   border: 1px solid #c9afa1;
   padding: 10px;
   margin-bottom: 20px; 
@@ -189,9 +194,7 @@ th {
   font-weight: bold;
   margin: 20px;
 }
-.mesaje{
-  overflow-y: auto;
-}
+
 .stitlu-sectiune{
   font-size: 20px;
   font-weight: bold;
