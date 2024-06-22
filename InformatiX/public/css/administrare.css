@@ -79,6 +79,7 @@ th {
 }
 .user-table {
   overflow-y: auto;
+  border-radius: 10px;
 }
 .problema{
   display: flex;

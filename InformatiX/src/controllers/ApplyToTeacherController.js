@@ -22,6 +22,12 @@ async function applyToTeacherController(req, res) {
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
 
+    if (!decoded || (decoded.role !== 'elev')) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+
     upload.single('image')(req, res, async function (err) {
         if (err) {
             console.error('Eroare în timpul încărcării fișierului:', err);
@@ -31,14 +37,9 @@ async function applyToTeacherController(req, res) {
         }
 
         try {
+
             const school1 = req.body.school;
             const file = req.file;
-            if (!decoded || (decoded.role !== 'elev')) {
-                res.writeHead(401, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
-                return;
-            }
-
             if (!file || !school1) {
                 console.error('Fișierul nu a fost încărcat');
                 res.writeHead(400, { 'Content-Type': 'application/json' });
