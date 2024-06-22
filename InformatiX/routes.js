@@ -3,7 +3,7 @@ const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
-const { deleteComment,handleCommentSubmission,fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
+const {getSolutionByUserAndProblemEvaluate,getProblemsByTema, deleteComment,handleCommentSubmission,fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
     getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController, deleteUserFromClassController } = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
@@ -73,7 +73,10 @@ function handleApiRoute(req, res) {
         getDeadlineByTema(req, res);
     } else if (req.url === '/api/submitSolution' && req.method === 'PUT') {
         submitSolution(req, res);
-    } else if (req.url.startsWith('/api/getSolution') && req.method === 'GET') {
+    }else if (req.url.startsWith('/api/getSolution/evaluare') && req.method === 'GET') {
+        getSolutionByUserAndProblemEvaluate(req, res);
+    } 
+    else if (req.url.startsWith('/api/getSolution') && req.method === 'GET') {
         getSolutionByUserAndProblem(req, res);
     }
     else if (req.url === '/api/createTema' && req.method === 'POST') {
@@ -103,6 +106,9 @@ function handleApiRoute(req, res) {
         { handleCommentSubmission(req, res); }
     else if (req.url.startsWith('/api/comments') && req.method === 'DELETE') 
         { deleteComment(req, res); }
+    else if(req.url.startsWith('/api/problems') && req.method === 'GET') {
+        getProblemsByTema(req, res);
+    }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Content not found!');

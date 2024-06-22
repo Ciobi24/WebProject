@@ -4,6 +4,27 @@ const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
 const { respingereProblemaService, aprobareProblemaService } = require('../services/AdministratoriService');
 
+
+async function getProblemsByTema(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const temaId = parseInt(queryObject.temaId, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [problems] = await connection.query(`
+            SELECT * FROM probleme join probleme_teme on probleme_teme.id_problema=probleme.id WHERE id_tema = ?
+        `, [temaId]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(problems));
+    } catch (error) {
+        console.error('Error fetching problems:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching problems.' }));
+    }
+}
+
+
 async function deleteComment(req, res) {
     let body = '';
     req.on('data', chunk => {
@@ -34,6 +55,31 @@ async function deleteComment(req, res) {
             res.end(JSON.stringify({ success: false, message: 'Error deleting comment.' }));
         }
     });
+}
+async function getSolutionByUserAndProblemEvaluate(req, res) {
+    const urlParts = url.parse(req.url, true);
+    const idProblema = parseInt(urlParts.query.idProblema, 10);
+    const idTema = parseInt(urlParts.query.idTema, 10);
+    const idUser = parseInt(urlParts.query.idUser, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [existingSolution] = await connection.execute(`
+            SELECT text_solutie FROM solutii WHERE id_problema = ? AND id_user = ? AND id_tema = ?;
+        `, [idProblema, idUser, idTema]);
+
+        if (existingSolution.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, solution: existingSolution[0].text_solutie }));
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, solution: '' }));
+        }
+    } catch (error) {
+        console.error('Error fetching solution:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching solution.' }));
+    }
 }
 
 async function getSolutionByUserAndProblem(req, res) {
@@ -470,7 +516,7 @@ async function handleCommentSubmission(req, res) {
     });
 }
 
-module.exports = {
+module.exports = {getProblemsByTema,getSolutionByUserAndProblemEvaluate,
     deleteComment, setProblemaRating, getDeadlineByTema, submitSolution, getSolutionByUserAndProblem,
     getProblemaById, addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
     aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission

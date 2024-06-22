@@ -18,22 +18,10 @@
             const sidebar = document.querySelector('.sidebar')
             sidebar.style.display = 'none'
         }
-        function showSignUp() {
-            const flipCheckbox = document.getElementById('flip');
-            flipCheckbox.checked = true;
-        }
-        function showLogin() {
-            const flipCheckbox = document.getElementById('flip');
-            flipCheckbox.checked = false;
-        }
+        
     </script>
-    <script>
-        function submitProblem() {
-            //implement
-        }
-      </script>
       <script src="../../../../../../../public/js/checkAdmin.js"></script>
-
+      <script src="../../../../../../../public/js/solution.js"></script>
 </head>
 
 <body>
@@ -68,73 +56,7 @@
     </header>
     <div class="container_princ">
         <h2>User Name</h2>
-        <div class="problema">
-            <h1>Titlu problema</h1>
-            <button>share</button>
-            <div class="ratings">
-                <span class="stars">★★★☆☆</span>
-                <span class="users-tried">100 încercări</span>
-                <span class="users-solved">50 rezolvări</span>
-            </div>
-            <p class="cerinta">Descriere problema, cerinte, posibile indicatii...</p>
-            <div class="tags">
-                <p>tag1</p>
-                <p>tag2</p>
-            </div>
-            <p class="autor">Autor</p>
-        </div>
-        <div class="code-section">
-            <h3>C Code</h3>
-            <pre><code>
-                    #include &lt;stdio.h&gt;
-
-                        int main() {
-                            printf("Hello, World!\n");
-                            return 0;
-                        }                        
-                </code></pre>
-        </div>
-        <div class="rating-section">
-            <h3>Rate the Code 0-100</h3>
-            <input type="number" min="0" max="100" placeholder="Enter rating (0-100)">
-        </div>
-        <div class="comment-section">
-            <h3>Comments</h3>
-            <textarea rows="4" cols="50" placeholder="Enter your comment"></textarea>
-        </div>
-        <button onclick="submitProblem()">Submit</button>
-
-        <div class="problema">
-            <h1>Titlu problema</h1>
-            <button>share</button>
-            <div class="ratings">
-                <span class="stars">★★★☆☆</span>
-                <span class="users-tried">100 încercări</span>
-                <span class="users-solved">50 rezolvări</span>
-            </div>
-            <p class="cerinta">Descriere problema, cerinte, posibile indicatii...</p>
-            <div class="tags">
-                <p>tag1</p>
-                <p>tag2</p>
-            </div>
-            <p class="autor">Autor</p>
-        </div>
-        <div class="code-section">
-            <h3>C Code</h3>
-            <pre class="code-section-pre"><code>int main() {
-                    printf("Hello, World!\n");
-                    return 0;
-                }          </code></pre>
-        </div>
-        <div class="rating-section">
-            <h3>Rate the Code 0-100</h3>
-            <input type="number" min="0" max="100" placeholder="Enter rating (0-100)">
-        </div>
-        <div class="comment-section">
-            <h3>Comments</h3>
-            <textarea rows="4" cols="50" placeholder="Enter your comment"></textarea>
-        </div>
-        <button onclick="submitProblem()">Submit</button>
+        <div class="problems-container" id="problems-container"></div>
     </div>
     <footer>
         <p>@ Contact</p>
