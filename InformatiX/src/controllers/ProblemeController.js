@@ -175,6 +175,7 @@ async function submitSolution(req, res) {
                     UPDATE solutii SET text_solutie = ? WHERE id_problema = ? AND id_user = ? AND id_tema = ?
                 `, [textSolutie, idProblema, idUser, idTema]);
             } else {
+                await connection.execute(`UPDATE probleme set utilizatori_incercat = utilizatori_incercat + 1 where id = ?`, [idProblema]);
                 await connection.execute(`UPDATE users set incercari = incercari + 1 where id = ?`, [idUser]);
                 // Insert a new solution
                 await connection.execute(`
@@ -590,7 +591,9 @@ async function handleProfessorGradeSubmission(req, res) {
                 UPDATE solutii SET nota = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
             `, [grade, idProblema, idTema, idUser]);
             if(grade==10)
-                await connection.execute(`UPDATE users set rezolvate = rezolvate + 1 where id = ?`, [idUser]);
+                {await connection.execute(`UPDATE users set rezolvate = rezolvate + 1 where id = ?`, [idUser]);
+                await connection.execute(`UPDATE probleme set utilizatori_rezolvat=utilizatori_rezolvat+1 where id = ?`, [idProblema]);
+                }
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: true, message: 'Nota a fost actualizată cu succes.' }));
         } catch (error) {
