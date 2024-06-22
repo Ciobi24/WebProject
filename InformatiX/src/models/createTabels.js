@@ -101,6 +101,7 @@ CREATE TABLE IF NOT EXISTS solutii (
   id_tema INT NOT NULL,
   text_solutie TEXT NOT NULL,
   comentariu TEXT,
+  comentariu_prof TEXT,
   FOREIGN KEY (id_problema) REFERENCES probleme(id),
   FOREIGN KEY (id_user) REFERENCES users(id)
 );

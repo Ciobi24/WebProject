@@ -3,7 +3,44 @@ const { getJwt } = require("../services/JwtService");
 const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
 const { respingereProblemaService, aprobareProblemaService} = require('../services/AdministratoriService');
+async function fetchCommentsHandler(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const idProblema = parseInt(queryObject.idProblema, 10);
+    const idTema = parseInt(queryObject.idTema, 10);
+    
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = parseInt(decoded.id, 10);
 
+    try {
+        const connection = await dbInstance.connect();
+        const [comments] = await connection.query(`
+            SELECT s.text_solutie AS text, u.firstname, u.lastname
+            FROM solutii s
+            JOIN users u ON s.id_user = u.id
+            WHERE s.id_tema = ? AND s.id_problema = ?
+        `, [idTema, idProblema]);
+
+        const [teacherComment] = await connection.query(`
+            SELECT s.comentariu_prof AS text
+            FROM solutii s
+            WHERE s.id_tema = ? AND s.id_problema = ? AND s.id_user = ?
+        `, [idTema, idProblema, idUser]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            comments: comments.map(c => ({
+                author: `${c.firstname} ${c.lastname}`,
+                text: c.text
+            })),
+            teacherComment: teacherComment.length ? teacherComment[0].text : null
+        }));
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching comments.' }));
+    }
+}
 async function getSolutionByUserAndProblem(req, res) {
     const urlParts = url.parse(req.url, true);
     const idProblema = parseInt(urlParts.query.idProblema, 10);
@@ -359,8 +396,49 @@ async function getProblemaById(req, res) {
         res.end('Internal Server Error');
     }
 }
+async function handleCommentSubmission(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, comentariu } = formData;
+            const cookieHeader = req.headers.cookie;
+            const decoded = getJwt(cookieHeader);
+            const idUser = decoded.id;
+
+            const connection = await dbInstance.connect();
+
+            // Verifică dacă există deja un comentariu pentru această problemă, temă și utilizator
+            const [existingComment] = await connection.query(`
+                SELECT * FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+            `, [idProblema, idTema, idUser]);
+
+            if (existingComment.length > 0) {
+                // Dacă există, actualizează comentariul existent
+                await connection.query(`
+                    UPDATE solutii SET comentariu = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+                `, [comentariu, idProblema, idTema, idUser]);
+            } else {
+                // Dacă nu există, inserează un nou comentariu
+                await connection.query(`
+                    INSERT INTO solutii (id_problema, id_tema, id_user, comentariu) VALUES (?, ?, ?, ?)
+                `, [idProblema, idTema, idUser, comentariu]);
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Comentariul a fost adăugat/actualizat cu succes.' }));
+        } catch (error) {
+            console.error('Error handling comment submission:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Eroare la adăugarea/actualizarea comentariului.' }));
+        }
+    });
+}
 
 module.exports = { setProblemaRating, getDeadlineByTema,submitSolution, getSolutionByUserAndProblem,
     getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
-    aprobareProblema, respingereProblema
-};
+    aprobareProblema, respingereProblema, fetchCommentsHandler,handleCommentSubmission };

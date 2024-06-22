@@ -90,8 +90,63 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
+        const sendCommentButton = document.getElementById('send');
+        if (sendCommentButton) {
+            sendCommentButton.addEventListener('click', async function(event) {
+                event.preventDefault();
+                const commentText = document.getElementById('comentariu').value;
+                submitComment(idProblema, idTema, commentText);
+            });
+        }
+        fetchComments(idProblema, idTema);
     }
-
+    async function fetchComments(idProblema, idTema) {
+        try {
+            const response = await fetch(`/api/comments?idProblema=${idProblema}&idTema=${idTema}`, {
+                method: 'GET', // This is actually the default and can be omitted
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });            
+              if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const comments = await response.json();
+            displayComments(comments);
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    }
+    async function submitComment(idProblema, idTema, comentariu) {
+        try {
+            const response = await fetch('/api/comments', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProblema, idTema, comentariu })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+        } catch (error) {
+            console.error('Error submitting comment:', error);
+        }
+    }
+    function displayComments(comments) {
+        const commentsContainer = document.querySelector('.comments');
+        comments.forEach(comment => {
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.innerHTML = `
+                <p class="autor">${comment.author}</p>
+                <p class="comentariu">${comment.text}</p>
+            `;
+            commentsContainer.appendChild(commentElement);
+        });
+    }
     function downloadJSON(obj, filename) {
         const jsonStr = JSON.stringify(obj, null, 2);
         const blob = new Blob([jsonStr], { type: 'application/json' });

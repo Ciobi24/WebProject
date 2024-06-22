@@ -2,10 +2,10 @@ const { handleLogin } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
-const { getUserByIdHandler, updateUserByCredentialsHandler,getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
-const { getSolutionByUserAndProblem,submitSolution,getDeadlineByTema,setProblemaRating,getProblemaById,addProblemaHandler, 
+const { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
+const { handleCommentSubmission,fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
     getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
-const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController,deleteUserFromClassController} = require('./src/controllers/ClassesController');
+const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController, deleteUserFromClassController } = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
 
 function handleUserRoute(req, res) {
@@ -15,9 +15,9 @@ function handleUserRoute(req, res) {
         handleRegister(req, res);
     }
     else if (req.url == '/reset-password') {
-        handleResetPassword(req, res); 
+        handleResetPassword(req, res);
     } else if (req.url == '/getDateResetPassword') {
-        handleUpdatePassword(req, res); 
+        handleUpdatePassword(req, res);
     } else if (req.url === '/addProblema' && req.method === 'POST') {
         addProblemaHandler(req, res);
     } else {
@@ -32,10 +32,10 @@ function handleApiRoute(req, res) {
     }
     else if (req.url === '/api/user') {
         getUserByIdHandler(req, res);
-    } 
+    }
     else if (req.url === '/api/updateUser') {
         updateUserByCredentialsHandler(req, res);
-    }else if (req.url.startsWith('/api/problemeByCategorie') && req.method === 'GET') {
+    } else if (req.url.startsWith('/api/problemeByCategorie') && req.method === 'GET') {
         getProblemeByCategorie(req, res);
     }
     else if (req.url.startsWith('/api/problemeByClasa') && req.method === 'GET') {
@@ -48,7 +48,7 @@ function handleApiRoute(req, res) {
         getProblemaStats(req, res);
     }
     else if (req.url === '/api/allClasses' && req.method === 'GET') {
-        getClassesByUser(req, res); 
+        getClassesByUser(req, res);
     }
     else if (req.url === '/api/createClass' && req.method === 'POST') {
         createClass(req, res);
@@ -61,20 +61,20 @@ function handleApiRoute(req, res) {
     }
     else if (req.url.startsWith('/api/deleteClass?id=') && req.method === 'DELETE') {
         deleteClassByIdController(req, res);
-    } 
+    }
     else if (req.url.startsWith('/api/deleteUser?id=') && req.method === 'DELETE') {
         deleteUserFromClassController(req, res);
-    } 
-    else if(req.url.match(/^\/api\/probleme\/\d+$/) && req.method === 'GET') {
+    }
+    else if (req.url.match(/^\/api\/probleme\/\d+$/) && req.method === 'GET') {
         console.log(req.url);
         getProblemaById(req, res);
-    }else if (req.url.match(/^\/api\/probleme\/\d+\/rating$/) && req.method === 'PUT') {
+    } else if (req.url.match(/^\/api\/probleme\/\d+\/rating$/) && req.method === 'PUT') {
         setProblemaRating(req, res);
-    }else if (req.url.startsWith('/api/teme/') && req.url.endsWith('/deadline') && req.method === 'GET') {
+    } else if (req.url.startsWith('/api/teme/') && req.url.endsWith('/deadline') && req.method === 'GET') {
         getDeadlineByTema(req, res);
-    }else  if (req.url === '/api/submitSolution' && req.method === 'PUT') {
+    } else if (req.url === '/api/submitSolution' && req.method === 'PUT') {
         submitSolution(req, res);
-    }else if (req.url.startsWith('/api/getSolution') && req.method === 'GET') {
+    } else if (req.url.startsWith('/api/getSolution') && req.method === 'GET') {
         getSolutionByUserAndProblem(req, res);
     }
     else if (req.url === '/api/createTema' && req.method === 'POST') {
@@ -84,24 +84,28 @@ function handleApiRoute(req, res) {
         getTeme(req, res);
     }
     else if (req.url.startsWith('/api/getProblemsByIdTema?id=') && req.method === 'GET') {
-        getProblemsByIdTema(req, res); 
-    } 
+        getProblemsByIdTema(req, res);
+    }
     else if (req.url.startsWith('/api/addProblem?id=') && req.method === 'POST') {
-        addProblemToTema(req, res); 
-    } 
+        addProblemToTema(req, res);
+    }
     else if (req.url.startsWith('/api/checkSuccesProblem?id=') && req.method === 'PATCH') {
-        aprobareProblema(req, res); 
+        aprobareProblema(req, res);
     }
     else if (req.url.startsWith('/api/checkFailProblem?id=') && req.method === 'DELETE') {
-        respingereProblema(req, res); 
+        respingereProblema(req, res);
     }
     else if (req.url === '/api/getAllUsers' && req.method === 'GET') {
-        getAllUsersHandler(req, res); 
+        getAllUsersHandler(req, res);
+    } else if (req.url.startsWith('/api/comments') && req.method === 'GET') {
+        fetchCommentsHandler(req, res);
     }
-    else { 
+    else if (req.url.startsWith('/api/comments') && req.method === 'PUT') 
+        { handleCommentSubmission(req, res); }
+    else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Content not found!');
-    } 
-} 
+    }
+}
 
 module.exports = { handleUserRoute, handleApiRoute };
