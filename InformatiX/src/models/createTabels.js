@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
   firstname VARCHAR(255),
   birthday DATE,
   city VARCHAR(255),
-  school VARCHAR(255)
+  school VARCHAR(255),
+  incercari INT DEFAULT 0,
+  rezolvate INT DEFAULT 0
 );
 `;
 
