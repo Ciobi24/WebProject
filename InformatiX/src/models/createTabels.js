@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
   firstname VARCHAR(255),
   birthday DATE,
   city VARCHAR(255),
-  school VARCHAR(255)
+  school VARCHAR(255),
+  incercari INT DEFAULT 0,
+  rezolvate INT DEFAULT 0
 );
 `;
 
@@ -110,6 +112,8 @@ CREATE TABLE IF NOT EXISTS solutii (
   id_tema INT NOT NULL,
   text_solutie TEXT NOT NULL,
   comentariu TEXT,
+  comentariu_prof TEXT,
+  nota INT,
   FOREIGN KEY (id_problema) REFERENCES probleme(id),
   FOREIGN KEY (id_user) REFERENCES users(id)
 );

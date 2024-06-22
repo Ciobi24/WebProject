@@ -2,13 +2,91 @@ const ProblemeService = require('../services/ProblemeService');
 const { getJwt } = require("../services/JwtService");
 const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
-const { respingereProblemaService, aprobareProblemaService} = require('../services/AdministratoriService');
+const { respingereProblemaService, aprobareProblemaService } = require('../services/AdministratoriService');
+
+
+async function getProblemsByTema(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const temaId = parseInt(queryObject.temaId, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [problems] = await connection.query(`
+            SELECT * FROM probleme join probleme_teme on probleme_teme.id_problema=probleme.id WHERE id_tema = ?
+        `, [temaId]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(problems));
+    } catch (error) {
+        console.error('Error fetching problems:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching problems.' }));
+    }
+}
+
+
+async function deleteComment(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema } = formData;
+            const cookieHeader = req.headers.cookie;
+            const decoded = getJwt(cookieHeader);
+            const idUser = decoded.id;
+
+            const connection = await dbInstance.connect();
+
+            await connection.execute(`
+            UPDATE solutii SET comentariu = NULL
+            WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+        `, [idProblema, idTema, idUser]);
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Comment deleted successfully.' }));
+
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Error deleting comment.' }));
+        }
+    });
+}
+async function getSolutionByUserAndProblemEvaluate(req, res) {
+    const urlParts = url.parse(req.url, true);
+    const idProblema = parseInt(urlParts.query.idProblema, 10);
+    const idTema = parseInt(urlParts.query.idTema, 10);
+    const idUser = parseInt(urlParts.query.idUser, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [existingSolution] = await connection.execute(`
+            SELECT text_solutie FROM solutii WHERE id_problema = ? AND id_user = ? AND id_tema = ?;
+        `, [idProblema, idUser, idTema]);
+
+        if (existingSolution.length > 0) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, solution: existingSolution[0].text_solutie }));
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, solution: '' }));
+        }
+    } catch (error) {
+        console.error('Error fetching solution:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching solution.' }));
+    }
+}
 
 async function getSolutionByUserAndProblem(req, res) {
     const urlParts = url.parse(req.url, true);
     const idProblema = parseInt(urlParts.query.idProblema, 10);
     const idTema = parseInt(urlParts.query.idTema, 10);
-    
+
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
     const idUser = parseInt(decoded.id, 10);
@@ -33,6 +111,42 @@ async function getSolutionByUserAndProblem(req, res) {
     }
 }
 
+async function fetchCommentsHandler(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const idProblema = parseInt(queryObject.idProblema, 10);
+    const idTema = parseInt(queryObject.idTema, 10);
+
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = parseInt(decoded.id, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [comments] = await connection.query(`
+            SELECT s.comentariu AS text, u.firstname, u.lastname, s.id_user
+            FROM solutii s
+            JOIN users u ON s.id_user = u.id
+            WHERE s.id_tema = ? AND s.id_problema = ?
+        `, [idTema, idProblema]);
+
+        const [teacherComment] = await connection.query(`
+            SELECT s.comentariu_prof AS text
+            FROM solutii s
+            WHERE s.id_tema = ? AND s.id_problema = ? AND s.id_user = ?
+        `, [idTema, idProblema, idUser]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            comments: comments.length ? comments : [],
+            teacherComment: teacherComment.length ? teacherComment[0].text : null,
+            currentUserId: idUser
+        }));
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching comments.' }));
+    }
+}
 async function submitSolution(req, res) {
     let body = '';
     req.on('data', chunk => {
@@ -61,6 +175,8 @@ async function submitSolution(req, res) {
                     UPDATE solutii SET text_solutie = ? WHERE id_problema = ? AND id_user = ? AND id_tema = ?
                 `, [textSolutie, idProblema, idUser, idTema]);
             } else {
+                await connection.execute(`UPDATE probleme set utilizatori_incercat = utilizatori_incercat + 1 where id = ?`, [idProblema]);
+                await connection.execute(`UPDATE users set incercari = incercari + 1 where id = ?`, [idUser]);
                 // Insert a new solution
                 await connection.execute(`
                     INSERT INTO solutii (id_problema, id_user, id_tema, text_solutie) VALUES (?, ?, ?, ?)
@@ -127,7 +243,7 @@ async function setProblemaRating(req, res) {
             const [existingRating] = await connection.query(`
                 SELECT * FROM rating WHERE id_problema = ? AND id_user = ?;
             `, [idProblema, idUser]);
-                console.log('HEI');
+            console.log('HEI');
             let oldRating = 0;
 
             if (existingRating.length > 0) {
@@ -201,7 +317,7 @@ async function addProblemaHandler(req, res) {
         }
     });
 }
- async function getProblemeByCategorie(req, res) {
+async function getProblemeByCategorie(req, res) {
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const categorie = urlParams.get('categorie');
 
@@ -215,7 +331,7 @@ async function addProblemaHandler(req, res) {
     }
 }
 
- async function getProblemeByClasa(req, res) {
+async function getProblemeByClasa(req, res) {
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const clasa = urlParams.get('clasa');
 
@@ -292,7 +408,7 @@ async function aprobareProblema(req, res) {
 
     try {
         const result = await aprobareProblemaService(idProblema);
-   
+
         if (result) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ message: 'Problema aprobată cu succes!' }));
@@ -323,7 +439,7 @@ async function respingereProblema(req, res) {
 
     try {
         const result = await respingereProblemaService(idProblema);
-        
+
         if (result) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ message: 'Problema respinsă cu succes!' }));
@@ -359,8 +475,158 @@ async function getProblemaById(req, res) {
         res.end('Internal Server Error');
     }
 }
+async function handleCommentSubmission(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
 
-module.exports = { setProblemaRating, getDeadlineByTema,submitSolution, getSolutionByUserAndProblem,
-    getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
-    aprobareProblema, respingereProblema
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, comentariu } = formData;
+            const cookieHeader = req.headers.cookie;
+            const decoded = getJwt(cookieHeader);
+            const idUser = decoded.id;
+
+            const connection = await dbInstance.connect();
+
+            // Verifică dacă există deja un comentariu pentru această problemă, temă și utilizator
+            const [existingComment] = await connection.query(`
+                SELECT * FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+            `, [idProblema, idTema, idUser]);
+
+            if (existingComment.length > 0) {
+                // Dacă există, actualizează comentariul existent
+                await connection.query(`
+                    UPDATE solutii SET comentariu = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+                `, [comentariu, idProblema, idTema, idUser]);
+            } else {
+                // Dacă nu există, inserează un nou comentariu
+                await connection.query(`
+                    INSERT INTO solutii (id_problema, id_tema, id_user, comentariu) VALUES (?, ?, ?, ?)
+                `, [idProblema, idTema, idUser, comentariu]);
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Comentariul a fost adăugat/actualizat cu succes.' }));
+        } catch (error) {
+            console.error('Error handling comment submission:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Eroare la adăugarea/actualizarea comentariului.' }));
+        }
+    });
+}
+async function handleProfessorCommentSubmission(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, idUser, comment } = formData;
+
+            const connection = await dbInstance.connect();
+
+            // Verifică dacă există deja o soluție pentru această problemă, temă și utilizator
+            const [existingSolution] = await connection.query(`
+                SELECT * FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+            `, [idProblema, idTema, idUser]);
+
+            if (existingSolution.length > 0) {
+                // Dacă există, actualizează comentariul profesorului
+                await connection.query(`
+                    UPDATE solutii SET comentariu_prof = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+                `, [comment, idProblema, idTema, idUser]);
+            } else {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Solution not found for the given problem, theme, and user.' }));
+                return;
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Professor comment submitted successfully.' }));
+        } catch (error) {
+            console.error('Error handling professor comment submission:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Error submitting professor comment.' }));
+        }
+    });
+}
+
+async function handleProfessorGradeSubmission(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, idUser, grade } = formData;
+
+            const connection = await dbInstance.connect();
+
+            await connection.query(`
+                UPDATE solutii SET nota = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+            `, [grade, idProblema, idTema, idUser]);
+            if(grade==10)
+                {await connection.execute(`UPDATE users set rezolvate = rezolvate + 1 where id = ?`, [idUser]);
+                await connection.execute(`UPDATE probleme set utilizatori_rezolvat=utilizatori_rezolvat+1 where id = ?`, [idProblema]);
+                }
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Nota a fost actualizată cu succes.' }));
+        } catch (error) {
+            console.error('Error updating grade:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Eroare la actualizarea notei.' }));
+        }
+    });
+}
+async function fetchGrade(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const idProblema = parseInt(queryObject.idProblema, 10);
+    const idTema = parseInt(queryObject.idTema, 10);
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = decoded.id;
+
+    try {
+        const connection = await dbInstance.connect();
+        const [result] = await connection.query(`
+            SELECT nota FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+        `, [idProblema, idTema,idUser]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, nota: result[0]?.nota || null }));
+    } catch (error) {
+        console.error('Error fetching grade:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Eroare la preluarea notei.' }));
+    }
+}
+module.exports = {fetchGrade,handleProfessorGradeSubmission,handleProfessorCommentSubmission,getProblemsByTema,getSolutionByUserAndProblemEvaluate,
+    deleteComment, setProblemaRating, getDeadlineByTema, submitSolution, getSolutionByUserAndProblem,
+    getProblemaById, addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
+    aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission
 };

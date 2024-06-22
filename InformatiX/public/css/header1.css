@@ -104,7 +104,7 @@ nav li:first-child {
     display: block;
   }
 }
-@media (max-width: 400px) and (min-height: 500px) {
+@media (max-width: 450px) and (min-height: 500px) {
   nav a {
     font-size: 12px;
   }
