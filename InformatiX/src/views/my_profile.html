@@ -179,9 +179,9 @@
       <div id="switch_page" style="display:none;">
         <div class="container">
           <h2>Apply for Teacher Account</h2>
-          <form action="#" enctype="multipart/form-data">
+          <form id="teacherApplicationForm" action="/applyToTeacher" enctype="multipart/form-data">
             <div class="input-group">
-              <label for="school">School</label>
+              <label for="school1">School</label>
               <input type="text" id="school1" name="school" placeholder="Enter your school name" required>
             </div>
             <div class="input-group">
@@ -189,7 +189,7 @@
               <input type="file" id="upload-file" name="upload-file" accept=".jpg, .jpeg, .png, .pdf" required>
               <small>Accepted formats: JPG, JPEG, PNG, PDF</small>
             </div>
-            <button type="submit">Submit Application</button>
+            <button type="submit" id="submit2">Submit Application</button>
           </form>
         </div>
       </div>

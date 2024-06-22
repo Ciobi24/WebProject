@@ -85,10 +85,6 @@ function closeAddTemaModal() {
     modal.style.display = "none";
 }
 
-function openProblemSolution(problemName, idTema, idProblema) {
-    window.location.href = `/home/clasele-mele/teme/${idTema}/rezolva-pb/${idProblema}`;
-}
-
 function openTemePage() {
     const userType = getUrlParam('userType');
     const url = 'rezolva_pb.html';

@@ -7,6 +7,7 @@ const { handleUserRoute, handleApiRoute } = require('./routes');
 const { checkTokenExistence } = require('./src/services/TokenResetService.js');
 const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
 const { getJwt } = require("./src/services/JwtService.js");
+const { applyToTeacherController } = require('./src/controllers/ApplyToTeacherController.js');
 
 require('dotenv').config();
 dbInstance.connect();
@@ -153,13 +154,12 @@ const server = http.createServer((req, res) => {
         routes['/reset-password'](req, res);
         return;
     }
+    if(pathname === '/applyToTeacher')
+    {
+        applyToTeacherController(req,res);
+        return;
+    }
     
-    if(pathname.startsWith('/home/clasele-mele/teme/'))
-        {
-            serveHTMLFile('/temele_mele.html', res);
-            return;
-        }
-
     if (pathname.startsWith('/api/')) {
         verifyToken(req, res, () => {
             handleApiRoute(req, res); // aici cumva fac cererile doar catre baza de date sa-mi dea informatii, n-am treaba cu paginile
@@ -179,6 +179,12 @@ const server = http.createServer((req, res) => {
         });
         return;
     }
+    if(pathname.startsWith('/home/clasele-mele/teme/'))
+        {
+            serveHTMLFile('/temele_mele.html', res);
+            return;
+        }
+
 
     if (routes[pathname]) {
         verifyToken(req, res, () => routes[pathname](req, res));
@@ -278,7 +284,6 @@ async function verifyStudentAccess(req, res, next) {
             res.end('Problema does not belong to the tema');
             return;
         }
-
         next();
     } catch (error) {
         console.error('Error verifying student access:', error);
