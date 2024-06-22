@@ -2,50 +2,45 @@ const ProblemeService = require('../services/ProblemeService');
 const { getJwt } = require("../services/JwtService");
 const url = require('url');
 const dbInstance = require('../models/db-config'); // Import the dbInstance
-const { respingereProblemaService, aprobareProblemaService} = require('../services/AdministratoriService');
-async function fetchCommentsHandler(req, res) {
-    const queryObject = url.parse(req.url, true).query;
-    const idProblema = parseInt(queryObject.idProblema, 10);
-    const idTema = parseInt(queryObject.idTema, 10);
-    
-    const cookieHeader = req.headers.cookie;
-    const decoded = getJwt(cookieHeader);
-    const idUser = parseInt(decoded.id, 10);
+const { respingereProblemaService, aprobareProblemaService } = require('../services/AdministratoriService');
 
-    try {
-        const connection = await dbInstance.connect();
-        const [comments] = await connection.query(`
-            SELECT s.text_solutie AS text, u.firstname, u.lastname
-            FROM solutii s
-            JOIN users u ON s.id_user = u.id
-            WHERE s.id_tema = ? AND s.id_problema = ?
-        `, [idTema, idProblema]);
+async function deleteComment(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
 
-        const [teacherComment] = await connection.query(`
-            SELECT s.comentariu_prof AS text
-            FROM solutii s
-            WHERE s.id_tema = ? AND s.id_problema = ? AND s.id_user = ?
-        `, [idTema, idProblema, idUser]);
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema } = formData;
+            const cookieHeader = req.headers.cookie;
+            const decoded = getJwt(cookieHeader);
+            const idUser = decoded.id;
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-            comments: comments.map(c => ({
-                author: `${c.firstname} ${c.lastname}`,
-                text: c.text
-            })),
-            teacherComment: teacherComment.length ? teacherComment[0].text : null
-        }));
-    } catch (error) {
-        console.error('Error fetching comments:', error);
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, message: 'Error fetching comments.' }));
-    }
+            const connection = await dbInstance.connect();
+
+            await connection.execute(`
+            UPDATE solutii SET comentariu = NULL
+            WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+        `, [idProblema, idTema, idUser]);
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Comment deleted successfully.' }));
+
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Error deleting comment.' }));
+        }
+    });
 }
+
 async function getSolutionByUserAndProblem(req, res) {
     const urlParts = url.parse(req.url, true);
     const idProblema = parseInt(urlParts.query.idProblema, 10);
     const idTema = parseInt(urlParts.query.idTema, 10);
-    
+
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
     const idUser = parseInt(decoded.id, 10);
@@ -70,6 +65,42 @@ async function getSolutionByUserAndProblem(req, res) {
     }
 }
 
+async function fetchCommentsHandler(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const idProblema = parseInt(queryObject.idProblema, 10);
+    const idTema = parseInt(queryObject.idTema, 10);
+
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = parseInt(decoded.id, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        const [comments] = await connection.query(`
+            SELECT s.comentariu AS text, u.firstname, u.lastname, s.id_user
+            FROM solutii s
+            JOIN users u ON s.id_user = u.id
+            WHERE s.id_tema = ? AND s.id_problema = ?
+        `, [idTema, idProblema]);
+
+        const [teacherComment] = await connection.query(`
+            SELECT s.comentariu_prof AS text
+            FROM solutii s
+            WHERE s.id_tema = ? AND s.id_problema = ? AND s.id_user = ?
+        `, [idTema, idProblema, idUser]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+            comments: comments.length ? comments : [],
+            teacherComment: teacherComment.length ? teacherComment[0].text : null,
+            currentUserId: idUser
+        }));
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Error fetching comments.' }));
+    }
+}
 async function submitSolution(req, res) {
     let body = '';
     req.on('data', chunk => {
@@ -164,7 +195,7 @@ async function setProblemaRating(req, res) {
             const [existingRating] = await connection.query(`
                 SELECT * FROM rating WHERE id_problema = ? AND id_user = ?;
             `, [idProblema, idUser]);
-                console.log('HEI');
+            console.log('HEI');
             let oldRating = 0;
 
             if (existingRating.length > 0) {
@@ -238,7 +269,7 @@ async function addProblemaHandler(req, res) {
         }
     });
 }
- async function getProblemeByCategorie(req, res) {
+async function getProblemeByCategorie(req, res) {
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const categorie = urlParams.get('categorie');
 
@@ -252,7 +283,7 @@ async function addProblemaHandler(req, res) {
     }
 }
 
- async function getProblemeByClasa(req, res) {
+async function getProblemeByClasa(req, res) {
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const clasa = urlParams.get('clasa');
 
@@ -329,7 +360,7 @@ async function aprobareProblema(req, res) {
 
     try {
         const result = await aprobareProblemaService(idProblema);
-   
+
         if (result) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ message: 'Problema aprobată cu succes!' }));
@@ -360,7 +391,7 @@ async function respingereProblema(req, res) {
 
     try {
         const result = await respingereProblemaService(idProblema);
-        
+
         if (result) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ message: 'Problema respinsă cu succes!' }));
@@ -439,6 +470,8 @@ async function handleCommentSubmission(req, res) {
     });
 }
 
-module.exports = { setProblemaRating, getDeadlineByTema,submitSolution, getSolutionByUserAndProblem,
-    getProblemaById,addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
-    aprobareProblema, respingereProblema, fetchCommentsHandler,handleCommentSubmission };
+module.exports = {
+    deleteComment, setProblemaRating, getDeadlineByTema, submitSolution, getSolutionByUserAndProblem,
+    getProblemaById, addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
+    aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission
+};

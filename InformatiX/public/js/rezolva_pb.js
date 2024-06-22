@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching problem data:', error);
         }
     }
+
     async function fetchUserById(userId) {
         try {
             const response = await fetch(`/api/user?id=${userId}`);
@@ -22,21 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('Network response was not ok.');
             }
             const user = await response.json();
-            return user.firstname + ' ' + user.lastname; 
+            return user.firstname + ' ' + user.lastname;
         } catch (error) {
             console.error('Error fetching user data:', error);
             return 'Unknown Author';
         }
     }
+
     async function displayProblem(problema) {
         document.getElementById('problema-titlu').innerText = problema.nume_problema;
         document.getElementById('problema-stelute').innerText = `${problema.rating}★`;
         document.getElementById('problema-incercari').innerText = `${problema.utilizatori_incercat} încercări`;
         document.getElementById('problema-rezolvari').innerText = `${problema.utilizatori_rezolvat} rezolvări`;
         document.getElementById('problema-descriere').innerText = problema.text_problema;
-        
-        const authorName = await fetchUserById(problema.creatorId);
 
+        const authorName = await fetchUserById(problema.creatorId);
         document.getElementById('problema-autor').innerText = `Autor: ${authorName}`;
 
         const tagsContainer = document.getElementById('problema-tags');
@@ -57,11 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-
-        // Ensure the share button is referenced correctly
         const shareButton = document.getElementById('share-button');
         if (shareButton) {
-            shareButton.addEventListener('click', function() {
+            shareButton.addEventListener('click', function () {
                 const problemaData = {
                     nume_problema: problema.nume_problema,
                     rating: problema.rating,
@@ -76,47 +75,50 @@ document.addEventListener('DOMContentLoaded', function () {
                 downloadJSON(problemaData, `${problema.nume_problema}.json`);
             });
         }
+
         const submitButton = document.querySelector('.rezolvare button');
         if (submitButton) {
-            submitButton.addEventListener('click', async function(event) {
-                // console.log('submit button clicked');
+            submitButton.addEventListener('click', async function (event) {
                 event.preventDefault();
                 const isDeadlineValid = await checkDeadline(idTema);
                 if (!isDeadlineValid) {
                     alert('Deadline-ul temei a fost depășit. Nu mai puteți trimite rezolvarea.');
                 } else {
-                    // console.log('submitting solution');
                     submitSolution();
                 }
             });
         }
+
         const sendCommentButton = document.getElementById('send');
         if (sendCommentButton) {
-            sendCommentButton.addEventListener('click', async function(event) {
+            sendCommentButton.addEventListener('click', async function (event) {
                 event.preventDefault();
                 const commentText = document.getElementById('comentariu').value;
                 submitComment(idProblema, idTema, commentText);
             });
         }
+
         fetchComments(idProblema, idTema);
     }
+
     async function fetchComments(idProblema, idTema) {
         try {
             const response = await fetch(`/api/comments?idProblema=${idProblema}&idTema=${idTema}`, {
-                method: 'GET', // This is actually the default and can be omitted
+                method: 'GET',
                 headers: {
-                  'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
-              });            
-              if (!response.ok) {
+            });
+            if (!response.ok) {
                 throw new Error('Network response was not ok.');
             }
-            const comments = await response.json();
-            displayComments(comments);
+            const commentsData = await response.json();
+            displayComments(commentsData, idProblema, idTema);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
     }
+
     async function submitComment(idProblema, idTema, comentariu) {
         try {
             const response = await fetch('/api/comments', {
@@ -131,44 +133,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             const result = await response.json();
             alert(result.message);
+            fetchComments(idProblema, idTema);
         } catch (error) {
             console.error('Error submitting comment:', error);
         }
     }
-    function displayComments(comments) {
-        const commentsContainer = document.querySelector('.comments');
-        comments.forEach(comment => {
-            const commentElement = document.createElement('div');
-            commentElement.classList.add('comment');
-            commentElement.innerHTML = `
-                <p class="autor">${comment.author}</p>
-                <p class="comentariu">${comment.text}</p>
-            `;
-            commentsContainer.appendChild(commentElement);
-        });
-    }
-    function downloadJSON(obj, filename) {
-        const jsonStr = JSON.stringify(obj, null, 2);
-        const blob = new Blob([jsonStr], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
 
-    function highlightStars(ratingValue) {
-        const starElements = document.querySelectorAll('.star-rating span');
-        starElements.forEach(star => {
-            if (star.getAttribute('data-value') <= ratingValue) {
-                star.classList.add('highlighted');
-            } else {
-                star.classList.remove('highlighted');
-            }
-        });
-    }
+
+
     async function submitRating(idProblema, ratingValue) {
         try {
             const response = await fetch(`/api/probleme/${idProblema}/rating`, {
@@ -187,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error submitting rating:', error);
         }
     }
+
     async function checkDeadline(idTema) {
         try {
             const response = await fetch(`/api/teme/${idTema}/deadline`);
@@ -194,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('Network response was not ok.');
             }
             const { deadline } = await response.json();
-            const currentDate = new Date( Date.now());
+            const currentDate = new Date(Date.now());
             const deadlineDate = new Date(deadline);
             return currentDate <= deadlineDate;
         } catch (error) {
@@ -202,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return false;
         }
     }
+
     async function fetchSolution(idProblema, idTema) {
         try {
             const response = await fetch(`/api/getSolution?idProblema=${idProblema}&idTema=${idTema}`);
@@ -222,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const idTema = urlParams[4];
         const idProblema = urlParams[6];
         const textSolutie = document.getElementById('rezolvare').value;
-    
+
         try {
             const response = await fetch('/api/submitSolution', {
                 method: 'PUT',
@@ -240,9 +214,76 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error submitting solution:', error);
         }
     }
+    async function deleteComment(idProblema, idTema) {
+        try {
+            const response = await fetch('/api/comments', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProblema, idTema })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+            // Optionally refetch comments to show the remaining comments
+            fetchComments(idProblema, idTema);
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    }
     
-    // // Add event listener for the submit button
-    // document.querySelector('button').addEventListener('click', submitSolution);
+    function displayComments({ comments, teacherComment, currentUserId }, idProblema, idTema) {
+        const commentsContainer = document.querySelector('.comments');
+        commentsContainer.innerHTML = `
+            <h2>Comentarii</h2>
+            <div class="add_comm">
+                <label for="comentariu">Adaugă comentariu</label>
+                <textarea id="comentariu" name="comentariu" class="comentariu" cols="5000" rows="5000"></textarea>
+                <button id="send">Trimite</button>
+            </div>
+        `; // Clear existing comments and add comment input field
+    
+        if (Array.isArray(comments) && comments.length > 0) {
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.classList.add('comment');
+                commentElement.innerHTML = `
+                    <p class="autor">${comment.firstname} ${comment.lastname}</p>
+                    <p class="comentariu">${comment.text}</p>
+                    ${comment.id_user === currentUserId ? '<button class="delete-comment">Delete</button>' : ''}
+                `;
+                if (comment.id_user === currentUserId) {
+                    commentElement.querySelector('.delete-comment').addEventListener('click', () => {
+                        deleteComment(idProblema, idTema);
+                    });
+                }
+                commentsContainer.appendChild(commentElement);
+            });
+        }
+    
+        if (teacherComment) {
+            const teacherCommentElement = document.createElement('div');
+            teacherCommentElement.classList.add('comment');
+            teacherCommentElement.innerHTML = `
+                <p class="autor">Teacher</p>
+                <p class="comentariu">${teacherComment}</p>
+            `;
+            commentsContainer.appendChild(teacherCommentElement);
+        }
+    
+        // Reattach the event listener for the comment submit button
+        const sendCommentButton = document.getElementById('send');
+        if (sendCommentButton) {
+            sendCommentButton.addEventListener('click', async function (event) {
+                event.preventDefault();
+                const commentText = document.getElementById('comentariu').value;
+                submitComment(idProblema, idTema, commentText);
+            });
+        }
+    }
     fetchProblemDetails(idProblema);
     fetchSolution(idProblema, idTema);
 });

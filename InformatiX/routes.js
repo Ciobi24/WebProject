@@ -3,7 +3,7 @@ const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
-const { handleCommentSubmission,fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
+const { deleteComment,handleCommentSubmission,fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
     getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController, deleteUserFromClassController } = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
@@ -101,6 +101,8 @@ function handleApiRoute(req, res) {
     }
     else if (req.url.startsWith('/api/comments') && req.method === 'PUT') 
         { handleCommentSubmission(req, res); }
+    else if (req.url.startsWith('/api/comments') && req.method === 'DELETE') 
+        { deleteComment(req, res); }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Content not found!');
@@ -108,3 +110,4 @@ function handleApiRoute(req, res) {
 }
 
 module.exports = { handleUserRoute, handleApiRoute };
+
