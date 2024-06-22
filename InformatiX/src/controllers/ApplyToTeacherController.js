@@ -40,7 +40,7 @@ async function applyToTeacherController(req, res) {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ error: 'Fișierul nu a fost încărcat' }));
                 return;
-            }
+            }   
 
             const insertResult = await insertTeacherApplication(userId, school1, file.path);
             if (insertResult) {

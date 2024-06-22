@@ -112,27 +112,26 @@
     <script>
         let myrole;
         function fetchUserDetails() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/user', true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    const user = JSON.parse(xhr.responseText);
-                    myrole = user.role;
-                    getTeme();
-                } else {
-                    console.error('Failed to fetch user details:', xhr.responseText);
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/user', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const user = JSON.parse(xhr.responseText);
+                        myrole = user.role;
+                        getTeme();
+                    } else {
+                        console.error('Failed to fetch user details:', xhr.responseText);
+                    }
                 }
-            }
-        };
-        xhr.send();
-       }
+            };
+            xhr.send();
+        }
 
-        function WhoAmI()
-        {
-            if(myrole === "profesor" || myrole === "admin")
+        function WhoAmI() {
+            if (myrole === "profesor" || myrole === "admin")
                 return 1;
-            else if(myrole === "elev")
+            else if (myrole === "elev")
                 return 0;
         }
         let users;
@@ -161,10 +160,10 @@
             sidebar.style.display = 'none'
         }
 
-        function openEvaluateModal() {
+        function openEvaluateModal(idTema) {
             var modal = document.getElementById('evaluateModal');
             modal.style.display = "block";
-            populateUsersList(users);
+            populateUsersList(users, idTema);
         }
         function closeSearchModal() {
             var modal = document.getElementById('searchModal');
@@ -172,25 +171,25 @@
         }
 
         function openProblemSolution(idTema, idProblema) {
-        window.location.href = `/home/clasele-mele/teme/${idTema}/rezolva-pb/${idProblema}`;
-        }       
+            window.location.href = `/home/clasele-mele/teme/${idTema}/rezolva-pb/${idProblema}`;
+        }
         async function openProblemModal(idTema) {
-          var modal = document.getElementById('problemModal');
-          modal.style.display = "block";
+            var modal = document.getElementById('problemModal');
+            modal.style.display = "block";
 
-          const problems = await fetchProblemsByTemaId(idTema);
+            const problems = await fetchProblemsByTemaId(idTema);
 
-          const problemsListItems = problems.map(problem => {
-            console.log('Processing problem.id:', problem.id);
-            return `
+            const problemsListItems = problems.map(problem => {
+                console.log('Processing problem.id:', problem.id);
+                return `
                 <li onclick="openProblemSolution(${idTema}, ${problem.id})">
                     #${problem.id} - ${problem.nume_problema}
                 </li>
             `;
-        }).join('');
+            }).join('');
 
-          var ulElement = modal.querySelector('ul');
-         ulElement.innerHTML = problemsListItems;
+            var ulElement = modal.querySelector('ul');
+            ulElement.innerHTML = problemsListItems;
         }
         function closeEvaluateModal() {
             var modal = document.getElementById('evaluateModal');
@@ -200,16 +199,6 @@
         function closeProblemModal() {
             var modal = document.getElementById('problemModal');
             modal.style.display = "none";
-        }
-
-        function openUserSolution() {
-            const userType = getUrlParam('userType');
-            const url = 'solution.html';
-            if (url.includes('?')) {
-                window.location.href = `${url}&userType=${userType}`;
-            } else {
-                window.location.href = `${url}?userType=${userType}`;
-            }
         }
 
         function closeAddTemaModal() {
@@ -354,7 +343,7 @@
                 divTema.classList.add('tema');
 
                 const problems = await fetchProblemsByTemaId(tema.id);
-                
+
                 const problemsList = problems.map(problem => `
             <li>Id: ${problem.id} - ${problem.nume_problema} - ${problem.dificultate}</li>`).join('');
                 let html = `
@@ -362,11 +351,11 @@
             <p>Probleme: ${problemsList}<p>
              <p>Deadline: ${new Date(tema.deadline).toLocaleString()}</p>`;
 
-             if(WhoAmI() === 1)
-                html += `<button id="${tema.id}" onclick="openSearchModal(this.id)">Adauga</button>
-                         <button onclick="openEvaluateModal()">Evalueaza</button> `;
-             else
-               html += `<button id=${tema.id} onclick="openProblemModal(this.id)">Rezolva</button> `;
+                if (WhoAmI() === 1)
+                    html += `<button id="${tema.id}" onclick="openSearchModal(this.id)">Adauga</button>
+                         <button id="${tema.id}" onclick="openEvaluateModal(this.id)">Evalueaza</button> `;
+                else
+                    html += `<button id=${tema.id} onclick="openProblemModal(this.id)">Rezolva</button> `;
 
                 divTema.innerHTML = html;
                 temeContainer.appendChild(divTema);
@@ -386,7 +375,7 @@
             }
         }
 
-        function populateUsersList(users) {
+        function populateUsersList(users, idTema) {
             console.log(users);
             const ul = document.querySelector('#evaluateModal ul');
             ul.innerHTML = '';
@@ -395,11 +384,12 @@
                 const li = document.createElement('li');
                 li.textContent = "#" + user.id + " - " + (user.firstname || "nesetat") + " " + (user.lastname || "nesetat") + " - " + user.email;
                 li.onclick = function () {
-                    openUserSolution(user.id);
+                    window.location.href = `/home/clasele-mele/teme/${idTema}/evalueaza/${user.id}`;
                 };
                 ul.appendChild(li);
             });
         }
+
         fetchUserDetails()
     </script>
 
