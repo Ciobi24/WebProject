@@ -85,6 +85,7 @@ th {
   flex-direction: column;
   background-color: #c9afa1;
   margin:20px;
+  border-radius: 5px;
 }
 .titlu_prb{
   margin:10px;
@@ -142,16 +143,46 @@ th {
   background-color: #a94b4b;
   color: white;
 }
-.formular{
-  height:70vh;
-  margin:20px;
-  border:5px solid #8B4C70;
+.formular {
+  height: 70vh;
+  margin: 20px;
+  border: 5px solid #8B4C70;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  width: 300px;
 }
+
+.aplicare {
+  border: 1px solid #c9afa1;
+  padding: 10px;
+  margin-bottom: 20px; 
+  border-radius: 8px;
+  background-color: #c9afa1;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+  max-width: 100%;
+}
+
+.aplicare p {
+  margin: 5px 0;
+}
+
+.aplicare a {
+  display: block;
+  margin-top: 10px; 
+  text-decoration: none;
+  color: #1369ca;
+}
+
+.aplicare a:hover{
+  color: #5289c9;
+  transition: 0.2s;
+}
+
 .mesaje_noi{
   font-size: 20px;
   font-weight: bold;

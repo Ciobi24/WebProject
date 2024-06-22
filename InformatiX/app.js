@@ -7,7 +7,7 @@ const { handleUserRoute, handleApiRoute } = require('./routes');
 const { checkTokenExistence } = require('./src/services/TokenResetService.js');
 const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
 const { getJwt } = require("./src/services/JwtService.js");
-const { applyToTeacherController } = require('./src/controllers/ApplyToTeacherController.js');
+const { applyToTeacherController, getAllApplicationsController } = require('./src/controllers/ApplyToTeacherController.js');
 
 require('dotenv').config();
 dbInstance.connect();
@@ -110,7 +110,7 @@ const routes = {
     },
     '/home/clasele-mele/teme/:idTema/evalueaza/:idElev': (req, res) => {
         serveHTMLFile('/solution.html', res);
-    },
+    },  
     '/reset-password': async (req, res) => {
         const urlString = req.url;
         const parameter = url.parse(urlString, true).query;
@@ -162,6 +162,11 @@ const server = http.createServer((req, res) => {
         applyToTeacherController(req,res);
         return;
     }
+    if(pathname === '/getAllApplications')
+        {
+            getAllApplicationsController(req,res);
+            return;
+        }
     
     if (pathname.startsWith('/api/')) {
         verifyToken(req, res, () => {
@@ -187,6 +192,14 @@ const server = http.createServer((req, res) => {
         verifyToken(req, res, () => {
             verifyProfessorAccess(req, res, () => routes['/home/clasele-mele/teme/:idTema/evalueaza/:idElev'](req, res));
         });
+        return;
+    }
+
+    if (pathname.startsWith('/uploads/')) {
+        const idUser = pathname.split('/')[2]; 
+        if (!isNaN(idUser)) {
+            serveHTMLFile('/upload.html', res);
+        }
         return;
     }
 
@@ -237,10 +250,12 @@ function serveStaticFile(pathname, res) {
 
     fs.readFile(filename, (err, data) => {
         if (err) {
-            console.error("Wrong path: ", filename);
+            if(!filename.startsWith("./public/uploads"))
+              console.error("Wrong path: ", filename);
             res.writeHead(404, { 'Content-Type': 'text/html' });
             return res.end("Page not found");
         }
+        else
         res.writeHead(200, { 'Content-Type': contentType });
         res.write(data);
         res.end();
