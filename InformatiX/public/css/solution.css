@@ -91,7 +91,7 @@ h2 {
 
 
 
-.rating-section,
+/* .rating-section,
 .comment-section {
     display: flex;
     flex-direction: column;
@@ -107,7 +107,7 @@ h2 {
     height: 5vh; 
     margin-bottom: 10px; 
     background-color: #c9afa1;
-}
+} */
 
 
 button:hover {
@@ -211,6 +211,11 @@ button {
   ::-webkit-scrollbar-thumb:hover {
     background: #522157; 
   }
+  label {
+    font-size: 30px;
+    color: #522157;
+    margin: 20px;
+}
   @media (max-width:550px) {
     h1 {
         font-size: 15px;

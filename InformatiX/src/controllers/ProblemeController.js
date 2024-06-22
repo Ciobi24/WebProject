@@ -515,8 +515,46 @@ async function handleCommentSubmission(req, res) {
         }
     });
 }
+async function handleProfessorCommentSubmission(req, res) {
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
 
-module.exports = {getProblemsByTema,getSolutionByUserAndProblemEvaluate,
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, idUser, comment } = formData;
+
+            const connection = await dbInstance.connect();
+
+            // Verifică dacă există deja o soluție pentru această problemă, temă și utilizator
+            const [existingSolution] = await connection.query(`
+                SELECT * FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+            `, [idProblema, idTema, idUser]);
+
+            if (existingSolution.length > 0) {
+                // Dacă există, actualizează comentariul profesorului
+                await connection.query(`
+                    UPDATE solutii SET comentariu_prof = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+                `, [comment, idProblema, idTema, idUser]);
+            } else {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Solution not found for the given problem, theme, and user.' }));
+                return;
+            }
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Professor comment submitted successfully.' }));
+        } catch (error) {
+            console.error('Error handling professor comment submission:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Error submitting professor comment.' }));
+        }
+    });
+}
+
+module.exports = {handleProfessorCommentSubmission,getProblemsByTema,getSolutionByUserAndProblemEvaluate,
     deleteComment, setProblemaRating, getDeadlineByTema, submitSolution, getSolutionByUserAndProblem,
     getProblemaById, addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
     aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlParams = window.location.pathname.split('/');
     const idTema = urlParams[4];
     const idUser = urlParams[6];
+
     async function fetchProblemsByTema(idTema) {
         try {
             const response = await fetch(`/api/problems?temaId=${idTema}`);
@@ -29,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function fetchSolutionByUser(idProblema, idTema,idUser) {
+    async function fetchSolutionByUser(idProblema, idTema, idUser) {
         try {
             const response = await fetch(`/api/getSolution/evaluare/?idProblema=${idProblema}&idTema=${idTema}&idUser=${idUser}`);
             if (!response.ok) {
@@ -50,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const problema of problems) {
             const problemElement = document.createElement('div');
             problemElement.classList.add('problema');
-            const authorName = await fetchUserById(problema.creator_id);
 
+            const authorName = await fetchUserById(problema.creator_id);
             problemElement.innerHTML = `
                 <h1>${problema.nume_problema}</h1>
                 <button class="share-button">share</button>
@@ -90,15 +91,28 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // Fetch and display solution outside the problem container
-            const solution = await fetchSolutionByUser(problema.id, idTema,idUser);
+            const solution = await fetchSolutionByUser(problema.id, idTema, idUser);
             const solutionElement = document.createElement('div');
             solutionElement.classList.add('code-section');
             solutionElement.innerHTML = `
                 <h3>Solution for ${problema.nume_problema}</h3>
                 <pre><code>${solution}</code></pre>
+                <div class="professor-comment">
+                    <label for="professor-comment-input-${problema.id}">Comentariul Profesorului:</label>
+                    <textarea id="professor-comment-input-${problema.id}" rows="4" cols="50"></textarea>
+                    <button id="submit-professor-comment-${problema.id}">Trimite Comentariul</button>
+                </div>
             `;
 
             problemsContainer.appendChild(solutionElement);
+
+            const submitCommentButton = document.getElementById(`submit-professor-comment-${problema.id}`);
+            if (submitCommentButton) {
+                submitCommentButton.addEventListener('click', async function () {
+                    const comment = document.getElementById(`professor-comment-input-${problema.id}`).value;
+                    await submitProfessorComment(problema.id, idTema, idUser, comment);
+                });
+            }
         }
     }
 
@@ -114,5 +128,30 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.removeChild(a);
     }
 
+    async function displayEvaluatedStudentName(idUser) {
+        const studentName = await fetchUserById(idUser);
+        document.getElementById('evaluated-student-name').innerText = `Evaluating: ${studentName}`;
+    }
+
+    async function submitProfessorComment(idProblema, idTema, idUser, comment) {
+        try {
+            const response = await fetch('/api/comments/professor', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProblema, idTema, idUser, comment })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+        } catch (error) {
+            console.error('Error submitting professor comment:', error);
+        }
+    }
+
+    displayEvaluatedStudentName(idUser);
     fetchProblemsByTema(idTema);
 });
