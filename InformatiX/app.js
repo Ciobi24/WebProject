@@ -108,6 +108,9 @@ const routes = {
     '/home/clasele-mele/teme/:idTema/rezolva-pb/:idProblema': (req, res) => {
         serveHTMLFile('/rezolva_pb.html', res);
     },
+    '/home/clasele-mele/teme/:idTema/evalueaza/:idElev': (req, res) => {
+        serveHTMLFile('/solution.html', res);
+    },
     '/reset-password': async (req, res) => {
         const urlString = req.url;
         const parameter = url.parse(urlString, true).query;
@@ -179,6 +182,14 @@ const server = http.createServer((req, res) => {
         });
         return;
     }
+    const regex2 = /\/home\/clasele-mele\/teme\/\d+\/evalueaza\/\d+/;
+    if (regex2.test(pathname)) {
+        verifyToken(req, res, () => {
+            verifyProfessorAccess(req, res, () => routes['/home/clasele-mele/teme/:idTema/evalueaza/:idElev'](req, res));
+        });
+        return;
+    }
+
     if(pathname.startsWith('/home/clasele-mele/teme/'))
         {
             serveHTMLFile('/temele_mele.html', res);
@@ -260,7 +271,6 @@ async function verifyStudentAccess(req, res, next) {
     try {
         const connection = await dbInstance.connect();
         
-        // Get class ID for the given theme
         const [temaResult] = await connection.query('SELECT id_clasa FROM teme WHERE id = ?', [idTema]);
         if (temaResult.length === 0) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -269,15 +279,12 @@ async function verifyStudentAccess(req, res, next) {
         }
         const idClasa = temaResult[0].id_clasa;
 
-        // Check if the user belongs to the class
         const [classResult] = await connection.query('SELECT * FROM clase_elevi WHERE id_clasa = ? AND id_user = ?', [idClasa, idUser]);
         if (classResult.length === 0) {
             res.writeHead(403, { 'Content-Type': 'text/plain' });
             res.end('Access forbidden');
             return;
         }
-
-        // Check if the problem belongs to the theme
         const [problemeTemaResult] = await connection.query('SELECT * FROM probleme_teme WHERE id_tema = ? AND id_problema = ?', [idTema, idProblema]);
         if (problemeTemaResult.length === 0) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -287,6 +294,40 @@ async function verifyStudentAccess(req, res, next) {
         next();
     } catch (error) {
         console.error('Error verifying student access:', error);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal server error');
+    }
+}
+
+async function verifyProfessorAccess(req, res, next) {
+    const urlParts = req.url.split('/');
+    const idTema = parseInt(urlParts[4], 10);
+    const idElev = parseInt(urlParts[6], 10);
+    
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = parseInt(decoded.id, 10);
+
+    try {
+        const connection = await dbInstance.connect();
+        
+        const [temaResult] = await connection.query('SELECT id_clasa FROM teme t JOIN clase c ON t.id_clasa = c.id WHERE t.id = ? AND c.id_user = ?', [idTema, idUser]);
+        if (temaResult.length === 0) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Tema not found');
+            return;
+        }
+        const idClasa = temaResult[0].id_clasa;
+
+        const [classResult] = await connection.query('SELECT * FROM clase_elevi WHERE id_clasa = ? AND id_user = ?', [idClasa, idElev]);
+        if (classResult.length === 0) {
+            res.writeHead(403, { 'Content-Type': 'text/plain' });
+            res.end('Access forbidden');
+            return;
+        }
+        next();
+    } catch (error) {
+        console.error('Error verifying professor access:', error);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Internal server error');
     }
