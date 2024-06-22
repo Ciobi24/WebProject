@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         fetchComments(idProblema, idTema);
+        fetchGrade(idProblema, idTema);
     }
 
     async function fetchComments(idProblema, idTema) {
@@ -139,7 +140,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    async function fetchGrade(idProblema, idTema) {
+        try {
+            const response = await fetch(`/api/grades?idProblema=${idProblema}&idTema=${idTema}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const gradeData = await response.json();
+            displayGrade(gradeData.nota);
+        } catch (error) {
+            console.error('Error fetching grade:', error);
+        }
+    }
 
+    function displayGrade(grade) {
+        const gradeContainer = document.getElementById('nota-afisata');
+        gradeContainer.innerHTML = `Nota: ${grade !== null ? grade : 'N/A'}`;
+    }
 
     async function submitRating(idProblema, ratingValue) {
         try {
@@ -214,27 +236,16 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error submitting solution:', error);
         }
     }
-    async function deleteComment(idProblema, idTema) {
-        try {
-            const response = await fetch('/api/comments', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ idProblema, idTema })
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok.');
+    function highlightStars(ratingValue) {
+        const starElements = document.querySelectorAll('.star-rating span');
+        starElements.forEach(star => {
+            if (star.getAttribute('data-value') <= ratingValue) {
+                star.classList.add('highlighted');
+            } else {
+                star.classList.remove('highlighted');
             }
-            const result = await response.json();
-            alert(result.message);
-            // Optionally refetch comments to show the remaining comments
-            fetchComments(idProblema, idTema);
-        } catch (error) {
-            console.error('Error deleting comment:', error);
-        }
+        });
     }
-    
     function displayComments({ comments, teacherComment, currentUserId }, idProblema, idTema) {
         const commentsContainer = document.querySelector('.comments');
         commentsContainer.innerHTML = `
@@ -284,6 +295,27 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
+    async function deleteComment(idProblema, idTema) {
+        try {
+            const response = await fetch('/api/comments', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProblema, idTema })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+            // Optionally refetch comments to show the remaining comments
+            fetchComments(idProblema, idTema);
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    }
+    
     fetchProblemDetails(idProblema);
     fetchSolution(idProblema, idTema);
 });

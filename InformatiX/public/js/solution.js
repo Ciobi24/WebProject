@@ -102,6 +102,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     <textarea id="professor-comment-input-${problema.id}" rows="4" cols="50"></textarea>
                     <button id="submit-professor-comment-${problema.id}">Trimite Comentariul</button>
                 </div>
+                <div class="professor-grade">
+                    <label for="professor-grade-input-${problema.id}">Nota:</label>
+                    <input type="number" id="professor-grade-input-${problema.id}" min="1" max="10">
+                    <button id="submit-professor-grade-${problema.id}">Trimite Nota</button>
+                </div>
             `;
 
             problemsContainer.appendChild(solutionElement);
@@ -113,19 +118,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     await submitProfessorComment(problema.id, idTema, idUser, comment);
                 });
             }
-        }
-    }
 
-    function downloadJSON(obj, filename) {
-        const jsonStr = JSON.stringify(obj, null, 2);
-        const blob = new Blob([jsonStr], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+            const submitGradeButton = document.getElementById(`submit-professor-grade-${problema.id}`);
+            if (submitGradeButton) {
+                submitGradeButton.addEventListener('click', async function () {
+                    const grade = document.getElementById(`professor-grade-input-${problema.id}`).value;
+                    await submitProfessorGrade(problema.id, idTema, idUser, grade);
+                });
+            }
+        }
     }
 
     async function displayEvaluatedStudentName(idUser) {
@@ -150,6 +151,37 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) {
             console.error('Error submitting professor comment:', error);
         }
+    }
+
+    async function submitProfessorGrade(idProblema, idTema, idUser, grade) {
+        try {
+            const response = await fetch('/api/grades/professor', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idProblema, idTema, idUser, grade })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const result = await response.json();
+            alert(result.message);
+        } catch (error) {
+            console.error('Error submitting professor grade:', error);
+        }
+    }
+
+    function downloadJSON(obj, filename) {
+        const jsonStr = JSON.stringify(obj, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 
     displayEvaluatedStudentName(idUser);

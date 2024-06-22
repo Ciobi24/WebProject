@@ -3,7 +3,7 @@ const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
-const { handleProfessorCommentSubmission, getSolutionByUserAndProblemEvaluate, getProblemsByTema, deleteComment, handleCommentSubmission, fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
+const { fetchGrade,handleProfessorGradeSubmission, handleProfessorCommentSubmission, getSolutionByUserAndProblemEvaluate, getProblemsByTema, deleteComment, handleCommentSubmission, fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
     getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController, deleteUserFromClassController } = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
@@ -110,6 +110,10 @@ function handleApiRoute(req, res) {
     else if (req.url.startsWith('/api/comments') && req.method === 'DELETE') { deleteComment(req, res); }
     else if (req.url.startsWith('/api/problems') && req.method === 'GET') {
         getProblemsByTema(req, res);
+    } else if (req.url.startsWith('/api/grades/professor') && req.method === 'PUT') {
+        handleProfessorGradeSubmission(req, res);
+    }else if (req.url.startsWith('/api/grades') && req.method === 'GET') {
+        fetchGrade(req, res);
     }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });

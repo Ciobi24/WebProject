@@ -516,6 +516,15 @@ async function handleCommentSubmission(req, res) {
     });
 }
 async function handleProfessorCommentSubmission(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
     let body = '';
     req.on('data', chunk => {
         body += chunk.toString();
@@ -554,7 +563,64 @@ async function handleProfessorCommentSubmission(req, res) {
     });
 }
 
-module.exports = {handleProfessorCommentSubmission,getProblemsByTema,getSolutionByUserAndProblemEvaluate,
+async function handleProfessorGradeSubmission(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        try {
+            const formData = JSON.parse(body);
+            const { idProblema, idTema, idUser, grade } = formData;
+
+            const connection = await dbInstance.connect();
+
+            await connection.query(`
+                UPDATE solutii SET nota = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+            `, [grade, idProblema, idTema, idUser]);
+
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Nota a fost actualizată cu succes.' }));
+        } catch (error) {
+            console.error('Error updating grade:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'Eroare la actualizarea notei.' }));
+        }
+    });
+}
+async function fetchGrade(req, res) {
+    const queryObject = url.parse(req.url, true).query;
+    const idProblema = parseInt(queryObject.idProblema, 10);
+    const idTema = parseInt(queryObject.idTema, 10);
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const idUser = decoded.id;
+
+    try {
+        const connection = await dbInstance.connect();
+        const [result] = await connection.query(`
+            SELECT nota FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
+        `, [idProblema, idTema,idUser]);
+
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, nota: result[0]?.nota || null }));
+    } catch (error) {
+        console.error('Error fetching grade:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Eroare la preluarea notei.' }));
+    }
+}
+module.exports = {fetchGrade,handleProfessorGradeSubmission,handleProfessorCommentSubmission,getProblemsByTema,getSolutionByUserAndProblemEvaluate,
     deleteComment, setProblemaRating, getDeadlineByTema, submitSolution, getSolutionByUserAndProblem,
     getProblemaById, addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
     aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission

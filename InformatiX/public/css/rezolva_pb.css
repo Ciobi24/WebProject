@@ -354,3 +354,9 @@ footer {
 .star-rating span.highlighted {
     color: #f39c12;
 }
+.nota{
+    font-size: 35px;
+    margin: 20px;
+    color:#8B4C70;
+    font-weight: bold;
+}
