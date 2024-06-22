@@ -171,9 +171,26 @@
             modal.style.display = "none";
         }
 
-        function openProblemModal() {
+        function openProblemSolution(idTema, idProblema) {
+        window.location.href = `/home/clasele-mele/teme/${idTema}/rezolva-pb/${idProblema}`;
+        }       
+        async function openProblemModal(idTema) {
           var modal = document.getElementById('problemModal');
-         modal.style.display = "block";
+          modal.style.display = "block";
+
+          const problems = await fetchProblemsByTemaId(idTema);
+
+          const problemsListItems = problems.map(problem => {
+            console.log('Processing problem.id:', problem.id);
+            return `
+                <li onclick="openProblemSolution(${idTema}, ${problem.id})">
+                    #${problem.id} - ${problem.nume_problema}
+                </li>
+            `;
+        }).join('');
+
+          var ulElement = modal.querySelector('ul');
+         ulElement.innerHTML = problemsListItems;
         }
         function closeEvaluateModal() {
             var modal = document.getElementById('evaluateModal');
@@ -337,11 +354,11 @@
                 divTema.classList.add('tema');
 
                 const problems = await fetchProblemsByTemaId(tema.id);
-
+                
                 const problemsList = problems.map(problem => `
             <li>Id: ${problem.id} - ${problem.nume_problema} - ${problem.dificultate}</li>`).join('');
                 let html = `
-            <h3> Tema: ${tema.nume}</h3>
+            <h3 id="${tema.id}""> Tema: ${tema.nume}</h3>
             <p>Probleme: ${problemsList}<p>
              <p>Deadline: ${new Date(tema.deadline).toLocaleString()}</p>`;
 
@@ -349,7 +366,7 @@
                 html += `<button id="${tema.id}" onclick="openSearchModal(this.id)">Adauga</button>
                          <button onclick="openEvaluateModal()">Evalueaza</button> `;
              else
-               html += `<button onclick="openProblemModal()">Rezolva</button> `;
+               html += `<button id=${tema.id} onclick="openProblemModal(this.id)">Rezolva</button> `;
 
                 divTema.innerHTML = html;
                 temeContainer.appendChild(divTema);

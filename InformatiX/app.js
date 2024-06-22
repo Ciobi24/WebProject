@@ -154,12 +154,6 @@ const server = http.createServer((req, res) => {
         return;
     }
     
-    if(pathname.startsWith('/home/clasele-mele/teme/'))
-        {
-            serveHTMLFile('/temele_mele.html', res);
-            return;
-        }
-
     if (pathname.startsWith('/api/')) {
         verifyToken(req, res, () => {
             handleApiRoute(req, res); // aici cumva fac cererile doar catre baza de date sa-mi dea informatii, n-am treaba cu paginile
@@ -179,6 +173,12 @@ const server = http.createServer((req, res) => {
         });
         return;
     }
+    if(pathname.startsWith('/home/clasele-mele/teme/'))
+        {
+            serveHTMLFile('/temele_mele.html', res);
+            return;
+        }
+
 
     if (routes[pathname]) {
         verifyToken(req, res, () => routes[pathname](req, res));
@@ -278,7 +278,6 @@ async function verifyStudentAccess(req, res, next) {
             res.end('Problema does not belong to the tema');
             return;
         }
-
         next();
     } catch (error) {
         console.error('Error verifying student access:', error);
