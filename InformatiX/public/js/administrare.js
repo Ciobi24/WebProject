@@ -128,14 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers.forEach(headerText => {
                     const headerCell = document.createElement('th');
                     headerCell.textContent = headerText;
-                    headerCell.style.backgroundColor = "#c8bba5";
+                    headerCell.style.backgroundColor = "#c8bba5";F
                     headerRow.appendChild(headerCell);
                 });
 
-                // const deleteHeaderCell = document.createElement('th');
-                // deleteHeaderCell.textContent = 'Actions';
-                // deleteHeaderCell.style.backgroundColor = "#c8bba5";
-                // headerRow.appendChild(deleteHeaderCell);
+                const deleteHeaderCell = document.createElement('th');
+                deleteHeaderCell.textContent = 'Actions';
+                deleteHeaderCell.style.backgroundColor = "#c8bba5";
+                headerRow.appendChild(deleteHeaderCell);
 
                 thead.appendChild(headerRow);
                 userTable.appendChild(thead);
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     deleteButton.style.cursor = 'pointer';
                     deleteButton.addEventListener('click', () => deleteUser(user.id));
                     deleteCell.appendChild(deleteButton);
-                    //row.appendChild(deleteCell);
+                    row.appendChild(deleteCell);
 
                     userTable.appendChild(row);
                 });
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function deleteUser(userId) {
-        fetch(`/api/deleteUser?id=${userId}`, {
+        fetch(`/api/deleteUserAdmin?id=${userId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
