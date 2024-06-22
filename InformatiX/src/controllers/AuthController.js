@@ -28,10 +28,9 @@ async function handleLogin(req, res) {
                 const token = jwt.sign({ id: user.id, role: user.role}, secretKey);
                 const userDetails = await getUserById(user.id);
 
-                let redirectUrl = '/home'; // default redirect URL
-                // console.log(userDetails.role);
+                let redirectUrl = '/home'; 
                 if (userDetails.role === 'admin') {
-                    redirectUrl = '/home/administrare'; // admin redirect URL
+                    redirectUrl = '/home/administrare';
                 }
 
                 res.writeHead(200, {

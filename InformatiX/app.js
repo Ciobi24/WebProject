@@ -7,6 +7,7 @@ const { handleUserRoute, handleApiRoute } = require('./routes');
 const { checkTokenExistence } = require('./src/services/TokenResetService.js');
 const { verifyToken } = require('./src/middlewares/loginMiddleware.js');
 const { getJwt } = require("./src/services/JwtService.js");
+const { applyToTeacherController } = require('./src/controllers/ApplyToTeacherController.js');
 
 require('dotenv').config();
 dbInstance.connect();
@@ -151,6 +152,11 @@ const server = http.createServer((req, res) => {
 
     if (pathname === '/reset-password') {
         routes['/reset-password'](req, res);
+        return;
+    }
+    if(pathname === '/applyToTeacher')
+    {
+        applyToTeacherController(req,res);
         return;
     }
     

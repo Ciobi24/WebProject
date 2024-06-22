@@ -22,6 +22,15 @@ CREATE TABLE IF NOT EXISTS reset_password_token (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 `;
+const createTablesTeacherApplication = `
+CREATE TABLE IF NOT EXISTS teacher_application (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  school_name VARCHAR(255) NOT NULL,
+  document_path VARCHAR(255) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+`;
 
 const createTablesProbleme = `
 CREATE TABLE IF NOT EXISTS probleme (
@@ -116,6 +125,7 @@ module.exports = {
     createTablesClasaElev,
     createTablesTeme,
     createTablesProblemeTeme,
-    createTablesSolutii
+    createTablesSolutii,
+    createTablesTeacherApplication
 };
 
