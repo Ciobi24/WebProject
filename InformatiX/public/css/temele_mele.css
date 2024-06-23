@@ -15,7 +15,9 @@ body {
 }
 
 header {
-    flex: 0 0 auto; /* Header takes up as much space as needed */
+    position: static;
+    height: 9vh;
+    z-index: 1;
 }
 
 footer {
@@ -30,15 +32,15 @@ footer {
 }
 
 .container_princ {
-    flex: 1 0 auto; /* Main container takes up remaining space */
-    margin-top: 9vh;
+    height:82vh ; /* Adjust height to account for footer */
+    /* margin-top: 9vh; */
     background-color: #deccb9;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     overflow-y: auto; /* Enable vertical scrolling for the main container */
-    padding-bottom: 9vh; /* Ensure content doesn't overlap with the footer */
+    /* padding-bottom: 9vh; Ensure content doesn't overlap with the footer */
 }
 
 h2 {
