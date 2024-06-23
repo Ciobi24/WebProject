@@ -205,3 +205,6 @@ textarea {
 button:hover {
     background-color: #522157;
 }
+.tema .expired {
+    color: red;
+}

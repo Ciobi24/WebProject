@@ -54,8 +54,8 @@
         <div class="modal-content">
             <span class="close" onclick="closeAddTemaModal()">&times;</span>
             <h2>Adaugă Temă Nouă</h2>
-            <label for="clasaInput">Clasa:</label>
-            <input type="text" id="clasaInput" placeholder="Clasa a X-a B/XB/10B"><br><br>
+            <label for="clasaInput">Nume:</label>
+            <input type="text" id="clasaInput" placeholder="Tema Clasa a X-a B/XB/10B"><br><br>
             <label for="deadlineInput">Deadline:</label>
             <input type="date" id="deadlineInput"><br><br>
             <button onclick="submitNewTema()">Submit</button>
@@ -338,6 +338,20 @@
 
             const temeArray = Array.isArray(teme) ? teme : [teme];
 
+            // Sort teme based on deadline: expired ones at the end
+            temeArray.sort((a, b) => {
+                const aDeadline = new Date(a.deadline);
+                const bDeadline = new Date(b.deadline);
+                const now = new Date();
+
+                const aIsExpired = aDeadline <= now;
+                const bIsExpired = bDeadline <= now;
+
+                if (aIsExpired && !bIsExpired) return 1;
+                if (!aIsExpired && bIsExpired) return -1;
+                return aDeadline - bDeadline;
+            });
+
             for (const tema of temeArray) {
                 const divTema = document.createElement('div');
                 divTema.classList.add('tema');
@@ -345,17 +359,22 @@
                 const problems = await fetchProblemsByTemaId(tema.id);
 
                 const problemsList = problems.map(problem => `
-            <li>Id: ${problem.id} - ${problem.nume_problema} - ${problem.dificultate}</li>`).join('');
+                    <li>Id: ${problem.id} - ${problem.nume_problema} - ${problem.dificultate}</li>
+                `).join('');
+
+                const deadlineDate = new Date(tema.deadline);
+                const isExpired = deadlineDate <= new Date();
                 let html = `
-            <h3 id="${tema.id}""> Tema: ${tema.nume}</h3>
-            <p>Probleme: ${problemsList}<p>
-             <p>Deadline: ${new Date(tema.deadline).toLocaleString()}</p>`;
+                    <h3 id="${tema.id}"${isExpired ? ' class="expired"' : ''}> Tema: ${tema.nume}</h3>
+                    <p>Probleme: ${problemsList}</p>
+                    <p class="${isExpired ? 'expired' : ''}">Deadline: ${deadlineDate.toLocaleString()}</p>
+                `;
 
                 if (WhoAmI() === 1)
                     html += `<button id="${tema.id}" onclick="openSearchModal(this.id)">Adauga</button>
-                         <button id="${tema.id}" onclick="openEvaluateModal(this.id)">Evalueaza</button> `;
+                             <button id="${tema.id}" onclick="openEvaluateModal(this.id)">Evalueaza</button>`;
                 else
-                    html += `<button id=${tema.id} onclick="openProblemModal(this.id)">Rezolva</button> `;
+                    html += `<button id=${tema.id} onclick="openProblemModal(this.id)">Rezolva</button>`;
 
                 divTema.innerHTML = html;
                 temeContainer.appendChild(divTema);
