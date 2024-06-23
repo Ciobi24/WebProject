@@ -20,6 +20,25 @@
         }
     </script>
     <script src="../../public/js/checkAdmin.js"></script>
+    <script>async function logout() {
+        try {
+          const response = await fetch('/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          if (response.ok) {
+            alert('Logout successful');
+            window.location.href = '/';
+          } else {
+            alert('Logout failed');
+          }
+        } catch (error) {
+          console.error('Error during logout:', error);
+        }
+      }</script>
+    
 </head>
 
 <body>
@@ -36,7 +55,7 @@
                 <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
                 <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
                 <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
-                <li><a href="/" onclick="hideSidebar()">Logout</a></li>
+                <li><a href="/" onclick="logout()" >Logout</a></li>
             </ul>
             <ul class="menu">
                 <li><a href="/home">Home</a></li>
@@ -44,7 +63,7 @@
                 <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
                 <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
                 <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
-                <li class="hideOnMobile"><a href="/">Logout</a></li>
+                <li class="hideOnMobile"><a href="/" onclick="logout()">Logout</a></li>
                 <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             height="26" viewBox="0 96 960 960" width="26">
                             <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />

@@ -17,31 +17,31 @@ const routes = {
         serveHTMLFile('/index.html', res);
     },
     '/home': (req, res) => {
-        serveHTMLFile('/logged_page.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/logged_page.html', res));
     },
     '/home/profil': (req, res) => {
-        serveHTMLFile('/my_profile.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/my_profile.html', res));
     },
     '/home/probleme': (req, res) => {
-        serveHTMLFile('/probleme.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/probleme.html', res));
     },
     '/home/clasele-mele': (req, res) => {
         serveHTMLFile('/clasele_mele.html', res);
     },
     '/home/probleme-clasa-9': (req, res) => {
-        serveHTMLFile('/probleme-clasa9.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/probleme-clasa9.html', res));
     },
     '/home/probleme-clasa-10': (req, res) => {
-        serveHTMLFile('/probleme-clasa10.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/probleme-clasa10.html', res));
     },
     '/home/probleme-clasa-11': (req, res) => {
-        serveHTMLFile('/probleme-clasa11.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/probleme-clasa11.html', res));
     },
     '/home/clasele-mele/teme': (req, res) => {
-        serveHTMLFile('/temele_mele.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/temele_mele.html', res));
     },
     '/home/clasele-mele/teme/rezolvare': (req, res) => {
-        serveHTMLFile('/solution.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/solution.html', res));
     },
     '/home/administrare': (req, res) => {
         if (checkAdminRole(req, res)) {
@@ -52,64 +52,58 @@ const routes = {
         }
     },
     '/home/probleme-clasa-9/probleme-elementare': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-9/elemente-ale-limbajului': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-9/tablouri-unidimensionale': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-9/tablouri-bidimensionale': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
-    },
-    '/home/probleme-clasa-9/probleme-diverse': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-10/subprograme': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-10/recursivitate': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-10/divide-et-impera': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-10/siruri-de-caractere': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () =>  serveHTMLFile('/lista_pb.html', res));
     },
-    '/home/probleme-clasa-10/structuri-de-date-liniare': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
-    },
-    '/home/probleme-clasa-10/liste-alocate-dinamic': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+    '/home/probleme-clasa-9/structuri-de-date-liniare': (req, res) => {
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-10/tipul-struct': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () =>  serveHTMLFile('/lista_pb.html', res));
+    },
+    '/home/probleme-clasa-10/probleme-diverse': (req, res) => {
+        verifyToken(req, res, () =>  serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-11/teoria-grafurilor': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-11/programare-dinamica': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () =>  serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-11/metoda-greedy': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-11/backtracking': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
-    },
-    '/home/probleme-clasa-11/programare-orientata-pe-obiecte': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () => serveHTMLFile('/lista_pb.html', res));
     },
     '/home/probleme-clasa-11/arbori': (req, res) => {
-        serveHTMLFile('/lista_pb.html', res);
+        verifyToken(req, res, () =>  serveHTMLFile('/lista_pb.html', res));
     },
     '/home/clasele-mele/teme/:idTema/rezolva-pb/:idProblema': (req, res) => {
-        serveHTMLFile('/rezolva_pb.html', res);
+        verifyToken(req, res, () =>  serveHTMLFile('/rezolva_pb.html', res));
     },
     '/home/clasele-mele/teme/:idTema/evalueaza/:idElev': (req, res) => {
-        serveHTMLFile('/solution.html', res);
+        verifyToken(req, res, () =>  serveHTMLFile('/solution.html', res));
     },  
     '/reset-password': async (req, res) => {
         const urlString = req.url;
@@ -182,9 +176,7 @@ const server = http.createServer((req, res) => {
     }
 
     if (pathname.startsWith('/api/')) {
-        verifyToken(req, res, () => {
             handleApiRoute(req, res); // aici cumva fac cererile doar catre baza de date sa-mi dea informatii, n-am treaba cu paginile
-        });
         return;
     }
 
@@ -218,7 +210,7 @@ const server = http.createServer((req, res) => {
 
     if(pathname.startsWith('/home/clasele-mele/teme/'))
         {
-            serveHTMLFile('/temele_mele.html', res);
+            verifyToken(req, res, () =>serveHTMLFile('/temele_mele.html', res));
             return;
         }
 
