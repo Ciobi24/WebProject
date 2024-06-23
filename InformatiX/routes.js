@@ -9,6 +9,7 @@ const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassControll
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
 
 function handleUserRoute(req, res) {
+    console.log(req.url);
     if (req.url === '/home') {
         handleLogin(req, res);
     } else if (req.url === '/register') {

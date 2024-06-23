@@ -152,17 +152,12 @@ const server = http.createServer((req, res) => {
         routes['/'](req, res);
         return;
     }
-
-    // if(pathname === '/tryInvalidateJwt')
-    // {
-    //     res.writeHead(200, {
-    //         'Set-Cookie': `token=eyJhbfeiOiJIUzI1NiIsIkpXVCJ9.eyJvfsdeE3MTkxMDUzefwdCI6MT8Qddsgz1-yUkKws; HttpOnly; Path=/; SameSite=Strict`,
-    //         'Content-Type': 'application/json'
-    //     });
-    //     return;
-    // }
-    if (pathname === '/reset-password') {
+    if (pathname === '/reset-password' && req.method == 'GET') {
         routes['/reset-password'](req, res);
+        return;
+    }
+    if (pathname === '/reset-password' && req.method == 'POST') {
+        handleUserRoute(req, res);
         return;
     }
     if(pathname === '/applyToTeacher')
