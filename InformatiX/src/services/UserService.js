@@ -15,29 +15,34 @@ async function getUserById(id) {
 
 
 async function findUserByEmailAndPassword(email, password) {
-    const connection = await dbInstance.connect();
+    let connection;
     try {
+        connection = await dbInstance.connect();
+
         const query = `SELECT id, role, password FROM users WHERE email = ?`;
         const [rows, _] = await connection.query(query, [email]);
-    
+
         if (rows.length === 0) {
-            return false;
+            return null;
         }
 
         const user = rows[0];
+        const storedHash = user.password;
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, storedHash);
 
         if (isPasswordValid) {
-            return true
+            return { id: user.id, role: user.role };
         } else {
-            return false
+            return null; 
         }
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
-    } 
+    }
 }
+
+
 
 async function findUserByEmailOrUsername(email, username) {
     const connection = await dbInstance.connect();

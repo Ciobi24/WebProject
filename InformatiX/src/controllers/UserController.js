@@ -9,6 +9,7 @@ async function getUserByIdHandler(req, res) {
     try {
         const userId = decoded.id;
 
+        console.log(userId);
         const user = await getUserById(userId);
         if (user) {
             res.writeHead(200, { 'Content-Type': 'application/json' });

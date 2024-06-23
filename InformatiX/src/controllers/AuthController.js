@@ -23,7 +23,7 @@ async function handleLogin(req, res) {
 
             const user = await findUserByEmailAndPassword(email, password);
             if (user) {
-                const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '1h' });
+                const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '24h' });
                 
                 let redirectUrl = '/home'; 
                 if (user.role === 'admin') {

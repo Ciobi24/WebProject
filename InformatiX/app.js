@@ -153,6 +153,14 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    // if(pathname === '/tryInvalidateJwt')
+    // {
+    //     res.writeHead(200, {
+    //         'Set-Cookie': `token=eyJhbfeiOiJIUzI1NiIsIkpXVCJ9.eyJvfsdeE3MTkxMDUzefwdCI6MT8Qddsgz1-yUkKws; HttpOnly; Path=/; SameSite=Strict`,
+    //         'Content-Type': 'application/json'
+    //     });
+    //     return;
+    // }
     if (pathname === '/reset-password') {
         routes['/reset-password'](req, res);
         return;
@@ -164,8 +172,8 @@ const server = http.createServer((req, res) => {
     }
     if(pathname === '/getAllApplications')
     {
-            getAllApplicationsController(req,res);
-            return;
+        getAllApplicationsController(req,res);
+        return;
     }
     if(pathname.startsWith('/applyToTeacherRespingere/'))
     {
@@ -303,6 +311,12 @@ async function verifyStudentAccess(req, res, next) {
             return;
         }
         const idClasa = temaResult[0].id_clasa;
+        if(!idClasa || (Number.isNaN(idClasa)))
+        {
+            res.writeHead(400, { 'Content-Type': 'text/plain' });
+            res.end('Bad request!');
+            return;
+        }
 
         const [classResult] = await connection.query('SELECT * FROM clase_elevi WHERE id_clasa = ? AND id_user = ?', [idClasa, idUser]);
         if (classResult.length === 0) {
@@ -317,7 +331,7 @@ async function verifyStudentAccess(req, res, next) {
             return;
         }
         next();
-    } catch (error) {
+    } catch (error) { 
         console.error('Error verifying student access:', error);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Internal server error');

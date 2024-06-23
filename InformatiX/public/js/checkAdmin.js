@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     const user = JSON.parse(xhr.responseText);
+                    console.log()
                     const isAdmin = user.role === 'admin';
 
                     const adminLinkSidebar = document.querySelector('.sidebar a[href="/home/administrare"]');
