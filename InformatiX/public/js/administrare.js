@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers.forEach(headerText => {
                     const headerCell = document.createElement('th');
                     headerCell.textContent = headerText;
-                    headerCell.style.backgroundColor = "#c8bba5";F
+                    headerCell.style.backgroundColor = "#c8bba5";
                     headerRow.appendChild(headerCell);
                 });
 

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS reset_password_token (
   user_id INT,
   token VARCHAR(255) NOT NULL,
   expires_at TIMESTAMP NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 const createTablesTeacherApplication = `
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS teacher_application (
   user_id INT,
   school_name VARCHAR(255) NOT NULL,
   document_path VARCHAR(255) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS probleme (
   utilizatori_incercat INT DEFAULT 0,
   utilizatori_rezolvat INT DEFAULT 0,
   creator_id INT,
-  FOREIGN KEY (creator_id) REFERENCES users(id)
+  FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS rating (
   rating FLOAT NOT NULL,
   UNIQUE KEY unique_rating (id_problema, id_user),
   FOREIGN KEY (id_problema) REFERENCES probleme(id),
-  FOREIGN KEY (id_user) REFERENCES users(id)
+  FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS clase (
   nume VARCHAR(255) NOT NULL,
   id_user INT NOT NULL,
   UNIQUE KEY unique_class_name_user_id (nume, id_user),
-  FOREIGN KEY (id_user) REFERENCES users(id)
+  FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 
@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS clase_elevi (
   id_clasa INT NOT NULL,
   id_user INT NOT NULL,
   PRIMARY KEY (id_clasa, id_user),
-  FOREIGN KEY (id_clasa) REFERENCES clase(id),
-  FOREIGN KEY (id_user) REFERENCES users(id)
+  FOREIGN KEY (id_clasa) REFERENCES clase(id) ON DELETE CASCADE, 
+  FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 const createTablesTeme = `
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS teme (
   deadline DATE NOT NULL,
   id_clasa INT NOT NULL,
   UNIQUE KEY pereche_unica (nume, id_clasa),
-  FOREIGN KEY (id_clasa) REFERENCES clase(id)
+  FOREIGN KEY (id_clasa) REFERENCES clase(id) ON DELETE CASCADE
 );
 `;
 
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS probleme_teme (
   id_problema INT NOT NULL,
   PRIMARY KEY (id_tema, id_problema),
   FOREIGN KEY (id_tema) REFERENCES teme(id),
-  FOREIGN KEY (id_problema) REFERENCES probleme(id)
+  FOREIGN KEY (id_problema) REFERENCES probleme(id) ON DELETE CASCADE
 );
 `;
 
@@ -114,8 +114,8 @@ CREATE TABLE IF NOT EXISTS solutii (
   comentariu TEXT,
   comentariu_prof TEXT,
   nota INT,
-  FOREIGN KEY (id_problema) REFERENCES probleme(id),
-  FOREIGN KEY (id_user) REFERENCES users(id)
+  FOREIGN KEY (id_problema) REFERENCES probleme(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
 );
 `;
 

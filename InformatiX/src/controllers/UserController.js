@@ -1,4 +1,4 @@
-const { getUserById, updateUserByCredentials, getAllUsers} = require('../services/UserService');
+const { getUserById, updateUserByCredentials, getAllUsers, deleteUser} = require('../services/UserService');
 const { getJwt } = require("../services/JwtService");
 const querystring = require('querystring');
 
@@ -104,4 +104,35 @@ async function getAllUsersHandler(req, res)
     }
 }
 
-module.exports = { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler };
+async function deleteUserByAdmin(req, res)
+{
+        const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+        const idUser = queryObject.get('id');
+    
+        const cookieHeader = req.headers.cookie;
+        const decoded = getJwt(cookieHeader);
+        const role = decoded.role;
+            if (role !== 'admin') {
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+                return;
+            }
+    
+            try {
+                const result = await deleteUser(idUser);
+    
+                if (result) {
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true, message: 'User deleted successfully.' }));
+                } else {
+                    res.writeHead(401, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: false, message: 'User does not have permission or user to delete not found!' }));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                res.writeHead(500, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'Error deleting class.' }));
+            }
+}
+
+module.exports = { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler, deleteUserByAdmin };

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { findUserByEmailAndPassword, getUserById } = require('../services/UserService');
-const { getUserByIdHandler } = require('./UserController');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 const secretKey = process.env.SECRET_KEY;
@@ -21,15 +21,12 @@ async function handleLogin(req, res) {
                 throw new Error('Secret key is missing or not set');
             }
 
-            const results = await findUserByEmailAndPassword(email, password);
-            if (results.length > 0) {
-                const user = results[0];
-                console.log(user);
-                const token = jwt.sign({ id: user.id, role: user.role}, secretKey);
-                const userDetails = await getUserById(user.id);
-
+            const user = await findUserByEmailAndPassword(email, password);
+            if (user) {
+                const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '1h' });
+                
                 let redirectUrl = '/home'; 
-                if (userDetails.role === 'admin') {
+                if (user.role === 'admin') {
                     redirectUrl = '/home/administrare';
                 }
 

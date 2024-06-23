@@ -1,11 +1,12 @@
 const dbInstance = require('../models/db-config');
+const bcrypt = require('bcrypt');
 
 async function getUserById(id) {
     const connection = await dbInstance.connect();
     try {
         const query = `SELECT * FROM users WHERE id = ?`;
         const [rows, _] = await connection.query(query, [id]);
-        return rows[0]; 
+        return rows[0];
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
@@ -14,11 +15,24 @@ async function getUserById(id) {
 
 
 async function findUserByEmailAndPassword(email, password) {
-    const connection = await dbInstance.connect(); 
+    const connection = await dbInstance.connect();
     try {
-        const query = `SELECT id, role FROM users WHERE email = ? AND password = ?`;
-        const [rows, _] = await connection.query(query, [email, password]);
-        return rows;
+        const query = `SELECT id, role, password FROM users WHERE email = ?`;
+        const [rows, _] = await connection.query(query, [email]);
+    
+        if (rows.length === 0) {
+            return false;
+        }
+
+        const user = rows[0];
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (isPasswordValid) {
+            return true
+        } else {
+            return false
+        }
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
@@ -26,7 +40,7 @@ async function findUserByEmailAndPassword(email, password) {
 }
 
 async function findUserByEmailOrUsername(email, username) {
-  const connection = await dbInstance.connect(); 
+    const connection = await dbInstance.connect();
     try {
         const query = `SELECT * FROM users WHERE email = ? OR username = ?`;
         const [rows, _] = await connection.query(query, [email, username]);
@@ -34,12 +48,11 @@ async function findUserByEmailOrUsername(email, username) {
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
-    } 
-}       
+    }
+}
 
-async function getAllUsers()
-{
-    const connection = await dbInstance.connect(); 
+async function getAllUsers() {
+    const connection = await dbInstance.connect();
     try {
         const query = `SELECT id, username, role, lastname, firstname, birthday, city, school FROM users`;
         const [rows, _] = await connection.query(query);
@@ -47,11 +60,24 @@ async function getAllUsers()
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
-    } 
+    }
+}
+async function deleteUser(idUser) {
+    const connection = await dbInstance.connect();
+    try { 
+        const query1 = `DELETE FROM users WHERE id = ?`;
+        const query2 = `DELETE FROM clase_elevi WHERE iduser = ?`
+        const [rows, _] = await connection.query(query, [idUser]);
+        return rows;
+    }
+    catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    }
 }
 
 async function insertUser(username, email, password, role) {
-    const connection = await dbInstance.connect(); 
+    const connection = await dbInstance.connect();
     try {
         const query = `INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)`;
         const [results, _] = await connection.query(query, [username, email, password, role]);
@@ -62,23 +88,22 @@ async function insertUser(username, email, password, role) {
     }
 }
 async function findUserByEmail(email) {
-    const connection = await dbInstance.connect(); 
+    const connection = await dbInstance.connect();
     try {
-      const [rows] = await connection.query('SELECT username FROM users WHERE email = ?', [email]);
-      if (rows.length == 1) {
-        return rows[0].username;
-      } else {
-        return null; 
-      }
+        const [rows] = await connection.query('SELECT username FROM users WHERE email = ?', [email]);
+        if (rows.length == 1) {
+            return rows[0].username;
+        } else {
+            return null;
+        }
     } catch (error) {
-      console.error("Error interacting with DB: " + error);
-      throw error;
+        console.error("Error interacting with DB: " + error);
+        throw error;
     }
-  }
+}
 
-async function updatePassword(newPassword, email)
-{
-    const connection = await dbInstance.connect(); 
+async function updatePassword(newPassword, email) {
+    const connection = await dbInstance.connect();
     try {
         const query = 'UPDATE users SET password = ? WHERE email = ?';
         const [result] = await connection.query(query, [newPassword, email]);
@@ -122,7 +147,7 @@ async function updateUserByCredentials(userFromDB, userData) {
 
         if (userData.birthday !== undefined && userData.birthday !== userFromDB.birthday) {
             const birthdayDate = new Date(userData.birthday);
-            birthdayDate.setDate(birthdayDate.getDate() + 1); 
+            birthdayDate.setDate(birthdayDate.getDate() + 1);
             const formattedBirthday = birthdayDate.toISOString().slice(0, 10);
             updatePromises.push(connection.query('UPDATE users SET birthday = ? WHERE id = ?', [formattedBirthday, userId]));
         }
@@ -158,5 +183,6 @@ module.exports = {
     updatePassword,
     getUserById,
     updateUserByCredentials,
-    getAllUsers
+    getAllUsers,
+    deleteUser
 };
