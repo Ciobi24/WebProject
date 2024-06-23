@@ -67,19 +67,38 @@ async function getAllUsers() {
         throw error;
     }
 }
+
 async function deleteUser(idUser) {
     const connection = await dbInstance.connect();
-    try { 
-        const query1 = `DELETE FROM users WHERE id = ?`;
-        const query2 = `DELETE FROM clase_elevi WHERE iduser = ?`
-        const [rows, _] = await connection.query(query, [idUser]);
+    try {
+        const deleteUserQuery = `DELETE FROM users WHERE id = ?`;
+        const deleteClaseEleviQuery = `DELETE FROM clase_elevi WHERE id_user = ?`;
+        const deleteUserSolutionQuery = `DELETE FROM solutii WHERE id_user = ?`;
+        const deleteUserTokenQuery = `DELETE FROM reset_password_token WHERE user_id = ?`;
+        const deleteUserTeacherApplicationQuery = `DELETE FROM teacher_application WHERE user_id = ?`;
+        const deleteAutorProblemeQuery = `UPDATE probleme set creator_id = NULL WHERE creator_id = ?`;
+        const deleteRatingQuery = `DELETE FROM rating WHERE id_user = ?`;
+        var result=await connection.query('SELECT id FROM clase WHERE id_user = ?', [idUser]);
+        var res2=await connection.query('SELECT id FROM teme WHERE id_clasa = ?', [result.id]);
+        await connection.query('DELETE FROM probleme_teme WHERE id_tema = ?', [res2.id]);
+        await connection.query('DELETE FROM teme WHERE id_clasa = ?', [result.id]);
+        const deleteClaseQuery = `DELETE FROM clase WHERE id_user = ?`;
+        await connection.query(deleteClaseQuery, [idUser]);
+        await connection.query(deleteRatingQuery, [idUser]);
+        await connection.query(deleteAutorProblemeQuery, [idUser]);
+        await connection.query(deleteUserTeacherApplicationQuery, [idUser]);
+        await connection.query(deleteClaseEleviQuery, [idUser]);
+        await connection.query(deleteUserSolutionQuery, [idUser]);
+        await connection.query(deleteUserTokenQuery, [idUser]);
+        const [rows, _] = await connection.query(deleteUserQuery, [idUser]);
+
         return rows;
-    }
-    catch (error) {
+    } catch (error) {
         console.error('Error executing query:', error);
         throw error;
     }
 }
+
 
 async function insertUser(username, email, password, role) {
     const connection = await dbInstance.connect();

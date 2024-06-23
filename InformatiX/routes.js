@@ -1,4 +1,4 @@
-const { handleLogin } = require('./src/controllers/AuthController');
+const { handleLogin,handleLogout } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
@@ -21,7 +21,10 @@ function handleUserRoute(req, res) {
         handleUpdatePassword(req, res);
     } else if (req.url === '/addProblema' && req.method === 'POST') {
         addProblemaHandler(req, res);
-    } else {
+    }else if(req.url === '/logout') {
+        handleLogout(req, res);
+    }
+    else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Page not found');
     }

@@ -47,7 +47,38 @@ async function handleLogin(req, res) {
         }
     });
 }
-
+async function handleLogout(req, res) {
+    try {
+        // Clear the token cookie
+        res.writeHead(200, {
+            'Set-Cookie': `token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`,
+            'Content-Type': 'application/json'
+        });
+        res.end(JSON.stringify({ success: true, message: 'Logout successful' }));
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Logout failed' }));
+    }
+}
+async function logout() {
+    try {
+      const response = await fetch('/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.ok) {
+        alert('Logout successful');
+        window.location.href = '/';
+      } else {
+        alert('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  }
 module.exports = {
-    handleLogin,
+    handleLogin,handleLogout,logout
 };
