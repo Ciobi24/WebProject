@@ -82,7 +82,7 @@ async function checkTokenExistence(resetToken) {
         const connection = await dbInstance.connect(); 
         const selectQuery = `SELECT u.email FROM users u JOIN reset_password_token r ON r.user_id = u.id WHERE r.token = ?;`;
         const [row] = await connection.query(selectQuery, resetToken);
-        
+
         if (row.length > 0) {
             return row[0].email; 
         } else {
