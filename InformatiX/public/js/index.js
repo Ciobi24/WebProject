@@ -13,25 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    console.log('Contul a fost creat cu succes!');
-                    var successMessage = document.getElementById('success-message-register');
-                    successMessage.innerText = 'Contul a fost creat cu succes! Continuați prin a vă loga cu datele dvs, apoi în cont la secțiunea Profil completați-vă profilul!';
-                    successMessage.style.display = 'block';
-                    var errorMessage = document.getElementById('error-message-register');
-                    errorMessage.style.display = 'none';
-                    setTimeout(function () {
-                        successMessage.style.display = 'none';
-                    }, 10000);
+                    alert('Contul a fost creat cu succes! Continuați prin a vă loga cu datele dvs, apoi în cont la secțiunea Profil completați-vă profilul!');
                 } else {
-                    var errorMessage = document.getElementById('error-message-register');
-                    errorMessage.innerText = 'Eroare la crearea contului: ' + xhr.responseText;
-                    errorMessage.style.display = 'block';
-
-                    var successMessage = document.getElementById('success-message-register');
-                    successMessage.style.display = 'none';
-                    setTimeout(function () {
-                        errorMessage.style.display = 'none';
-                    }, 20000);
+                    alert('Eroare la crearea contului: ' + xhr.responseText);
                 }
             }
         };
@@ -57,16 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.cookie = 'jwt=' + token + ';path=/'; 
                     
                     window.location.href = redirectUrl;
-                    document.getElementById('error-message').style.display = 'none';
                 }
                 else {
-                    var errorMessage = document.getElementById('error-message');
-                    errorMessage.innerText = 'Eroare la autentificare! Email și/sau parolă incorecte.';
-                    errorMessage.style.display = 'block';
-        
-                    setTimeout(function () {
-                        errorMessage.style.display = 'none';
-                    }, 7000); //timer de 7 secunde 
+                    alert('Eroare la autentificare! Email și/sau parolă incorecte.');
                 }
             }
         };
@@ -88,16 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('A password reset link has been sent to your email.');
                     document.getElementById('emailForgotPassword').value = ''; // clear the input field
                 } else {
-                    var errorMessage = document.createElement('div');
-                    errorMessage.id = 'error-message-reset';
-                    errorMessage.innerText = 'Failed to send reset link. Please try again.';
-                    errorMessage.style.display = 'block';
-                    errorMessage.style.color = 'red';
-                    document.querySelector('.modal-content').appendChild(errorMessage);
-    
-                    setTimeout(function () {
-                        errorMessage.style.display = 'none';
-                    }, 7000); // 7-second timer
+                    alert('Failed to send reset link. Please try again.');
                 }
             }
         };
