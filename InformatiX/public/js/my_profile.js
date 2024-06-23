@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                         document.getElementById('city').value = response.city || '';
                         document.getElementById('school').value = response.school || '';
+                        document.getElementById('nr1').innerText = response.incercari;
+                        document.getElementById('nr2').innerText = response.rezolvate;
+                        document.getElementById('nr3').innerText = `Id: ${response.id}`;
                     } catch (e) {
                         console.error("Could not parse response as JSON: " + e.message);
                     }
@@ -91,13 +94,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     console.log("User updated successfully");
+                    
+                    alert("Profil actualizat cu succes!");
+                    // var successMessage = document.getElementById('successMessage');
+                    // successMessage.style.display = 'block';
 
-                    var successMessage = document.getElementById('successMessage');
-                    successMessage.style.display = 'block';
-
-                    setTimeout(function () {
-                        successMessage.style.display = 'none';
-                    }, 10000);
+                    // setTimeout(function () {
+                    //     successMessage.style.display = 'none';
+                    // }, 10000);
                 } else {
                     console.error('Error: ' + xhr.statusText);
                 }
