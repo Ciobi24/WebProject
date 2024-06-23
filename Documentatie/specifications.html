@@ -26,7 +26,7 @@
                 <ul>
                     <li><a href="#arhitectura-abordata">2.1. Arhitectura abordată</a></li>
                     <li><a href="#structura-fisiere">2.2. Structura fișierelor</a></li>
-                    <li><a class="red-link" href="#logare">2.3. Logare (IMPORTANT!)</a></li>
+                    <li><a href="#logare">2.3. Logare </a></li>
                     <li><a href="#interfata-utilizator">2.4. Interfața utilizatorului</a></li>
                     <ul>
                         <li><a href="#pagina-index">Pagina de index</a></li>
@@ -78,7 +78,7 @@
                         Fiecare problema poate fi exportata folosind butonul de share. Profesorii vor avea
                         posibilitatea să creeze și să administreze clase, să adauge elevi în aceste clase și să atribuie
                         teme
-                        elevilor prin propunerea sau selectarea de probleme existente în aplicație. Ei vor putea, de
+                        elevilor prin selectarea de probleme existente în aplicație. Ei vor putea, de
                         asemenea, să evalueze soluțiile trimise
                         de elevi și să ofere
                         feedback individual. Pe lângă funcționalitatea de bază, aplicația va genera rapoarte care oferă
@@ -125,8 +125,7 @@
                     <section id="propunere-aprobare">
                         <h4>Propunerea și Aprobarea de Probleme:</h4>
                         <p>Profesorii pot propune probleme informatice care vor fi supuse aprobării administratorilor.
-                            Aceste probleme pot fi etichetate cu diverse TAG-uri pentru a facilita căutarea și
-                            filtrarea.</p>
+                            Aceste probleme pot fi etichetate cu diverse TAG-uri.</p>
                     </section>
 
                     <section id="creare-gestionare-clase">
@@ -137,8 +136,7 @@
 
                     <section id="atribuire-teme">
                         <h4>Atribuirea de Teme:</h4>
-                        <p>Profesorii pot atribui teme elevilor fie propunând probleme noi, ce vor fi aprobate de
-                            administratori, fie selectând dintr-o bază de date existentă de probleme.</p>
+                        <p>Profesorii pot atribui teme elevilor propunând probleme selectate din baza de date existentă.</p>
                     </section>
 
                     <section id="rezolvare-evaluare">
@@ -146,12 +144,14 @@
                         <p>Elevii pot rezolva problemele și pot trimite soluțiile lor pentru evaluare de către profesor.
                             De asemenea, ei pot oferi comentarii și ponturi colegilor sau pot marca problemele cu un
                             număr de stele pentru a indica nivelul lor de dificultate sau calitate.</p>
+                            <p>Profesorii pot evalua soluțiile trimise de elevi și pot oferi feedback individual. 
+                                Ei vor oferi o nota de la 1 la 10 si un comentariu de feedback fiecarui elev per problema.</p>
                     </section>
 
                     <section id="accesibilitate-export-import">
-                        <h4>Accesibilitatea prin API și Export/Import de Probleme:</h4>
+                        <h4>Accesibilitatea prin API și Export de Probleme:</h4>
                         <p>Problemele pot fi accesate de alte aplicații web prin intermediul unui API, iar problemele
-                            pot fi exportate/importate în formate deschise, cum ar fi XML, JSON sau CSV.</p>
+                            pot fi exportate în formate deschise, cum ar fi JSON, prin butonul de "share".</p>
                     </section>
                 </section>
             </section>
@@ -170,6 +170,9 @@
                     Cele 3 componente facilitează întreținerea codului, permite un acces mai controlat în cadrul
                     fișierelor și este ușor de înțeles.
                 </p>
+                <img class="C1" src="img/C1.png" alt="altcv">
+                <img class="C2" src="img/C2.png" alt="altcv">
+                <img class="C3" src="img/C3.png" alt="altcv">
             </section>
             <section id="structura-fisiere">
                 <h3>2.2. Structura fișierelor</h3>
@@ -182,24 +185,17 @@
                 <img class="img1" src="img/img1.png" alt="altcv">
             </section>
             <section id="logare">
-                <h3>2.3. Cum funcționează procesul de logare - demo(important!)</h3>
-                <p> Important, în procesul demo s-a implementat o logare minimalistă, bazată pe 2 cuvinte cheie:
-                    admin și profesor. Pentru elev am folosit orice alt identificator, mai puțin "elev" și "profesor".
+                <h3>2.3. Cum funcționează procesul de logare </h3>
+                <p> Procesul de logare este unul simplu și eficient, utilizatorul trebuie să introducă datele de
+                    autentificare (username și parolă) în formularul de login.
+                    După ce acestea sunt completate, datele sunt trimise către server, unde se face verificarea în baza
+                    de date. În cazul în care datele sunt corecte,
+                    utilizatorul este redirecționat către pagina principală a aplicației, unde își poate accesa
+                    informațiile personale, poate rezolva probleme, sau poate
+                    accesa alte funcționalități ale aplicației.
                 </p>
-                <img class="img22" src="img/img22.png" alt="altcv">
-                <p> Pentru a diferenția utilizatorii și a crea conținuturi în pagină diferite pentru fiecare în parte,
-                    aceasta
-                    din nevoia de a nu face pagini diferite pentru fiecare, am abordat o modalitate de a stoca o
-                    variabilă
-                    <b>userType</b> în URL-ul paginii, pe care am trimis-o de la fiecare pagină către alta, și în
-                    fiecare pagină unde aveam
-                    de creat conținut diferit pentru fiecare categorie de utilizatori, am parsat acea valoare în string
-                    și apoi am
-                    modelat mai departe informația în funcții de JavaScript de display.
-                </p>
-                <img class="img23" src="img/img23.png" alt="altcv">
-                <p>Deci, în procesul de logare, a se completa la secțiunea "email" cu "profesor" - pentru categoria de profesor
-                , "admin" pentru categoria de administrator, si orice altceva pentru categoria de user obișnuit. </p>
+               
+                
             </section>
             <section id="interfata-utilizator">
                 <h3>2.4. Interfața utilizatorului</h3>
