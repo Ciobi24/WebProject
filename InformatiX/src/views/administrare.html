@@ -41,17 +41,6 @@
       }</script>
     
 </head>
-<script>
-    document.getElementById('logoutButton').addEventListener('click', function(event) {
-        event.preventDefault(); 
-
-        function deleteCookie(name) {
-            document.cookie = name + '=; Max-Age=-99999999;';  
-        }
-        deleteCookie('token');
-        window.location.href = '/';
-    });
-</script>
 <body>
     <header>
         <nav>

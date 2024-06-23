@@ -546,7 +546,7 @@ async function handleProfessorCommentSubmission(req, res) {
     const decoded = getJwt(cookieHeader);
     const role = decoded.role;
 
-    if (role !== 'profesor') {
+    if (role !== 'profesor' || role !== 'admin') {
         res.writeHead(401, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
         return;
@@ -594,7 +594,7 @@ async function handleProfessorGradeSubmission(req, res) {
     const decoded = getJwt(cookieHeader);
     const role = decoded.role;
 
-    if (role !== 'profesor') {
+    if (role !== 'profesor' || role !== 'admin') {
         res.writeHead(401, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
         return;

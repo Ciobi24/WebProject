@@ -74,8 +74,6 @@ function handleApiRoute(req, res) {
     }
     else if (req.url.startsWith('/api/deleteUser?id=') && req.method === 'DELETE') {
         deleteUserFromClassController(req, res);
-    }
-    else if (req.url.match(/^\/api\/probleme\/\d+$/) && req.method === 'GET') {
     } 
     else if (req.url.startsWith('/api/deleteUserAdmin?id=') && req.method === 'DELETE') {
         deleteUserByAdmin(req, res);
