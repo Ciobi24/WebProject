@@ -2,7 +2,7 @@ const { handleLogin } = require('./src/controllers/AuthController');
 const { handleRegister } = require('./src/controllers/RegisterController');
 const { handleResetPassword } = require('./src/controllers/ForgotPasswordController');
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
-const {deleteUserByAdmin, getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
+const {deleteUserByAdmin,newPasswordController ,getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
 const { fetchGrade,handleProfessorGradeSubmission, handleProfessorCommentSubmission, getSolutionByUserAndProblemEvaluate, getProblemsByTema, deleteComment, handleCommentSubmission, fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
     getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController, deleteUserFromClassController } = require('./src/controllers/ClassesController');
@@ -32,6 +32,10 @@ function handleApiRoute(req, res) {
     }
     else if (req.url === '/api/user') {
         getUserByIdHandler(req, res);
+    }
+    else if (req.url === '/api/newPassword')
+    {
+        newPasswordController(req, res);
     }
     else if (req.url === '/api/updateUser') {
         updateUserByCredentialsHandler(req, res);

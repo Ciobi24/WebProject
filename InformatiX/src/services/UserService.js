@@ -107,6 +107,37 @@ async function findUserByEmail(email) {
     }
 }
 
+async function newPassword(oldPassword, newPassword, idUser) {
+    try {
+        const connection = await dbInstance.connect();
+        const [rows] = await connection.query('SELECT password FROM users WHERE id = ?', [idUser]);
+        if (rows.length === 0) {
+            return false;
+        }
+
+        const hashedOldPassword = rows[0].password;
+
+        const match = await bcrypt.compare(oldPassword, hashedOldPassword);
+        if (!match) {
+            return false;
+        }
+
+        const newHashedPassword = await bcrypt.hash(newPassword, 10); 
+
+        const updateQuery = 'UPDATE users SET password = ? WHERE id = ?';
+        const [updateResult] = await connection.query(updateQuery, [newHashedPassword, idUser]);
+
+        if (updateResult.affectedRows === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error("Error interacting with DB: " + error);
+        throw error;
+    }
+}
+
 async function updatePassword(newPassword, email) {
     const connection = await dbInstance.connect();
     try {
@@ -189,5 +220,6 @@ module.exports = {
     getUserById,
     updateUserByCredentials,
     getAllUsers,
-    deleteUser
+    deleteUser,
+    newPassword
 };

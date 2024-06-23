@@ -50,18 +50,7 @@
     }
   </script>
   <script>
-    window.onload = function () {
-      var buttons = document.querySelectorAll('button:not(#submit1)');
-
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function () {
-          for (var j = 0; j < buttons.length; j++) {
-            buttons[j].classList.remove('active');
-          }
-          this.classList.add('active');
-        });
-      }
-    };
+    
   </script>
   <script src="../../public/js/checkAdmin.js"></script>
 
@@ -99,9 +88,9 @@
   </header>
   <div class="corp_profil">
     <div class="corp_stanga">
-      <button onclick="showDiv('infos_page')">My info</button>
-      <button onclick="showDiv('passwrd_page')">Change Password</button>
-      <button onclick="showDiv('switch_page')">Switch to teacher</button>
+      <button id="k2" onclick="showDiv('infos_page')">My info</button>
+      <button id="k2" onclick="showDiv('passwrd_page')">Change Password</button>
+      <button id="k2" onclick="showDiv('switch_page')">Switch to teacher</button>
       <div class="statistics">
         <div class="circle">
           <p id="nr3"></p>
@@ -173,7 +162,7 @@
               <label for="new-password">New Password</label>
               <input type="password" id="new-password" name="new-password" placeholder="Enter new password" required>
             </div>
-            <button id="submit3" type="submit">Change Password</button>
+            <button id="submit3" type="button" onclick="sendData()">Change Password</button>
           </form>
         </div>
       </div>
@@ -208,5 +197,32 @@
 
   <script src="../../public/js/my_profile.js"></script>
 </body>
+<script>
+  function sendData() {
+        const oldPassword = document.getElementById('old-password').value;
+        const newPassword = document.getElementById('new-password').value;
 
+        document.getElementById('new-password').value = "";
+        document.getElementById('old-password').value = "";
+
+        fetch('/api/newPassword', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            oldPassword: oldPassword,
+            newPassword: newPassword
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message);
+        })
+        .catch(error => {
+          alert(data.message);
+        });
+      }     
+
+</script>
 </html>
