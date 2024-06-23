@@ -109,6 +109,10 @@ const routes = {
         const urlString = req.url;
         const parameter = url.parse(urlString, true).query;
         const token = parameter.token;
+        if(!token){
+            res.writeHead(400, { 'Content-Type': 'text/html' });
+            return res.end("Bad request!");
+        }
 
         try {
             const email = await checkTokenExistence(token);
@@ -146,6 +150,7 @@ const server = http.createServer((req, res) => {
         routes['/'](req, res);
         return;
     }
+
     if (pathname === '/reset-password' && req.method == 'GET') {
         routes['/reset-password'](req, res);
         return;
@@ -214,7 +219,6 @@ const server = http.createServer((req, res) => {
             return;
         }
 
-
     if (routes[pathname]) {
         verifyToken(req, res, () => routes[pathname](req, res));
         return;
@@ -249,7 +253,7 @@ function serveStaticFile(pathname, res) {
             break;
         default:
             filename = '.' + pathname;
-            contentType = 'application/octet-stream'; // Default MIME type
+            contentType = 'application/octet-stream'; 
             break;
     }
 

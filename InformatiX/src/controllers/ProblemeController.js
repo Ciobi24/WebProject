@@ -237,7 +237,6 @@ async function setProblemaRating(req, res) {
 
             const connection = await dbInstance.connect();
 
-            // Check if a rating already exists
             const [existingRating] = await connection.query(`
                 SELECT * FROM rating WHERE id_problema = ? AND id_user = ?;
             `, [idProblema, idUser]);
@@ -315,6 +314,7 @@ async function addProblemaHandler(req, res) {
         }
     });
 }
+
 async function getProblemeByCategorie(req, res) {
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const categorie = urlParams.get('categorie');
@@ -515,18 +515,16 @@ async function handleCommentSubmission(req, res) {
 
             const connection = await dbInstance.connect();
 
-            // Verifică dacă există deja un comentariu pentru această problemă, temă și utilizator
             const [existingComment] = await connection.query(`
                 SELECT * FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
             `, [idProblema, idTema, idUser]);
 
             if (existingComment.length > 0) {
-                // Dacă există, actualizează comentariul existent
                 await connection.query(`
                     UPDATE solutii SET comentariu = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
                 `, [comentariu, idProblema, idTema, idUser]);
             } else {
-                // Dacă nu există, inserează un nou comentariu
+
                 await connection.query(`
                     INSERT INTO solutii (id_problema, id_tema, id_user, comentariu) VALUES (?, ?, ?, ?)
                 `, [idProblema, idTema, idUser, comentariu]);
@@ -563,13 +561,11 @@ async function handleProfessorCommentSubmission(req, res) {
 
             const connection = await dbInstance.connect();
 
-            // Verifică dacă există deja o soluție pentru această problemă, temă și utilizator
             const [existingSolution] = await connection.query(`
                 SELECT * FROM solutii WHERE id_problema = ? AND id_tema = ? AND id_user = ?
             `, [idProblema, idTema, idUser]);
 
             if (existingSolution.length > 0) {
-                // Dacă există, actualizează comentariul profesorului
                 await connection.query(`
                     UPDATE solutii SET comentariu_prof = ? WHERE id_problema = ? AND id_tema = ? AND id_user = ?
                 `, [comment, idProblema, idTema, idUser]);
