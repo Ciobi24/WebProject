@@ -11,6 +11,25 @@
     <link rel="stylesheet" href="../../../public/css/footer.css">
     <script src="../../../public/js/temele-mele.js"></script>
     <script src="../../../public/js/checkAdmin.js"></script>
+    <script>async function logout() {
+        try {
+          const response = await fetch('/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          if (response.ok) {
+            alert('Logout successful');
+            window.location.href = '/';
+          } else {
+            alert('Logout failed');
+          }
+        } catch (error) {
+          console.error('Error during logout:', error);
+        }
+      }</script>
+
 </head>
 
 <body>
@@ -27,7 +46,7 @@
                 <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
                 <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
                 <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
-                <li><a href="/" onclick="hideSidebar()">Logout</a></li>
+                <li><a href="/" onclick="logout()">Logout</a></li>
             </ul>
             <ul class="menu">
                 <li><a href="/home">Home</a></li>
@@ -35,7 +54,7 @@
                 <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
                 <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
                 <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
-                <li class="hideOnMobile"><a href="/">Logout</a></li>
+                <li class="hideOnMobile"><a href="/"onclick="logout()">Logout</a></li>
                 <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             height="26" viewBox="0 96 960 960" width="26">
                             <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
@@ -46,66 +65,65 @@
     <div class="container_princ">
         <h2>Temele Mele</h2>
         <div id="temele">
-
+        </div>
+        <div id="addTemaModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAddTemaModal()">&times;</span>
+                <h2>Adaugă Temă Nouă</h2>
+                <label for="clasaInput">Nume:</label>
+                <input type="text" id="clasaInput" placeholder="Tema Clasa a X-a B/XB/10B"><br><br>
+                <label for="deadlineInput">Deadline:</label>
+                <input type="date" id="deadlineInput"><br><br>
+                <button onclick="submitNewTema()">Submit</button>
+            </div>
+        </div>
+    
+        <div id="searchModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeSearchModal()">&times;</span>
+                <h2>Cauta Probleme</h2>
+                <input type="text" id="searchInput" placeholder="Cauta problema...">
+                <button onclick="searchProblem()">Adauga</button>
+            </div>
+        </div>
+    
+        <div id="userModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeUserModal()">&times;</span>
+                <h2>Select User</h2>
+                <ul>
+                    <li onclick="openUserSolution()">User 1</li>
+                    <li onclick="openUserSolution()">User 2</li>
+                    <li onclick="openUserSolution()">User 3</li>
+                    <li onclick="openUserSolution()">User 4</li>
+                    <li onclick="openUserSolution()">User 5</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div id="evaluateModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeEvaluateModal()">&times;</span>
+                <h2>Evalueaza Elevii</h2>
+                <ul>
+    
+                </ul>
+            </div>
+        </div>
+        <div id="problemModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeProblemModal()">&times;</span>
+                <h2>Rezolva Probleme</h2>
+                <ul>
+                    <li onclick="openProblemSolution('Problema 1', 2, 1)">Problema 1</li>
+                    <li onclick="openProblemSolution('Problema 2', 2, 2)">Problema 2</li>
+                    <li onclick="openProblemSolution('Problema 3', 2, 3)">Problema 3</li>
+                    <li onclick="openProblemSolution('Problema 4', 2, 4)">Problema 4</li>
+                </ul>
+            </div>
         </div>
     </div>
-
-    <div id="addTemaModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddTemaModal()">&times;</span>
-            <h2>Adaugă Temă Nouă</h2>
-            <label for="clasaInput">Nume:</label>
-            <input type="text" id="clasaInput" placeholder="Tema Clasa a X-a B/XB/10B"><br><br>
-            <label for="deadlineInput">Deadline:</label>
-            <input type="date" id="deadlineInput"><br><br>
-            <button onclick="submitNewTema()">Submit</button>
-        </div>
-    </div>
-
-    <div id="searchModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeSearchModal()">&times;</span>
-            <h2>Cauta Probleme</h2>
-            <input type="text" id="searchInput" placeholder="Cauta problema...">
-            <button onclick="searchProblem()">Adauga</button>
-        </div>
-    </div>
-
-    <div id="userModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeUserModal()">&times;</span>
-            <h2>Select User</h2>
-            <ul>
-                <li onclick="openUserSolution()">User 1</li>
-                <li onclick="openUserSolution()">User 2</li>
-                <li onclick="openUserSolution()">User 3</li>
-                <li onclick="openUserSolution()">User 4</li>
-                <li onclick="openUserSolution()">User 5</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="evaluateModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEvaluateModal()">&times;</span>
-            <h2>Evalueaza Elevii</h2>
-            <ul>
-
-            </ul>
-        </div>
-    </div>
-    <div id="problemModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeProblemModal()">&times;</span>
-            <h2>Rezolva Probleme</h2>
-            <ul>
-                <li onclick="openProblemSolution('Problema 1', 2, 1)">Problema 1</li>
-                <li onclick="openProblemSolution('Problema 2', 2, 2)">Problema 2</li>
-                <li onclick="openProblemSolution('Problema 3', 2, 3)">Problema 3</li>
-                <li onclick="openProblemSolution('Problema 4', 2, 4)">Problema 4</li>
-            </ul>
-        </div>
-    </div>
+    
     <footer>
         <p>Contact: informatix@example.com Toate drepturile sunt rezervate.</p>
     </footer>
