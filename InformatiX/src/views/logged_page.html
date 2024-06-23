@@ -90,14 +90,11 @@
           <div class="avatar">
             <img src="../../public/images/avatar.png" alt="avatar">
           </div>
-          <p>Bine ai venit User_Username</p>
+          <p id="helloUser"></p>
         </div>
-        <div class="go-to-profile"> <a href="my_profile.html"> Profilul meu</a> </div>
+        <div class="go-to-profile"> <a href="/home/profil"> Profilul meu</a> </div>
       </div>
-      <div class="anunturi">
-        <p class="text-anunt1">ANUNȚURI</p>
-        <p class="text-anunt2"> Niciun anunț disponibil din partea echipei. <br>Fii la curent cu tot ce se postează!</p>
-      </div>
+
       <div class="sectiune-clasa">
         <img src="../../public/images/team.gif" alt="team">
         <div class="elem2">
@@ -120,7 +117,7 @@
       </div>
       <div class="altele">
         <p><b>Pentru contact admin, raportare erori de funcționare a site-ului, sau alte nelămuriri sau probleme, vă rugăm
-            să le raportați folosind <a href="">formularul de contact</a>. </b></p>
+            să le raportați la adresa <a>informatix.contact@gmail.com</a>. </b></p>
         <img src="../../public/images/bug.jpeg" alt="bug">
       </div>
     </div>
@@ -187,48 +184,55 @@
         <p class="text-domenii1">Categorii de probleme</p>
         <table class="tabel1">
           <tr>
-            <th><a>Clasa 9</a></th>
+            <th><a href="/home/probleme-clasa-9">Clasa 9</a></th>
           </tr>
           <tr>
-            <td><a>Clasa 10</a></td>
+            <td><a href="/home/probleme-clasa-10">Clasa 10</a></td>
           </tr>
           <tr>
-            <td><a>Clasa 11</a></td>
-          </tr>
-        </table>
-  
-        <table class="tabel2">
-          <tr>
-            <th><a>Ușoare</a></th>
-          </tr>
-          <tr>
-            <td><a>Medii</a></td>
-          </tr>
-          <tr>
-            <td><a>Grele</a></td>
+            <td><a href="/home/probleme-clasa-11">Clasa 11</a></td>
           </tr>
         </table>
   
         <table class="tabel3">
           <tr>
-            <th><a>Backtracking</a></th>
+            <th><a href="/home/probleme-clasa-9/probleme-elementare">Probleme elementare</a></th>
           </tr>
           <tr>
-            <td><a>Divizibilitate</a></td>
+            <td><a href="/home/probleme-clasa-9/elemente-ale-limbajului">Elemente ale limbajului</a></td>
           </tr>
           <tr>
-            <td><a>Secvențe</a></td>
+            <td><a href="/home/probleme-clasa-9/tablouri-unidimensionale">Tablouri unidimensionale</a></td>
           </tr>
           <tr>
-            <td><a>Matrici pătratice</a></td>
+            <td><a href="/home/probleme-clasa-9/tablouri-bidimensionale">Tablouri bidimensionale</a></td>
           </tr>
           <tr>
-            <td><a>Sortări</a></td>
+            <td><a href="/home/probleme-clasa-10/recursivitate">Recursivitate</a></td>
           </tr>
           <tr>
-            <td><a href="">mai multe</a></td>
+            <td><a href="/home/probleme-clasa-10/siruri-de-caractere">Siruri de caractere</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home/probleme-clasa-11/teoria-grafurilor">Teoria grafurilor</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home/probleme-clasa-11/backtracking">Backtracking</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home/probleme">Mai multe aici</a></td>
           </tr>
         </table>
+        <style>
+          table a {
+              text-decoration: none;
+              color: inherit; 
+          }
+          table a:hover{
+            text-decoration:underline;
+            color: rgb(152, 135, 135);
+          }
+      </style>
       </div>
     </div>
   </div>
@@ -252,5 +256,5 @@
     addAdminButton();
   </script>
 </body>
-
+<script src="../../public/js/logged_page.js"></script>
 </html>

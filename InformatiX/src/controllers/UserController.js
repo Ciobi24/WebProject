@@ -95,6 +95,7 @@ async function getAllUsersHandler(req, res) {
 
         req.on('end', async () => {
 
+            console.log(body);
             const user = await updateUserByCredentials(decoded, JSON.parse(body));
 
             if (user) {
