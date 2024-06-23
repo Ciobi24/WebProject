@@ -66,6 +66,16 @@ class Problema {
             row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.utilizatori_incercat, row.utilizatori_rezolvat, row.nr_rating
         ));
     }
+
+    static async getVerified() {
+        const connection = await dbInstance.connect();
+        const query = 'SELECT * FROM probleme WHERE verified = true ORDER BY id DESC LIMIT 4';
+        const [results] = await connection.query(query);
+        return results.map(row => new Problema(
+            row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.utilizatori_incercat, row.utilizatori_rezolvat, row.nr_rating
+        ));
+    }
+    
 }
 
 module.exports = Problema;

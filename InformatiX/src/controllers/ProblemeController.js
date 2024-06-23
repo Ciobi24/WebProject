@@ -1,7 +1,7 @@
 const ProblemeService = require('../services/ProblemeService');
 const { getJwt } = require("../services/JwtService");
 const url = require('url');
-const dbInstance = require('../models/db-config'); // Import the dbInstance
+const dbInstance = require('../models/db-config'); 
 const { respingereProblemaService, aprobareProblemaService } = require('../services/AdministratoriService');
 
 
@@ -164,20 +164,18 @@ async function submitSolution(req, res) {
 
             const connection = await dbInstance.connect();
 
-            // Check if solution exists
             const [existingSolution] = await connection.execute(`
                 SELECT * FROM solutii WHERE id_problema = ? AND id_user = ? AND id_tema = ?
             `, [idProblema, idUser, idTema]);
 
             if (existingSolution.length > 0) {
-                // Update the existing solution
+
                 await connection.execute(`
                     UPDATE solutii SET text_solutie = ? WHERE id_problema = ? AND id_user = ? AND id_tema = ?
                 `, [textSolutie, idProblema, idUser, idTema]);
             } else {
                 await connection.execute(`UPDATE probleme set utilizatori_incercat = utilizatori_incercat + 1 where id = ?`, [idProblema]);
                 await connection.execute(`UPDATE users set incercari = incercari + 1 where id = ?`, [idUser]);
-                // Insert a new solution
                 await connection.execute(`
                     INSERT INTO solutii (id_problema, id_user, id_tema, text_solutie) VALUES (?, ?, ?, ?)
                 `, [idProblema, idUser, idTema, textSolutie]);
@@ -275,7 +273,7 @@ async function setProblemaRating(req, res) {
                 newRating = ((currentRating * currentNrRating) + rating) / (currentNrRating + 1);
             }
             console.log('newRating', newRating);
-            // Update `probleme` table with new rating and number of ratings
+
             await connection.query(`
                 UPDATE probleme SET rating = ?, nr_rating = ? WHERE id = ?;
             `, [newRating, existingRating.length > 0 ? currentNrRating : currentNrRating + 1, idProblema]);
@@ -377,6 +375,32 @@ async function getProblemsUnverified(req, res) {
     }
     try {
         const probleme = await ProblemeService.getProblemsUnverifiedService();
+
+        if (probleme) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(probleme));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('Not found!');
+        }
+    } catch (error) {
+        console.error(error);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Internal Server Error');
+    }
+}
+
+async function getProblemsVerified(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+    if (role !== 'admin' && role !== 'profesor' && role != 'elev') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+    try {
+        const probleme = await ProblemeService.getProblemsVerifiedService();
 
         if (probleme) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -628,5 +652,5 @@ async function fetchGrade(req, res) {
 module.exports = {fetchGrade,handleProfessorGradeSubmission,handleProfessorCommentSubmission,getProblemsByTema,getSolutionByUserAndProblemEvaluate,
     deleteComment, setProblemaRating, getDeadlineByTema, submitSolution, getSolutionByUserAndProblem,
     getProblemaById, addProblemaHandler, getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified,
-    aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission
+    aprobareProblema, respingereProblema, fetchCommentsHandler, handleCommentSubmission, getProblemsVerified
 };

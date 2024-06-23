@@ -227,7 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const rejectButton = document.createElement('button');
             rejectButton.textContent = 'Respinge';
 
-            // Set common styles for both buttons
             const buttonStyle = `
                 background-color: #4CAF50;
                 color: white;

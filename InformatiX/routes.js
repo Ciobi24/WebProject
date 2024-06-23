@@ -4,7 +4,7 @@ const { handleResetPassword } = require('./src/controllers/ForgotPasswordControl
 const { handleUpdatePassword } = require('./src/controllers/ForgotPasswordController');
 const {deleteUserByAdmin,newPasswordController ,getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler } = require('./src/controllers/UserController');
 const { fetchGrade,handleProfessorGradeSubmission, handleProfessorCommentSubmission, getSolutionByUserAndProblemEvaluate, getProblemsByTema, deleteComment, handleCommentSubmission, fetchCommentsHandler, getSolutionByUserAndProblem, submitSolution, getDeadlineByTema, setProblemaRating, getProblemaById, addProblemaHandler,
-    getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
+    getProblemeByCategorie, getProblemeByClasa, getProblemaStats, getProblemsUnverified, getProblemsVerified,aprobareProblema, respingereProblema } = require('./src/controllers/ProblemeController');
 const { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController, deleteClassByIdController, deleteUserFromClassController } = require('./src/controllers/ClassesController');
 const { createTema, getTeme, getProblemsByIdTema, addProblemToTema } = require('./src/controllers/TemeController');
 
@@ -50,6 +50,9 @@ function handleApiRoute(req, res) {
     }
     else if (req.url.startsWith('/api/getAllProblemsUnverified') && req.method === 'GET') {
         getProblemsUnverified(req, res);
+    }
+    else if (req.url.startsWith('/api/getAllProblems') && req.method === 'GET') {
+        getProblemsVerified(req, res);
     }
     else if (req.url.startsWith('/api/problemaStats') && req.method === 'GET') {
         getProblemaStats(req, res);

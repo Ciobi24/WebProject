@@ -18,6 +18,10 @@ class ProblemeService {
     {
         return await Problema.getUnverified();
     }
+    static async getProblemsVerifiedService()
+    {
+        return await Problema.getVerified();
+    }
 }
 
 

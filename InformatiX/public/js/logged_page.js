@@ -16,5 +16,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
+ 
+
     sendRequest();
+
 });
+
+    async function fetchUserById(userId) {
+        try {
+            const response = await fetch(`/api/user?id=${userId}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const user = await response.json();
+            return user.firstname + ' ' + user.lastname; 
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            return 'Unknown Author';
+        }
+    }
