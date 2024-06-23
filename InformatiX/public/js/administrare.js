@@ -149,18 +149,23 @@ document.addEventListener('DOMContentLoaded', function () {
                         row.appendChild(cell);
                     });
 
-                    const deleteCell = document.createElement('td');
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Șterge';
-                    deleteButton.style.backgroundColor = '#ff6666';
-                    deleteButton.style.color = 'white';
-                    deleteButton.style.borderRadius = '5px';
-                    deleteButton.style.border = 'none';
-                    deleteButton.style.padding = '5px 5px';
-                    deleteButton.style.cursor = 'pointer';
-                    deleteButton.addEventListener('click', () => deleteUser(user.id));
-                    deleteCell.appendChild(deleteButton);
-                    row.appendChild(deleteCell);
+                    if (user.role !== 'admin') {
+                        const deleteCell = document.createElement('td');
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Șterge';
+                        deleteButton.style.backgroundColor = '#ff6666';
+                        deleteButton.style.color = 'white';
+                        deleteButton.style.borderRadius = '5px';
+                        deleteButton.style.border = 'none';
+                        deleteButton.style.padding = '5px 5px';
+                        deleteButton.style.cursor = 'pointer';
+                        deleteButton.addEventListener('click', () => deleteUser(user.id));
+                        deleteCell.appendChild(deleteButton);
+                        row.appendChild(deleteCell);
+                    } else {
+                        const emptyCell = document.createElement('td');
+                        row.appendChild(emptyCell);
+                    }
 
                     userTable.appendChild(row);
                 });
@@ -169,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error fetching users:', error);
             });
     }
+
 
 
     function deleteUser(userId) {
