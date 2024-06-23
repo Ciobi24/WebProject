@@ -76,39 +76,30 @@ async function updateUserByCredentialsHandler(req, res) {
     }
 }
 
-async function getAllUsersHandler(req, res) {
+async function getAllUsersHandler(req, res)
+{
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+
+    if (!decoded || (decoded.role !== 'admin')) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+
     try {
-        const cookieHeader = req.headers.cookie;
-        const decoded = getJwt(cookieHeader);
 
-        if (!decoded || (decoded.role !== 'admin')) {
-            res.writeHead(401, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
-            return;
+        const useri = await getAllUsers();
+        if (useri) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(useri));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Content not found!' }));
         }
-
-
-        let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString();
-        });
-
-        req.on('end', async () => {
-
-            const user = await updateUserByCredentials(decoded, JSON.parse(body));
-
-            if (user) {
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, message: 'User updated successfully', user }));
-            } else {
-                res.writeHead(404, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: false, message: 'User not found' }));
-            }
-        });
-
     } catch (error) {
         res.writeHead(401, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, message: 'Unauthorized', error: error.message }));
+        res.end(JSON.stringify({ message: 'Unauthorized', error: error.message }));
     }
 }
 
