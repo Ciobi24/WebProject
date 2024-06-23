@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../public/css/footer.css">
     <link rel="stylesheet" href="../../public/css/administrare.css">
     <link rel="icon" type="image/png" href="../../public/favicons/icon.png">
-    <title>In&lt;form&gt;atiX</title>
+    <title>Administrare</title>
     <script>
         function showSidebar() {
             const sidebar = document.querySelector('.sidebar')
@@ -20,9 +20,19 @@
             sidebar.style.display = 'none'
         }
     </script>
-     <!-- <script src="../../public/js/sendArgument.js"></script> -->
+    <script src="../../public/js/administrare.js"></script>
 </head>
+<script>
+    document.getElementById('logoutButton').addEventListener('click', function(event) {
+        event.preventDefault(); 
 
+        function deleteCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';  
+        }
+        deleteCookie('token');
+        window.location.href = '/';
+    });
+</script>
 <body>
     <header>
         <nav>
@@ -37,7 +47,8 @@
                 <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
                 <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
                 <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
-                <li><a href="/" onclick="hideSidebar()">Logout</a></li>
+                <li class="hideOnMobile"><a href="/" id="logoutButton">Logout</a></li>
+
             </ul>
             <ul class="menu">
                 <li><a href="/home">Home</a></li>
@@ -45,7 +56,7 @@
                 <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
                 <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
                 <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
-                <li class="hideOnMobile"><a href="/">Logout</a></li>
+                <li class="hideOnMobile"><a href="/" id="logoutButton">Logout</a></li>
                 <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             height="26" viewBox="0 96 960 960" width="26">
                             <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
@@ -57,86 +68,24 @@
             <div class="dreptunghi_dreapta">
                 <p class="probleme_noi">Cereri aprobare probleme</p>
                 <div class="probleme">
-                    <div class="problema">
-                        <h3 class="titlu_prb">Titlu problema</h3>
-                        <p class="descriere_prb">Descriere problema
-                        </p>
-                        <div class="last_line">
-                            <div class="tags">
-                                <p class="tag">Tag1</p>
-                                <p class="tag">Tag2</p>
-                                <p class="tag">Tag3</p>
-                            </div>
-                            <p class="autor">Autor</p>
-                            <div class="butoane">
-                                <button class="aproba-btn">Aproba</button>
-                                <button class="respinge-btn">Respinge</button>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="problema">
-                        <h3 class="titlu_prb">Titlu problema</h3>
-                        <p class="descriere_prb">Descriere problema</p>
-                        <div class="last_line">
-                            <div class="tags">
-                                <p class="tag">Tag1</p>
-                                <p class="tag">Tag2</p>
-                                <p class="tag">Tag3</p>
-                            </div>
-                            <p class="autor">Autor</p>
-                        </div>
-                        <div class="butoane">
-                            <button class="aproba-btn">Aproba</button>
-                            <button class="respinge-btn">Respinge</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
             <div class="formular">
-                <p class="mesaje_noi">Mesaje noi de la utilizatori</p>
+                <p class="mesaje_noi">Aplicări profesor</p>
                 <div class="mesaje">
-                    <div class="mesaj">
-                        <h3 class="titlu_mesaj">Subiect mesaj</h3>
-                        <p class="continut_mesaj">Continutul mesajului...</p>
-                        <div class="informatii_mesaj">
-                            <p class="expeditor_mesaj">Expeditor: Numele Utilizatorului</p>
-                            <p class="data_mesaj">Data: 15 aprilie 2024</p>
-                        </div>
-                        <div class="butoane">
-                            <button class="raspunde-btn">Răspunde</button>
-                            <button class="sterge-btn">Șterge</button>
-                        </div>
-                    </div>
-                    <div class="mesaj">
-                        <h3 class="titlu_mesaj">Subiect mesaj</h3>
-                        <p class="continut_mesaj">Continutul mesajului...</p>
-                        <div class="informatii_mesaj">
-                            <p class="expeditor_mesaj">Expeditor: Numele Utilizatorului</p>
-                            <p class="data_mesaj">Data: 14 aprilie 2024</p>
-                        </div>
-                        <div class="butoane">
-                            <button class="raspunde-btn">Răspunde</button>
-                            <button class="sterge-btn">Șterge</button>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <div class="admin-conturi">
                 <h2 class="titlu-sectiune">Administrare conturi</h2>
-                <div class="butoane-admin">
-                    <button class="blocare-btn">Blocare cont</button>
-                    <button class="sterge-c-btn">Ștergere cont</button>
-                    <button class="modificare-btn">Modificare date</button>
+                <div class="user-table">
+                    
                 </div>
-                <input type="search" placeholder="Search user...">
             </div>
         </div>
     <footer>
-        <p>@ Contact</p>
+        <p>Contact: informatix@example.com Toate drepturile sunt rezervate.</p>
     </footer>
 </body>
 

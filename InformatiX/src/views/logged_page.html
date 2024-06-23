@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>In&lt;form>atiX</title>
+  <title>Home</title>
   <link rel="icon" type="image/png" href="../../public/favicons/icon.png">
   <link rel="stylesheet" href="./public/css/header1.css">
   <link rel="stylesheet" href="../../public/css/footer.css">
@@ -31,40 +31,59 @@
     function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
     }
+    async function logout() {
+      try {
+        const response = await fetch('/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response.ok) {
+          alert('Logout successful');
+          window.location.href = '/';
+        } else {
+          alert('Logout failed');
+        }
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    }
   </script>
   <script src="../../public/js/checkAdmin.js"></script>
+  <script>"../controllers/AuthController"</script>
 </head>
 
 <body>
   <header>
     <nav>
-        <ul class="sidebar">
-            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
-                        viewBox="0 96 960 960" width="26">
-                        <path
-                            d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
-                    </svg></a></li>
-            <li><a href="/home" onclick=hideSidebar()>Home</a></li>
-            <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
-            <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
-            <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
-            <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
-            <li><a href="/" onclick="hideSidebar()">Logout</a></li>
-        </ul>
-        <ul class="menu">
-            <li><a href="/home">Home</a></li>
-            <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
-            <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
-            <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
-            <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
-            <li class="hideOnMobile"><a href="/">Logout</a></li>
-            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                        height="26" viewBox="0 96 960 960" width="26">
-                        <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-                    </svg></a></li>
-        </ul>
+      <ul class="sidebar">
+        <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960"
+              width="26">
+              <path
+                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+            </svg></a></li>
+        <li><a href="/home" onclick=hideSidebar()>Home</a></li>
+        <li><a href="/home/probleme" onclick=hideSidebar()>Probleme</a></li>
+        <li><a href="/home/clasele-mele" onclick="hideSidebar()">Clasele mele</a></li>
+        <li><a href="/home/profil" onclick="hideSidebar()">Profil</a></li>
+        <li><a href="/home/administrare" onclick="hideSidebar()">Administrare</a></li>
+        <li><a href="/" onclick="logout()">Logout</a></li>
+      </ul>
+      <ul class="menu">
+        <li><a href="/home">Home</a></li>
+        <li class="hideOnMobile"><a href="/home/probleme">Probleme</a></li>
+        <li class="hideOnMobile"><a href="/home/clasele-mele">Clasele mele</a></li>
+        <li class="hideOnMobile"><a href="/home/profil">Profil</a></li>
+        <li class="hideOnMobile"><a href="/home/administrare">Administrare</a></li>
+        <li class="hideOnMobile"><a href="/" onclick="logout()">Logout</a></li>
+        <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+              viewBox="0 96 960 960" width="26">
+              <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+            </svg></a></li>
+      </ul>
     </nav>
-</header>
+  </header>
   <div class="container-mare">
     <div class="dreptunghi_stanga">
       <div class="profile">
@@ -72,14 +91,11 @@
           <div class="avatar">
             <img src="../../public/images/avatar.png" alt="avatar">
           </div>
-          <p>Bine ai venit User_Username</p>
+          <p id="helloUser"></p>
         </div>
-        <div class="go-to-profile"> <a href="my_profile.html"> Profilul meu</a> </div>
+        <div class="go-to-profile"> <a href="/home/profil"> Profilul meu</a> </div>
       </div>
-      <div class="anunturi">
-        <p class="text-anunt1">ANUNȚURI</p>
-        <p class="text-anunt2"> Niciun anunț disponibil din partea echipei. <br>Fii la curent cu tot ce se postează!</p>
-      </div>
+
       <div class="sectiune-clasa">
         <img src="../../public/images/team.gif" alt="team">
         <div class="elem2">
@@ -87,8 +103,10 @@
           <p>Hai să rezolvi probleme alături de noi!</p>
           <p>Trimite soluțiile tale profesorului asignat clasei, și ai ocazia să concurezi cu ceilalți la cât mai multe
             probleme rezolvate!</p>
+          <p>Dacă ești deja profesor, creează-ți propria clasă și evaluează-ți elevii după meritele lor.
+          </p>
         </div>
-        <a class="join-a-class" href="">Alătură-te unei clase</a>
+        <a class="join-a-class" href="/home/clasele-mele">Clasele tale</a>
       </div>
       <div class="informations">
         <p class="ce-gasesc-aici">Ce găsesc aici?</p>
@@ -101,13 +119,14 @@
           și algoritmica problemelor. Trebuie doar să vrei, să lucrezi, și să nu te descurajezi!!</p>
       </div>
       <div class="altele">
-        <p><b>Pentru contact admin, raportare erori de funcționare a site-ului, sau alte nelămuriri sau probleme, vă rugăm
-            să le raportați folosind <a href="">formularul de contact</a>. </b></p>
+        <p><b>Pentru contact admin, raportare erori de funcționare a site-ului, sau alte nelămuriri sau probleme, vă
+            rugăm
+            să le raportați la adresa <a>informatix.contact@gmail.com</a>. </b></p>
         <img src="../../public/images/bug.jpeg" alt="bug">
       </div>
     </div>
-    
-    
+
+
     <div class="dreptunghi_dreapta">
       <div class="probleme">
         <p class="probleme_noi">Probleme noi</p>
@@ -115,7 +134,7 @@
           <h3 class="titlu_prb">Titlu problema</h3>
           <p class="descriere_prb">Descriere problema Descriere problemaDescriere problemaDescriere
             problemaDescriere problemaDescriere problemaDescriere problemaDescriere problemaDescriere
-           
+
           </p>
           <div class="last_line">
             <div class="tags">
@@ -165,62 +184,136 @@
           </div>
         </div>
       </div>
+      <script>
+        function fetchProblems() {
+          fetch('/api/getAllProblems')
+            .then(response => response.json())
+            .then(data => {
+              const container = document.querySelector('.dreptunghi_dreapta .probleme');
+
+              const problemElements = container.querySelectorAll('.problema');
+              problemElements.forEach(element => element.remove());
+
+              data.forEach(async problem => {
+                const problemDiv = document.createElement('div');
+                problemDiv.classList.add('problema');
+
+                const titleElement = document.createElement('h3');
+                titleElement.classList.add('titlu_prb');
+                titleElement.textContent = "Nume problemă: " + problem.nume_problema;
+                problemDiv.appendChild(titleElement);
+
+                const descriptionElement = document.createElement('p');
+                descriptionElement.classList.add('id');
+                descriptionElement.textContent = "Id: #" + problem.id;
+                problemDiv.appendChild(descriptionElement);
+
+                const lastLineDiv = document.createElement('div');
+                lastLineDiv.classList.add('last_line');
+                problemDiv.appendChild(lastLineDiv);
+
+                const tagsDiv = document.createElement('div');
+                tagsDiv.classList.add('tags');
+                lastLineDiv.appendChild(tagsDiv);
+
+
+                if (problem.tags && problem.tags.length) {
+                  problem.tags.forEach(tag => {
+                    const tagElement = document.createElement('p');
+                    tagElement.classList.add('tag');
+                    tagElement.textContent = tag;
+                    tagsDiv.appendChild(tagElement);
+                  });
+                }
+
+                const categorie = document.createElement('p');
+                categorie.classList.add('categorie');
+                categorie.textContent = "Categorie: " + problem.categorie;
+                lastLineDiv.appendChild(categorie);
+
+                const clasa = document.createElement('p');
+                clasa.classList.add('clasa');
+                clasa.textContent = "Clasă: " + problem.clasa;
+                lastLineDiv.appendChild(clasa);
+
+                const authorElement = document.createElement('p');
+                authorElement.classList.add('autor');
+                authorElement.textContent = "Autor: " + await fetchUserById(problem.creatorId);
+                lastLineDiv.appendChild(authorElement);
+
+                container.appendChild(problemDiv);
+              });
+            })
+            .catch(error => {
+              console.error('Error fetching problems:', error);
+            });
+        }
+        fetchProblems();  
+      </script>
       <div class="domenii">
         <p class="text-domenii1">Categorii de probleme</p>
         <table class="tabel1">
           <tr>
-            <th><a>Clasa 9</a></th>
+            <th><a href="/home/probleme-clasa-9">Clasa 9</a></th>
           </tr>
           <tr>
-            <td><a>Clasa 10</a></td>
+            <td><a href="/home/probleme-clasa-10">Clasa 10</a></td>
           </tr>
           <tr>
-            <td><a>Clasa 11</a></td>
+            <td><a href="/home/probleme-clasa-11">Clasa 11</a></td>
           </tr>
         </table>
-  
-        <table class="tabel2">
-          <tr>
-            <th><a>Ușoare</a></th>
-          </tr>
-          <tr>
-            <td><a>Medii</a></td>
-          </tr>
-          <tr>
-            <td><a>Grele</a></td>
-          </tr>
-        </table>
-  
+
         <table class="tabel3">
           <tr>
-            <th><a>Backtracking</a></th>
+            <th><a href="/home/probleme-clasa-9/probleme-elementare">Probleme elementare</a></th>
           </tr>
           <tr>
-            <td><a>Divizibilitate</a></td>
+            <td><a href="/home/probleme-clasa-9/elemente-ale-limbajului">Elemente ale limbajului</a></td>
           </tr>
           <tr>
-            <td><a>Secvențe</a></td>
+            <td><a href="/home/probleme-clasa-9/tablouri-unidimensionale">Tablouri unidimensionale</a></td>
           </tr>
           <tr>
-            <td><a>Matrici pătratice</a></td>
+            <td><a href="/home/probleme-clasa-9/tablouri-bidimensionale">Tablouri bidimensionale</a></td>
           </tr>
           <tr>
-            <td><a>Sortări</a></td>
+            <td><a href="/home/probleme-clasa-10/recursivitate">Recursivitate</a></td>
           </tr>
           <tr>
-            <td><a href="">mai multe</a></td>
+            <td><a href="/home/probleme-clasa-10/siruri-de-caractere">Siruri de caractere</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home/probleme-clasa-11/teoria-grafurilor">Teoria grafurilor</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home/probleme-clasa-11/backtracking">Backtracking</a></td>
+          </tr>
+          <tr>
+            <td><a href="/home/probleme">Mai multe aici</a></td>
           </tr>
         </table>
+        <style>
+          table a {
+            text-decoration: none;
+            color: inherit;
+          }
+
+          table a:hover {
+            text-decoration: underline;
+            color: rgb(152, 135, 135);
+          }
+        </style>
       </div>
     </div>
   </div>
   <footer>
-    <p>@ Contact</p>
+    <p>Contact: informatix@example.com Toate drepturile sunt rezervate.</p>
   </footer>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const userType = urlParams.get('userType');
-  
+
     function addAdminButton() {
       if (userType === 'admin') {
         const menuUl = document.querySelector('.menu');
@@ -230,9 +323,10 @@
         menuUl.insertBefore(adminLi, secondMenuItem);
       }
     }
-  
+
     addAdminButton();
   </script>
 </body>
+<script src="../../public/js/logged_page.js"></script>
 
 </html>

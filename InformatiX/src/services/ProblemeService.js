@@ -11,6 +11,18 @@ class ProblemeService {
     static async getProblemeByClasa(clasa) {
         return await Problema.getAllByClasa(clasa);
     }
+    static async getProblemaById(id){
+        return await Problema.getById(id);
+    }
+    static async getProblemsUnverifiedService(role)
+    {
+        return await Problema.getUnverified();
+    }
+    static async getProblemsVerifiedService()
+    {
+        return await Problema.getVerified();
+    }
 }
+
 
 module.exports = ProblemeService;

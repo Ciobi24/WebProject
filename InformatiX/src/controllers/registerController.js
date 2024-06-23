@@ -1,5 +1,11 @@
 const { findUserByEmailOrUsername, insertUser } = require('../services/UserService');
+const bcrypt = require('bcrypt');
 
+// Functia de validare a emailului
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 async function handleRegister(req, res) {
     let body = '';
@@ -12,6 +18,12 @@ async function handleRegister(req, res) {
         const username = formData.username;
         const email = formData.email;
         const password = formData.password;
+
+        // Validare email
+        if (!isValidEmail(email)) {
+            res.writeHead(400, { 'Content-Type': 'text/plain' });
+            return res.end('Email invalid');
+        }
 
         try {
             const existingUsers = await findUserByEmailOrUsername(email, username);
@@ -29,7 +41,10 @@ async function handleRegister(req, res) {
                     res.end(`Username-ul ${username} este deja utilizat!`);
                 }
             } else {
-                await insertUser(username, email, password, 'elev');
+                const iteratii = 10;
+                const hashedPassword = await bcrypt.hash(password, iteratii);
+
+                await insertUser(username, email, hashedPassword, 'elev');
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true, message: 'Contul a fost creat cu succes' }));
             }

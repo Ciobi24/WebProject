@@ -1,4 +1,4 @@
-const { getUserById, updateUserByCredentials } = require('../services/UserService');
+const { getUserById, updateUserByCredentials, getAllUsers, deleteUser, newPassword} = require('../services/UserService');
 const { getJwt } = require("../services/JwtService");
 const querystring = require('querystring');
 
@@ -8,7 +8,6 @@ async function getUserByIdHandler(req, res) {
     const decoded = getJwt(cookieHeader);
     try {
         const userId = decoded.id;
-
         const user = await getUserById(userId);
         if (user) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -52,7 +51,7 @@ async function updateUserByCredentialsHandler(req, res) {
     try {
         const cookieHeader = req.headers.cookie;
         const decoded = getJwt(cookieHeader);
-        
+
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -77,4 +76,113 @@ async function updateUserByCredentialsHandler(req, res) {
     }
 }
 
-module.exports = { getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler };
+async function getAllUsersHandler(req, res)
+{
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+
+    if (!decoded || (decoded.role !== 'admin')) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+
+    try {
+
+        const useri = await getAllUsers();
+        if (useri) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(useri));
+        } else {
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Content not found!' }));
+        }
+    } catch (error) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: error.message }));
+    }
+}
+
+async function deleteUserByAdmin(req, res) {
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idUser = queryObject.get('id');
+
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+    if (role !== 'admin') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+
+    try {
+        const result = await deleteUser(idUser);
+
+        if (result) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'User deleted successfully.' }));
+        } else {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'User does not have permission or user to delete not found!' }));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Error deleting class.' }));
+    }
+}
+
+
+async function newPasswordController(req, res) {
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    console.log(decoded.role);
+
+    if (!decoded || !(decoded.role !== 'admin' || decoded.role !== 'elev' || decoded.role !== 'profesor')) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+    
+    if (!decoded.id || Number.isNaN(decoded.id)) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission!' }));
+        return;
+    }
+    try {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+
+        req.on('end', async () => {
+            const formData = JSON.parse(body);
+            const oldPass = formData.oldPassword;
+            const newPass = formData.newPassword;
+
+            if (!oldPass || !newPass) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ message: 'Bad Request', error: 'Câmpuri invalide!' }));
+                return;
+            }
+
+            const result = await newPassword(oldPass, newPass, decoded.id);
+            if (result) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, message: 'Parolă schimbată cu succes!' }));
+            } else {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'Parola veche introdusă nu este validă!' }));
+            }
+        });
+    } catch (error) {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: error.message }));
+    }
+}
+
+module.exports = {
+    getUserByIdHandler, updateUserByCredentialsHandler, getUserByIdnotCookieHandler, getAllUsersHandler,
+    deleteUserByAdmin, newPasswordController
+};

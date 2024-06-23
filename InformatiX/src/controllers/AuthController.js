@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { findUserByEmailAndPassword, getUserById } = require('../services/UserService');
-const { getUserByIdHandler } = require('./UserController');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 const secretKey = process.env.SECRET_KEY;
@@ -21,17 +21,13 @@ async function handleLogin(req, res) {
                 throw new Error('Secret key is missing or not set');
             }
 
-            const results = await findUserByEmailAndPassword(email, password);
-            if (results.length > 0) {
-                const user = results[0];
-                console.log(user);
-                const token = jwt.sign({ id: user.id, role: user.role}, secretKey);
-                const userDetails = await getUserById(user.id);
-
-                let redirectUrl = '/home'; // default redirect URL
-                // console.log(userDetails.role);
-                if (userDetails.role === 'admin') {
-                    redirectUrl = '/home/administrare'; // admin redirect URL
+            const user = await findUserByEmailAndPassword(email, password);
+            if (user) {
+                const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '24h' });
+                
+                let redirectUrl = '/home'; 
+                if (user.role === 'admin') {
+                    redirectUrl = '/home/administrare';
                 }
 
                 res.writeHead(200, {
@@ -51,7 +47,38 @@ async function handleLogin(req, res) {
         }
     });
 }
-
+async function handleLogout(req, res) {
+    try {
+        // Clear the token cookie
+        res.writeHead(200, {
+            'Set-Cookie': `token=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT`,
+            'Content-Type': 'application/json'
+        });
+        res.end(JSON.stringify({ success: true, message: 'Logout successful' }));
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'Logout failed' }));
+    }
+}
+async function logout() {
+    try {
+      const response = await fetch('/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.ok) {
+        alert('Logout successful');
+        window.location.href = '/';
+      } else {
+        alert('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  }
 module.exports = {
-    handleLogin,
+    handleLogin,handleLogout,logout
 };

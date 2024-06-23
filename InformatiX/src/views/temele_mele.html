@@ -4,55 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>In&lt;form&gt;atiX</title>
-    <link rel="icon" type="image/png" href="../../public/favicons/icon.png">
-    <link rel="stylesheet" href="../../public/css/header1.css">
-    <link rel="stylesheet" href="../../public/css/temele_mele.css">
-    <link rel="stylesheet" href="../../public/css/footer.css">
-    <script src="../../public/js/temele-mele.js"></script>
-    <script src="../../public/js/checkAdmin.js"></script>
+    <title>Teme</title>
+    <link rel="icon" type="image/png" href="../../../public/favicons/icon.png">
+    <link rel="stylesheet" href="../../../public/css/header1.css">
+    <link rel="stylesheet" href="../../../public/css/temele_mele.css">
+    <link rel="stylesheet" href="../../../public/css/footer.css">
+    <script src="../../../public/js/temele-mele.js"></script>
+    <script src="../../../public/js/checkAdmin.js"></script>
 </head>
-<script>
-    function showSidebar() {
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.style.display = 'flex'
-}
 
-function hideSidebar() {
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.style.display = 'none'
-}
-
-function closeSearchModal() {
-    var modal = document.getElementById('searchModal');
-    modal.style.display = "none";
-}
-function closeEvaluateModal() {
-    var modal = document.getElementById('evaluateModal');
-    modal.style.display = "none";
-}
-function closeProblemModal() {
-    var modal = document.getElementById('problemModal');
-    modal.style.display = "none";
-}
-function closeEvaluateModal() {
-    var modal = document.getElementById('evaluateModal');
-    modal.style.display = "none";
-}
-function openUserSolution() {
-    const userType = getUrlParam('userType');
-    const url = 'solution.html';
-    if (url.includes('?')) {
-        window.location.href = `${url}&userType=${userType}`;
-    } else {
-        window.location.href = `${url}?userType=${userType}`;
-    }
-}
-function closeAddTemaModal() {
-    var modal = document.getElementById('addTemaModal');
-    modal.style.display = "none";
-}
-</script>
 <body>
     <header>
         <nav>
@@ -85,39 +45,19 @@ function closeAddTemaModal() {
     </header>
     <div class="container_princ">
         <h2>Temele Mele</h2>
-        <div class="teme">
-            <div class="tema">
-                <h3>Tema 1</h3>
-                <p>Clasa a X-a B</p>
-                <p>Deadline: January 31, 2024</p>
-                <ul>
-                    <li>Problem 1</li>
-                    <li>Problem 2</li>
-                    <li>Problem 3</li>
-                </ul>
-            </div>
-            <div class="tema">
-                <h3>Tema 2</h3>
-                <p>Clasa a X-a B</p>
-                <p>Deadline: February 15, 2024</p>
-                <ul>
-                    <li>Problem 1</li>
-                    <li>Problem 2</li>
-                </ul>
-            </div>
+        <div id="temele">
+
         </div>
     </div>
 
     <div id="addTemaModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddTemaModal()">&times;</span>
-            <h2>Adauga Tema Noua</h2>
-            <label for="clasaInput">Clasa:</label>
-            <input type="text" id="clasaInput" placeholder="Clasa a X-a B/XB/10B"><br><br>
+            <h2>Adaugă Temă Nouă</h2>
+            <label for="clasaInput">Nume:</label>
+            <input type="text" id="clasaInput" placeholder="Tema Clasa a X-a B/XB/10B"><br><br>
             <label for="deadlineInput">Deadline:</label>
             <input type="date" id="deadlineInput"><br><br>
-            <label for="problemsInput">Probleme:</label>
-            <textarea id="problemsInput" placeholder="Problema1, Problema2, ..."></textarea><br><br>
             <button onclick="submitNewTema()">Submit</button>
         </div>
     </div>
@@ -150,11 +90,7 @@ function closeAddTemaModal() {
             <span class="close" onclick="closeEvaluateModal()">&times;</span>
             <h2>Evalueaza Elevii</h2>
             <ul>
-                <li onclick="openUserSolution()">User 1</li>
-                <li onclick="openUserSolution()">User 2</li>
-                <li onclick="openUserSolution()">User 3</li>
-                <li onclick="openUserSolution()">User 4</li>
-                <li onclick="openUserSolution()">User 5</li>
+
             </ul>
         </div>
     </div>
@@ -163,16 +99,319 @@ function closeAddTemaModal() {
             <span class="close" onclick="closeProblemModal()">&times;</span>
             <h2>Rezolva Probleme</h2>
             <ul>
-                <li onclick="openProblemSolution('Problema 1')">Problema 1</li>
-                <li onclick="openProblemSolution('Problema 2')">Problema 2</li>
-                <li onclick="openProblemSolution('Problema 3')">Problema 3</li>
-                <li onclick="openProblemSolution('Problema 3')">Problema 4</li>
+                <li onclick="openProblemSolution('Problema 1', 2, 1)">Problema 1</li>
+                <li onclick="openProblemSolution('Problema 2', 2, 2)">Problema 2</li>
+                <li onclick="openProblemSolution('Problema 3', 2, 3)">Problema 3</li>
+                <li onclick="openProblemSolution('Problema 4', 2, 4)">Problema 4</li>
             </ul>
         </div>
     </div>
     <footer>
-        <p>@ Contact</p>
+        <p>Contact: informatix@example.com Toate drepturile sunt rezervate.</p>
     </footer>
+    <script>
+        let myrole;
+        function fetchUserDetails() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/user', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const user = JSON.parse(xhr.responseText);
+                        myrole = user.role;
+                        getTeme();
+                    } else {
+                        console.error('Failed to fetch user details:', xhr.responseText);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        function WhoAmI() {
+            if (myrole === "profesor" || myrole === "admin")
+                return 1;
+            else if (myrole === "elev")
+                return 0;
+        }
+        let users;
+        function getElevi() {
+            const url = window.location.href;
+            const classId = url.substring(url.lastIndexOf('/') + 1);
+            fetch(`/api/getEleviByIdClass?id=${classId}`)
+                .then(response => response.json())
+                .then(data => {
+                    users = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        getElevi();
+        var idTemaGlobal;
+
+        function showSidebar() {
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
+        }
+
+        function hideSidebar() {
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
+        }
+
+        function openEvaluateModal(idTema) {
+            var modal = document.getElementById('evaluateModal');
+            modal.style.display = "block";
+            populateUsersList(users, idTema);
+        }
+        function closeSearchModal() {
+            var modal = document.getElementById('searchModal');
+            modal.style.display = "none";
+        }
+
+        function openProblemSolution(idTema, idProblema) {
+            window.location.href = `/home/clasele-mele/teme/${idTema}/rezolva-pb/${idProblema}`;
+        }
+        async function openProblemModal(idTema) {
+            var modal = document.getElementById('problemModal');
+            modal.style.display = "block";
+
+            const problems = await fetchProblemsByTemaId(idTema);
+
+            const problemsListItems = problems.map(problem => {
+                console.log('Processing problem.id:', problem.id);
+                return `
+                <li onclick="openProblemSolution(${idTema}, ${problem.id})">
+                    #${problem.id} - ${problem.nume_problema}
+                </li>
+            `;
+            }).join('');
+
+            var ulElement = modal.querySelector('ul');
+            ulElement.innerHTML = problemsListItems;
+        }
+        function closeEvaluateModal() {
+            var modal = document.getElementById('evaluateModal');
+            modal.style.display = "none";
+        }
+
+        function closeProblemModal() {
+            var modal = document.getElementById('problemModal');
+            modal.style.display = "none";
+        }
+
+        function closeAddTemaModal() {
+            var modal = document.getElementById('addTemaModal');
+            modal.style.display = "none";
+        }
+
+        function openAddTemaModal() {
+            var modal = document.getElementById('addTemaModal');
+            modal.style.display = "block";
+        }
+        function openSearchModal(id) {
+            idTemaGlobal = id;
+            var modal = document.getElementById('searchModal');
+            modal.style.display = "block";
+        }
+
+        function submitNewTema() {
+
+            const clasaInput = document.getElementById('clasaInput').value.trim();
+            const deadlineInput = document.getElementById('deadlineInput').value;
+
+            if (!clasaInput || !deadlineInput) {
+                alert('Toate câmpurile sunt obligatorii.');
+                return;
+            }
+
+            const today = new Date();
+            const deadlineDate = new Date(deadlineInput);
+
+            if (deadlineDate <= today) {
+                alert('Data trebuie să fie după data curentă.');
+                return;
+            }
+            const url = window.location.href;
+            const classId = url.substring(url.lastIndexOf('/') + 1);
+
+            const data = {
+                nume: clasaInput,
+                deadline: deadlineInput,
+                classId: classId
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/createTema', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                        document.getElementById('clasaInput').value = '';
+                        document.getElementById('deadlineInput').value = '';
+                        closeAddTemaModal();
+                    } else {
+                        var response = JSON.parse(xhr.responseText);
+                        alert(response.message);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify(data));
+            closeAddTemaModal();
+            document.getElementById('clasaInput').value = '';
+            document.getElementById('deadlineInput').value = '';
+            location.reload();
+        }
+
+
+        function searchProblem() {
+            const searchInput = document.getElementById('searchInput').value.trim();
+
+            if (!searchInput) {
+                alert('Introduceti un ID de problema.');
+                return;
+            }
+
+            if (!/^\d+$/.test(searchInput)) {
+                alert('ID-ul problemei trebuie să conțină doar numere.');
+                return;
+            }
+
+            const url = window.location.href;
+            const idTema = url.substring(url.lastIndexOf('/') + 1);
+
+            const data = {
+                problemId: searchInput
+            };
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', `/api/addProblem?id=${idTemaGlobal}`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (xhr.status === 200) {
+                        document.getElementById('searchInput').value = '';
+                        closeSearchModal();
+                        location.reload();
+                    } else {
+                        document.getElementById('searchInput').value = '';
+                        alert(response.message);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify(data));
+        }
+    </script>
+
+    <script>
+        function getTeme() {
+            const url = window.location.href;
+            const classId = url.substring(url.lastIndexOf('/') + 1);
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `/api/getTeme?id=${classId}`, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const teme = JSON.parse(xhr.responseText);
+                        displayTeme(teme);
+                    } else {
+                        alert('Eroare la obținerea temelor.');
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        async function displayTeme(teme) {
+            const temeContainer = document.getElementById('temele');
+            temeContainer.innerHTML = '';
+
+            const temeArray = Array.isArray(teme) ? teme : [teme];
+
+            // Sort teme based on deadline: expired ones at the end
+            temeArray.sort((a, b) => {
+                const aDeadline = new Date(a.deadline);
+                const bDeadline = new Date(b.deadline);
+                const now = new Date();
+
+                const aIsExpired = aDeadline <= now;
+                const bIsExpired = bDeadline <= now;
+
+                if (aIsExpired && !bIsExpired) return 1;
+                if (!aIsExpired && bIsExpired) return -1;
+                return aDeadline - bDeadline;
+            });
+
+            for (const tema of temeArray) {
+                const divTema = document.createElement('div');
+                divTema.classList.add('tema');
+
+                const problems = await fetchProblemsByTemaId(tema.id);
+
+                const problemsList = problems.map(problem => `
+                    <li>Id: ${problem.id} - ${problem.nume_problema} - ${problem.dificultate}</li>
+                `).join('');
+
+                const deadlineDate = new Date(tema.deadline);
+                const isExpired = deadlineDate <= new Date();
+                let html = `
+                    <h3 id="${tema.id}"${isExpired ? ' class="expired"' : ''}> Tema: ${tema.nume}</h3>
+                    <p>Probleme: ${problemsList}</p>
+                    <p class="${isExpired ? 'expired' : ''}">Deadline: ${deadlineDate.toLocaleString()}</p>
+                `;
+
+                if (WhoAmI() === 1)
+                    html += `<button id="${tema.id}" onclick="openSearchModal(this.id)">Adauga</button>
+                             <button id="${tema.id}" onclick="openEvaluateModal(this.id)">Evalueaza</button>`;
+                else
+                    html += `<button id=${tema.id} onclick="openProblemModal(this.id)">Rezolva</button>`;
+
+                divTema.innerHTML = html;
+                temeContainer.appendChild(divTema);
+            }
+        }
+
+        async function fetchProblemsByTemaId(temaId) {
+            try {
+                const response = await fetch(`/api/getProblemsByIdTema?id=${temaId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            } catch (error) {
+                console.error('Error fetching problems:', error);
+                return [];
+            }
+        }
+
+        function populateUsersList(users, idTema) {
+            console.log(users);
+            const ul = document.querySelector('#evaluateModal ul');
+            ul.innerHTML = '';
+
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.textContent = "#" + user.id + " - " + (user.firstname || "nesetat") + " " + (user.lastname || "nesetat") + " - " + user.email;
+                li.onclick = function () {
+                    window.location.href = `/home/clasele-mele/teme/${idTema}/evalueaza/${user.id}`;
+                };
+                ul.appendChild(li);
+            });
+        }
+
+        fetchUserDetails()
+    </script>
+
 </body>
 
 </html>

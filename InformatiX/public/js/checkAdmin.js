@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         const xhr = new XMLHttpRequest();
@@ -14,8 +13,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                     const adminLinkMenu = document.querySelector('.menu a[href="/home/administrare"]');
 
                     if (!isAdmin) {
-                        adminLinkSidebar.style.display = 'none';
-                        adminLinkMenu.style.display = 'none';
+                        if (adminLinkSidebar) {
+                            adminLinkSidebar.parentElement.remove(); // Remove the entire li element
+                        }
+                        if (adminLinkMenu) {
+                            adminLinkMenu.parentElement.remove(); // Remove the entire li element
+                        }
                     }
                 } else {
                     console.error('Failed to fetch user data');

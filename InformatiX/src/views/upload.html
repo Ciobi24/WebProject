@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vizualizare Document</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+    }
+
+    .document-container {
+        max-width: 90%;
+        max-height: 90%;
+        overflow-y: auto; 
+        border: 1px solid #ccc;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .document {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+</style>
+</head>
+<body>
+    <script>
+        const currentPath = window.location.pathname;
+        const segments = currentPath.split('/'); 
+        const last = segments[segments.length - 1]; 
+
+        const fileExtensions = ['png', 'jpeg', 'pdf', 'jpg'];
+        let cale = '';
+
+        for (let ext of fileExtensions) {
+            const url = `../../public/uploads/${last}.${ext}`;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        cale = url;
+                        return response.blob();
+                    } else {
+                        return null; 
+                    }
+                })
+                .then(blob => {
+                    if (blob) {
+                        const imageURL = URL.createObjectURL(blob);
+                        const imgElement = document.querySelector('.document');
+                        imgElement.src = imageURL;
+                        imgElement.alt = 'Document';
+                    }
+                })
+                .catch(error => {
+                    console.error('Eroare la cererea fișierului:', error);
+                });
+
+            if (cale) {
+                break; 
+            }
+        }
+    </script>
+    <div class="document-container">
+        <img class="document" src="" alt="Document">
+    </div>
+</body>
+</html>

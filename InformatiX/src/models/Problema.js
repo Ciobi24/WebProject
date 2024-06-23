@@ -41,9 +41,41 @@ class Problema {
         const [results] = await connection.query(query, [clasa]);
         console.log(row.utilizatori_incercat);
         return results.map(row => new Problema(
-            row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.nr_rating, row.utilizatori_incercat, row.utilizatori_rezolvat
+            row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.utilizatori_incercat, row.utilizatori_rezolvat, row.nr_rating
         ));
     }
+    static async getById(id) {
+        const connection = await dbInstance.connect();
+        const query = 'SELECT * FROM probleme WHERE id = ?';
+        const [results] = await connection.query(query, [id]);
+        if (results.length === 0) {
+            console.log('Problema not found');
+            return null;
+        }
+        const row = results[0];
+        return new Problema(
+            row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.utilizatori_incercat, row.utilizatori_rezolvat,row.nr_rating
+        );
+    }
+
+    static async getUnverified(){
+        const connection = await dbInstance.connect();
+        const query = 'SELECT * FROM probleme WHERE verified = false';
+        const [results] = await connection.query(query);
+        return results.map(row => new Problema(
+            row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.utilizatori_incercat, row.utilizatori_rezolvat, row.nr_rating
+        ));
+    }
+
+    static async getVerified() {
+        const connection = await dbInstance.connect();
+        const query = 'SELECT * FROM probleme WHERE verified = true ORDER BY id DESC LIMIT 4';
+        const [results] = await connection.query(query);
+        return results.map(row => new Problema(
+            row.id, row.nume_problema, row.dificultate, row.categorie, row.clasa, row.text_problema, row.creator_id, row.verified, row.rating, row.utilizatori_incercat, row.utilizatori_rezolvat, row.nr_rating
+        ));
+    }
+    
 }
 
 module.exports = Problema;

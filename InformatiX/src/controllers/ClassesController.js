@@ -1,6 +1,6 @@
 const { getJwt } = require("../services/JwtService");
-const { getClassesForProf, getClassesForElev, insertClass, addUserToClass, 
-    checkDuplicateClassName, getUsersByClassId} = require("../services/ClassesService");
+const { getClassesForProf, getClassesForElev, insertClass, addUserToClass,
+    checkDuplicateClassName, getUsersByClassId, deleteClassById, deleteUserFromClass } = require("../services/ClassesService");
 
 async function getClassesByUser(req, res) {
     const cookieHeader = req.headers.cookie;
@@ -51,17 +51,16 @@ async function createClass(req, res) {
                 res.end(JSON.stringify({ message: 'Bad Request', error: 'Class name is required' }));
                 return;
             }
-            if( await checkDuplicateClassName(decoded.id, formData.className))
-            {
+            if (await checkDuplicateClassName(decoded.id, formData.className)) {
                 res.writeHead(409, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: 'Nume pentru clasă deja folosit!'}));
+                res.end(JSON.stringify({ message: 'Nume pentru clasă deja folosit!' }));
                 return;
             }
-            const insertSuccess =  await insertClass(formData.className, decoded.id);
+            const insertSuccess = await insertClass(formData.className, decoded.id);
 
             if (insertSuccess) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: 'Class added successfully'}));
+                res.end(JSON.stringify({ message: 'Class added successfully' }));
                 return;
             } else {
                 res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -99,7 +98,7 @@ async function getUsersByIdClass(req, res) {
 async function addUserToClassController(req, res) {
     const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
     const idClass = queryObject.get('id');
-    
+
     const cookieHeader = req.headers.cookie;
     const decoded = getJwt(cookieHeader);
     let body = '';
@@ -119,7 +118,7 @@ async function addUserToClassController(req, res) {
         const formData = JSON.parse(body);
         try {
             const result = await addUserToClass(formData.idFormular, idClass);
-       
+
             if (result.success) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ message: result.message }));
@@ -134,5 +133,78 @@ async function addUserToClassController(req, res) {
     });
 }
 
+async function deleteClassByIdController(req, res) {
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idClass = queryObject.get('id');
 
-module.exports = { getClassesByUser, createClass, getUsersByIdClass, addUserToClassController }
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    if (role !== 'admin' && role !== 'profesor') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+        return;
+    }
+
+    try {
+        const result = await deleteClassById(idClass, decoded.id);
+
+        if (result) {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, message: 'Class deleted successfully.' }));
+        } else {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, message: 'User does not have permission or class not found!' }));
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Error deleting class.' }));
+    }
+}
+
+async function deleteUserFromClassController(req, res) {
+    const queryObject = new URL(req.url, `http://${req.headers.host}`).searchParams;
+    const idClass = queryObject.get('id');
+
+    const cookieHeader = req.headers.cookie;
+    const decoded = getJwt(cookieHeader);
+    const role = decoded.role;
+
+    let body = '';
+
+    req.on('data', chunk => {
+        body += chunk.toString();
+    });
+
+    req.on('end', async () => {
+        if (role !== 'admin' && role !== 'profesor') {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Unauthorized', error: 'User does not have permission' }));
+            return;
+        }
+
+        const formData = JSON.parse(body);
+        try {
+            const result = await deleteUserFromClass(idClass, formData.idFormular , decoded.id);
+
+            if (result) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, message: 'User deleted successfully.' }));
+            } else {
+                res.writeHead(401, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, message: 'User does not have permission or user to delete not found!' }));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: 'Error deleting class.' }));
+        }
+    });
+}
+
+module.exports = {
+    getClassesByUser, createClass, getUsersByIdClass, addUserToClassController,
+    deleteClassByIdController, deleteUserFromClassController, deleteUserFromClassController
+}

@@ -94,12 +94,12 @@ async function addUserToClass(id_user, id_clasa) {
         FROM users
         WHERE id = ?
     `;
-    
-    const [findUser] = await connection.query(exists, [id_user]);
-    
-    if (findUser.length !== 1 || findUser[0].count !== 1) {
-        return { success: false, message: 'Utilizatorul cu id-ul specificat nu există.' };
-    }
+
+        const [findUser] = await connection.query(exists, [id_user]);
+
+        if (findUser.length !== 1 || findUser[0].count !== 1) {
+            return { success: false, message: 'Utilizatorul cu id-ul specificat nu există.' };
+        }
 
         const checkQuery = `
             SELECT COUNT(*) AS count
@@ -123,11 +123,61 @@ async function addUserToClass(id_user, id_clasa) {
         throw error;
     }
 }
+async function deleteClassById(idClass, idUser) {
+    let connection;
+    try {
+        connection = await dbInstance.connect();
+        const query1 = `
+        SELECT COUNT(*) AS count FROM clase
+        WHERE id = ? AND id_user = ?
+    `;
+        const [rows] = await connection.query(query1, [idClass, idUser]);
+
+        if (rows[0].count == 0) {
+            return false;
+        }
+
+        const query2 = `
+            DELETE FROM clase_elevi
+            WHERE id_clasa = ?
+        `;
+        await connection.query(query2, [idClass]);
+
+        const query3 = `
+            DELETE FROM clase
+            WHERE id = ?
+        `;
+        const [result] = await connection.query(query3, [idClass]);
+        return result.affectedRows > 0; 
+    } catch (error) {
+        return false;
+    }
+}
+
+async function deleteUserFromClass(idClass, id_user, id_prof) {
+    connection = await dbInstance.connect();
+    try {
+        const query = `
+        DELETE ce
+        FROM clase_elevi ce
+        JOIN clase c ON ce.id_clasa = c.id
+        WHERE ce.id_clasa = ? AND ce.id_user = ? AND c.id_user = ?
+    `;
+    
+    const [result] = await connection.query(query, [idClass, id_user, id_prof]);
+    return result.affectedRows > 0;
+    } catch (error) {
+        return false;
+    }
+}
+
 module.exports = {
     getClassesForProf,
     getClassesForElev,
     insertClass,
     checkDuplicateClassName,
     getUsersByClassId,
-    addUserToClass
+    addUserToClass,
+    deleteClassById,
+    deleteUserFromClass
 };
