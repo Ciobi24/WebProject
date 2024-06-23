@@ -160,14 +160,17 @@ async function newPassword(oldPassword, newPassword, idUser) {
 async function updatePassword(newPassword, email) {
     const connection = await dbInstance.connect();
     try {
+        const hashedPassword = await bcrypt.hash(newPassword, 10); 
+
         const query = 'UPDATE users SET password = ? WHERE email = ?';
-        const [result] = await connection.query(query, [newPassword, email]);
+        const [result] = await connection.query(query, [hashedPassword, email]);
+
         if (result.affectedRows === 1) {
             const [rows] = await connection.query('SELECT username FROM users WHERE email = ?', [email]);
             if (rows.length == 1) {
-                return rows[0].username;  // ce user este actualizat, returnez!!
+                return rows[0].username;  // Returnez numele utilizatorului actualizat
             } else {
-                return null; // nu s-a actualizat nimic
+                return null; // Nu s-a actualizat nimic
             }
         } else {
             console.log('No user found with this email.');
@@ -178,7 +181,6 @@ async function updatePassword(newPassword, email) {
         throw error;
     }
 }
-
 async function updateUserByCredentials(userFromDB, userData) {
     const connection = await dbInstance.connect();
     try {
