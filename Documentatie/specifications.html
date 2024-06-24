@@ -220,11 +220,17 @@
                         software.
                     </p>
                     <img class="img4" src="img/img4.png" alt="altcv">
+                    <p>Pentru optiunea de Forgot Password se va trimite un mail la adresa furnizata pentru a se putea reseta.</p>
+                    <img class="img" src="img/reset-pwd.png" alt="altcv">
+                    <img class="img" src="img/mail.png" alt="altcv">
+                    <img class="img" src="img/reset.png" alt="altcv">
                     <p>În urma realizării cu succes a procesului de logare, utilizatorul va fi redirecționat către
                         pagina "logged-page", mai pe scurt meniul principal
                         care leagă celelalte pagini între ele într-o structură arborescentă.
                     </p>
                     <img class="img5" src="img/img5.png" alt="altcv">
+                    <img class="img51" src="img/img51.png" alt="altcv">
+                    <img class="img52" src="img/img52.png" alt="altcv">
                     <p> Pagina conține o abstractizare a principalelor funcționalități ale produsului software, afișate
                         în secțiuni în cadrul paginii. Contând foarte mult
                         modul de detaliere a funcționalităților aplicației web, s-a ales acest mod de afișare a
@@ -271,6 +277,19 @@
                         rezolva probleme, iar profesorii evaluează și
                         acordă note, am tratat detaliat aceste pagini specifice.
                     </p>
+                    <img class="img" src="img/categorii.png" alt="altcv">
+                    <p>Pagina de mai jos se regăsește in una dintre categoriile selectate.
+                        Acest mod afișează într-un format elegant
+                        toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe
+                        probleme. Pentru fiecare problemă se va putea vizualiza
+                        separat anumite statistici care țin de rating-ul oferit de elevi, de câți utilizatori au
+                        încercat să o rezolve și câți au rezolvat-o cu
+                        succes.
+                    </p>
+                    <img class="img10" src="img/img10.png" alt="altcv">
+                    <img class="img11" src="img/img11.png" alt="altcv">
+                    <p>Butonul de share este asignat exportului într-un format open (JSON). </p>
+                    <img class="img" src="img/export.png" alt="altcv">
                     <p> Meniul cu titlul "Adaugă o problemă" este destinat doar rolului de profesor pentru ca aceștia să
                         poată propune probleme spre a fi
                         înregistrate în sistem și ulterior rezolvate de elevi. Se consideră adminul că are orice rol. În
@@ -283,17 +302,7 @@
                         validare a problemelor, conform statutului
                         de admin - care deține și un rol de a accepta cererea de introducere a problemei în sistem.
                     </p>
-                    <img class="img10" src="img/img10.png" alt="altcv">
-                    <p>Această pagină se regăsește din meniul de căutare probleme, la secțiunea de "probleme clasa 9".
-                        Acest mod afișează într-un format elegant
-                        toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe
-                        probleme. Pentru fiecare problemă se va putea vizualiza
-                        separat anumite statistici care țin de rating-ul oferit de elevi, de câți utilizatori au
-                        încercat să o rezolve și câți au rezolvat-o cu
-                        succes.
-                    </p>
-                    <img class="img11" src="img/img11.png" alt="altcv">
-                    <p>Butonul de share va fi asignat exportului într-un format open (XML / JSON / CSV, etc.). </p>
+                    <img class="img" src="img/adauga.png" alt="altcv">
                 </section>
                 <section id="clasele-mele">
                     <h4>Clasele mele</h4>
@@ -330,24 +339,26 @@
                         nu este sfârșit.
                     </p>
                     <img class="img15" src="img/img15.png" alt="altcv">
+                    <img class="img" src="img/teme.png" alt="altcv">
                     <p>
-                        Adăugarea unei noi teme este un proces implicit, desfășurat de către profesor. Acesta va selecta
-                        clasa destinatară pentru tema specifică și va stabili un termen-limită, care nu va elimina tema
+                        Adăugarea unei noi teme este un proces explicit, desfășurat de către profesor. Acesta va selecta
+                        numele pentru tema specifică și va stabili un termen-limită, care nu va elimina tema
                         chiar dacă acesta este atins. Totuși, termenul-limită este un indicator util pentru profesor,
                         ajutându-l să-și organizeze eficient activitățile și să gestioneze corespunzător soluțiile
                         trimise
-                        de elevi în vederea evaluării.
+                        de elevi în vederea evaluării. Temele vor aparea ordonate dupa deadline-ul lor, 
+                        cele expirate fiind in josul sectiunii.
 
                         Este important de menționat că aplicația este concepută pentru a fi accesibilă oricui, incluzând
-                        posibilitatea existenței claselor neoficiale, unde modalitățile de lucru pot fi diverse, conform
+                        posibilitatea existenței claselor neoficiale (de exemplu grupele pentru centrele de excelenta sau olimpiade), unde modalitățile de lucru pot fi diverse, conform
                         preferințelor fiecăruia. Principalul accent se pune pe rezultatele obținute și pe eficiența pe
                         care
                         platforma o oferă în contextul educațional. </p>
                     <img class="img16" src="img/img16.png" alt="altcv">
                     <p>Procesul de adăugare a unei probleme în cadrul unei teme (prin apăsarea butonului specific)
                         constituie un traseu inițiat de sistemul de gestiune a bazei de date. Acesta începe prin
-                        căutarea problemei fie după
-                        identificatorul unic (ID), fie după nume. După identificarea problemei, sistemul returnează
+                        căutarea problemei după
+                        identificatorul unic (ID). După identificarea problemei, sistemul returnează
                         răspunsul corespunzător către interfața de utilizator (frontend). În același timp, se activează
                         funcțiile dedicate pentru prezentarea conținutului specific asociat problemei în cadrul paginii
                         respective.
@@ -360,7 +371,7 @@
                     <img class="img18" src="img/img18.png" alt="altcv">
                     <p> În cadrul paginii de evaluare pentru un utilizator, membru clasei pentru care profesorul face
                         verificarea soluțiilor, profesorul primeste enuntul problemei, codul sursă aferent, urmând apoi
-                        să efectueze verificările, și apoi poate încărca evaluarea pe server, elevul primind răspunsul
+                        să efectueze verificările, și apoi poate încărca evaluarea pe server, elevul primind răspunsul (comentariul)
                         și
                         punctajul acordat, iar pentru server se va face un update la statisticile problemei respective
                         pentru
@@ -386,8 +397,10 @@
                         este sigur pe ce a lucrat, și tot în această secțiune poate încărca anumite comentarii care pot
                         fi văzute
                         de toți membrii clasei și unde se pot oferi hint-uri pentru rezolvarea problemei, precum și alte
-                        comentarii.
+                        comentarii. Poate vedea feedbackul profesorului și punctajul acordat. Poate oferi rating la problema.
                     </p>
+                    <img class="img" src="img/rating.png" alt="altcv">
+                    <img class="img" src="img/com.png" alt="altcv">
                 </section>
             </section>
 
@@ -403,7 +416,6 @@
                 <img class="responsive" src="img/responsive.png" alt="altcv">
                 <img class="responsive2" src="img/responsive2.png" alt="altcv">
                 <img class="responsive3" src="img/responsive3.png" alt="altcv">
-                <img class="responsive4" src="img/responsive4.png" alt="altcv">
             </section>
         </section>
         <section id="#paleta_font">
@@ -452,28 +464,26 @@
             <section id="securitate">
                 <h3>4.1. Securitate</h3>
                 <p>Cerințele de securitate includ implementarea unui sistem robust de autentificare și autorizare pentru
-                    utilizatori. Acest sistem ar trebui să ofere funcționalități precum autentificarea cu doi factori,
-                    gestionarea sesiunilor și protecția împotriva atacurilor de tip CSRF și XSS. De asemenea, trebuie să
-                    se asigure protecția datelor sensibile, cum ar fi parolele și informațiile personale ale
-                    utilizatorilor, prin criptare adecvată și practici de securitate la nivelul aplicației și al bazei
-                    de date.</p>
+                    utilizatori. Acest sistem foloseste un JWT pentru autentificare si pentru resetare de parole, respectiv logout, 
+                    care este stocat intr-un cookie HttpOnly, prevenind atacuri XSS. Datele cu caracter personal si sensibile, cum ar fi parolele, sunt encryptate
+                    folosind bcrypt. Aplicatia este protejata impotriva SQL injections, folosind prepared statements si query params si facand verificari detaliate.</p>
                 <p>În plus, sunt impuse restricții de acces la anumite funcționalități sau date în funcție de rolurile
                     utilizatorilor, iar activitățile suspecte trebuie să fie monitorizate și înregistrate pentru a
                     detecta eventualele încercări de acces neautorizat. Administratorii sunt singurii cu acces la pagina
                     de administrare și toate funcționalitățile acesteia(gestionarea conturilor, mesajele de feedback,
                     aprobarea problemelor).
-                    Profesorii sunt singurii care pot da teme, pot crea clase și pot adăuga elevi în ele, pot corecta
+                    Profesorii si adminii sunt singurii care pot da teme, pot crea clase și pot adăuga elevi în ele, pot corecta
                     teme și oferi feedback și punctaje, pot propune probleme noi. Elevii sunt cei care vor primi aceste
                     teme și vor fi incluși în clasele menționate, vor rezolva problemele și vor putea lăsa comentarii la
-                    ele epntru ceilalți colegi.</p>
+                    ele epntru ceilalți colegi. Doar adminul poate gestiona conturile si aproba cereri pentru probleme sau pentru un cont de profesor</p>
             </section>
             <section id="performanta">
                 <h3>4.2. Performanță</h3>
                 <p>Cerințele de performanță sunt legate de timpul de încărcare al paginilor și de timpul de răspuns al
                     aplicației în timpul utilizării. Pentru a asigura o experiență fluidă utilizatorilor, aplicația
-                    trebuie să fie optimizată pentru a funcționa rapid și eficient, chiar și în condiții de trafic
+                    este optimizată pentru a funcționa rapid și eficient, chiar și în condiții de trafic
                     intens.</p>
-                <p>Aceasta poate implica optimizarea codului pentru a reduce timpul de procesare și de încărcare a
+                <p>Aceasta implica optimizarea codului pentru a reduce timpul de procesare și de încărcare a
                     paginilor, utilizarea cache-urilor la nivelul serverului pentru a reduce timpul de răspuns al
                     cererilor repetitive și reducerea la minimum a solicitărilor de rețea prin combinarea și minimizarea
                     fișierelor CSS și JavaScript.</p>
@@ -481,12 +491,14 @@
             <section id="scalabilitate">
                 <h3>4.3. Scalabilitate și Portabilitate</h3>
                 <p>Cerințele de scalabilitate vizează capacitatea aplicației de a gestiona creșterea volumului de
-                    utilizatori și de date fără a afecta performanța. Aplicația ar trebui să fie proiectată pentru a fi
+                    utilizatori și de date fără a afecta performanța. Aplicația este proiectată pentru a fi
                     ușor scalabilă, astfel încât să poată fi extinsă sau redusă în funcție de necesități.</p>
                 <p>De asemenea, portabilitatea este importantă pentru asigurarea că aplicația poate fi rulată pe
                     diferite medii și platforme. Aceasta implică folosirea tehnologii și framework-uri care sunt
                     compatibile cu o gamă largă de sisteme de operare și dispozitive, precum și eliminarea dependențelor
-                    specifice unei platforme.</p>
+                    specifice unei platforme. De aceea, aplicatia nu foloseste framework-uri si se bazeaza pe operatii
+                     elementare si servicii proprii ce nu vor fi niciodata outdated/deprecated si sunt compatibile cu orice 
+                     platforma si OS.</p>
             </section>
         </section>
 
