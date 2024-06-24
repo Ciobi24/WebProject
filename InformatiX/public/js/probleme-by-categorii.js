@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const problemaHTML = `
               <div class="problema">
-                  <h1>${problema.nume_problema}</h1>
+                  <h1>#${problema.id} ${problema.nume_problema}</h1>
                   <button class="share-button">Share</button>
                   <div class="ratings">
                       <span class="stars">${problema.rating}★</span> 

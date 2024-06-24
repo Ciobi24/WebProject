@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function displayProblems(problems) {
         const problemsContainer = document.getElementById('problems-container');
-        problemsContainer.innerHTML = ''; // Clear previous content
+        problemsContainer.innerHTML = '';
 
         for (const problema of problems) {
             const problemElement = document.createElement('div');
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const authorName = await fetchUserById(problema.creator_id);
             problemElement.innerHTML = `
-                <h1>${problema.nume_problema}</h1>
+                <h1>#${problema.id} ${problema.nume_problema}</h1>
                 <button class="share-button">share</button>
                 <div class="ratings">
                     <span class="stars">${problema.rating}★</span>
