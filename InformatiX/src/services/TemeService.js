@@ -94,28 +94,29 @@ async function addProblemToTemaService(problemId, idTema, idUser) {
     let connection;
     try {
         connection = await dbInstance.connect();
-
+       
         let query3 = 'SELECT * FROM probleme WHERE id = ?';
         let [rows3] = await connection.query(query3, [problemId]);
-        if(!rows3)
+        if(!rows3[0].id)
             return false;
 
         let query2 = 'SELECT id_clasa FROM teme WHERE id = ?';
         let [rows2] = await connection.query(query2, [idTema]);
 
-        if(!rows2)
+        if(!rows2[0].id_clasa)
             return false;
 
         let query = 'SELECT * FROM clase WHERE id = ? AND id_user = ?';
-        let [rows] = await connection.query(query, [rows2[0].id_clasa, idUser]);
-        if (rows.length === 0) {
+        let [rows4] = await connection.query(query, [rows2[0].id_clasa, idUser]);
+        if (!rows4[0].id) {
             return false; 
         }
         query = 'SELECT * FROM probleme_teme WHERE id_problema = ? AND id_tema = ?';
-        [rows] = await connection.query(query, [problemId, idTema]);
-        if (rows.length > 0) {
+        let [rows] = await connection.query(query, [problemId, idTema]);
+        if (rows[0]) {
             return false; 
         }
+
         query = 'INSERT INTO probleme_teme (id_tema, id_problema) VALUES (?, ?)';
         const result = await connection.query(query, [idTema, problemId]);
 

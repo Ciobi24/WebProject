@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
 
+        document.getElementById('username').value="";
+        document.getElementById('email').value="";
+        document.getElementById('password').value="";
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/register', true);
         xhr.setRequestHeader('Content-Type', 'application/json');

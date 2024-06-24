@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch('/api/getAllUsers')
             .then(response => response.json())
             .then(data => {
-                const headers = ['ID', 'Username', 'Role', 'Last Name', 'First Name', 'Birthday', 'City', 'School'];
-
+                const headers = ['ID', 'Username', 'Role', 'LastName', 'FirstName', 'Birthday', 'City', 'School'];
+ 
                 const thead = document.createElement('thead');
                 const headerRow = document.createElement('tr');
                 headers.forEach(headerText => {

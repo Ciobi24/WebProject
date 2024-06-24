@@ -2,10 +2,9 @@
 <html lang="ro">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="specifications.css">
-    <title>Documentație</title>
+    <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
+    <script src="https://w3c.github.io/scholarly-html/js/scholarly.min.js"></script>
+    <title>Documentatie</title>
 </head>
 
 <body>
@@ -535,35 +534,66 @@
                 <section id="ajax">
                     <h2>2.6.4. Ajax</h2>
                     <p>
-                        În cadrul aplicației noastre, Ajax și async/await sunt folosite pentru a realiza o experiență de utilizare fluidă și dinamică, permițând actualizarea conținutului paginii fără necesitatea de a o reîncărca complet. Această abordare îmbunătățește performanța aplicației și reduce timpul de așteptare pentru utilizatori.
-                        Ajax este utilizat în diverse părți ale aplicației noastre pentru a gestiona cererile către server fără a întrerupe experiența utilizatorului. Câteva exemple:
-                        Autentificare și Înregistrare: Formularul de autentificare și cel de înregistrare trimit cereri asincrone către server pentru a verifica credențialele utilizatorilor. Dacă datele sunt corecte, utilizatorul este autentificat și redirecționat fără a reîncărca pagina.
-                        Adăugarea și Gestionarea Temelor: Profesorii pot adăuga teme pentru elevi, iar aceste cereri sunt trimise asincron către server, care actualizează baza de date și returnează răspunsul fără a reîncărca pagina.
-                        Evaluarea și Feedback-ul Problemelor: Profesorii pot evalua soluțiile trimise de elevi și pot trimite feedback folosind cereri Ajax, actualizând baza de date și informând elevii despre evaluările primite în timp real.
+                        În cadrul aplicației noastre, Ajax și async/await sunt folosite pentru a realiza o experiență de
+                        utilizare fluidă și dinamică, permițând actualizarea conținutului paginii fără necesitatea de a
+                        o reîncărca complet. Această abordare îmbunătățește performanța aplicației și reduce timpul de
+                        așteptare pentru utilizatori.
+                        Ajax este utilizat în diverse părți ale aplicației noastre pentru a gestiona cererile către
+                        server fără a întrerupe experiența utilizatorului. Câteva exemple:
+                        Autentificare și Înregistrare: Formularul de autentificare și cel de înregistrare trimit cereri
+                        asincrone către server pentru a verifica credențialele utilizatorilor. Dacă datele sunt corecte,
+                        utilizatorul este autentificat și redirecționat fără a reîncărca pagina.
+                        Adăugarea și Gestionarea Temelor: Profesorii pot adăuga teme pentru elevi, iar aceste cereri
+                        sunt trimise asincron către server, care actualizează baza de date și returnează răspunsul fără
+                        a reîncărca pagina.
+                        Evaluarea și Feedback-ul Problemelor: Profesorii pot evalua soluțiile trimise de elevi și pot
+                        trimite feedback folosind cereri Ajax, actualizând baza de date și informând elevii despre
+                        evaluările primite în timp real.
                     </p>
                 </section>
                 <section id="modul-http">
                     <h2>2.6.5. Modul HTTP</h2>
                     <p>
-                        În proiectul nostru, am folosit modulul HTTP pentru a crea un server care să gestioneze cererile HTTP. Acesta primește cererile de la client, procesează datele și trimite răspunsurile corespunzătoare. 
-                        Am definit o serie de rute pentru a gestiona diferite tipuri de cereri HTTP. Aceste rute specifică ce trebuie să facă serverul atunci când primește o anumită cerere.
-                        Modulul HTTP gestionează cererile ce necesită autentificare prin verificarea tokenurilor JWT. Acest lucru asigură că doar utilizatorii autentificați pot accesa anumite rute și funcționalități.
+                        În proiectul nostru, am folosit modulul HTTP pentru a crea un server care să gestioneze cererile
+                        HTTP. Acesta primește cererile de la client, procesează datele și trimite răspunsurile
+                        corespunzătoare.
+                        Am definit o serie de rute pentru a gestiona diferite tipuri de cereri HTTP. Aceste rute
+                        specifică ce trebuie să facă serverul atunci când primește o anumită cerere.
+                        Modulul HTTP gestionează cererile ce necesită autentificare prin verificarea tokenurilor JWT.
+                        Acest lucru asigură că doar utilizatorii autentificați pot accesa anumite rute și
+                        funcționalități.
                     </p>
                 </section>
                 <section id="jwt-cookies">
                     <h2>2.6.6. JWT si Cookies HttpOnly</h2>
                     <p>
-                        În proiectul nostru, JWT este utilizat pentru a autentifica utilizatorii și pentru a menține sesiunile acestora. Atunci când un utilizator se autentifică cu succes, serverul generează un token JWT care conține informații despre utilizator (cum ar fi ID-ul și rolul acestuia). Acest token este trimis clientului și stocat într-un cookie HttpOnly pentru a preveni accesul JavaScript din partea clientului.
-                        Atunci când utilizatorul se autentifică, serverul generează un token JWT folosind o cheie secretă stocată în variabilele de mediu. Tokenul conține informații precum ID-ul utilizatorului și rolul acestuia, și este semnat digital pentru a preveni modificările neautorizate.
-                        De fiecare dată când utilizatorul accesează o resursă protejată, serverul verifică tokenul JWT pentru a se asigura că este valid și că utilizatorul are drepturile necesare pentru a accesa resursa.
-                        În proiectul nostru, utilizăm HttpOnly Cookies pentru a stoca tokenurile JWT ale utilizatorilor autentificați. Aceasta asigură că tokenul JWT nu poate fi accesat sau manipulat de scripturi malițioase, adăugând un strat suplimentar de securitate.
+                        În proiectul nostru, JWT este utilizat pentru a autentifica utilizatorii și pentru a menține
+                        sesiunile acestora. Atunci când un utilizator se autentifică cu succes, serverul generează un
+                        token JWT care conține informații despre utilizator (cum ar fi ID-ul și rolul acestuia). Acest
+                        token este trimis clientului și stocat într-un cookie HttpOnly pentru a preveni accesul
+                        JavaScript din partea clientului.
+                        Atunci când utilizatorul se autentifică, serverul generează un token JWT folosind o cheie
+                        secretă stocată în variabilele de mediu. Tokenul conține informații precum ID-ul utilizatorului
+                        și rolul acestuia, și este semnat digital pentru a preveni modificările neautorizate.
+                        De fiecare dată când utilizatorul accesează o resursă protejată, serverul verifică tokenul JWT
+                        pentru a se asigura că este valid și că utilizatorul are drepturile necesare pentru a accesa
+                        resursa.
+                        În proiectul nostru, utilizăm HttpOnly Cookies pentru a stoca tokenurile JWT ale utilizatorilor
+                        autentificați. Aceasta asigură că tokenul JWT nu poate fi accesat sau manipulat de scripturi
+                        malițioase, adăugând un strat suplimentar de securitate.
                     </p>
                 </section>
                 <section id="multer">
                     <h2>2.6.7. Export in format open si Incarcare de fisiere</h2>
                     <p>
-                    Aplicatia noastra permite exportarea problemelor in format JSON, pentru a facilita partajarea si colaborarea intre utilizatori. Atunci cand un utilizator doreste sa exporte o problema, serverul genereaza un fisier JSON care contine informatiile necesare despre problema respectiva. Acest fisier este apoi trimis clientului pentru a fi descarcat.
-                    Pentru a permite utilizatorilor sa incarce fisiere, am folosit modulul Multer, care faciliteaza incarcarea de fisiere in aplicatii Node.js. Atunci cand un utilizator incarca un fisier, acesta este trimis catre server, care il salveaza pe disk. Informatiile despre fisier sunt apoi stocate in baza de date pentru a fi accesate ulterior.    
+                        Aplicatia noastra permite exportarea problemelor in format JSON, pentru a facilita partajarea si
+                        colaborarea intre utilizatori. Atunci cand un utilizator doreste sa exporte o problema, serverul
+                        genereaza un fisier JSON care contine informatiile necesare despre problema respectiva. Acest
+                        fisier este apoi trimis clientului pentru a fi descarcat.
+                        Pentru a permite utilizatorilor sa incarce fisiere, am folosit modulul Multer, care faciliteaza
+                        incarcarea de fisiere in aplicatii Node.js. Atunci cand un utilizator incarca un fisier, acesta
+                        este trimis catre server, care il salveaza pe disk. Informatiile despre fisier sunt apoi stocate
+                        in baza de date pentru a fi accesate ulterior.
                     </p>
                 </section>
 
