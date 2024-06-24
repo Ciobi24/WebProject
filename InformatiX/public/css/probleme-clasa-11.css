@@ -173,6 +173,6 @@ td:hover {
 
     .probleme-elementare, .elemente-ale-limbajului, .vectori, .matrici, .diverse,.structuri {
         width: 100%;
-        max-width: 100%; /* Ensure full width on small screens */
+        max-width: 100%; 
     }
 }
