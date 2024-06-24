@@ -315,7 +315,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error deleting comment:', error);
         }
     }
-    
     fetchProblemDetails(idProblema);
     fetchSolution(idProblema, idTema);
 });

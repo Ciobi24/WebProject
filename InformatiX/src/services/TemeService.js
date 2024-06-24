@@ -94,16 +94,16 @@ async function addProblemToTemaService(problemId, idTema, idUser) {
     let connection;
     try {
         connection = await dbInstance.connect();
-
+       
         let query3 = 'SELECT * FROM probleme WHERE id = ?';
         let [rows3] = await connection.query(query3, [problemId]);
-        if(!rows3)
+        if(!rows3.id)
             return false;
 
         let query2 = 'SELECT id_clasa FROM teme WHERE id = ?';
         let [rows2] = await connection.query(query2, [idTema]);
 
-        if(!rows2)
+        if(!rows2.id_clasa)
             return false;
 
         let query = 'SELECT * FROM clase WHERE id = ? AND id_user = ?';
