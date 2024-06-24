@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function displayProblem(problema) {
-        document.getElementById('problema-titlu').innerText = problema.nume_problema;
+        document.getElementById('problema-titlu').innerText ='#' + problema.id + ' ' + problema.nume_problema;
         document.getElementById('problema-stelute').innerText = `${problema.rating}★`;
         document.getElementById('problema-incercari').innerText = `${problema.utilizatori_incercat} încercări`;
         document.getElementById('problema-rezolvari').innerText = `${problema.utilizatori_rezolvat} rezolvări`;
