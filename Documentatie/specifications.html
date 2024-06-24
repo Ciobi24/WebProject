@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="specifications.css">
-    <title>Documentation</title>
+    <title>Documentație</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
                     <li><a href="#public-vizat">1.2. Publicul vizat</a></li>
                     <li><a href="#product-scope">1.3. Product scope</a></li>
                     <ul>
-                        <li><a href="#functionalitati">1.3.1 Functionalități</a></li>
+                        <li><a href="#functionalitati">1.3.1 Funcționalități</a></li>
                     </ul>
                 </ul>
                 <li><a href="#prezentare-aplicatie">2. Prezentarea aplicației</a></li>
@@ -35,6 +35,16 @@
                         <li><a href="#clasele-mele">Clasele mele</a></li>
                     </ul>
                     <li><a href="#responsive">2.5. Responsive</a></li>
+                    <li><a href="#arhitectura-tehnica">2.6. Arhitectura și Componenta Tehnică</a></li>
+                    <ul>
+                        <li><a href="#baza-de-date">2.6.1 Baza de date</a></li>
+                        <li><a href="#api">2.6.2 API</a></li>
+                        <li><a href="#servicii">2.6.3 Servicii</a></li>
+                        <li><a href="#ajax">2.6.4 Ajax</a></li>
+                        <li><a href="#modul-http">2.6.5 Modul HTTP</a></li>
+                        <li><a href="#jwt-cookies">2.6.6 JWT și Cookies HttpOnly</a></li>
+                        <li><a href="#multer">2.6.7. Export in format open si Incarcare de fisiere</a></li>
+                    </ul>
                 </ul>
                 <li><a href="#paleta_font">3. Paleta de culori și familia de fonturi</a></li>
                 <ul>
@@ -50,13 +60,14 @@
             </ul>
         </nav>
 
-        <section id="cerinte-site" class="continut">
-            <h1>Cerințele site-ului</h1>
+        <section id="cerinte-site" class="continut" itemscope itemtype="https://schema.org/WebApplication">
+            <h1 itemprop="headline">Cerințele site-ului</h1>
             <section id="introducere">
                 <h2>1. Introducere</h2>
                 <section id="scop">
                     <h3>1.1. Scop</h3>
-                    <p> Scopul aplicației "In<em>form</em>atiX" este de a furniza un mediu interactiv și educațional
+                    <p itemprop="description"> Scopul aplicației "In<em>form</em>atiX" este de a furniza un mediu
+                        interactiv și educațional
                         pentru elevii
                         de gimnaziu și
                         liceu, pentru învățarea programării prin intermediul rezolvării de probleme. Utilizatorii vor
@@ -68,14 +79,14 @@
                         medii, dificile), și de capitolul pe care se bazează problema (backtracking, șiruri de caractere
                         etc.).
                         Elevii pot vizualiza
-                        aceste probleme atât înregistrându-se, cât și fără a fi înregistrati, iar rezolvarea acestora
+                        aceste probleme atât înregistrați, cât și fără a fi înregistrați, iar rezolvarea acestora
                         presupune
                         apartenența la o clasă
                         cu un profesor asignat și trimiterea soluțiilor respective spre a fi corectate de către
                         profesor.
-                        Acestia vor putea lasa comentarii pentru colegi la fiecare problema si vor putea oferi un rating
-                        de la 1 la 5 stele pentru ea.
-                        Fiecare problema poate fi exportata folosind butonul de share. Profesorii vor avea
+                        Aceștia vor putea lasa comentarii pentru colegi la fiecare problemă și vor putea oferi un rating
+                        de la 1 la 5 stele pentru aceasta.
+                        Fiecare problemă poate fi exportată folosind butonul de share. Profesorii vor avea
                         posibilitatea să creeze și să administreze clase, să adauge elevi în aceste clase și să atribuie
                         teme
                         elevilor prin selectarea de probleme existente în aplicație. Ei vor putea, de
@@ -131,12 +142,13 @@
                     <section id="creare-gestionare-clase">
                         <h4>Crearea și Gestionarea Claselor:</h4>
                         <p>Profesorii pot crea clase și adăuga elevii în aceste clase folosind identificatori precum
-                            email sau username.</p>
+                            id-ul, care se regăsește pe pagina profilului.</p>
                     </section>
 
                     <section id="atribuire-teme">
                         <h4>Atribuirea de Teme:</h4>
-                        <p>Profesorii pot atribui teme elevilor propunând probleme selectate din baza de date existentă.</p>
+                        <p>Profesorii pot atribui teme elevilor propunând probleme selectate din baza de date existentă.
+                        </p>
                     </section>
 
                     <section id="rezolvare-evaluare">
@@ -144,8 +156,9 @@
                         <p>Elevii pot rezolva problemele și pot trimite soluțiile lor pentru evaluare de către profesor.
                             De asemenea, ei pot oferi comentarii și ponturi colegilor sau pot marca problemele cu un
                             număr de stele pentru a indica nivelul lor de dificultate sau calitate.</p>
-                            <p>Profesorii pot evalua soluțiile trimise de elevi și pot oferi feedback individual. 
-                                Ei vor oferi o nota de la 1 la 10 si un comentariu de feedback fiecarui elev per problema.</p>
+                        <p>Profesorii pot evalua soluțiile trimise de elevi și pot oferi feedback individual.
+                            Ei vor oferi o notă de la 1 la 10 și un comentariu de feedback fiecărui elev per problemă.
+                        </p>
                     </section>
 
                     <section id="accesibilitate-export-import">
@@ -162,27 +175,28 @@
             <section id="arhitectura-abordata">
                 <h3>2.1. Arhitectura abordată</h3>
                 <p> Aplicația dezvoltă o structură ușor de înțeles, bine implementată și care facilitează comunicarea
-                    dintre componenta de frontend(la nivelul interfeței de utilizator)
-                    și cea de backend(la nivel de server). S-a adoptat un design-pattern arhitectural,
+                    dintre componenta de frontend (la nivelul interfeței de utilizator)
+                    și cea de backend (la nivel de server). S-a adoptat un design-pattern arhitectural,
                     Model-View-Controller, motivația venind din ideea
-                    de a separa logica de prezentare a datelor (Model), interfața utilizatorului (View), și logica de
+                    de a separa logica de prezentare a datelor (Model), interfața utilizatorului (View) și logica de
                     control a aplicației (Controller).
-                    Cele 3 componente facilitează întreținerea codului, permite un acces mai controlat în cadrul
-                    fișierelor și este ușor de înțeles.
+                    Cele 3 componente facilitează întreținerea codului, permit un acces mai controlat în cadrul
+                    fișierelor și sunt ușor de înțeles.
                 </p>
-                <img class="C1" src="img/C1.png" alt="altcv">
-                <img class="C2" src="img/C2.png" alt="altcv">
-                <img class="C3" src="img/C3.png" alt="altcv">
+                <img class="C1" src="img/C1.png" alt="Diagrama C1">
+                <img class="C2" src="img/C2.png" alt="Diagrama C2">
+                <img class="C3" src="img/C3.png" alt="Diagrama C3">
+                <img class="C4" src="img/C4.png" alt="Diagrama C4">
             </section>
             <section id="structura-fisiere">
                 <h3>2.2. Structura fișierelor</h3>
                 <p> Așa cum s-a menționat anterior despre modelul MVC, aplicația are în componență 2 foldere esențiale:
                     "src" - care deține logica
                     de structurare din cadrul arhitecturii, și "public" - care conține elementele statice - și anume
-                    fisierele .css specifice paginilor,
+                    fișierele .css specifice paginilor,
                     imagini, fonturi, favicons etc.
                 </p>
-                <img class="img1" src="img/img1.png" alt="altcv">
+                <img class="img1" src="img/img1.png" alt="Structura fișierelor">
             </section>
             <section id="logare">
                 <h3>2.3. Cum funcționează procesul de logare </h3>
@@ -191,11 +205,9 @@
                     După ce acestea sunt completate, datele sunt trimise către server, unde se face verificarea în baza
                     de date. În cazul în care datele sunt corecte,
                     utilizatorul este redirecționat către pagina principală a aplicației, unde își poate accesa
-                    informațiile personale, poate rezolva probleme, sau poate
+                    informațiile personale, poate rezolva probleme sau poate
                     accesa alte funcționalități ale aplicației.
                 </p>
-               
-                
             </section>
             <section id="interfata-utilizator">
                 <h3>2.4. Interfața utilizatorului</h3>
@@ -203,34 +215,35 @@
                     <h4>Pagina de index</h4>
                     <p> Pagina de "index" a aplicației oferă o scurtă descriere a site-ului și a facilităților lui,
                         răspunde la câteva dintre curiozitățile
-                        cele mai mari ale unui utilizator nou, și de asemenea permite utilizatorilor să se logheze în
+                        cele mai mari ale unui utilizator nou și de asemenea permite utilizatorilor să se logheze în
                         aplicație sau să-și facă un cont nou. S-a utilizat
                         modul de derulare prin slide-uri a conținutului, celelalte pagini păstrând varianta clasică de
                         scroll.
                     </p>
-                    <img class="img2" src="img/img2.png" alt="altcv">
+                    <img class="img2" src="img/img2.png" alt="Pagina de index">
                     <p> Formularul de login este adresat oricărui tip de utilizator; în urma completării acestuia se vor
                         face verificările în baza de date și utilizatorul
                         va avea acces la cont. Similar și pentru meniul de înregistrare.</p>
-                    <img class="img3" src="img/img3.png" alt="altcv">
+                    <img class="img3" src="img/img3.png" alt="Formular de login">
                     <p>Meniul de înregistrare va fi adresat doar utilizatorilor de tip "elevi", iar mai apoi un user
                         "elev" poate da upgrade la "profesor"
                         în urma completării unui formular care va fi verificat de administratori. Rolul de administrator
-                        este unul privilegiat, deținut de ownerul produsului
+                        este unul privilegiat, deținut de owner-ul produsului
                         software.
                     </p>
-                    <img class="img4" src="img/img4.png" alt="altcv">
-                    <p>Pentru optiunea de Forgot Password se va trimite un mail la adresa furnizata pentru a se putea reseta.</p>
-                    <img class="img" src="img/reset-pwd.png" alt="altcv">
-                    <img class="img" src="img/mail.png" alt="altcv">
-                    <img class="img" src="img/reset.png" alt="altcv">
+                    <img class="img4" src="img/img4.png" alt="Meniul de înregistrare">
+                    <p>Pentru opțiunea de Forgot Password se va trimite un mail la adresa furnizată pentru a se putea
+                        reseta.</p>
+                    <img class="img" src="img/reset-pwd.png" alt="Resetare parolă - form">
+                    <img class="img" src="img/mail.png" alt="Resetare parolă - mail">
+                    <img class="img" src="img/reset.png" alt="Resetare parolă - nouă parolă">
                     <p>În urma realizării cu succes a procesului de logare, utilizatorul va fi redirecționat către
                         pagina "logged-page", mai pe scurt meniul principal
                         care leagă celelalte pagini între ele într-o structură arborescentă.
                     </p>
-                    <img class="img5" src="img/img5.png" alt="altcv">
-                    <img class="img51" src="img/img51.png" alt="altcv">
-                    <img class="img52" src="img/img52.png" alt="altcv">
+                    <img class="img5" src="img/img5.png" alt="Pagina logged-page">
+                    <img class="img51" src="img/img51.png" alt="Logged-page - detalii">
+                    <img class="img52" src="img/img52.png" alt="Logged-page - secțiuni">
                     <p> Pagina conține o abstractizare a principalelor funcționalități ale produsului software, afișate
                         în secțiuni în cadrul paginii. Contând foarte mult
                         modul de detaliere a funcționalităților aplicației web, s-a ales acest mod de afișare a
@@ -240,33 +253,36 @@
                         detaliat (în care să se menționeze cât mai multe detalii despre site) atinge orice obiective din
                         partea producătorilor software.
                     </p>
-                    <img class="img6" src="img/img6.png" alt="altcv">
-                    <p> Navbar-ul, specific header-ului, reprezintă "harta de nevigare" din cadrul aplicației. Acesta
+                    <img class="img6" src="img/img6.png" alt="Funcționalități - logged-page">
+                    <p> Navbar-ul, specific header-ului, reprezintă "harta de navigare" din cadrul aplicației. Acesta
                         are caracter static, elementele din Navbar-ul
                         vizibile din orice pagină a utilizatorului logat, și este dezvoltat responsive în crearea unui
                         "menu-button" specific dispozitivelor
                         cu rezoluție mai mică.
                     </p>
-                    <img class="img7" src="img/img7.png" alt="altcv">
+                    <img class="img7" src="img/img7.png" alt="Navbar">
                 </section>
                 <section id="pagina-profil">
                     <h4>Pagina de profil</h4>
-                    <img class="img8" src="img/img8.png" alt="altcv">
-                    <p> Această pagină, indispensabilă aplicației, reprezintă modalitatea prin care utilizatorul îsi
+                    <img class="img8" src="img/img8.png" alt="Pagina de profil">
+                    <p> Această pagină, indispensabilă aplicației, reprezintă modalitatea prin care utilizatorul își
                         poate vizualiza datele personale
                         din cont, poate efectua anumite modificări care ulterior vor fi transmise către baza de date,
                         poate să-și modifice parola, și
                         poate transmite un formular către administrator prin care solicită rol de profesor, cu dovadă.
-                        Tododată, în secțiunea de profil,
+                        Totodată, în secțiunea de profil,
                         un utilizator poate să-și verifice statisticile: câte probleme a rezolvat, câte a încercat, și
                         apoi să-și planifice singur ce ar
                         mai putea rezolva sau primi din partea profesorului.
+                        Aici se regasesc si optiunile de switch to teacher, unde un cont de elev poate solicita rol de
+                        profesor, si
+                        de modificare a parolei.
                     </p>
-
+                    <img class="img" src="img/psw.png" alt="Modificare parolă">
                 </section>
                 <section id="pagina-probleme">
                     <h4>Pagina de probleme</h4>
-                    <img class="img9" src="img/img9.png" alt="altcv">
+                    <img class="img9" src="img/img9.png" alt="Pagina de probleme">
                     <p> În cadrul secțiunii de probleme, userul poate naviga către pagina specifică oricărei probleme,
                         îi poate vizualiza enunțul, și mai apoi
                         o poate rezolva în cadrul clasei virtuale de care ar aparține. Problemele au un anumit tag (de
@@ -277,8 +293,8 @@
                         rezolva probleme, iar profesorii evaluează și
                         acordă note, am tratat detaliat aceste pagini specifice.
                     </p>
-                    <img class="img" src="img/categorii.png" alt="altcv">
-                    <p>Pagina de mai jos se regăsește in una dintre categoriile selectate.
+                    <img class="img" src="img/categorii.png" alt="Categorii de probleme">
+                    <p>Pagina de mai jos se regăsește în una dintre categoriile selectate.
                         Acest mod afișează într-un format elegant
                         toate categoriile de probleme, iar pe fiecare din aceste categorii găsindu-se mai multe
                         probleme. Pentru fiecare problemă se va putea vizualiza
@@ -286,10 +302,10 @@
                         încercat să o rezolve și câți au rezolvat-o cu
                         succes.
                     </p>
-                    <img class="img10" src="img/img10.png" alt="altcv">
-                    <img class="img11" src="img/img11.png" alt="altcv">
+                    <img class="img10" src="img/img10.png" alt="Listă probleme">
+                    <img class="img11" src="img/img11.png" alt="Detalii problemă">
                     <p>Butonul de share este asignat exportului într-un format open (JSON). </p>
-                    <img class="img" src="img/export.png" alt="altcv">
+                    <img class="img" src="img/export.png" alt="Export problemă">
                     <p> Meniul cu titlul "Adaugă o problemă" este destinat doar rolului de profesor pentru ca aceștia să
                         poată propune probleme spre a fi
                         înregistrate în sistem și ulterior rezolvate de elevi. Se consideră adminul că are orice rol. În
@@ -302,30 +318,30 @@
                         validare a problemelor, conform statutului
                         de admin - care deține și un rol de a accepta cererea de introducere a problemei în sistem.
                     </p>
-                    <img class="img" src="img/adauga.png" alt="altcv">
+                    <img class="img" src="img/adauga.png" alt="Adăugare problemă">
                 </section>
                 <section id="clasele-mele">
                     <h4>Clasele mele</h4>
-                    <img class="img12" src="img/img12.png" alt="altcv">
+                    <img class="img12" src="img/img12.png" alt="Clasele mele">
                     <p> În cadrul acestei componente a aplicației este realizată interacțiunea dintre elevi și profesor.
                         Conform cerințelor, un profesor poate deține una
                         sau mai multe clase, acesta având un rol de a manageria clasa/clasele respective și de a lucra
                         eficient cu elevii săi. De asemenea, un elev poate
                         aparține la mai multe clase, acesta rezolvând independent temele pentru o clasă față de
                         cealaltă. Am optat în modul acesta de
-                        preferințe deoarece, în practică un elev ar putea aparține de clasa la care studiază, si
+                        preferințe deoarece, în practică un elev ar putea aparține de clasa la care studiază, și
                         totodată se mai poate crea o clasă pentru
                         elevii care participă la concursuri și olimpiade și de care elevul să aparțină simultan.
-                        Profesorul este cel care adaugă elevi într-o clasă pe baza usernameului.
+                        Profesorul este cel care adaugă elevi într-o clasă pe baza username-ului.
                         Tot acesta, apăsând pe butonul + poate crea o nouă clasă.
                     </p>
-                    <img class="img13" src="img/img13.png" alt="altcv">
-                    <p>Apăsând pe fiecare clasă, profesorul poate vizualiza elevii, poate adăuga alti elevi și poate
+                    <img class="img13" src="img/img13.png" alt="Adăugare clasă">
+                    <p>Apăsând pe fiecare clasă, profesorul poate vizualiza elevii, poate adăuga alți elevi și poate
                         accesa secțiunea de teme pentru clasa respectivă.</p>
-                    <img class="img14" src="img/img14.png" alt="altcv">
+                    <img class="img14" src="img/img14.png" alt="Vizualizare elevi">
                     <p>Strâns legată de componenta claselor este pagina cu "Temele mele", unde un profesor fie poate
                         propune probleme spre rezolvare, fie poate să aleagă din
-                        lista de probleme existente în sistem. O tema are un anumit deadline, poate fi pe parcurs
+                        lista de probleme existente în sistem. O temă are un anumit deadline, poate fi pe parcurs
                         modificată prin adăugarea de alte probleme,
                         se vor putea adăuga comentarii din partea tuturor membrilor clasei respective, iar în urma
                         finalizării termenului-limită, profesorul poate
@@ -338,23 +354,25 @@
                         dacă termenului-limită
                         nu este sfârșit.
                     </p>
-                    <img class="img15" src="img/img15.png" alt="altcv">
-                    <img class="img" src="img/teme.png" alt="altcv">
+                    <img class="img15" src="img/img15.png" alt="Evaluare teme">
+                    <img class="img" src="img/teme.png" alt="Temele mele">
                     <p>
                         Adăugarea unei noi teme este un proces explicit, desfășurat de către profesor. Acesta va selecta
                         numele pentru tema specifică și va stabili un termen-limită, care nu va elimina tema
                         chiar dacă acesta este atins. Totuși, termenul-limită este un indicator util pentru profesor,
                         ajutându-l să-și organizeze eficient activitățile și să gestioneze corespunzător soluțiile
                         trimise
-                        de elevi în vederea evaluării. Temele vor aparea ordonate dupa deadline-ul lor, 
-                        cele expirate fiind in josul sectiunii.
+                        de elevi în vederea evaluării. Temele vor apărea ordonate după deadline-ul lor,
+                        cele expirate fiind în josul secțiunii.
 
                         Este important de menționat că aplicația este concepută pentru a fi accesibilă oricui, incluzând
-                        posibilitatea existenței claselor neoficiale (de exemplu grupele pentru centrele de excelenta sau olimpiade), unde modalitățile de lucru pot fi diverse, conform
+                        posibilitatea existenței claselor neoficiale (de exemplu grupele pentru centrele de excelență
+                        sau olimpiade), unde modalitățile de lucru pot fi diverse, conform
                         preferințelor fiecăruia. Principalul accent se pune pe rezultatele obținute și pe eficiența pe
                         care
-                        platforma o oferă în contextul educațional. </p>
-                    <img class="img16" src="img/img16.png" alt="altcv">
+                        platforma o oferă în contextul educațional.
+                    </p>
+                    <img class="img16" src="img/img16.png" alt="Adăugare temă">
                     <p>Procesul de adăugare a unei probleme în cadrul unei teme (prin apăsarea butonului specific)
                         constituie un traseu inițiat de sistemul de gestiune a bazei de date. Acesta începe prin
                         căutarea problemei după
@@ -363,15 +381,16 @@
                         funcțiile dedicate pentru prezentarea conținutului specific asociat problemei în cadrul paginii
                         respective.
                     </p>
-                    <img class="img17" src="img/img17.png" alt="altcv">
+                    <img class="img17" src="img/img17.png" alt="Căutare problemă">
                     <p>În secțiunea de evaluare, profesorul poate vedea soluțiile parțiale, respectiv finale, pentru
                         fiecare
                         utilizator în pagini web diferite.
                     </p>
-                    <img class="img18" src="img/img18.png" alt="altcv">
+                    <img class="img18" src="img/img18.png" alt="Evaluare soluții">
                     <p> În cadrul paginii de evaluare pentru un utilizator, membru clasei pentru care profesorul face
-                        verificarea soluțiilor, profesorul primeste enuntul problemei, codul sursă aferent, urmând apoi
-                        să efectueze verificările, și apoi poate încărca evaluarea pe server, elevul primind răspunsul (comentariul)
+                        verificarea soluțiilor, profesorul primește enunțul problemei, codul sursă aferent, urmând apoi
+                        să efectueze verificările, și apoi poate încărca evaluarea pe server, elevul primind răspunsul
+                        (comentariul)
                         și
                         punctajul acordat, iar pentru server se va face un update la statisticile problemei respective
                         pentru
@@ -383,55 +402,189 @@
                         fi
                         și profesor, iar elevilor nu li se va afișa în interfață acest meniu.
                     </p>
-                    <img class="img19" src="img/img19.png" alt="altcv">
-                    <p>Interfața de user(elev), are mai multe restrângeri care au fost discutate, anterior, iar una
+                    <img class="img19" src="img/img19.png" alt="Interfața de evaluare a profesorului">
+                    <p>Interfața de user (elev), are mai multe restrângeri care au fost discutate anterior, iar una
                         foarte
                         importantă la nivel de interfață este la modul cum acesta poate rezolva și trimite o problemă.
                         Prin
-                        intermediul de cod JavaScript se crează anumite verificări în funcție de tipul de user, și apoi
-                        display-ul anumitor componente Html se face după constrângerile impuse.
+                        intermediul de cod JavaScript se creează anumite verificări în funcție de tipul de user, și apoi
+                        display-ul anumitor componente HTML se face după constrângerile impuse.
                     </p>
-                    <img class="img20" src="img/img20.png" alt="altcv">
+                    <img class="img20" src="img/img20.png" alt="Interfața elevului">
                     <p>În această pagină, utilizatorul poate vizualiza conținutul problemei, poate trimite soluția dacă
                         acesta
                         este sigur pe ce a lucrat, și tot în această secțiune poate încărca anumite comentarii care pot
                         fi văzute
                         de toți membrii clasei și unde se pot oferi hint-uri pentru rezolvarea problemei, precum și alte
-                        comentarii. Poate vedea feedbackul profesorului și punctajul acordat. Poate oferi rating la problema.
+                        comentarii. Poate vedea feedback-ul profesorului și punctajul acordat. Poate oferi rating la
+                        problemă.
                     </p>
-                    <img class="img" src="img/rating.png" alt="altcv">
-                    <img class="img" src="img/com.png" alt="altcv">
+                    <img class="img" src="img/rating.png" alt="Oferire rating">
+                    <img class="img" src="img/com.png" alt="Comentarii">
+                    <img class="img" src="img/nota.png" alt="Notă">
+                    <p> Așa cum am menționat, contul de admin vine cu câteva funcționalități în plus, pe lângă cele ale
+                        profesorului.
+                        Userul cu rol de admin poate aproba sau respinge problemele propuse, poate aproba sau respinge
+                        cererile pentru conturile de profesor
+                        evaluând documentele primite, se ocupă de gestionarea conturilor din baza de date.
+                    </p>
+                    <img class="img" src="img/admin.png" alt="Admin">
                 </section>
             </section>
 
-            <section id="#responsive">
-                <h3>2.4 Responsive</h3>
+            <section id="responsive">
+                <h3>2.5 Responsive</h3>
                 <p> Aplicația este dezvoltată într-un mod responsive, astfel încât să poată fi accesată de pe orice
                     dispozitiv, indiferent de rezoluție.
                     Elementele de pe pagină se adaptează în funcție de dimensiunea ecranului, iar meniul de
                     navigare este optimizat pentru dispozitivele mobile.
                     De asemenea, butoanele și formularele sunt ușor de utilizat și de pe dispozitivele mobile. Toate
-                    dispozitivele incluse in opțiunile din prima imagine de mai jos au o interfață responsive pentru
-                    toate paginile. </p>
-                <img class="responsive" src="img/responsive.png" alt="altcv">
-                <img class="responsive2" src="img/responsive2.png" alt="altcv">
-                <img class="responsive3" src="img/responsive3.png" alt="altcv">
+                    dispozitivele incluse în opțiunile din prima imagine de mai jos au o interfață responsive pentru
+                    toate paginile.
+                </p>
+                <img class="responsive" src="img/responsive.png" alt="Interfață responsive 1">
+                <img class="responsive2" src="img/responsive2.png" alt="Interfață responsive 2">
+                <img class="responsive3" src="img/responsive3.png" alt="Interfață responsive 3">
             </section>
+            <section id="arhitectura-tehnica">
+                <h3>2.6. Arhitectura și Componenta Tehnică</h3>
+                <p>Aplicația este dezvoltată folosind NodeJS, HTML, CSS, JavaScript si MySQL2. NodeJS folosește un model
+                    de I/O non-blocat bazat pe evenimente, ceea ce înseamnă că poate gestiona un număr mare de conexiuni
+                    simultane cu o latență minimă și un consum redus de resurse. Acest aspect este esențial pentru
+                    aplicații care necesită scalabilitate și performanță ridicată, cum ar fi cele care implică numeroase
+                    operațiuni de citire și scriere în baza de date sau care au mulți utilizatori activi.
+                    Folosind JavaScript atât pe server (cu NodeJS) cât și pe client, se asigură o continuitate în cod și
+                    logică. Aceasta simplifică procesul de dezvoltare, deoarece dezvoltatorii pot folosi același limbaj
+                    pe ambele părți, reducând curba de învățare și facilitând întreținerea codului.Codul JavaScript
+                    poate fi partajat între front-end și back-end, permițând reutilizarea componentelor și modulelor
+                    comune.
+                    NodeJS vine cu NPM, un manager de pachete care oferă acces la o vastă colecție de biblioteci și
+                    module open-source. NodeJS evoluează constant și rămâne relevant în peisajul tehnologic.
+                    NodeJS folosește un singur thread pentru a gestiona multiple conexiuni concurrente, folosind bucla
+                    de evenimente (event loop). Aceasta reduce overhead-ul asociat cu gestionarea thread-urilor multiple
+                    și îmbunătățește eficiența aplicației.
+                </p>
+                <section id="baza-de-date">
+                    <h2>2.6.1. Baza de date</h2>
+                    <p>Am optat pentru MySQL2 din mai multe considerente. MySQL2 este cunoscut pentru performanța sa
+                        înaltă, fiind capabil să gestioneze un număr mare de interogări pe secundă. Acest lucru este
+                        esențial pentru aplicațiile web care trebuie să servească mulți utilizatori simultan.
+                        MySQL2 este optimizat pentru a funcționa cu NodeJS, oferind un driver ușor de utilizat și
+                        eficient.
+                        Modulul MySQL2 pentru NodeJS oferă o interfață modernă și ușor de utilizat, compatibilă cu
+                        promisiuni(promise) și async/await, facilitând scrierea de cod asincron curat și eficient.
+                        asigură durabilitatea datelor prin mecanisme robuste de jurnalizare și replicare. Aceasta
+                        înseamnă că datele sunt protejate împotriva pierderii în cazul unor erori de sistem sau de
+                        hardware. MySQL2 oferă funcționalități avansate de securitate, inclusiv autentificare puternică,
+                        control detaliat al accesului și criptare a datelor în tranzit și la repaus. Aceste măsuri sunt
+                        esențiale pentru protejarea datelor sensibile ale utilizatorilor.
+                        Oferă soluții eficiente de backup și restaurare, asigurând că datele pot fi recuperate rapid în
+                        cazul unui dezastru.
+                        Motorul de interogare al MySQL2 este foarte performant, având capabilități avansate de
+                        optimizare a interogărilor, ceea ce reduce timpul de răspuns și îmbunătățește experiența
+                        utilizatorului.
+                    </p>
+                </section>
+                <section id="api">
+                    <h2>2.6.2. API</h2>
+                    <p>
+                        Aplicatia noastra ofera un API RESTful care permite accesul la resursele aplicatiei prin
+                        intermediul unor cereri HTTP. API-ul este proiectat pentru a fi ușor de utilizat și de înțeles,
+                        permițând dezvoltatorilor să integreze ușor aplicația noastră cu alte aplicații sau servicii.
+                        API-ul oferă acces la o gamă largă de funcționalități, inclusiv gestionarea problemelor și
+                        temelor, evaluarea soluțiilor, gestionarea claselor, statistici despre probleme.
+                    </p>
+                </section>
+                <section id="servicii">
+                    <h2>2.6.3. Servicii</h2>
+                    <p>
+                        În cadrul aplicației noastre, am implementat diverse servicii care sunt responsabile pentru
+                        gestionarea funcționalităților specifice. Aceste servicii sunt concepute pentru a fi
+                        independente și reutilizabile, fiecare abordând un aspect particular al aplicației.
+                        Serviciul de Autentificare (AuthenticationService):
+
+                        Responsabilități: Gestionarea procesului de autentificare a utilizatorilor, verificarea
+                        identității acestora, generarea și validarea token-urilor JWT.
+                        Implementare: Folosește jsonwebtoken pentru a crea și verifica token-uri JWT care sunt stocate
+                        în cookies HttpOnly pentru securitate sporită.
+                        Beneficii: Asigură că doar utilizatorii autentificați pot accesa resursele protejate ale
+                        aplicației, prevenind accesul neautorizat.
+                        Serviciul de Gestionare a Utilizatorilor (UserService):
+
+                        Responsabilități: Gestionarea operațiunilor legate de utilizatori, cum ar fi înregistrarea,
+                        actualizarea profilului, și recuperarea parolelor.
+                        Implementare: Utilizează operații CRUD pe baza de date MySQL2 pentru a stoca și manipula datele
+                        utilizatorilor.
+                        Beneficii: Simplifică gestionarea utilizatorilor și asigură integritatea datelor acestora.
+                        Serviciul de Gestionare a Problemelor (ProblemService):
+
+                        Responsabilități: Gestionarea problemelor informatice, inclusiv adăugarea, rezolvarea,
+                        aprobarea, precum și etichetarea acestora, rating si statistici.
+                        Implementare: Permite profesorilor să propună probleme și adminilor să le aprobe, asigurând un
+                        flux de lucru controlat pentru validarea conținutului.
+                        Beneficii: Asigură că doar problemele aprobate sunt disponibile elevilor pentru rezolvare.
+                        Serviciul de Gestionare a Claselor si cel al Temelor (ClassesService si TemeService):
+
+                        Responsabilități: Gestionarea claselor și a relațiilor dintre profesori și elevi, inclusiv
+                        adăugarea elevilor în clase și atribuirile de teme.
+                        Implementare: Permite crearea, modificarea și ștergerea claselor, și gestionarea elevilor din
+                        aceste clase.
+                        Beneficii: Facilitează organizarea elevilor și temelor, îmbunătățind gestionarea educațională.
+                    </p>
+                </section>
+                <section id="ajax">
+                    <h2>2.6.4. Ajax</h2>
+                    <p>
+                        În cadrul aplicației noastre, Ajax și async/await sunt folosite pentru a realiza o experiență de utilizare fluidă și dinamică, permițând actualizarea conținutului paginii fără necesitatea de a o reîncărca complet. Această abordare îmbunătățește performanța aplicației și reduce timpul de așteptare pentru utilizatori.
+                        Ajax este utilizat în diverse părți ale aplicației noastre pentru a gestiona cererile către server fără a întrerupe experiența utilizatorului. Câteva exemple:
+                        Autentificare și Înregistrare: Formularul de autentificare și cel de înregistrare trimit cereri asincrone către server pentru a verifica credențialele utilizatorilor. Dacă datele sunt corecte, utilizatorul este autentificat și redirecționat fără a reîncărca pagina.
+                        Adăugarea și Gestionarea Temelor: Profesorii pot adăuga teme pentru elevi, iar aceste cereri sunt trimise asincron către server, care actualizează baza de date și returnează răspunsul fără a reîncărca pagina.
+                        Evaluarea și Feedback-ul Problemelor: Profesorii pot evalua soluțiile trimise de elevi și pot trimite feedback folosind cereri Ajax, actualizând baza de date și informând elevii despre evaluările primite în timp real.
+                    </p>
+                </section>
+                <section id="modul-http">
+                    <h2>2.6.5. Modul HTTP</h2>
+                    <p>
+                        În proiectul nostru, am folosit modulul HTTP pentru a crea un server care să gestioneze cererile HTTP. Acesta primește cererile de la client, procesează datele și trimite răspunsurile corespunzătoare. 
+                        Am definit o serie de rute pentru a gestiona diferite tipuri de cereri HTTP. Aceste rute specifică ce trebuie să facă serverul atunci când primește o anumită cerere.
+                        Modulul HTTP gestionează cererile ce necesită autentificare prin verificarea tokenurilor JWT. Acest lucru asigură că doar utilizatorii autentificați pot accesa anumite rute și funcționalități.
+                    </p>
+                </section>
+                <section id="jwt-cookies">
+                    <h2>2.6.6. JWT si Cookies HttpOnly</h2>
+                    <p>
+                        În proiectul nostru, JWT este utilizat pentru a autentifica utilizatorii și pentru a menține sesiunile acestora. Atunci când un utilizator se autentifică cu succes, serverul generează un token JWT care conține informații despre utilizator (cum ar fi ID-ul și rolul acestuia). Acest token este trimis clientului și stocat într-un cookie HttpOnly pentru a preveni accesul JavaScript din partea clientului.
+                        Atunci când utilizatorul se autentifică, serverul generează un token JWT folosind o cheie secretă stocată în variabilele de mediu. Tokenul conține informații precum ID-ul utilizatorului și rolul acestuia, și este semnat digital pentru a preveni modificările neautorizate.
+                        De fiecare dată când utilizatorul accesează o resursă protejată, serverul verifică tokenul JWT pentru a se asigura că este valid și că utilizatorul are drepturile necesare pentru a accesa resursa.
+                        În proiectul nostru, utilizăm HttpOnly Cookies pentru a stoca tokenurile JWT ale utilizatorilor autentificați. Aceasta asigură că tokenul JWT nu poate fi accesat sau manipulat de scripturi malițioase, adăugând un strat suplimentar de securitate.
+                    </p>
+                </section>
+                <section id="multer">
+                    <h2>2.6.7. Export in format open si Incarcare de fisiere</h2>
+                    <p>
+                    Aplicatia noastra permite exportarea problemelor in format JSON, pentru a facilita partajarea si colaborarea intre utilizatori. Atunci cand un utilizator doreste sa exporte o problema, serverul genereaza un fisier JSON care contine informatiile necesare despre problema respectiva. Acest fisier este apoi trimis clientului pentru a fi descarcat.
+                    Pentru a permite utilizatorilor sa incarce fisiere, am folosit modulul Multer, care faciliteaza incarcarea de fisiere in aplicatii Node.js. Atunci cand un utilizator incarca un fisier, acesta este trimis catre server, care il salveaza pe disk. Informatiile despre fisier sunt apoi stocate in baza de date pentru a fi accesate ulterior.    
+                    </p>
+                </section>
+
+            </section>
+
         </section>
-        <section id="#paleta_font">
+
+        <section id="paleta_font">
             <h2>3. Paleta de culori și familia de fonturi</h2>
             <section id="paleta">
                 <h3>3.1. Paleta de culori</h3>
                 <p>Paleta de culori aleasă se bazează pe nuanțe de violet și nuanțe bazate pe complementara sa
                     (galben), împreună cu clasicele alb și negru. Motivația din spatele acestei alegeri este faptul
-                    că violet este o culoare vizibilă, puternică, închisă și contrastantă împreună cu galbenul.
+                    că violetul este o culoare vizibilă, puternică, închisă și contrastantă împreună cu galbenul.
                     Violetul este cunoscut ca fiind o culoare ce stimulează concentrarea și învățarea și captează
                     atenția utilizatorului spre deosebire de alte culori mai fade. Combinate, culorile din această
                     paletă oferă o multitudine de combinații în ceea ce privește gradienturile și alte efecte
                     vizuale atractive pentru utilizatori. Am luat în considerare și persoanele color-blind,
                     contrastul fiind vizibil și pentru acestea.
                 </p>
-                <img class="img21" src="img/img21.png" alt="altcv">
+                <img class="img21" src="img/img21.png" alt="Paleta de culori">
             </section>
             <section id="fonturi">
                 <h3>3.2. Familia de fonturi</h3>
@@ -453,7 +606,7 @@
                     text principal și branding.</p>
                 <p>Echilibrată și prietenoasă: Caracterul său este descris ca fiind prietenos, echilibrat și
                     accesibil. Indiferent dacă proiectați logo-uri, site-uri web, reviste sau aplicații, Poppins
-                    oferă o privire contemporană și profesională.</p>
+                    oferă un aspect contemporan și profesional.</p>
                 <p>Din aceste motive, am considerat că Poppins este un font potrivit pentru învățatul cu plăcere,
                     fiind vizibil, lizibil, sofisticat, dar și modern. Nu are un aspect dur și este potrivit în
                     primul rând pentru a capta atenția și a stârni interesul elevilor.</p>
@@ -464,18 +617,24 @@
             <section id="securitate">
                 <h3>4.1. Securitate</h3>
                 <p>Cerințele de securitate includ implementarea unui sistem robust de autentificare și autorizare pentru
-                    utilizatori. Acest sistem foloseste un JWT pentru autentificare si pentru resetare de parole, respectiv logout, 
-                    care este stocat intr-un cookie HttpOnly, prevenind atacuri XSS. Datele cu caracter personal si sensibile, cum ar fi parolele, sunt encryptate
-                    folosind bcrypt. Aplicatia este protejata impotriva SQL injections, folosind prepared statements si query params si facand verificari detaliate.</p>
+                    utilizatori. Acest sistem folosește un JWT pentru autentificare și pentru resetare de parole,
+                    respectiv logout,
+                    care este stocat într-un cookie HttpOnly, prevenind atacuri XSS. Datele cu caracter personal și
+                    sensibile, cum ar fi parolele, sunt criptate
+                    folosind bcrypt. Aplicația este protejată împotriva SQL injections, folosind prepared statements și
+                    query params și făcând verificări detaliate.</p>
+                <img class="img" src="img/jwt.png" alt="Securitate">
                 <p>În plus, sunt impuse restricții de acces la anumite funcționalități sau date în funcție de rolurile
                     utilizatorilor, iar activitățile suspecte trebuie să fie monitorizate și înregistrate pentru a
                     detecta eventualele încercări de acces neautorizat. Administratorii sunt singurii cu acces la pagina
-                    de administrare și toate funcționalitățile acesteia(gestionarea conturilor, mesajele de feedback,
+                    de administrare și toate funcționalitățile acesteia (gestionarea conturilor, mesajele de feedback,
                     aprobarea problemelor).
-                    Profesorii si adminii sunt singurii care pot da teme, pot crea clase și pot adăuga elevi în ele, pot corecta
+                    Profesorii și adminii sunt singurii care pot da teme, pot crea clase și pot adăuga elevi în ele, pot
+                    corecta
                     teme și oferi feedback și punctaje, pot propune probleme noi. Elevii sunt cei care vor primi aceste
                     teme și vor fi incluși în clasele menționate, vor rezolva problemele și vor putea lăsa comentarii la
-                    ele epntru ceilalți colegi. Doar adminul poate gestiona conturile si aproba cereri pentru probleme sau pentru un cont de profesor</p>
+                    ele pentru ceilalți colegi. Doar adminul poate gestiona conturile și aproba cereri pentru probleme
+                    sau pentru un cont de profesor.</p>
             </section>
             <section id="performanta">
                 <h3>4.2. Performanță</h3>
@@ -483,10 +642,16 @@
                     aplicației în timpul utilizării. Pentru a asigura o experiență fluidă utilizatorilor, aplicația
                     este optimizată pentru a funcționa rapid și eficient, chiar și în condiții de trafic
                     intens.</p>
-                <p>Aceasta implica optimizarea codului pentru a reduce timpul de procesare și de încărcare a
-                    paginilor, utilizarea cache-urilor la nivelul serverului pentru a reduce timpul de răspuns al
-                    cererilor repetitive și reducerea la minimum a solicitărilor de rețea prin combinarea și minimizarea
-                    fișierelor CSS și JavaScript.</p>
+                <p>Aceasta implică optimizarea codului pentru a reduce timpul de procesare și de încărcare a
+                    paginilor și reducerea la minimum a solicitărilor de rețea prin combinarea și minimizarea
+                    fișierelor CSS și JavaScript. NodeJS folosește un model de I/O non-blocat bazat pe evenimente, ceea
+                    ce înseamnă că poate gestiona un număr mare de conexiuni simultane cu o latență minimă și un consum
+                    redus de resurse. Acest aspect este esențial pentru aplicații care necesită scalabilitate și
+                    performanță ridicată, cum ar fi cele care implică numeroase operațiuni de citire și scriere în baza
+                    de date sau care au mulți utilizatori activi.
+                    NodeJS folosește un singur thread pentru a gestiona multiple conexiuni concurrente, folosind bucla
+                    de evenimente (event loop). Aceasta reduce overhead-ul asociat cu gestionarea thread-urilor multiple
+                    și îmbunătățește eficiența aplicației.</p>
             </section>
             <section id="scalabilitate">
                 <h3>4.3. Scalabilitate și Portabilitate</h3>
@@ -494,11 +659,12 @@
                     utilizatori și de date fără a afecta performanța. Aplicația este proiectată pentru a fi
                     ușor scalabilă, astfel încât să poată fi extinsă sau redusă în funcție de necesități.</p>
                 <p>De asemenea, portabilitatea este importantă pentru asigurarea că aplicația poate fi rulată pe
-                    diferite medii și platforme. Aceasta implică folosirea tehnologii și framework-uri care sunt
+                    diferite medii și platforme. Aceasta implică folosirea tehnologiilor și framework-urilor care sunt
                     compatibile cu o gamă largă de sisteme de operare și dispozitive, precum și eliminarea dependențelor
-                    specifice unei platforme. De aceea, aplicatia nu foloseste framework-uri si se bazeaza pe operatii
-                     elementare si servicii proprii ce nu vor fi niciodata outdated/deprecated si sunt compatibile cu orice 
-                     platforma si OS.</p>
+                    specifice unei platforme. De aceea, aplicația nu folosește framework-uri și se bazează pe operații
+                    elementare și servicii proprii ce nu vor fi niciodată outdated/deprecated și sunt compatibile cu
+                    orice
+                    platformă și sistem de operare.</p>
             </section>
         </section>
 
