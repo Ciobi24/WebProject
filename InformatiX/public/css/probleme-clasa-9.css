@@ -16,7 +16,7 @@ body {
 }
 
 .container-mare {
-    height:82vh ; /* Adjust height to account for footer */
+    height:82vh ; 
     margin-top: 9vh;
     background-color: #deccb9;
     overflow-y: auto;
@@ -172,6 +172,6 @@ td:hover {
 
     .probleme-elementare, .elemente-ale-limbajului, .vectori, .matrici, .diverse {
         width: 100%;
-        max-width: 100%; /* Ensure full width on small screens */
+        max-width: 100%; 
     }
 }
