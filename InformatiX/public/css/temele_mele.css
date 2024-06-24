@@ -10,8 +10,8 @@
 body {
     display: flex;
     flex-direction: column;
-    margin: 0; /* Remove default margin to prevent unnecessary space */
-    height: 100vh; /* Ensure the body takes up the entire viewport height */
+    margin: 0; 
+    height: 100vh; 
 }
 
 header {
@@ -26,21 +26,21 @@ footer {
     height: 9vh;
     color: #ffffff;
     align-self: baseline;
-    position: fixed; /* Fix the footer at the bottom of the page */
-    bottom: 0; /* Align it to the bottom */
-    left: 0; /* Ensure it spans the entire width */
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
 }
 
 .container_princ {
-    height:82vh ; /* Adjust height to account for footer */
+    height:82vh ;
     /* margin-top: 9vh; */
     background-color: #deccb9;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    overflow-y: auto; /* Enable vertical scrolling for the main container */
-    /* padding-bottom: 9vh; Ensure content doesn't overlap with the footer */
+    overflow-y: auto; 
+    
 }
 
 h2 {
@@ -105,7 +105,7 @@ h2 {
     background: #522157;
 }
 
-/* Styles for the modal */
+
 .modal {
     display: none;
     position: fixed;
@@ -118,7 +118,7 @@ h2 {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Modal content styles */
+
 .modal-content {
     background-color: #deccb9;
     margin: 15% auto;
@@ -129,7 +129,7 @@ h2 {
     text-align: center;
 }
 
-/* Close button styles */
+
 .close {
     color: #522157;
     float: right;
