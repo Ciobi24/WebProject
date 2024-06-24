@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS solutii (
   id_problema INT NOT NULL,
   id_user INT NOT NULL,
   id_tema INT NOT NULL,
-  text_solutie TEXT NOT NULL,
+  text_solutie TEXT,
   comentariu TEXT,
   comentariu_prof TEXT,
   nota INT,
