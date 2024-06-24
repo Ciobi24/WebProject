@@ -9,7 +9,6 @@
   padding: 0;
   font-family: Poppins;
   color: #522157;
-  /* overflow: hidden; */
 }
 body{
   height: 100vh;
@@ -42,7 +41,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: 348px;
 }
 .probleme_noi{
   font-size: 20px;
@@ -225,7 +224,7 @@ th {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 790px;
+  width: 720px;
 }
 
 ::-webkit-scrollbar {
@@ -330,6 +329,31 @@ footer p{  color: #ffffff;}
   font-size: 12px;
 }
 @media (max-width:1023px){
+  .content{
+    flex-direction: column;
+    margin: 0;
+  }
+  .dreptunghi_dreapta{
+    width: 90%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 100vh;
+  }
+  .formular{
+    width: 90%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .admin-conturi{
+    width: 90%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}   
+@media ((max-width:1367px) and (min-width: 767px) and (max-width: 1025px)){
+  .probleme {
+    width: 670px;
+  }
   .content{
     flex-direction: column;
     margin: 0;
